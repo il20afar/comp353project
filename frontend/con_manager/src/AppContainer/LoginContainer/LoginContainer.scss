@@ -1,0 +1,166 @@
+@import "../../Styles/Utils.scss";
+
+.condo-container {
+  @include vFlex(space-between);
+  padding: 2px;
+  box-sizing: border-box;
+  border-radius: 10px;
+  background-color: ghostwhite;
+  border: 4px solid $main;
+  max-height: 100%;
+  overflow: hidden;
+
+  .condo-picture {
+    height: auto;
+    overflow: hidden;
+    box-sizing: border-box;
+    border-radius: 5px;
+    background-size: cover;
+
+    img {
+      min-height: 80px;
+      width: 100%;
+      height: auto;
+      background-size: cover;
+    }
+  }
+  .condo-price,
+  .condo-city {
+    width: 100%;
+    height: 24px;
+    box-sizing: border-box;
+    margin: 2px 0 2px 0px;
+
+    font-size: 16px;
+    line-height: 24px;
+    text-align: center;
+    background-color: $main;
+    border-radius: 3px;
+    color: $text_bg;
+  }
+}
+
+.listing-container {
+  display: grid;
+  overflow: scroll;
+  &.preview {
+    @include box(
+      $bCol: $border,
+      $bWid: 3px,
+      $bRad: 10px,
+      $bgColor: $main,
+      $width: 400px,
+      $height: 600px
+    );
+    max-height: calc(100vh - 140px);
+    grid-template-rows: repeat(3, 200px);
+    grid-template-columns: repeat(auto-fill, 200px);
+  }
+  &.full {
+    height: calc(100vh - 140px);
+    width: 100%;
+    @include abs($top: 140px, $left: 0);
+    grid-template-rows: repeat(2, 50%);
+    grid-template-columns: repeat(3, 33.33%);
+    animation: fadein 0.25s ease;
+
+    .condo-container {
+      background-color: transparent;
+      border-color: transparent;
+      padding: 30px;
+
+      .condo-price,
+      .condo-city {
+        width: 100%;
+        height: 40px;
+        box-sizing: border-box;
+        margin: 2px 0 2px 0px;
+
+        font-size: 22px;
+        line-height: 40px;
+        text-align: center;
+        background-color: black;
+        border-radius: 3px;
+        color: $text_bg;
+      }
+    }
+  }
+  @keyframes fadein {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+}
+
+.login-container {
+  @include fullFlex();
+  position: relative;
+  background-color: $bg;
+
+  .login-logo {
+    $h: 100px;
+    width: 100%;
+    height: $h;
+    @include abs($top: 0, $left: 0);
+    line-height: $h;
+    font-size: 70px;
+    font-weight: 800;
+    font-style: italic;
+    text-align: center;
+    color: $main;
+    text-shadow: $boxshadow;
+    pointer-events: none;
+  }
+
+  .ads-button {
+    height: 100px;
+    width: 140px;
+    @include flex(row, center);
+    @include abs($top: 20px, $left: 20px);
+    .listing-preview {
+      @include abs($top: 100px, $left: 0);
+      max-height: calc(100vh - 120px);
+      .listing-container.preview {
+        opacity: 0;
+      }
+    }
+    .button.show:hover {
+      + .listing-preview {
+        opacity: 1 !important;
+        transition: 0.25s ease-in;
+        .listing-container.preview {
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  .login {
+    width: 500px;
+    height: 260px;
+    @include flex(column, space-between);
+
+    .login-inputs {
+      @include box(
+        $bCol: $border,
+        $bWid: 3px,
+        $bRad: 10px,
+        $bgColor: $main,
+        $width: 500px,
+        $height: 180px
+      );
+      padding: 30px 20px 30px 20px;
+      box-sizing: border-box;
+      @include flex(column, space-between);
+
+      .username-container,
+      .password-container {
+        width: 100%;
+        height: 50px;
+      }
+    }
+  }
+}

@@ -1,0 +1,59 @@
+// [THEME VARIABLES]
+$main: rgb(41, 116, 255);
+$bg: rgb(182, 184, 187);
+$text_bg: ghostwhite;
+$border: rgb(64, 72, 85);
+
+$boxshadow: 0 1px 1px rgba(0, 0, 0, 0.12), 0 2px 2px rgba(0, 0, 0, 0.12),
+  0 4px 4px rgba(0, 0, 0, 0.12), 0 8px 8px rgba(0, 0, 0, 0.12),
+  0 16px 16px rgba(0, 0, 0, 0.12);
+
+// [FUNCTIONS]
+@mixin assVal($properties, $value) {
+  @each $property in $properties {
+    #{$property}: $value;
+  }
+}
+
+// [PSEUDOCLASSES]
+@mixin flex($direction, $justifyContent) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justifyContent;
+}
+
+@mixin fullFlex() {
+  @include assVal(width height, 100%);
+  @include flex(column, center);
+  > * {
+    margin: 0 auto;
+  }
+  display: flex;
+}
+
+@mixin hFlex($justifyContent) {
+  @include assVal(width height, 100%);
+  @include flex(row, $justifyContent);
+}
+
+@mixin vFlex($justifyContent) {
+  @include assVal(width height, 100%);
+  @include flex(column, $justifyContent);
+}
+
+@mixin box($bCol, $bWid, $bRad, $bgColor, $width, $height) {
+  width: $width;
+  height: $height;
+  border: $bWid solid $bCol;
+  border-radius: $bRad;
+  background-color: $bgColor;
+  box-shadow: $boxshadow;
+}
+
+@mixin abs($top: auto, $right: auto, $bottom: auto, $left: auto) {
+  position: absolute;
+  top: $top;
+  right: $right;
+  bottom: $bottom;
+  left: $left;
+}

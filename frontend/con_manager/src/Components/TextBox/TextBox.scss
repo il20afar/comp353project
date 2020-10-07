@@ -1,0 +1,30 @@
+@import "../../Styles/Utils.scss";
+
+.textbox {
+  @include assVal(width height, 100%);
+
+  .text-input {
+    @include assVal(width height line-height, 100%);
+    background-color: $text_bg;
+    border: 3px solid $border;
+    border-radius: 7px;
+    font-size: 34px;
+    padding: 0 12px 0 12px;
+    outline: none;
+    box-sizing: border-box;
+    transition: 0.25s ease;
+
+    &::-webkit-input-placeholder {
+      font-style: italic;
+    }
+    &:-moz-placeholder {
+      font-style: italic;
+    }
+    &::-moz-placeholder {
+      font-style: italic;
+    }
+    &:-ms-input-placeholder {
+      font-style: italic;
+    }
+  }
+}
