@@ -13,8 +13,26 @@ const AppContainer = () => {
   const user = useRef({ name: "Anonymous" });
 
   const handleLogin = (username, pw) => {
-    user.current.name = username;
-    setLoginPage(false);
+    fetch("http://localhost:80/comp353project/backend/register.php", {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ name: username, password: pw }),
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data === "Account found!") {
+        user.current.name = username;
+        setLoginPage(false);
+      } else {
+        // For now this does absolutely nothing
+        // TODO: display some kind of "Invalid Credentials" alert
+      }
+    })
+    .catch(error => {
+      console.error('Error: ', error);
+    });
   };
 
   return (
