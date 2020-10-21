@@ -2,25 +2,18 @@
 
 .page-container {
   @include fullFlex();
-  background-color: $main;
-  font-size: 200px;
-  animation: mymove 0.006s infinite;
-}
+  background-color: $bg;
+  position: relative;
+  font-size: 50px;
+  position: relative;
+  color: $main;
+  font-weight: 700;
 
-@keyframes mymove {
-  0% {
-    background-color: $main;
-  }
-  25% {
-    background-color: purple;
-  }
-  50% {
-    background-color: red;
-  }
-  75% {
-    background-color: orange;
-  }
-  100% {
-    background-color: yellow;
+  .username {
+    width: fit-content;
+    font-size: 20px;
+    position: absolute;
+    top: 20px;
+    right: 20px;
   }
 }
