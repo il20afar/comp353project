@@ -30,7 +30,7 @@ const Menu = (props) => {
 };
 
 const Sidebar = (props) => {
-  const { currentPage, setCurrentPage } = props;
+  const { currentPage, setCurrentPage, menus } = props;
   const [show, setShow] = useState(true);
   const onSelect = (key) => {
     setCurrentPage(key);
@@ -39,12 +39,6 @@ const Sidebar = (props) => {
   useEffect(() => {
     return () => {};
   }, []);
-
-  const menus = {
-    Marketing: ["Ads", "Postings"],
-    Social: ["Live Threads", "Polls", "Activities", "Reviews", "Email"],
-    Management: ["Financial", "Contracts", "Meetings"],
-  };
 
   return (
     <D cn={`sidebar ${show ? "open" : "closed"}`}>
