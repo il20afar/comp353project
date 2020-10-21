@@ -13,6 +13,7 @@ import images from "../../condo_pictures/images";
 
 const Condo = (props) => {
   const { picture, price, city } = props;
+  
   return (
     <D cn="condo-container">
       <D cn="condo-picture">{picture}</D>
@@ -59,13 +60,13 @@ const LoginContainer = (props) => {
   const [ads, toggleAds] = useState(false);
   const refs = {
     username: useRef(null),
-    pw: useRef(null),
+    password: useRef(null),
     adsButton: useRef(null),
     loginButton: useRef(null),
   };
 
   const isLoginEntered = () =>
-    refs.username.current.value != "" && refs.pw.current.value !== "";
+    refs.username.current.value != "" && refs.password.current.value !== "";
 
   const handlers = {
     login: {
@@ -75,7 +76,7 @@ const LoginContainer = (props) => {
           : "hidden";
       },
       onSubmit: () => {
-        handleLogin(refs.username.current.value, refs.pw.current.value);
+        handleLogin(refs.username.current.value, refs.password.current.value);
       },
     },
     ads: {
@@ -84,6 +85,23 @@ const LoginContainer = (props) => {
       },
     },
   };
+
+  // Component mounted
+  useEffect(()=>{
+    const listenEnter = (e)=>{
+      if(e.key==='Enter'){
+        handlers.login.onSubmit();
+      }
+    }
+    document.addEventListener('keyup', listenEnter);
+
+    // Component unmounted
+    return ()=>{
+      document.removeEventListener('keyup', listenEnter);
+
+    }
+  })
+
 
   return (
     <D cn="login-container">
@@ -94,22 +112,16 @@ const LoginContainer = (props) => {
           <D cn="login-logo">CON MANAGER</D>
           <D cn="login">
             <D cn="login-inputs">
-              <D cn="username-container">
-                <TextBox
-                  type="input"
-                  ref={refs.username}
-                  placeholder="Username/Email"
-                  onChange={handlers.login.onChange}
-                />
-              </D>
-              <D cn="password-container">
-                <TextBox
-                  type="password"
-                  ref={refs.pw}
-                  placeholder="Password"
-                  onChange={handlers.login.onChange}
-                />
-              </D>
+              {["username", "password"].map((x) => (
+                <D key={x} cn="username-container">
+                  <TextBox
+                    type={x === "username" ? "input" : x}
+                    ref={refs[x]}
+                    placeholder={`${x[0].toUpperCase()}${x.slice(1)}`}
+                    onChange={handlers.login.onChange}
+                  />
+                </D>
+              ))}
             </D>
             <D
               ref={refs.loginButton}

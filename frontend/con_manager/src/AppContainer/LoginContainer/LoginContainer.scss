@@ -121,6 +121,7 @@
     @include flex(row, center);
     @include abs($top: 20px, $left: 20px);
     .listing-preview {
+      display: none;
       @include abs($top: 100px, $left: 0);
       max-height: calc(100vh - 120px);
       .listing-container.preview {
@@ -129,7 +130,7 @@
     }
     .button.show:hover {
       + .listing-preview {
-        opacity: 1 !important;
+        display: block;
         transition: 0.25s ease-in;
         .listing-container.preview {
           opacity: 1;
@@ -139,11 +140,13 @@
   }
 
   .login {
+    max-width: calc(100vw - 30px);
     width: 500px;
     height: 260px;
     @include flex(column, space-between);
 
     .login-inputs {
+      max-width: 100%;
       @include box(
         $bCol: $border,
         $bWid: 3px,
