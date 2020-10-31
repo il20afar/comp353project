@@ -3,10 +3,16 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import { BrowserRouter, router } from 'react-router-dom';
+import Ads from './AppContainer/PageContainer/Pages/Marketing/Ads/Ads'
+import PageContainer from './AppContainer/PageContainer/PageContainer'
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+  <BrowserRouter>
+    <PageContainer />
+    </BrowserRouter>
+
   </React.StrictMode>,
   document.getElementById('root')
 );

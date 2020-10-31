@@ -13,7 +13,7 @@ const AppContainer = () => {
   const user = useRef({ name: "Anonymous" });
 
   const handleLogin = (username, pw) => {
-    fetch("http://localhost:3001/backend/register.php", {
+    fetch("http://localhost:80/comp353project/backend/register.php", {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

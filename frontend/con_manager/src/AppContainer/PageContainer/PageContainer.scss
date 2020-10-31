@@ -1,19 +1,6 @@
-@import "../../Styles/Utils.scss";
 
 .page-container {
-  @include fullFlex();
-  background-color: $bg;
-  position: relative;
-  font-size: 50px;
-  position: relative;
-  color: $main;
-  font-weight: 700;
-
-  .username {
-    width: fit-content;
-    font-size: 20px;
-    position: absolute;
-    top: 20px;
-    right: 20px;
-  }
+    padding-top: 20px;
+    height: 100%;
+    width: 100%;
 }

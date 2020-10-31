@@ -1,27 +1,47 @@
-import React from "react";
-import { forwardRef, useState, useEffect, useRef } from "react";
+import React, {Component} from 'react';
+import Toolbar from '../../Components/Toolbar/Toolbar';
+import SideDrawer from '../../Components/SideDrawer/SideDrawer';
+import Backdrop from '../../Components/Backdrop/Backdrop';
+import PageContainerHome from './PageContainerHome';
+import './PageContainer.scss';
 
-import { D } from "../../Utils/Utils";
-import Sidebar from "../../Components/Sidebar/Sidebar";
 
-import "../../Styles/Utils.scss";
-import "./PageContainer.scss";
 
-const PageContainer = (props) => {
-  const { user } = props;
-  const [currentPage, setCurrentPage] = useState("Ads");
-  const menus = {
-    Marketing: ["Ads", "Postings"],
-    Social: ["Live Threads", "Polls", "Activities", "Reviews", "Email"],
-    Management: ["Financial", "Contracts", "Meetings"],
+class PageContainer extends Component {
+
+  state = {
+    sideDrawerOpen: false,
   };
+
+  drawerToggleClickHandler = () => {
+    this.setState((prevState) => {
+      return {sideDrawerOpen: !prevState.sideDrawerOpen};
+    });
+  }
+
+  backdropClickHandler = () => {
+    this.setState({sideDrawerOpen: false});
+  }
+
+  render(){
+    let sideDrawer;
+    let backdrop;
+
+    if(this.state.sideDrawerOpen) 
+    {
+      sideDrawer = <SideDrawer />;
+      backdrop = <Backdrop click = {this.backdropClickHandler}/>;
+    }
+
   return (
-    <D cn="page-container">
-      <Sidebar {...{ currentPage, setCurrentPage, menus }} />
-      <D cn="username">Hello, {user.current.name}</D>
-      <D cn="page">{currentPage}</D>
-    </D>
-  );
+        <div className = "page-container">
+            <Toolbar drawerClickHandler = {this.drawerToggleClickHandler}/>
+            {backdrop}
+            <SideDrawer show = {this.state.sideDrawerOpen}/>
+        </div>
+    
+        )};
+
 };
 
 export default PageContainer;
