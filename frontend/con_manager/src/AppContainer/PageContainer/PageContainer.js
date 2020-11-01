@@ -2,7 +2,7 @@ import React from "react";
 import { forwardRef, useState, useEffect, useRef } from "react";
 
 import { D } from "../../Utils/Utils";
-import Sidebar from "../../Components/Sidebar/Sidebar";
+import Sidebar from "../../Components/Sidebar/SIdebar";
 
 import "../../Styles/Utils.scss";
 import "./PageContainer.scss";
