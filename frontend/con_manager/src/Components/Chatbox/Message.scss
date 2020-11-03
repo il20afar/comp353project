@@ -1,0 +1,93 @@
+@import "../../Styles/Utils.scss";
+
+.message {
+  width: 100%;
+  position: relative;
+  max-width: 100%;
+  display: flex;
+  padding-bottom: 10px;
+  box-sizing: border-box;
+
+  &.others {
+    justify-content: flex-start;
+    .content {
+      border-bottom-left-radius: 0 !important;
+    }
+    .username-container,
+    .content-container {
+      justify-content: flex-start;
+    }
+  }
+
+  &.self {
+    justify-content: flex-end;
+
+    .content {
+      border-bottom-right-radius: 0 !important;
+    }
+    .username-container,
+    .content-container {
+      justify-content: flex-end;
+    }
+  }
+
+  .message-container {
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+
+    .content-container {
+      width: 100%;
+      height: fit-content;
+      display: flex;
+
+      .content {
+        width: fit-content;
+        max-width: 70%;
+        background-color: $text_bg;
+        border-radius: 4px;
+        padding: 10px 16px 10px 16px;
+        box-sizing: border-box;
+        box-shadow: $boxshadow;
+      }
+    }
+    .username-container {
+      width: 100%;
+      height: 26px;
+      display: flex;
+      margin-top: -1px;
+      .bottom-container {
+        width: fit-content;
+        height: inherit;
+        border: 1px solid $text_bg;
+        box-sizing: border-box;
+        border-bottom-left-radius: 4px;
+        border-bottom-right-radius: 4px;
+        padding: 0 10px 0 10px;
+        background-color: $main;
+        box-shadow: $boxshadow;
+        display: flex;
+
+        > div {
+          font-size: 16px;
+          line-height: 26px;
+          font-weight: 500;
+        }
+        .username {
+          color: $bg;
+        }
+        .date,
+        .time,
+        .kw {
+          font-style: italic;
+          color: ghostwhite;
+          opacity: 0.8;
+        }
+        .kw {
+          opacity: 0.6;
+        }
+      }
+    }
+  }
+}

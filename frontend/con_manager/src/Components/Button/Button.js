@@ -1,6 +1,5 @@
 import React from "react";
-import { useState } from "react";
-import { D } from "../../Utils/Utils";
+import { D } from "../../imports";
 import "./Button.scss";
 import "../../Styles/Utils.scss";
 
@@ -12,7 +11,7 @@ const Button = (props) => {
     onClick,
   } = props;
 
-  const [show, setShow] = useState(true);
+  const [show, setShow] = React.useState(true);
 
   const handlers = {
     onClick: (e) => {

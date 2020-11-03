@@ -1,19 +1,12 @@
 import React from "react";
-import { forwardRef, useState, useEffect, useRef } from "react";
-
-import { D } from "../../Utils/Utils";
-
-import TextBox from "../../Components/TextBox/TextBox";
-import Button from "../../Components/Button/Button";
-
+import { D, TextBox, Button } from "../../imports";
+import images from "../../condo_pictures/images";
 import "../../Styles/Utils.scss";
 import "./LoginContainer.scss";
 
-import images from "../../condo_pictures/images";
-
 const Condo = (props) => {
   const { picture, price, city } = props;
-  
+
   return (
     <D cn="condo-container">
       <D cn="condo-picture">{picture}</D>
@@ -57,12 +50,12 @@ const Listings = (props) => {
 
 const LoginContainer = (props) => {
   const { handleLogin } = props;
-  const [ads, toggleAds] = useState(false);
+  const [ads, toggleAds] = React.useState(false);
   const refs = {
-    username: useRef(null),
-    password: useRef(null),
-    adsButton: useRef(null),
-    loginButton: useRef(null),
+    username: React.useRef(null),
+    password: React.useRef(null),
+    adsButton: React.useRef(null),
+    loginButton: React.useRef(null),
   };
 
   const isLoginEntered = () =>
@@ -87,21 +80,19 @@ const LoginContainer = (props) => {
   };
 
   // Component mounted
-  useEffect(()=>{
-    const listenEnter = (e)=>{
-      if(e.key==='Enter'){
+  React.useEffect(() => {
+    const listenEnter = (e) => {
+      if (e.key === "Enter") {
         handlers.login.onSubmit();
       }
-    }
-    document.addEventListener('keyup', listenEnter);
+    };
+    document.addEventListener("keyup", listenEnter);
 
     // Component unmounted
-    return ()=>{
-      document.removeEventListener('keyup', listenEnter);
-
-    }
-  })
-
+    return () => {
+      document.removeEventListener("keyup", listenEnter);
+    };
+  });
 
   return (
     <D cn="login-container">
