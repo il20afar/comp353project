@@ -39,16 +39,24 @@ class user extends request
 
     public function login($obj)
     {
-        $res = $this->query(
-            $this->select((array) $obj)
-        );
-        return json_encode($res ? "Account found!" : "Wrong credentials");
+
+        $query = $this->select("firstname, lastname, email, phoneno, address, city, province, country, profilepicture", (array) $obj);
+        $res = $this->query($query, true);
+
+        return json_encode($res);
     }
 
-    public function create($obj){
-        $res = $this->query(
-            $this->insert((array) $obj)
+    
+    public function modify($obj){
+        $username = ((array) $obj)['username'];
+        $where = sprintf(
+            "username='%s'",
+            $username
         );
+        $query = $this->update((array) $obj, $where);
+        $res = $this->query($query, false);
+        
+        return json_encode($res);
     }
 }
 ?>

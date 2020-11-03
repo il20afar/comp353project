@@ -6,4 +6,36 @@ const D = React.forwardRef((props, ref) => {
   return <div ref={ref} className={cn} {...rest} />;
 });
 
-export { D };
+const url = "http://localhost:3001/backend/main.php";
+const data = {
+  send: async (type, action, fields) => {
+    try {
+      const req = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          type,
+          action,
+          ...fields,
+        }),
+      });
+      const res = await req.json();
+      return res;
+    } catch (error) {
+      return error.toString();
+    }
+  },
+  get: async (keyValuePairs) => {
+    // const response = await fetch(`${url}?${queryString}`, {
+    //         method: 'GET',
+    //         headers: {},
+    //         url: "/download.jsp"
+    //     }
+    // )
+    // return response;
+  },
+};
+
+export { D, data };

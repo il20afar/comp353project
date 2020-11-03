@@ -1,15 +1,11 @@
 import React from "react";
-import { forwardRef, useState, useEffect, useRef } from "react";
+import { D, Sidebar, User } from "../../imports";
 
-import { D } from "../../Utils/Utils";
-import Sidebar from "../../Components/Sidebar/SIdebar";
-
-import "../../Styles/Utils.scss";
 import "./PageContainer.scss";
 
 const PageContainer = (props) => {
   const { user } = props;
-  const [currentPage, setCurrentPage] = useState("Ads");
+  const [currentPage, setCurrentPage] = React.useState("Ads");
   const menus = {
     Marketing: ["Ads", "Postings"],
     Social: ["Live Threads", "Polls", "Activities", "Reviews", "Email"],
@@ -18,7 +14,7 @@ const PageContainer = (props) => {
   return (
     <D cn="page-container">
       <Sidebar {...{ currentPage, setCurrentPage, menus }} />
-      <D cn="username">Hello, {user.current.name}</D>
+      <User user={user} />
       <D cn="page">{currentPage}</D>
     </D>
   );

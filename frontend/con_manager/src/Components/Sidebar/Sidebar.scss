@@ -9,7 +9,6 @@ $transition: all 0.15s ease-in;
   top: 0;
   left: 0;
   overflow: auto;
-  border-right: 2px solid white;
   &.open {
     @media only screen and (max-width: 600px) {
       width: 100vw;
@@ -30,7 +29,7 @@ $transition: all 0.15s ease-in;
       width: 100%;
       height: calc(100% - 70px);
       overflow: scroll;
-      scroll-snap-type: y mandatory;
+      // scroll-snap-type: y mandatory;
       display: flex;
       justify-content: center;
       .menus {
@@ -88,7 +87,7 @@ $transition: all 0.15s ease-in;
               line-height: $h;
               font-size: 18px;
               color: ghostwhite;
-              background-color: rgb(60, 50, 240);
+              background-color: $bg;
               border-radius: 10px;
               cursor: pointer;
               position: relative;

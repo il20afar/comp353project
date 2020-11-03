@@ -14,40 +14,48 @@ class request
         $this->conn = $conn;
     }
 
-    public function query(string $query)
+    public function query(string $query, bool $returnRows)
     {
         if (!$this->conn) {
             die("Connection failed: " . mysqli_connect_error());
         }
         $res = mysqli_query($this->conn, $query);
-        return mysqli_num_rows($res) > 0 ? $res : [];
+        $rows = array();
+        if($returnRows){
+            while($r = mysqli_fetch_assoc($res)) {
+                $rows['user'][] = $r;
+            }
+            return $rows;
+
+        }
+
+        else return mysqli_affected_rows($this->conn);
     }
 
-    public function select(array $fields)
+    public function select(string $from, array $fields)
     {
         foreach ($fields as $key => $val) {
-            $from[] = $key;
             $where[] = "$key='$val'";
         }
         return sprintf(
             "SELECT %s FROM %s WHERE %s;",
-            implode(', ', $from),
+            $from,
             $this->type,
             implode(" AND ", $where)
         );
     }
 
-    public function insert(array $fields)
+    public function update(array $fields, string $where)
     {
+        $set = array();
         foreach ($fields as $key => $val) {
-            $keys[] = $key;
-            $values[] = $val;
+            $set[] = "$key='$val'";
         }
         return sprintf(
-            "INSERT INTO %s (%s) VALUES (%s);",
+            "UPDATE %s SET %s WHERE %s;",
             $this->type,
-            implode(', ', $keys),
-            implode(" AND ", $values)
+            implode(', ', $set),
+            $where
         );
     }
 

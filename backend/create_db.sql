@@ -32,8 +32,8 @@ INSERT INTO user (
     profilepicture
 ) 
 VALUES 
-	('afar', 'afar', 'Antoine', 'Farley', 'afar@hey.you', '7776665555', '10 Main Street', 'Montreal', 'Quebec', 'Canada', ''), 
-	('rohh', 'rohh', 'Rohhann', 'Thambithurai', 'rt@hey.you', '0009998888', '14 Main Street', 'Montreal', 'Quebec', 'Canada', ''), 
-	('poon', 'poon', 'Brian', 'Poon', 'bp@hey.you', '8447776666', '18 Main Street', 'Hong Kong', 'Hong Kong', 'Hong Kong', ''),
-	('mpob', 'mpob', 'Maxime', 'Pobudzey', 'mpob@hey.you', '6665576532', '45 President Street', 'Ottawa', 'Ontario', 'Canada', ''); 
+	('afar', 'afar', 'Antoine', 'Farley', 'afar@hey.you', 7776665555, '10 Main Street', 'Montreal', 'Quebec', 'Canada', 'asdfas'), 
+	('rohh', 'rohh', 'Rohhann', 'Thambithurai', 'rt@hey.you', 0009998888, '14 Main Street', 'Montreal', 'Quebec', 'Canada', 'adfasd'), 
+	('poon', 'poon', 'Brian', 'Poon', 'bp@hey.you', 8447776666, '18 Main Street', 'Hong Kong', 'Hong Kong', 'Hong Kong', 'asdf'),
+	('mpob', 'mpob', 'Maxime', 'Pobudzey', 'mpob@hey.you', 6665576532, '45 President Street', 'Ottawa', 'Ontario', 'Canada', 'asdfasdf'); 
 

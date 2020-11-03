@@ -1,8 +1,11 @@
 // [THEME VARIABLES]
-$main: rgb(41, 116, 255);
-$bg: rgb(255, 223, 199);
+$main: black;
+$bg: rgb(99, 99, 99);
+$text_alt: ghostwhite;
 $text_bg: ghostwhite;
-$border: rgb(64, 72, 85);
+$border: black;
+$confirm_green: rgb(54, 224, 105);
+$cancel_red: rgb(255, 0, 0);
 
 $boxshadow: 0 1px 1px rgba(0, 0, 0, 0.12), 0 2px 2px rgba(0, 0, 0, 0.12),
   0 4px 4px rgba(0, 0, 0, 0.12), 0 8px 8px rgba(0, 0, 0, 0.12),

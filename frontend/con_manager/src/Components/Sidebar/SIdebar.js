@@ -1,7 +1,6 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Fade as Hamburger } from "hamburger-react";
-import { useState } from "react";
-import { D } from "../../Utils/Utils";
+import { D } from "../../imports";
 import "./Sidebar.scss";
 import "../../Styles/Utils.scss";
 
@@ -31,12 +30,12 @@ const Menu = (props) => {
 
 const Sidebar = (props) => {
   const { currentPage, setCurrentPage, menus } = props;
-  const [show, setShow] = useState(true);
+  const [show, setShow] = React.useState(false);
   const onSelect = (key) => {
     setCurrentPage(key);
   };
 
-  useEffect(() => {
+  React.useEffect(() => {
     return () => {};
   }, []);
 

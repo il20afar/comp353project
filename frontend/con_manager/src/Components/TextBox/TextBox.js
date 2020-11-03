@@ -1,31 +1,58 @@
 import React from "react";
-import { useEffect, forwardRef } from "react";
-import { D } from "../../Utils/Utils";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import { D } from "../../imports";
 import "./TextBox.scss";
 import "../../Styles/Utils.scss";
 
-const Textbox = forwardRef((props, ref) => {
-  const { type, placeholder, onChange, focusOnRender = false } = props;
+const Textbox = React.forwardRef((props, ref) => {
+  const {
+    type,
+    placeholder,
+    onChange = () => null,
+    focusOnRender = false,
+    className = "",
+    initialValue,
+    outlineOnChange = false,
+  } = props;
 
-  useEffect(() => {
+  const [outlineState, setOutlineState] = React.useState("inactive");
+
+  React.useEffect(() => {
     focusOnRender && ref.input.current.focus();
+    if (initialValue) {
+      ref.current.value = initialValue;
+    }
   }, []);
 
+  const onChangeHandler = (e) => {
+    console.log("value", e.target.value);
+    if (outlineOnChange) {
+      setOutlineState(e.target.value !== initialValue ? "active" : "inactive");
+    }
+    onChange(e);
+  };
+
+  const onCancelClick = () => {
+    ref.current.value = initialValue;
+    onChange();
+    setOutlineState("inactive");
+  };
+
   return (
-    <D cn="textbox">
+    <D cn={`textbox ${outlineState} ${className}`}>
+      <D cn={`cancel-icon-container ${outlineState}`} onClick={onCancelClick}>
+        <FontAwesomeIcon icon={faTimes} />
+      </D>
       {((
         props = {
           ref: ref,
           className: "text-input",
-          onChange: onChange,
+          onChange: onChangeHandler,
           placeholder,
         }
       ) =>
-        type !== "textarea" ? (
-          <input type={type} {...props} />
-        ) : (
-          <textarea {...props} />
-        ))()}
+        type !== "textarea" ? <input {...props} /> : <textarea {...props} />)()}
     </D>
   );
 });
