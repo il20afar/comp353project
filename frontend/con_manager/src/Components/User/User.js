@@ -41,7 +41,7 @@ const User = (props) => {
   const onConfirmChange = async () => {
     closeOrConfirm.current.className = `action-icon loading`;
     const userIfUpdateSuccessful = {
-      username: user.username,
+      username: user.current.username,
       firstname: refs.firstname.current.value,
       lastname: refs.lastname.current.value,
       email: refs.email.current.value,
