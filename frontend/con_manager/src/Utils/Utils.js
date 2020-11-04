@@ -6,7 +6,7 @@ const D = React.forwardRef((props, ref) => {
   return <div ref={ref} className={cn} {...rest} />;
 });
 
-const url = "http://localhost:8080/comp353project/backend/main.php";
+const url = "http://localhost:80/comp353project/backend/main.php";
 const data = {
   send: async (type, action, fields) => {
     try {
