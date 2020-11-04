@@ -1,19 +1,6 @@
 <?php
 include('request.php');
 
-/**
- * $this->fields = {
- *      'username', 'password',
- *      'firstname', 'lastname',
- *      'email', 'phoneno', 'address', 'city', 'province', 'country',
- *      'profilepicture',
- *      'ownedcondos?',
- *      'pictures?',
- *      'activity?',
- *      'friends?',
- *      'privacy?'
- * ]
- */
 class user extends request
 {
     public function __construct($conn)
@@ -22,16 +9,16 @@ class user extends request
             'user',
             [
                 'username',
-                'password',
-                'firstname',
-                'lastname',
-                'email',
-                'phoneno',
-                'address',
+                'pw',
+                'first_name',
+                'last_name',
+                'street',
                 'city',
                 'province',
                 'country',
-                'profilepicture',
+                'email',
+                'phone_number',
+                'profile_picture',
             ],
             $conn
         );
@@ -40,7 +27,7 @@ class user extends request
     public function login($obj)
     {
 
-        $query = $this->select("firstname, lastname, email, phoneno, address, city, province, country, profilepicture", (array) $obj);
+        $query = $this->select("first_name, last_name, street, city, province, country, email, phone_number, profile_picture", (array) $obj);
         $res = $this->query($query, true);
 
         return json_encode($res);
