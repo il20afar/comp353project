@@ -1,5 +1,6 @@
 import React from "react";
 import { D } from "../../../../imports";
+import Condo from './Condo';
 import "./Ads.scss";
 
 const Ads = (props) => {
@@ -43,7 +44,7 @@ const Ads = (props) => {
   return (
     <div className="ads">
       <header className="ads-head">Discover Your Future Home</header>
-      <div className="contain">
+      <div className="container">
         {arr.map((obj) => makeCondo(obj.adId, obj.img, obj.city, obj.price))}
       </div>
     </div>

@@ -8,7 +8,7 @@ import Ads from './AppContainer/PageContainer/Pages/Marketing/Ads';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Ads />
   </React.StrictMode>,
   document.getElementById('root')
 );
