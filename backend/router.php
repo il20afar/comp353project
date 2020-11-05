@@ -3,14 +3,14 @@ include 'user.php';
 
 class router
 {
-    private object $user;
+    private object $users;
     // private object $marketing;
     // private object $social;
     // private object $info;
 
     public function __construct(object $conn)
     {
-        $this->user = new user($conn);
+        $this->users= new users($conn);
     }
 
     public function route()

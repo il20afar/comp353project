@@ -1,7 +1,7 @@
 <?php
 include('request.php');
 
-class user extends request
+class users extends request
 {
     public function __construct($conn)
     {

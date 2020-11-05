@@ -10,8 +10,8 @@ const AppContainer = () => {
 
   const handleLogin = async (username, pw) => {
     const res = await data.send("users", "login", { username, pw });
-    if (res.user) {
-      user.current = { username, ...res.user[0] };
+    if (res.users) {
+      user.current = { username, ...res.users[0] };
       console.log(res);
       setLoginPage(false);
     } else {

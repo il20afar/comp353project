@@ -23,7 +23,7 @@ class request
         $rows = array();
         if($returnRows){
             while($r = mysqli_fetch_assoc($res)) {
-                $rows['user'][] = $r;
+                $rows['users'][] = $r;
             }
             return $rows;
 
