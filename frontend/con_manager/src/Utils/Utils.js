@@ -9,12 +9,6 @@ const D = React.forwardRef((props, ref) => {
 const url = "http://localhost:80/comp353project/backend/main.php";
 const data = {
   send: async (type, action, fields) => {
-    const alskd = JSON.stringify({
-      type,
-      action,
-      ...fields,
-    })
-    console.log(alskd)
     try {
       const req = await fetch(url, {
         method: "POST",
