@@ -1,37 +1,41 @@
 import React from "react";
 import { D } from "../../../../imports";
 import "./Ads.scss";
+import Condo from "./Condo";
 
 const Ads = (props) => {
   const { advertisements } = props;
   const arr = [
     {
-      adId: 1,
+      adId: 1, //primary key
       img:
-        "https://www.brickunderground.com/sites/default/files/styles/blog_primary_image/public/blog/images/190501Tribeca111MurrayStMAINPIC.jpg",
+        "https://www.brickunderground.com/sites/default/files/styles/blog_primary_image/public/blog/images/190501Tribeca111MurrayStMAINPIC.jpg", //part of "Pictures"
+      city: "Montreal", //part of "Description"
+      price: "$400,000", //part of "Description"
+      title: " ", //?
+      type: " ", //(ad, item sale, service)
+      visibility: " ", //(public, general, classified)
+    },
+    {
+      adId: 2,
+      img:
+        "https://torontostoreys.com/wp-content/uploads/2018/01/roseanne-condo-770x514.jpg",
       city: "Montreal",
-      price: "300003434",
+      price: "$650,000",
+    },
+    {
+      adId: 3,
+      img:
+        "https://www.moneyunder30.com/wp-content/uploads/2008/07/so-you-wanna-buy-a-condo-five-questions-to-ask-before-buying-648x364-c-default.jpg",
+      city: "Montreal",
+      price: "$725,000",
     },
     {
       adId: 4,
       img:
-        "https://www.brickunderground.com/sites/default/files/styles/blog_primary_image/public/blog/images/190501Tribeca111MurrayStMAINPIC.jpg",
-      city: "Montreal",
-      price: "100023432400",
-    },
-    {
-      adId: 7,
-      img:
-        "https://www.brickunderground.com/sites/default/files/styles/blog_primary_image/public/blog/images/190501Tribeca111MurrayStMAINPIC.jpg",
-      city: "Montreal",
-      price: "13334200000",
-    },
-    {
-      adId: 67,
-      img:
-        "https://www.brickunderground.com/sites/default/files/styles/blog_primary_image/public/blog/images/190501Tribeca111MurrayStMAINPIC.jpg",
+        "https://images.unsplash.com/photo-1539693010221-cd218dfe6565?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80",
       city: "Ottawa",
-      price: "123400000",
+      price: "$600,000",
     },
   ];
   console.log(JSON.stringify(arr));
@@ -43,7 +47,7 @@ const Ads = (props) => {
   return (
     <div className="ads">
       <header className="ads-head">Discover Your Future Home</header>
-      <div className="contain">
+      <div className="container">
         {arr.map((obj) => makeCondo(obj.adId, obj.img, obj.city, obj.price))}
       </div>
     </div>
