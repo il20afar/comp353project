@@ -8,8 +8,8 @@ const AppContainer = () => {
   const [loginPage, setLoginPage] = React.useState(true);
   const user = React.useRef(null);
 
-  const handleLogin = async (username, password) => {
-    const res = await data.send("user", "login", { username, password });
+  const handleLogin = async (username, pw) => {
+    const res = await data.send("users", "login", { username, pw });
     if (res.user) {
       user.current = { username, ...res.user[0] };
       console.log(res);

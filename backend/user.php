@@ -6,7 +6,7 @@ class user extends request
     public function __construct($conn)
     {
         parent::__construct(
-            'user',
+            'users',
             [
                 'username',
                 'pw',
