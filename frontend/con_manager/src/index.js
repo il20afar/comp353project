@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import PageContainer from './AppContainer/PageContainer/PageContainer'
+import Ads from './AppContainer/PageContainer/Pages/Marketing/Ads';
 
 ReactDOM.render(
   <React.StrictMode>
