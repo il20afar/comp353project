@@ -15,27 +15,40 @@ const Ads = (props) => {
       title: " ", //?
       type: " ", //(ad, item sale, service)
       visibility: " ", //(public, general, classified)
+      creatorID: " ",
     },
     {
       adId: 2,
       img:
         "https://torontostoreys.com/wp-content/uploads/2018/01/roseanne-condo-770x514.jpg",
-      city: "Montreal",
-      price: "$650,000",
+      city: "Montreal", //part of "Description"
+      price: "$650,000", //part of "Description"
+      title: " ", //?
+      type: " ", //(ad, item sale, service)
+      visibility: " ", //(public, general, classified)
+      creatorID: " ",
     },
     {
       adId: 3,
       img:
         "https://www.moneyunder30.com/wp-content/uploads/2008/07/so-you-wanna-buy-a-condo-five-questions-to-ask-before-buying-648x364-c-default.jpg",
-      city: "Montreal",
-      price: "$725,000",
+      city: "Montreal", //part of "Description"
+      price: "$725,000", //part of "Description"
+      title: " ", //?
+      type: " ", //(ad, item sale, service)
+      visibility: " ", //(public, general, classified)
+      creatorID: " ",
     },
     {
       adId: 4,
       img:
         "https://images.unsplash.com/photo-1539693010221-cd218dfe6565?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80",
-      city: "Ottawa",
-      price: "$600,000",
+      city: "Ottawa", //part of "Description"
+      price: "$600,000", //part of "Description"
+      title: " ", //?
+      type: " ", //(ad, item sale, service)
+      visibility: " ", //(public, general, classified)
+      creatorID: " ",
     },
   ];
   console.log(JSON.stringify(arr));
