@@ -4,6 +4,7 @@ CREATE DATABASE comp353;
 
 USE comp353;
 
+/* Creating tables */
 CREATE TABLE users (
 	user_id INT NOT NULL AUTO_INCREMENT,
 	username VARCHAR(50) NOT NULL,
@@ -22,7 +23,7 @@ CREATE TABLE users (
 
 CREATE TABLE associations (
 	asso_id INT NOT NULL AUTO_INCREMENT,
-	asso__name VARCHAR(50) NOT NULL,
+	asso_name VARCHAR(50) NOT NULL,
 	asso_desc VARCHAR(1000) NOT NULL,
 	admin_id INT NOT NULL,
 	PRIMARY KEY(asso_id),
@@ -64,6 +65,7 @@ CREATE TABLE owns (
 	FOREIGN KEY (condo_id) REFERENCES condos(condo_id)
 );
 
+/* Inserting data */
 INSERT INTO
 	users (
 		username,
@@ -133,6 +135,56 @@ VALUES
 	);
 
 INSERT INTO
+	associations (asso_name, asso_desc, admin_id)
+VALUES
+	(
+		'Condo Owners Association of Concordia',
+		'An association dedicated to bringing together condo owners of Concordia University.',
+		1
+	);
+
+INSERT INTO
+	condos (
+		price,
+		area,
+		street,
+		city,
+		province,
+		country,
+		features,
+		asso_id
+	)
+VALUES
+	(
+		500000,
+		3000,
+		'15 Some Street',
+		'Montreal',
+		'Quebec',
+		'Canada',
+		'Gas fireplace, AC system',
+		1
+	),
+	(
+		700000,
+		3500,
+		'20 Some Street',
+		'Montreal',
+		'Quebec',
+		'Canada',
+		'Granite kitchen countertop, Close to subway',
+		1
+	);
+
+INSERT INTO
+	owns (user_id, condo_id, percent)
+VALUES
+	(1, 1, 50),
+	(2, 1, 50),
+	(3, 2, 40),
+	(4, 2, 60);
+
+INSERT INTO
 	ads (
 		title,
 		ad_type,
@@ -145,7 +197,7 @@ VALUES
 	(
 		'Public Condo Ad #1',
 		'condo',
-		'On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain.',
+		'The illusion which exalts us is dearer to us than ten thousand truths.',
 		'public',
 		'/path/to/picture, /path/to/other/picture',
 		1
@@ -153,7 +205,7 @@ VALUES
 	(
 		'Public Condo Ad #2',
 		'condo',
-		'On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain.',
+		'The illusion which exalts us is dearer to us than ten thousand truths.',
 		'public',
 		'/path/to/picture, /path/to/other/picture',
 		2
@@ -161,7 +213,7 @@ VALUES
 	(
 		'General Condo Ad #1',
 		'condo',
-		'On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain.',
+		'The illusion which exalts us is dearer to us than ten thousand truths.',
 		'general',
 		'/path/to/picture, /path/to/other/picture',
 		3
@@ -169,15 +221,31 @@ VALUES
 	(
 		'General Condo Ad #2',
 		'condo',
-		'On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain.',
+		'The illusion which exalts us is dearer to us than ten thousand truths.',
 		'general',
 		'/path/to/picture, /path/to/other/picture',
 		4
 	),
 	(
+		'Classified Condo Ad #1',
+		'condo',
+		'The illusion which exalts us is dearer to us than ten thousand truths.',
+		'Condo Owners Association of Concordia',
+		'/path/to/picture, /path/to/other/picture',
+		1
+	),
+	(
+		'Classified Condo Ad #2',
+		'condo',
+		'The illusion which exalts us is dearer to us than ten thousand truths.',
+		'Condo Owners Association of Concordia',
+		'/path/to/picture, /path/to/other/picture',
+		2
+	),
+	(
 		'Public Item Sale Ad #1',
 		'item_sale',
-		'On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain.',
+		'The illusion which exalts us is dearer to us than ten thousand truths.',
 		'public',
 		'/path/to/picture, /path/to/other/picture',
 		1
@@ -185,7 +253,7 @@ VALUES
 	(
 		'Public Item Sale Ad #2',
 		'item_sale',
-		'On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain.',
+		'The illusion which exalts us is dearer to us than ten thousand truths.',
 		'public',
 		'/path/to/picture, /path/to/other/picture',
 		2
@@ -193,7 +261,7 @@ VALUES
 	(
 		'General Item Sale Ad #1',
 		'item_sale',
-		'On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain.',
+		'The illusion which exalts us is dearer to us than ten thousand truths.',
 		'general',
 		'/path/to/picture, /path/to/other/picture',
 		3
@@ -201,15 +269,31 @@ VALUES
 	(
 		'General Item Sale Ad #2',
 		'item_sale',
-		'On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain.',
+		'The illusion which exalts us is dearer to us than ten thousand truths.',
 		'general',
 		'/path/to/picture, /path/to/other/picture',
 		4
 	),
 	(
+		'Classified Item Sale Ad #1',
+		'item_sale',
+		'The illusion which exalts us is dearer to us than ten thousand truths.',
+		'Condo Owners Association of Concordia',
+		'/path/to/picture, /path/to/other/picture',
+		1
+	),
+	(
+		'Classified Item Sale Ad #2',
+		'item_sale',
+		'The illusion which exalts us is dearer to us than ten thousand truths.',
+		'Condo Owners Association of Concordia',
+		'/path/to/picture, /path/to/other/picture',
+		2
+	),
+	(
 		'Public Service Ad #1',
 		'service',
-		'On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain.',
+		'The illusion which exalts us is dearer to us than ten thousand truths.',
 		'public',
 		'/path/to/picture, /path/to/other/picture',
 		1
@@ -217,7 +301,7 @@ VALUES
 	(
 		'Public Service Ad #2',
 		'service',
-		'On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain.',
+		'The illusion which exalts us is dearer to us than ten thousand truths.',
 		'public',
 		'/path/to/picture, /path/to/other/picture',
 		2
@@ -225,7 +309,7 @@ VALUES
 	(
 		'General Service Ad #1',
 		'service',
-		'On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain.',
+		'The illusion which exalts us is dearer to us than ten thousand truths.',
 		'general',
 		'/path/to/picture, /path/to/other/picture',
 		3
@@ -233,8 +317,24 @@ VALUES
 	(
 		'General Service Ad #2',
 		'service',
-		'On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain.',
+		'The illusion which exalts us is dearer to us than ten thousand truths.',
 		'general',
 		'/path/to/picture, /path/to/other/picture',
 		4
-	)
+	),
+	(
+		'Classified Service Ad #1',
+		'service',
+		'The illusion which exalts us is dearer to us than ten thousand truths.',
+		'Condo Owners Association of Concordia',
+		'/path/to/picture, /path/to/other/picture',
+		1
+	),
+	(
+		'Classified Service Ad #2',
+		'service',
+		'The illusion which exalts us is dearer to us than ten thousand truths.',
+		'Condo Owners Association of Concordia',
+		'/path/to/picture, /path/to/other/picture',
+		2
+	);
