@@ -131,3 +131,110 @@ VALUES
 		6665576532,
 		'/some/path/'
 	);
+
+INSERT INTO
+	ads (
+		title,
+		ad_type,
+		ad_desc,
+		visibility,
+		pictures,
+		creator_id
+	)
+VALUES
+	(
+		'Public Condo Ad #1',
+		'condo',
+		'On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain.',
+		'public',
+		'/path/to/picture, /path/to/other/picture',
+		1
+	),
+	(
+		'Public Condo Ad #2',
+		'condo',
+		'On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain.',
+		'public',
+		'/path/to/picture, /path/to/other/picture',
+		2
+	),
+	(
+		'General Condo Ad #1',
+		'condo',
+		'On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain.',
+		'general',
+		'/path/to/picture, /path/to/other/picture',
+		3
+	),
+	(
+		'General Condo Ad #2',
+		'condo',
+		'On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain.',
+		'general',
+		'/path/to/picture, /path/to/other/picture',
+		4
+	),
+	(
+		'Public Item Sale Ad #1',
+		'item_sale',
+		'On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain.',
+		'public',
+		'/path/to/picture, /path/to/other/picture',
+		1
+	),
+	(
+		'Public Item Sale Ad #2',
+		'item_sale',
+		'On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain.',
+		'public',
+		'/path/to/picture, /path/to/other/picture',
+		2
+	),
+	(
+		'General Item Sale Ad #1',
+		'item_sale',
+		'On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain.',
+		'general',
+		'/path/to/picture, /path/to/other/picture',
+		3
+	),
+	(
+		'General Item Sale Ad #2',
+		'item_sale',
+		'On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain.',
+		'general',
+		'/path/to/picture, /path/to/other/picture',
+		4
+	),
+	(
+		'Public Service Ad #1',
+		'service',
+		'On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain.',
+		'public',
+		'/path/to/picture, /path/to/other/picture',
+		1
+	),
+	(
+		'Public Service Ad #2',
+		'service',
+		'On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain.',
+		'public',
+		'/path/to/picture, /path/to/other/picture',
+		2
+	),
+	(
+		'General Service Ad #1',
+		'service',
+		'On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain.',
+		'general',
+		'/path/to/picture, /path/to/other/picture',
+		3
+	),
+	(
+		'General Service Ad #2',
+		'service',
+		'On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain.',
+		'general',
+		'/path/to/picture, /path/to/other/picture',
+		4
+	)
