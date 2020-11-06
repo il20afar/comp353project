@@ -51,7 +51,7 @@ const User = (props) => {
       province: refs.province.current.value,
       country: refs.country.current.value,
     };
-    const res = await data.send("user", "modify", userIfUpdateSuccessful);
+    const res = await data.send("users", "modify", userIfUpdateSuccessful);
     window.setTimeout(() => {
       console.log(res);
 
