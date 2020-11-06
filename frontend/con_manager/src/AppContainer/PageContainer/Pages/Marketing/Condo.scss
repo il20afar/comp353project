@@ -58,16 +58,18 @@
 .box:active {
   overflow: visible;
   border-color: black;
-  width: 360px;
+  width: 100%;
   height: 100%;
 
   .img {
-    width: 380px;
+    border-radius: 6px;
+    width: 360px;
     height: 260px;
   }
 
   .content p {
-    width: 380px;
+    border-radius: 6px;
+    width: 360px;
     height: 150px;
   }
 }
