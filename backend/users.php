@@ -14,7 +14,7 @@ class users extends request
     public function login($obj)
     {
 
-        $query = $this->select("first_name, last_name, street, city, province, country, email, phone_number, profile_picture", (array) $obj);
+        $query = $this->select("user_id, first_name, last_name, street, city, province, country, email, phone_number, profile_picture", (array) $obj);
         $res = $this->query($query, true);
         return json_encode($res);
     }
