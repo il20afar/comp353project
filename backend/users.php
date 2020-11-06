@@ -7,19 +7,6 @@ class users extends request
     {
         parent::__construct(
             'users',
-            [
-                'username',
-                'pw',
-                'first_name',
-                'last_name',
-                'street',
-                'city',
-                'province',
-                'country',
-                'email',
-                'phone_number',
-                'profile_picture',
-            ],
             $conn
         );
     }
@@ -29,7 +16,6 @@ class users extends request
 
         $query = $this->select("first_name, last_name, street, city, province, country, email, phone_number, profile_picture", (array) $obj);
         $res = $this->query($query, true);
-
         return json_encode($res);
     }
 
@@ -42,7 +28,6 @@ class users extends request
         );
         $query = $this->update((array) $obj, $where);
         $res = $this->query($query, false);
-        
         return json_encode($res);
     }
 }

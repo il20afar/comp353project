@@ -3,14 +3,12 @@ include 'db_config.php';
 
 class request
 {
-    private string $type;
-    private object $fields;
+    private string $table;
     private object $conn;
 
-    public function __construct(string $type, array $fields, object $conn)
+    public function __construct(string $table, object $conn)
     {
-        $this->type = $type;
-        $this->fields = (object) $fields;
+        $this->table = $table;
         $this->conn = $conn;
     }
 
@@ -23,12 +21,11 @@ class request
         $rows = array();
         if($returnRows){
             while($r = mysqli_fetch_assoc($res)) {
-                $rows['users'][] = $r;
+                $rows[$this->table][] = $r;
             }
             return $rows;
 
         }
-
         else return mysqli_affected_rows($this->conn);
     }
 
@@ -40,7 +37,7 @@ class request
         return sprintf(
             "SELECT %s FROM %s WHERE %s;",
             $from,
-            $this->type,
+            $this->table,
             implode(" AND ", $where)
         );
     }
@@ -53,7 +50,7 @@ class request
         }
         return sprintf(
             "UPDATE %s SET %s WHERE %s;",
-            $this->type,
+            $this->table,
             implode(', ', $set),
             $where
         );
