@@ -23,7 +23,7 @@ CREATE TABLE users (
 
 CREATE TABLE associations (
 	asso_id INT NOT NULL AUTO_INCREMENT,
-	asso_name VARCHAR(50) NOT NULL,
+	asso_name VARCHAR(50) NOT NULL UNIQUE,
 	asso_desc VARCHAR(1000) NOT NULL,
 	admin_id INT NOT NULL,
 	PRIMARY KEY(asso_id),
@@ -41,7 +41,8 @@ CREATE TABLE condos (
 	features VARCHAR(1000) NOT NULL,
 	asso_id INT,
 	PRIMARY KEY(condo_id),
-	FOREIGN KEY(asso_id) REFERENCES associations(asso_id)
+	FOREIGN KEY(asso_id) REFERENCES associations(asso_id),
+	UNIQUE(street, city, province, country)
 );
 
 CREATE TABLE ads (
