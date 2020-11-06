@@ -5,5 +5,4 @@ include 'router.php';
 $conn = mysqli_connect($hostname, $db_username, $db_password, $database_name);
 $router = new router($conn);
 $router->route();
-
 ?>

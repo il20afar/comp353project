@@ -19,11 +19,11 @@ const User = (props) => {
   const profilepic = <img src={aisle20copy} alt="user-picture-profile" />;
 
   const refs = {
-    firstname: React.useRef(null),
-    lastname: React.useRef(null),
+    first_name: React.useRef(null),
+    last_name: React.useRef(null),
     email: React.useRef(null),
-    phoneno: React.useRef(null),
-    address: React.useRef(null),
+    phone_number: React.useRef(null),
+    street: React.useRef(null),
     city: React.useRef(null),
     province: React.useRef(null),
     country: React.useRef(null),
@@ -42,16 +42,16 @@ const User = (props) => {
     closeOrConfirm.current.className = `action-icon loading`;
     const userIfUpdateSuccessful = {
       username: user.current.username,
-      firstname: refs.firstname.current.value,
-      lastname: refs.lastname.current.value,
+      first_name: refs.first_name.current.value,
+      last_name: refs.last_name.current.value,
       email: refs.email.current.value,
-      phoneno: Number.parseInt(refs.phoneno.current.value),
-      address: refs.address.current.value,
+      phone_number: Number.parseInt(refs.phone_number.current.value),
+      street: refs.street.current.value,
       city: refs.city.current.value,
       province: refs.province.current.value,
       country: refs.country.current.value,
     };
-    const res = await data.send("user", "modify", userIfUpdateSuccessful);
+    const res = await data.send("users", "modify", userIfUpdateSuccessful);
     window.setTimeout(() => {
       console.log(res);
 
@@ -97,13 +97,13 @@ const User = (props) => {
               "First Name",
               "Last Name",
               "Email",
-              "PhoneNo",
-              "Address",
+              "Phone Number",
+              "Street",
               "City",
               "Province",
               "Country",
             ].map((elem) => {
-              const keyword = elem.replace(" ", "").toLowerCase();
+              const keyword = elem.replace(" ", "_").toLowerCase();
               return (
                 <D key={uuid()} cn={`user-info-container ${keyword}`}>
                   <D cn="title"> {elem}</D>
