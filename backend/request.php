@@ -79,7 +79,7 @@ class request
             'DELETE FROM $s WHERE %s;',
             $this->table,
             implode(', ', $where)
-        )
+        );
     }
 
 }
