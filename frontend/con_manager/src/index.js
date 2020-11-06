@@ -6,7 +6,12 @@ import * as serviceWorker from "./serviceWorker";
 import PageContainer from "./AppContainer/PageContainer/PageContainer";
 import Ads from "./AppContainer/PageContainer/Pages/Marketing/Ads";
 
-ReactDOM.render(<Ads />, document.getElementById("root"));
+ReactDOM.render(
+  <React.StrictMode>
+    <Ads />
+  </React.StrictMode>,
+  document.getElementById("root")
+);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
