@@ -2,7 +2,7 @@ import React from "react";
 import { D } from "../../../../imports";
 import Condo from './Condo';
 import "./Ads.scss";
-import Condo from "./Condo";
+
 
 const Ads = (props) => {
   const { advertisements } = props;
