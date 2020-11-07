@@ -12,10 +12,14 @@ class request
         $this->conn = $conn;
     }
 
+    /* Executes the supplied query and returns:
+       - the resulting rows as an array if returnRows is true
+       - the number of affected rows if returnRows is false
+    */
     public function query(string $query, bool $returnRows)
     {
         if (!$this->conn) {
-            die("Connection failed: " . mysqli_connect_error());
+            die('Connection failed: ' . mysqli_connect_error());
         }
         $res = mysqli_query($this->conn, $query);
         $rows = array();
@@ -24,7 +28,6 @@ class request
                 $rows[$this->table][] = $r;
             }
             return $rows;
-
         }
         else return mysqli_affected_rows($this->conn);
     }
@@ -53,6 +56,29 @@ class request
             $this->table,
             implode(', ', $set),
             $where
+        );
+    }
+
+    /* Returns a string representing a valid INSERT statement given the supplied values */
+    public function insert(array $values)
+    {
+        return sprintf(
+            'INSERT INTO %s VALUES (%s);',
+            $this->table,
+            implode(', ', $values)
+        );
+    }
+
+    /* Returns a string representing a valid DELETE statement given the supplied conditions */ 
+    public function delete(array $conditions)
+    {
+        foreach ($conditions as $key => $value) {
+            $where[] = "$key='$value'";
+        }
+        return sprintf(
+            'DELETE FROM $s WHERE %s;',
+            $this->table,
+            implode(', ', $where)
         );
     }
 
