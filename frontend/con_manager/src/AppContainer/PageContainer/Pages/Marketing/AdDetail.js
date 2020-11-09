@@ -5,7 +5,7 @@ const AdDetail = (props) => {
   return (
     <div>
       <header>
-        <h2>{props.title}</h2>
+        <p>{props.title}</p>
       </header>
 
       <section>
