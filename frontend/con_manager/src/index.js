@@ -6,6 +6,7 @@ import * as serviceWorker from "./serviceWorker";
 import PageContainer from "./AppContainer/PageContainer/PageContainer";
 import Ads from "./AppContainer/PageContainer/Pages/Marketing/Ads";
 import AdDetail from "./AppContainer/PageContainer/Pages/Marketing/AdDetail";
+import Meetings from "./AppContainer/PageContainer/Pages/Management/Meetings";
 
 ReactDOM.render(
   <React.StrictMode>
