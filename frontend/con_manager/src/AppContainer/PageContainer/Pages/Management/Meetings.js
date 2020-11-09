@@ -1,4 +1,6 @@
 import React from "react";
+import FullCalendar from '@fullcalendar/react'
+import dayGridPlugin from '@fullcalendar/daygrid'
 import { D } from "../../../../imports";
 import "./Meetings.scss";
 
