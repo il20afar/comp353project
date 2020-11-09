@@ -1,9 +1,8 @@
 import React from "react";
 import { D } from "../../../../imports";
-import Condo from './Condo';
+import Condo from "./Condo";
 import "./Ads.scss";
 import AdDetail from "./AdDetail";
-
 
 const Ads = (props) => {
   const { advertisements } = props;
@@ -17,6 +16,7 @@ const Ads = (props) => {
       title: "2 and a half condo in with furnitures", //?
       type: "Condo", //(ad, item sale, service)
       visibility: " ", //(public, general, classified)
+      creatorID: " ",
     },
     {
       adId: 251,
@@ -56,14 +56,27 @@ const Ads = (props) => {
   };
 
   const makeDetail = (adId, img, city, price, title, type) => {
-    return <AdDetail {...{ className: "detail", adId, img, city, price, title, type }} />;
+    return (
+      <AdDetail
+        {...{ className: "detail", adId, img, city, price, title, type }}
+      />
+    );
   };
 
   return (
     <div className="ads">
       <header className="ads-head">Discover Your Future Home</header>
       <div className="containe">
-        {arr.map((obj) => makeDetail(obj.adId, obj.img, obj.city, obj.price, obj.title,obj.type))}
+        {arr.map((obj) =>
+          makeDetail(
+            obj.adId,
+            obj.img,
+            obj.city,
+            obj.price,
+            obj.title,
+            obj.type
+          )
+        )}
       </div>
     </div>
   );

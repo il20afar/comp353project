@@ -1,37 +1,40 @@
-.ad-detail{
-
+header {
+  background-color: black;
+  padding: 10px;
+  text-align: center;
+  font-size: 40px;
+  color: white;
 }
 
-.img-detail {
-    height: 650px;
-    width: 1000px;
+section {
+  display: -webkit-flex;
+  display: flex;
 }
 
-.title-id-box {
-    margin: 0%;
-    padding: 0%;
-    display: flex;
-    width: 1000px;
-    border: 1px black solid;
+nav {
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  background: #ccc;
+  padding: 100px;
 }
 
-.title {
-    margin: 0%;
-    padding: 0%;
-    width: 720px;
-
-    font-size: 22px;
-    font-family: "Tahoma";
-    font-weight: 700;
+description {
+  -webkit-flex: 3;
+  -ms-flex: 3;
+  flex: 3;
+  background-color: #f1f1f1;
+  padding: 10px;
 }
 
-.id {
-    margin: 0%;
-    padding: 0%;
-    height: 100%;
-    width: 280px;
-    font-size: 22px;
-    font-family: "Tahoma";
-    font-weight: 700;
-    border-left: 1px solid black;
+@media (max-width: 500px) {
+  section {
+    -webkit-flex-direction: column;
+    flex-direction: column;
+  }
+}
+
+img-detail {
+  width: 100px;
+  height: 100px;
 }
