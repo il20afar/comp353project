@@ -5,7 +5,7 @@ import "./Contracts.scss";
 const Contracts = (props) => {
   const {} = props;
 
-  return <D cn="contracts"></D>;
+  return <D cn="TESTTTTTTTTTTTTTTTTTTT"></D>;
 };
 
 export default Contracts;
