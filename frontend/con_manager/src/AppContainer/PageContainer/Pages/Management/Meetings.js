@@ -1,8 +1,6 @@
 import React from "react";
-import { D } from "../../../../imports";
 import "./Meetings.scss";
 import momentJalaali from "moment-jalaali";
-import { Calendar } from "react-datepicker2";
 import DatePicker from "react-datepicker2";
 
 // const Meetings = (props) => {

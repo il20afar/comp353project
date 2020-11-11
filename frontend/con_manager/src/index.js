@@ -5,12 +5,12 @@ import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import PageContainer from "./AppContainer/PageContainer/PageContainer";
 import Ads from "./AppContainer/PageContainer/Pages/Marketing/Ads";
-import AdDetail from "./AppContainer/PageContainer/Pages/Marketing/AdDetail";
 import Meetings from "./AppContainer/PageContainer/Pages/Management/Meetings";
+import AdDetail from "./AppContainer/PageContainer/Pages/Marketing/AdDetail";
 
 ReactDOM.render(
   <React.StrictMode>
-    <Ads />
+    <App />
   </React.StrictMode>,
   document.getElementById("root")
 );

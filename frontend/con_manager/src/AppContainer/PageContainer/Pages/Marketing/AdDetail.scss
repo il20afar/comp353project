@@ -1,9 +1,11 @@
 header {
-  background-color: black;
+  background-color: rgba(0, 0, 0, 0.89);
   padding: 10px;
   text-align: center;
-  font-size: 40px;
-  color: white;
+  font-size: 55px;
+  color: whitesmoke;
+  font-weight: 500;
+  font-family: "Tahoma";
 }
 
 section {
@@ -16,15 +18,30 @@ nav {
   -ms-flex: 1;
   flex: 1;
   background: #ccc;
-  padding: 100px;
+  padding: 70px;
 }
 
 description {
   -webkit-flex: 3;
   -ms-flex: 3;
   flex: 3;
-  background-color: #f1f1f1;
+  background-color: whitesmoke;
   padding: 10px;
+}
+
+description h1 {
+  font-size: 30px;
+  border-bottom: black solid 2px;
+  font-family: "Tahoma";
+  font-weight: 500;
+}
+
+description p {
+  font-size: 22px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-family: "Tahoma";
+  font-weight: 500;
 }
 
 @media (max-width: 500px) {
@@ -34,7 +51,7 @@ description {
   }
 }
 
-img-detail {
-  width: 100px;
-  height: 100px;
+.img-detail {
+  width: 920px;
+  height: 560px;
 }
