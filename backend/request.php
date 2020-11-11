@@ -3,32 +3,32 @@ include 'db_config.php';
 
 class request
 {
-    private string $type;
-    private object $fields;
+    private string $table;
     private object $conn;
 
-    public function __construct(string $type, array $fields, object $conn)
+    public function __construct(string $table, object $conn)
     {
-        $this->type = $type;
-        $this->fields = (object) $fields;
+        $this->table = $table;
         $this->conn = $conn;
     }
 
+    /* Executes the supplied query and returns:
+       - the resulting rows as an array if returnRows is true
+       - the number of affected rows if returnRows is false
+    */
     public function query(string $query, bool $returnRows)
     {
         if (!$this->conn) {
-            die("Connection failed: " . mysqli_connect_error());
+            die('Connection failed: ' . mysqli_connect_error());
         }
         $res = mysqli_query($this->conn, $query);
         $rows = array();
         if($returnRows){
             while($r = mysqli_fetch_assoc($res)) {
-                $rows['user'][] = $r;
+                $rows[$this->table][] = $r;
             }
             return $rows;
-
         }
-
         else return mysqli_affected_rows($this->conn);
     }
 
@@ -40,7 +40,7 @@ class request
         return sprintf(
             "SELECT %s FROM %s WHERE %s;",
             $from,
-            $this->type,
+            $this->table,
             implode(" AND ", $where)
         );
     }
@@ -53,9 +53,32 @@ class request
         }
         return sprintf(
             "UPDATE %s SET %s WHERE %s;",
-            $this->type,
+            $this->table,
             implode(', ', $set),
             $where
+        );
+    }
+
+    /* Returns a string representing a valid INSERT statement given the supplied values */
+    public function insert(array $values)
+    {
+        return sprintf(
+            'INSERT INTO %s VALUES (%s);',
+            $this->table,
+            implode(', ', $values)
+        );
+    }
+
+    /* Returns a string representing a valid DELETE statement given the supplied conditions */ 
+    public function delete(array $conditions)
+    {
+        foreach ($conditions as $key => $value) {
+            $where[] = "$key='$value'";
+        }
+        return sprintf(
+            'DELETE FROM $s WHERE %s;',
+            $this->table,
+            implode(', ', $where)
         );
     }
 
