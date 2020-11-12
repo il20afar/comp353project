@@ -11,9 +11,22 @@
 
   &.showSidebar {
     transition: 0.25s;
-    .page {
+    .page,
+    .page-title {
       width: calc(100% - 320px);
     }
+  }
+  .page-title {
+    width: calc(100% - 70px);
+    height: 70px;
+    line-height: 70px;
+    font-size: 40px;
+    color: $text_bg;
+    position: absolute;
+    top: 0px;
+    right: 0;
+    text-align: center;
+    transition: 0.25s;
   }
 
   .page {
@@ -21,15 +34,15 @@
 
     position: absolute;
     width: calc(100% - 70px);
-    height: 100%;
+    height: calc(100% - 70px);
     padding: 30px;
     overflow-y: scroll;
     box-sizing: border-box;
-    top: 0;
+    top: 70px;
     right: 0;
   }
 
-  .username {
+  > .username {
     width: fit-content;
     font-size: 20px;
     position: absolute;

@@ -1,7 +1,9 @@
 // /AppContainer
 import AppContainer from "./AppContainer/AppContainer";
 import LoginContainer from "./AppContainer/LoginContainer/LoginContainer";
-import PageContainer from "./AppContainer/PageContainer/PageContainer";
+import PageContainer, {
+  MainContext,
+} from "./AppContainer/PageContainer/PageContainer";
 
 // /AppContainer/PageContainer/Pages
 import Contracts from "./AppContainer/PageContainer/Pages/Management/Contracts";
@@ -11,7 +13,7 @@ import Ads from "./AppContainer/PageContainer/Pages/Marketing/Ads";
 import Postings from "./AppContainer/PageContainer/Pages/Marketing/Postings";
 import Activities from "./AppContainer/PageContainer/Pages/Social/Activities";
 import Email from "./AppContainer/PageContainer/Pages/Social/Email";
-import Threads from "./AppContainer/PageContainer/Pages/Social/Threads";
+import Threads from "./AppContainer/PageContainer/Pages/Social/Threads/Threads";
 import Polls from "./AppContainer/PageContainer/Pages/Social/Polls";
 import Reviews from "./AppContainer/PageContainer/Pages/Social/Reviews";
 
@@ -31,6 +33,7 @@ export {
   AppContainer,
   LoginContainer,
   PageContainer,
+  MainContext,
   Contracts,
   Financial,
   Meetings,

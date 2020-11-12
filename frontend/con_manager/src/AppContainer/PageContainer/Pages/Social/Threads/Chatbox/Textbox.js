@@ -1,25 +1,22 @@
 import React from "react";
-import { D } from "../../imports";
+import { useRef, useEffect } from "react";
 import "./Textbox.scss";
-import "../../Styles/Utils.scss";
 
 const Textbox = (props) => {
   const { type, placeholder, buttonContent, onClick } = props;
   const refs = {
-    input: React.useRef(null),
-    button: React.useRef(null),
+    input: useRef(null),
+    button: useRef(null),
   };
   const getRef = (refName) => refs[refName].current;
   const textarea = type === "textarea";
 
   const setClass = (str) =>
     (getRef("button").className = `textbox-button ${str}`);
-
   const handlers = {
     previousVal: "",
     isShiftActive: false,
     onSend: (val = getRef("input").value) => {
-      console.log(val, type);
       if (textarea && val === "") {
         return;
       }
@@ -28,9 +25,8 @@ const Textbox = (props) => {
       onClick(val);
     },
     onKeyDown: (e, k = e.key) => {
-      console.log(k);
       if (k === "Shift") handlers.isShiftActive = true;
-      else if (k === "Enter") {
+      else if (k === "Enter" && !handlers.isShiftActive) {
         e.preventDefault();
         handlers.onSend();
       }
@@ -39,19 +35,17 @@ const Textbox = (props) => {
       if (k === "Shift") handlers.isShiftActive = false;
     },
     onChange: (e, val = e.target.value) => {
-      console.log("changed");
       textarea && setClass(val === "" ? "unavailable" : "");
     },
   };
 
-  React.useEffect(() => {
-    console.log("mounted");
+  useEffect(() => {
     refs.input.current.focus();
   }, []);
 
   return (
-    <D cn="textbox flex-row">
-      <D cn="textbox-wrapper">
+    <div className="textbox-chatbox flex-row">
+      <div className="textbox-wrapper">
         {((
           h = handlers,
           props = {
@@ -72,12 +66,12 @@ const Textbox = (props) => {
           className={`textbox-button${
             type === "textarea" ? " unavailable" : ""
           }`}
-          onClick={() => handlers.onaSend()}
+          onClick={() => handlers.onSend()}
         >
           {buttonContent}
         </div>
-      </D>
-    </D>
+      </div>
+    </div>
   );
 };
 

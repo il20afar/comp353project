@@ -40,6 +40,10 @@ const menus = {
   Management: ["Financial", "Contracts", "Meetings"],
 };
 
+export const MainContext = React.createContext({
+  user: {},
+});
+
 const PageContainer = (props) => {
   const { user } = props;
   const [currentPage, setCurrentPage] = React.useState({
@@ -62,38 +66,44 @@ const PageContainer = (props) => {
     });
   };
 
+  const defaultContext = { user };
+
   return (
     <Router>
-      <D cn={`page-container${showSidebar ? " showSidebar" : ""}`}>
-        <D cn="page">
-          <Switch>
-            {Object.values(menus)
-              .flat()
-              .map((elem) => {
-                return (
-                  <Route key={uuid()} path={`/${elem.toLowerCase()}`}>
-                    {pages[elem]()}
-                  </Route>
-                );
-              })}
-          </Switch>
+      <MainContext.Provider value={defaultContext}>
+        <D cn={`page-container${showSidebar ? " showSidebar" : ""}`}>
+          <div className="page-title">{currentPage.name}</div>
+
+          <D cn="page">
+            <Switch>
+              {Object.values(menus)
+                .flat()
+                .map((elem) => {
+                  return (
+                    <Route key={uuid()} path={`/${elem.toLowerCase()}`}>
+                      {pages[elem]()}
+                    </Route>
+                  );
+                })}
+            </Switch>
+          </D>
+          <Sidebar
+            {...{
+              currentPage: currentPage.name,
+              show: showSidebar,
+              setCurrentPage: handleSidebarState,
+              handleSidebarToggle,
+              showUserMod,
+              setShowUserMod,
+              menus,
+              user,
+            }}
+          />
+          {showUserMod && (
+            <UserModModal user={user} onClose={() => setShowUserMod(false)} />
+          )}
         </D>
-        <Sidebar
-          {...{
-            currentPage: currentPage.name,
-            show: showSidebar,
-            setCurrentPage: handleSidebarState,
-            handleSidebarToggle,
-            showUserMod,
-            setShowUserMod,
-            menus,
-            user,
-          }}
-        />
-        {showUserMod && (
-          <UserModModal user={user} onClose={() => setShowUserMod(false)} />
-        )}
-      </D>
+      </MainContext.Provider>
     </Router>
   );
 };
