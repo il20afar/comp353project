@@ -2,22 +2,23 @@ import React from "react";
 import "./AdDetail.scss";
 
 const AdDetail = (props) => {
+  const { title, img, adId, type, city, price, ...rest } = props;
   return (
-    <div>
+    <div {...rest}>
       <header>
-        <p>{props.title}</p>
+        <p>{title}</p>
       </header>
 
       <section>
         <nav>
-          <img className="img-detail" src={props.img} />
+          <img className="img-detail" src={img} />
         </nav>
 
         <description>
-          <h1>Adverstment ID: {props.adId}</h1>
-          <p>Type: {props.type}</p>
-          <p>City: {props.city}</p>
-          <p>Price: {props.price}</p>
+          <h1>Adverstment ID: {adId}</h1>
+          <p>Type: {type}</p>
+          <p>City: {city}</p>
+          <p>Price: {price}</p>
         </description>
       </section>
     </div>

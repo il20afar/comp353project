@@ -6,11 +6,10 @@ const D = React.forwardRef((props, ref) => {
   return <div ref={ref} className={cn} {...rest} />;
 });
 
-const url = "http://localhost:80/comp353project/backend/main.php";
 const data = {
   send: async (table, action, fields) => {
     try {
-      const req = await fetch(url, {
+      const req = await fetch(process.env.REACT_APP_PHP_SERVER_URL, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

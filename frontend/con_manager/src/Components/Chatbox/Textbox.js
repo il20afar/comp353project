@@ -14,6 +14,7 @@ const Textbox = (props) => {
 
   const setClass = (str) =>
     (getRef("button").className = `textbox-button ${str}`);
+
   const handlers = {
     previousVal: "",
     isShiftActive: false,

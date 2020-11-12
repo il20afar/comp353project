@@ -1,11 +1,11 @@
 @import "../../Styles/Utils.scss";
 
-.user-container {
+.comp-user-icon {
   @include assVal(width height, 100%);
   position: absolute;
   pointer-events: none;
   .user-icon-container {
-    $size: 60px;
+    $size: 50px;
     @include assVal(width height, $size);
     position: absolute;
     @include assVal(top right, 10px);
@@ -45,6 +45,13 @@
       }
     }
   }
+}
+
+.user-container {
+  @include assVal(width height, 100%);
+  position: absolute;
+  pointer-events: none;
+
   .user-edit-container {
     @include assVal(width height, 100%);
     @include flex(column, center);

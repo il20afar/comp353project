@@ -49,7 +49,7 @@ const Listings = (props) => {
 };
 
 const LoginContainer = (props) => {
-  const { handleLogin } = props;
+  const { loginStates, setLoginPage, handleLogin, invalidLogin } = props;
   const [ads, toggleAds] = React.useState(false);
   const refs = {
     username: React.useRef(null),
@@ -81,6 +81,7 @@ const LoginContainer = (props) => {
 
   // Component mounted
   React.useEffect(() => {
+    ["username", "password"].forEach((elem) => (refs[elem].current.value = ""));
     const listenEnter = (e) => {
       if (e.key === "Enter") {
         handlers.login.onSubmit();
@@ -95,7 +96,7 @@ const LoginContainer = (props) => {
   });
 
   return (
-    <D cn="login-container">
+    <D cn={`login-container`}>
       {ads ? (
         <Listings ref={refs.adsButton} type={"full"} />
       ) : (
@@ -106,7 +107,8 @@ const LoginContainer = (props) => {
               {["username", "password"].map((x) => (
                 <D key={x} cn="username-container">
                   <TextBox
-                    type={x === "username" ? "input" : x}
+                    type={"input"}
+                    subType={x}
                     ref={refs[x]}
                     placeholder={`${x[0].toUpperCase()}${x.slice(1)}`}
                     onChange={handlers.login.onChange}
@@ -125,6 +127,11 @@ const LoginContainer = (props) => {
               />
             </D>
           </D>
+          {invalidLogin && (
+            <D cn="invalidLogin" onClick={() => setLoginPage(loginStates.idle)}>
+              Invalid username or password
+            </D>
+          )}
         </>
       )}
       <D cn="ads-button">

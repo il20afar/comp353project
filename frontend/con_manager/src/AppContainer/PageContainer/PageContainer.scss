@@ -1,13 +1,33 @@
 @import "../../Styles/Utils.scss";
 
 .page-container {
-  @include fullFlex();
   background-color: $bg;
   position: relative;
   font-size: 50px;
-  position: relative;
   color: $main;
   font-weight: 700;
+  width: 100vw;
+  height: 100vh;
+
+  &.showSidebar {
+    transition: 0.25s;
+    .page {
+      width: calc(100% - 320px);
+    }
+  }
+
+  .page {
+    transition: 0.25s;
+
+    position: absolute;
+    width: calc(100% - 70px);
+    height: 100%;
+    padding: 30px;
+    overflow-y: scroll;
+    box-sizing: border-box;
+    top: 0;
+    right: 0;
+  }
 
   .username {
     width: fit-content;

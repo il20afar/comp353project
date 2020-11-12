@@ -100,6 +100,36 @@
   position: relative;
   background-color: $bg;
 
+  .invalidLogin {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    left: 0;
+    top: 0;
+    @include flex(column, center);
+    background-color: rgba(0, 0, 0, 0.9);
+
+    color: red;
+    font-size: 30px;
+    text-align: center;
+    cursor: pointer;
+
+    animation-name: invalidLogin;
+    animation-duration: 1.2s;
+    animation-timing-function: ease-out;
+    @keyframes invalidLogin {
+      0% {
+        opacity: 1;
+      }
+      75% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+      }
+    }
+  }
+
   .login-logo {
     $h: 100px;
     width: 100%;

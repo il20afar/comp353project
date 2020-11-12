@@ -4,10 +4,11 @@ $transition: all 0.15s ease-in;
 
 .sidebar {
   height: 100%;
-  width: 100%;
+  width: 50px;
   position: absolute;
   top: 0;
   left: 0;
+
   overflow: auto;
   &.open {
     @media only screen and (max-width: 600px) {
@@ -19,10 +20,61 @@ $transition: all 0.15s ease-in;
     background-color: $main;
 
     .hamburger-container {
-      width: 50px;
-      height: 50px;
+      width: 48px;
+      height: 70px;
+      @include flex(column, center);
+      margin-left: 10px;
+
       > div > div {
         background-color: white !important;
+      }
+    }
+    .user-mod-container {
+      position: absolute;
+      width: calc(100% - 64px);
+      height: 70px;
+      background-color: transparent;
+      // border-bottom: 1px solid white;
+      // border-bottom-left-radius: 5px;
+      top: 0;
+      right: 0;
+      display: flex;
+      cursor: pointer;
+      .username-wrapper {
+        width: calc(100% - 20px);
+        line-height: 70px;
+        height: 100%;
+        font-size: 24px;
+        color: white;
+        text-align: right;
+        transition: 0.2s;
+      }
+      .user-wrapper {
+        width: 70px;
+        height: 100%;
+        margin-left: 20px;
+        position: relative;
+      }
+
+      .comp-user-icon {
+        .user-icon-container {
+          border: 1px solid white !important;
+        }
+      }
+
+      &:hover {
+        .username-wrapper {
+          opacity: 0.7;
+        }
+        .comp-user-icon {
+          .user-icon-container {
+            opacity: 0.7;
+
+            .preference-icon {
+              opacity: 0.9;
+            }
+          }
+        }
       }
     }
     .menus-wrapper {
@@ -127,14 +179,23 @@ $transition: all 0.15s ease-in;
     }
   }
   &.closed {
-    width: 50px;
+    width: 70px;
     transition: $transition;
-    background-color: transparent;
+    background-color: black;
     border: none;
 
-    .hamburger {
-      width: 40px;
-      height: 40px;
+    .hamburger-container {
+      width: 48px;
+      height: 70px;
+      @include flex(column, center);
+      margin-left: 10px;
+
+      > div > div {
+        background-color: white !important;
+      }
+    }
+    .user-mod-container {
+      opacity: 0;
     }
     .menus {
       opacity: 0;

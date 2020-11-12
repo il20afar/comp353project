@@ -1,6 +1,8 @@
 import React from "react";
 import { Fade as Hamburger } from "hamburger-react";
-import { D } from "../../imports";
+import { D, UserIcon, UserIconMod } from "../../imports";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { v4 as uuid } from "uuid";
 import "./Sidebar.scss";
 import "../../Styles/Utils.scss";
 
@@ -13,14 +15,16 @@ const Menu = (props) => {
         {sections.map((sec) => {
           const isCurrent = currentPage === sec;
           return (
-            <D
-              cn={`menu-section${isCurrent ? " current" : ""}`}
-              key={sec}
-              onClick={() => onSelect(sec)}
-            >
-              {isCurrent && <D cn="current-dot">·</D>}
-              {sec}
-            </D>
+            <Link key={uuid()} to={sec.toLowerCase()}>
+              <D
+                cn={`menu-section${isCurrent ? " current" : ""}`}
+                key={sec}
+                onClick={() => onSelect(sec)}
+              >
+                {isCurrent && <D cn="current-dot">·</D>}
+                {sec}
+              </D>
+            </Link>
           );
         })}
       </D>
@@ -29,8 +33,16 @@ const Menu = (props) => {
 };
 
 const Sidebar = (props) => {
-  const { currentPage, setCurrentPage, menus } = props;
-  const [show, setShow] = React.useState(false);
+  const {
+    currentPage,
+    setCurrentPage,
+    show,
+    handleSidebarToggle,
+    showUserMod,
+    setShowUserMod,
+    menus,
+    user,
+  } = props;
   const onSelect = (key) => {
     setCurrentPage(key);
   };
@@ -42,13 +54,24 @@ const Sidebar = (props) => {
   return (
     <D cn={`sidebar ${show ? "open" : "closed"}`}>
       <D cn="hamburger-container">
-        <Hamburger className="hamburger" toggled={show} toggle={setShow} />
+        <Hamburger
+          className="hamburger"
+          toggled={show}
+          toggle={() => handleSidebarToggle()}
+          color="white"
+        />
+      </D>
+      <D cn="user-mod-container" onClick={() => setShowUserMod(!showUserMod)}>
+        <D cn="username-wrapper">{user.current.username}</D>
+        <D cn="user-wrapper">
+          <UserIcon />
+        </D>
       </D>
       <D cn="menus-wrapper">
         <D cn="menus">
           {Object.entries(menus).map(([title, sections]) => (
             <Menu
-              key={title}
+              key={uuid()}
               onSelect={onSelect}
               {...{ currentPage, title, sections }}
             />
