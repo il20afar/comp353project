@@ -43,12 +43,27 @@ const Sidebar = (props) => {
     menus,
     user,
   } = props;
+  const closeSidebarOnMenuClick = React.useRef(false);
+
   const onSelect = (key) => {
     setCurrentPage(key);
+    closeSidebarOnMenuClick.current && handleSidebarToggle(); // Close sidebar if width < 600
   };
 
   React.useEffect(() => {
-    return () => {};
+    // Tells the component to close the sidebar on menu click if window width < 600
+    const shouldCloseSidebarOnMenuToggle = (e, w = e.target.innerWidth) => {
+      if (w < 600 && !closeSidebarOnMenuClick.current) {
+        closeSidebarOnMenuClick.current = true;
+      } else if (w > 600 && closeSidebarOnMenuClick.current) {
+        closeSidebarOnMenuClick.current = false;
+      }
+    };
+    window.addEventListener("resize", shouldCloseSidebarOnMenuToggle);
+
+    return () => {
+      window.removeEventListener("resize", shouldCloseSidebarOnMenuToggle);
+    };
   }, []);
 
   return (
@@ -61,23 +76,30 @@ const Sidebar = (props) => {
           color="white"
         />
       </D>
-      <D cn="user-mod-container" onClick={() => setShowUserMod(!showUserMod)}>
-        <D cn="username-wrapper">{user.current.username}</D>
-        <D cn="user-wrapper">
-          <UserIcon />
-        </D>
-      </D>
-      <D cn="menus-wrapper">
-        <D cn="menus">
-          {Object.entries(menus).map(([title, sections]) => (
-            <Menu
-              key={uuid()}
-              onSelect={onSelect}
-              {...{ currentPage, title, sections }}
-            />
-          ))}
-        </D>
-      </D>
+      {show && (
+        <>
+          <D
+            cn="user-mod-container"
+            onClick={() => setShowUserMod(!showUserMod)}
+          >
+            <D cn="username-wrapper">{user.current.username}</D>
+            <D cn="user-wrapper">
+              <UserIcon />
+            </D>
+          </D>
+          <D cn="menus-wrapper">
+            <D cn="menus">
+              {Object.entries(menus).map(([title, sections]) => (
+                <Menu
+                  key={uuid()}
+                  onSelect={onSelect}
+                  {...{ currentPage, title, sections }}
+                />
+              ))}
+            </D>
+          </D>
+        </>
+      )}
     </D>
   );
 };

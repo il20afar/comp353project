@@ -4,6 +4,23 @@ import images from "../../condo_pictures/images";
 import "../../Styles/Utils.scss";
 import "./LoginContainer.scss";
 
+const cities = [
+  "Toronto",
+  "Montreal",
+  "Calgary",
+  "Edmonton",
+  "Ottawa",
+  "Vancouver",
+];
+const prices = [
+  "10 000 000",
+  "1 000 000",
+  "500 000",
+  "325 000",
+  "3 000 000",
+  "39 000 000",
+];
+
 const Condo = (props) => {
   const { picture, price, city } = props;
 
@@ -18,22 +35,6 @@ const Condo = (props) => {
 
 const Listings = (props) => {
   const { type } = props;
-  const cities = [
-    "Toronto",
-    "Montreal",
-    "Calgary",
-    "Edmonton",
-    "Ottawa",
-    "Vancouver",
-  ];
-  const prices = [
-    "10 000 000",
-    "1 000 000",
-    "500 000",
-    "325 000",
-    "3 000 000",
-    "39 000 000",
-  ];
   return (
     <D cn={`listing-container ${type}`}>
       {images.map((elem, index) => (
@@ -50,7 +51,7 @@ const Listings = (props) => {
 
 const LoginContainer = (props) => {
   const { loginStates, setLoginPage, handleLogin, invalidLogin } = props;
-  const [ads, toggleAds] = React.useState(false);
+  const [showLogin, setShowLogin] = React.useState(false);
   const refs = {
     username: React.useRef(null),
     password: React.useRef(null),
@@ -64,44 +65,53 @@ const LoginContainer = (props) => {
   const handlers = {
     login: {
       onChange: () => {
-        refs.loginButton.current.style.visibility = isLoginEntered()
-          ? "visible"
-          : "hidden";
+        isLoginEntered()
+          ? refs.loginButton.current.classList.add("show")
+          : refs.loginButton.current.classList.remove("show");
       },
       onSubmit: () => {
-        handleLogin(refs.username.current.value, refs.password.current.value);
-      },
-    },
-    ads: {
-      onClick: (e) => {
-        toggleAds(!ads);
+        isLoginEntered() &&
+          handleLogin(refs.username.current.value, refs.password.current.value);
       },
     },
   };
 
   // Component mounted
   React.useEffect(() => {
-    ["username", "password"].forEach((elem) => (refs[elem].current.value = ""));
-    const listenEnter = (e) => {
-      if (e.key === "Enter") {
-        handlers.login.onSubmit();
-      }
-    };
-    document.addEventListener("keyup", listenEnter);
+    if (showLogin) {
+      ["username", "password"].forEach(
+        (elem) => (refs[elem].current.value = "")
+      );
+      const listenEnter = (e) => {
+        if (e.key === "Enter") {
+          handlers.login.onSubmit();
+        }
+      };
+      document.addEventListener("keyup", listenEnter);
 
-    // Component unmounted
-    return () => {
-      document.removeEventListener("keyup", listenEnter);
-    };
-  });
+      // Component unmounted
+      return () => {
+        document.removeEventListener("keyup", listenEnter);
+      };
+    }
+  }, [showLogin]);
 
   return (
     <D cn={`login-container`}>
-      {ads ? (
-        <Listings ref={refs.adsButton} type={"full"} />
-      ) : (
-        <>
-          <D cn="login-logo">CON MANAGER</D>
+      <Listings ref={refs.adsButton} type={"full"} />
+
+      <D cn="login-logo">CON MANAGER</D>
+      <D cn="login-button">
+        <Button
+          content={{ show: "LOGIN" }}
+          style={{
+            show: { fontSize: "20px", height: "40px", lineHeight: "40px" },
+          }}
+          onClick={() => setShowLogin(!showLogin)}
+        />
+      </D>
+      {showLogin && (
+        <D cn="login-full-width-wrapper">
           <D cn="login">
             <D cn="login-inputs">
               {["username", "password"].map((x) => (
@@ -119,47 +129,24 @@ const LoginContainer = (props) => {
             <D
               ref={refs.loginButton}
               cn="button-container"
-              style={{ visibility: "hidden" }}
+              style={{ visibility: "visible" }}
             >
               <Button
                 content={{ show: "LOGIN" }}
                 onClick={handlers.login.onSubmit}
               />
             </D>
+            {invalidLogin && (
+              <D
+                cn="invalidLogin"
+                onClick={() => setLoginPage(loginStates.idle)}
+              >
+                Invalid username or password
+              </D>
+            )}
           </D>
-          {invalidLogin && (
-            <D cn="invalidLogin" onClick={() => setLoginPage(loginStates.idle)}>
-              Invalid username or password
-            </D>
-          )}
-        </>
-      )}
-      <D cn="ads-button">
-        <Button
-          type={"dynamic"}
-          content={{ show: "Ads", hide: "X" }}
-          style={{
-            show: {
-              width: "140px",
-              backgroundColor: "transparent",
-              borderRadius: "5px",
-              padding: "10px",
-            },
-            hide: {
-              width: "140px",
-              backgroundColor: "transparent",
-              borderColor: "black",
-              fontSize: "50px",
-              padding: "10px",
-              color: "black",
-            },
-          }}
-          onClick={handlers.ads.onClick}
-        />
-        <D cn="listing-preview">
-          <Listings ref={refs.adsButton} type={"preview"} />
         </D>
-      </D>
+      )}
     </D>
   );
 };

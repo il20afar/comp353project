@@ -1,6 +1,6 @@
 import React from "react";
-import { D, MainContext, TextBox } from "../../../../../imports";
-import Chatbox from "./Chatbox/Chatbox";
+import { D, MainContext, TextBox } from "../../../../imports";
+import Chatbox from "../../../../Components/Chatbox/Chatbox";
 import { v4 as uuid } from "uuid";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -43,7 +43,7 @@ const ThreadView = (props) => {
 };
 
 const threads = [
-  "Condos",
+  "0",
   "Ads",
   "Make CondoAssociation Great Again",
   "Please help!",
@@ -58,17 +58,22 @@ const messages = [
 ];
 
 const Thread = (props) => {
-  const { name, numberMessages, modifiedOn, createdBy, onClick } = props;
+  const {
+    name,
+    numberMessages,
+    modifiedOn,
+    createdBy,
+    onClick,
+    gridTemplateColumns,
+  } = props;
   return (
-    <div className="thread" onClick={() => onClick(name)}>
+    <div
+      className="thread"
+      style={{ gridTemplateColumns }}
+      onClick={() => onClick(name)}
+    >
       <div className="thread-element-container name">
         <div className="thread-element name">{name}</div>
-      </div>
-      <div className="thread-element-container numbermsg">
-        <div className="thread-element numbermsg">
-          <FontAwesomeIcon icon={faStickyNote} />
-          <div>&nbsp;&nbsp;{numberMessages}</div>
-        </div>
       </div>
       <div className="thread-element-container modified-on">
         <div className="thread-element modified-on">
@@ -82,12 +87,25 @@ const Thread = (props) => {
           <div>&nbsp;&nbsp;{createdBy}</div>
         </div>
       </div>
+      <div className="thread-element-container numbermsg">
+        <div className="thread-element numbermsg">
+          <FontAwesomeIcon icon={faStickyNote} />
+          <div>&nbsp;&nbsp;{numberMessages}</div>
+        </div>
+      </div>
     </div>
   );
 };
 
 const ThreadMenu = (props) => {
   const { showThread, setShowThread } = props;
+
+  React.useEffect(() => {
+    const max = 12 * Math.max(...threads.map((elem) => elem.length));
+    console.log(max);
+  }, []);
+  const max = 11.38 * Math.max(...threads.map((elem) => elem.length));
+
   return (
     <div className="thread-menu">
       {threads.map((elem, index) => (
@@ -95,9 +113,10 @@ const ThreadMenu = (props) => {
           key={uuid()}
           name={elem}
           numberMessages={index * 18}
-          modifiedOn="10-10-10"
+          modifiedOn="10-10-10 12:38pm"
           createdBy="afar"
           onClick={setShowThread}
+          gridTemplateColumns={`minmax(300px, ${max}px) minmax(0px, 300px) minmax(0px,300px) minmax(60px, 80px)`}
         />
       ))}
     </div>
@@ -109,8 +128,6 @@ const Threads = (props) => {
   const { user } = React.useContext(MainContext);
 
   const [showThread, setShowThread] = React.useState("");
-
-  const handleThreadSelect = (name) => {};
 
   console.log(showThread);
   return (

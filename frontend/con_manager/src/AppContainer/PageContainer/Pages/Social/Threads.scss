@@ -1,4 +1,4 @@
-@import "../../../../../Styles/Utils.scss";
+@import "../../../../Styles/Utils.scss";
 
 .threads-page {
   @include fullsize();
@@ -98,7 +98,8 @@
     grid-row-gap: 20px;
 
     .thread {
-      width: 100%;
+      width: calc(100% - 20px);
+      max-width: calc(100% - 20px);
       height: 70px;
       background-color: rgb(153, 189, 255);
       border-radius: 8px;
@@ -108,7 +109,7 @@
       box-sizing: border-box;
       box-shadow: $boxshadow;
       grid-template-rows: 100%;
-      grid-template-columns: 40% 100px auto 300px;
+      grid-column-gap: 20px;
       cursor: pointer;
 
       .thread-element-container {
@@ -117,6 +118,8 @@
         @include flex(column, center);
 
         .thread-element {
+          overflow: hidden;
+
           font-size: 20px;
           color: black;
           &.name,
@@ -132,16 +135,16 @@
           &.name {
             grid-column: 1 / span 1;
           }
-          &.numbermsg {
-            grid-column: 2 / span 1;
-            @include flex(row, flex-start);
-          }
           &.modified-on {
             grid-column: 3 / span 1;
           }
           &.created-by {
             grid-column: 4 / span 1;
             @include flex(row, flex-end);
+          }
+          &.numbermsg {
+            grid-column: 2 / span 1;
+            @include flex(row, flex-start);
           }
         }
       }

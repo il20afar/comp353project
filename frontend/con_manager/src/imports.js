@@ -13,7 +13,7 @@ import Ads from "./AppContainer/PageContainer/Pages/Marketing/Ads";
 import Postings from "./AppContainer/PageContainer/Pages/Marketing/Postings";
 import Activities from "./AppContainer/PageContainer/Pages/Social/Activities";
 import Email from "./AppContainer/PageContainer/Pages/Social/Email";
-import Threads from "./AppContainer/PageContainer/Pages/Social/Threads/Threads";
+import Threads from "./AppContainer/PageContainer/Pages/Social/Threads";
 import Polls from "./AppContainer/PageContainer/Pages/Social/Polls";
 import Reviews from "./AppContainer/PageContainer/Pages/Social/Reviews";
 
