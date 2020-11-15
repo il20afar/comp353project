@@ -1,7 +1,7 @@
 import React from "react";
+import { useState, useRef } from "react";
 import Textbox from "./Textbox";
 import Message from "./Message";
-import { D, data } from "../../imports";
 import { v4 as uuid } from "uuid";
 
 import "./Chatbox.scss";
@@ -11,28 +11,48 @@ const createMessage = (date, time, username, content, type = "others") => {
 };
 
 const Chatbox = (props) => {
-  const { user } = props;
-  const intervalId = React.useRef(0);
-  const [messages, setMessages] = React.useState([]);
+  const { user, messages: inputMessage = [] } = props;
+  const intervalId = useRef(0);
+  const [messages, setMessages] = useState(inputMessage);
 
-  const sendMessage = async (message, username = user.current.name) => {};
+  const sendMessage = async (message, username = user.current.name) => {
+    // const response = await sendData({ username: username, message: message });
+    // if (response !== "message_accepted") {
+    //   alert("Your message couldn't be sent!");
+    // }
+    console.log(message);
 
-  React.React.useEffect(() => {}, [messages]);
+    const newMessages = [
+      ...messages,
+
+      createMessage("10-10-10", "13:44", username, message, "self"),
+    ];
+
+    setMessages(newMessages);
+  };
+
+  React.useEffect(() => {
+    setMessages([
+      createMessage("10-10-10", "13:44", "afar", "My name is afar.", "self"),
+    ]);
+  }, []);
+
+  console.log(messages);
 
   return (
-    <D cn="chatbox">
-      <D cn="messagebox-container">
-        <D cn="messagebox">{messages}</D>
-      </D>
-      <D cn="textbox-container">
+    <div className="chatbox">
+      <div className="messagebox-container">
+        <div className="messagebox">{messages}</div>
+      </div>
+      <div className="textbox-container">
         <Textbox
           type="textarea"
           placeholder="Send a message!"
           buttonContent="Send"
-          onClick={(e) => sendMessage(e)}
+          onClick={(e) => sendMessage(e, user.current.username)}
         />
-      </D>
-    </D>
+      </div>
+    </div>
   );
 };
 

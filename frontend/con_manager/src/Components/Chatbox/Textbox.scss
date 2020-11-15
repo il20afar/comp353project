@@ -1,11 +1,22 @@
 @import "../../Styles/Utils.scss";
 
-.textbox {
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.textbox-chatbox {
   width: 100%;
   height: fit-content;
 
   .textbox-wrapper {
-    max-width: 500px;
     width: 100%;
     height: fit-content;
     background-color: transparent;
@@ -15,16 +26,18 @@
 
     .text-input {
       width: calc(100% - 90px);
-      height: 50px;
+      height: fit-content;
       background-color: $text_bg;
       border: 3px solid $border;
       border-radius: 7px;
       font-size: 34px;
-      line-height: 44px;
-      padding: 0 12px 0 12px;
+      line-height: 30px;
+      padding: 12px;
       outline: none;
       box-sizing: border-box;
       transition: 0.25s ease;
+      resize: none;
+      font: 400 14px "Roboto", sans-serif !important;
 
       &::-webkit-input-placeholder {
         font-style: italic;
@@ -42,12 +55,11 @@
 
     .textbox-button {
       width: 80px;
-      height: 50px;
       background-color: $main;
-      color: $border;
+      color: $text_bg;
       border: 3px solid $border;
       border-radius: 6px;
-      font-size: 34px;
+      font-size: 24px;
       font-weight: 1000;
       line-height: 44px;
       text-align: center;
@@ -55,6 +67,7 @@
       cursor: pointer;
       user-select: none;
       box-shadow: $boxshadow;
+      @include flex(column, center);
 
       &.unavailable {
         background-color: gray !important;

@@ -12,9 +12,25 @@ import "./User.scss";
 import "../../Styles/Utils.scss";
 import aisle20copy from "./aisle20copy.jpg";
 
-const User = (props) => {
-  const { user } = props;
-  const [show, setShow] = React.useState(false);
+const UserIcon = (props) => {
+  const {
+    profilepic = <img src={aisle20copy} alt="user-picture-profile" />,
+    ...rest
+  } = props;
+  return (
+    <D cn="comp-user-icon" {...rest}>
+      <D cn="user-icon-container">
+        {profilepic}
+        <D cn="preference-icon">
+          <FontAwesomeIcon icon={faUser} />
+        </D>
+      </D>
+    </D>
+  );
+};
+
+const UserModModal = (props) => {
+  const { user, onClose } = props;
   const closeOrConfirm = React.useRef(null);
   const profilepic = <img src={aisle20copy} alt="user-picture-profile" />;
 
@@ -29,10 +45,11 @@ const User = (props) => {
     country: React.useRef(null),
   };
 
-  const onChange = (e) => {
+  const onChange = () => {
     const entries = Object.entries(refs).filter(
-      ([key, val]) => val.current.value !== user[key]
+      ([key, val]) => val.current.value !== user.current[key]
     );
+    console.log(user);
     closeOrConfirm.current.className = `action-icon ${
       entries.length === 0 ? "close" : "confirm"
     }`;
@@ -58,7 +75,7 @@ const User = (props) => {
       if (res !== 0) {
         closeOrConfirm.current.className = "action-icon close";
         user.current = userIfUpdateSuccessful;
-        setShow(false);
+        onClose(false);
       } else {
         closeOrConfirm.current.className = "action-icon confirm";
 
@@ -70,66 +87,54 @@ const User = (props) => {
 
   return (
     <D cn="user-container">
-      {show ? (
-        <D className="user-edit-container">
-          <D className="user-edit-window">
-            <D cn="action-icon-container">
-              <D ref={closeOrConfirm} cn={`action-icon close`}>
-                <D
-                  cn="action-icon-wrapper close"
-                  onClick={() => setShow(!show)}
-                >
-                  <FontAwesomeIcon icon={faTimesCircle} />
-                </D>
-                <D cn="action-icon-wrapper confirm" onClick={onConfirmChange}>
-                  <FontAwesomeIcon icon={faCheckCircle} />
-                </D>
-                <D cn="action-icon-wrapper loading">
-                  <FontAwesomeIcon icon={faSpinner} />
-                </D>
+      <D className="user-edit-container">
+        <D className="user-edit-window">
+          <D cn="action-icon-container">
+            <D ref={closeOrConfirm} cn={`action-icon close`}>
+              <D cn="action-icon-wrapper close" onClick={() => onClose()}>
+                <FontAwesomeIcon icon={faTimesCircle} />
+              </D>
+              <D cn="action-icon-wrapper confirm" onClick={onConfirmChange}>
+                <FontAwesomeIcon icon={faCheckCircle} />
+              </D>
+              <D cn="action-icon-wrapper loading">
+                <FontAwesomeIcon icon={faSpinner} />
               </D>
             </D>
-            <D cn="username-container">{user.current.username}</D>
-            <D cn="profilepicture-container">
-              <D cn="profilepicture"> {profilepic}</D>
-            </D>
-            {[
-              "First Name",
-              "Last Name",
-              "Email",
-              "Phone Number",
-              "Street",
-              "City",
-              "Province",
-              "Country",
-            ].map((elem) => {
-              const keyword = elem.replace(" ", "_").toLowerCase();
-              return (
-                <D key={uuid()} cn={`user-info-container ${keyword}`}>
-                  <D cn="title"> {elem}</D>
-                  <TextBox
-                    type={"input"}
-                    ref={refs[keyword]}
-                    initialValue={user.current[keyword]}
-                    onChange={onChange}
-                    outlineOnChange
-                    focusOnRender={false}
-                  />
-                </D>
-              );
-            })}
           </D>
-        </D>
-      ) : (
-        <D cn="user-icon-container" onClick={() => setShow(!show)}>
-          {profilepic}
-          <D cn="preference-icon">
-            <FontAwesomeIcon icon={faUser} />
+          <D cn="username-container">{user.current.username}</D>
+          <D cn="profilepicture-container">
+            <D cn="profilepicture"> {profilepic}</D>
           </D>
+          {[
+            "First Name",
+            "Last Name",
+            "Email",
+            "Phone Number",
+            "Street",
+            "City",
+            "Province",
+            "Country",
+          ].map((elem) => {
+            const keyword = elem.replace(" ", "_").toLowerCase();
+            return (
+              <D key={uuid()} cn={`user-info-container ${keyword}`}>
+                <D cn="title"> {elem}</D>
+                <TextBox
+                  type={"input"}
+                  ref={refs[keyword]}
+                  initialValue={user.current[keyword]}
+                  onChange={onChange}
+                  outlineOnChange
+                  focusOnRender={false}
+                />
+              </D>
+            );
+          })}
         </D>
-      )}
+      </D>
     </D>
   );
 };
 
-export default User;
+export { UserModModal, UserIcon };

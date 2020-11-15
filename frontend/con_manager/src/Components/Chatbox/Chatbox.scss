@@ -19,7 +19,7 @@
       .text-input {
         height: 80px !important;
         width: 100% !important;
-        @include assVal(width height, 100%);
+        @include border();
       }
       .textbox-button {
         margin-top: 10px !important;
@@ -33,7 +33,7 @@
 }
 
 .chatbox {
-  @include assVal(width height, 100%);
+  @include fullsize();
   font-family: "Roboto", sans-serif;
   background-color: $bg;
   grid-row: 2 / span 1;
@@ -41,15 +41,15 @@
   grid-template-rows: calc(100% - 100px) 100px;
 
   .messagebox-container {
-    @include assVal(width height, 100%);
+    @include fullsize();
     max-height: 100%;
     grid-row: 1 / span 1;
-    padding: 20px 20px 0px 20px;
+    padding: 20px 0px 0px 0px !important;
     box-sizing: border-box;
     overflow: hidden;
     position: relative;
     .messagebox {
-      @include assVal(width height, 100%);
+      @include fullsize();
       position: relative;
       border: 30px solid $main;
       background-color: $main;
@@ -71,22 +71,22 @@
   }
 
   .textbox-container {
-    @include assVal(width height, 100%);
+    @include fullsize();
     width: 100%;
     grid-row: 2 / span 1;
     box-sizing: border-box;
-    padding: 20px;
+    padding: 20px 0 0 0 !important;
     overflow-x: scroll;
     .textbox {
-      @include assVal(width height, 100%);
+      @include fullsize();
       .textbox-wrapper {
         position: relative;
-        @include assVal(width height, 100%);
+        @include fullsize();
         max-width: 100%;
 
         .text-input {
           @include border();
-          @include assVal(width height, 100%);
+          @include fullsize();
           max-width: 100%;
           width: calc(100% - 113px);
           line-height: 26px;

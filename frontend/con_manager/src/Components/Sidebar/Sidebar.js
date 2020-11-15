@@ -1,6 +1,8 @@
 import React from "react";
 import { Fade as Hamburger } from "hamburger-react";
-import { D } from "../../imports";
+import { D, UserIcon, UserIconMod } from "../../imports";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { v4 as uuid } from "uuid";
 import "./Sidebar.scss";
 import "../../Styles/Utils.scss";
 
@@ -13,14 +15,16 @@ const Menu = (props) => {
         {sections.map((sec) => {
           const isCurrent = currentPage === sec;
           return (
-            <D
-              cn={`menu-section${isCurrent ? " current" : ""}`}
-              key={sec}
-              onClick={() => onSelect(sec)}
-            >
-              {isCurrent && <D cn="current-dot">·</D>}
-              {sec}
-            </D>
+            <Link key={uuid()} to={sec.toLowerCase()}>
+              <D
+                cn={`menu-section${isCurrent ? " current" : ""}`}
+                key={sec}
+                onClick={() => onSelect(sec)}
+              >
+                {isCurrent && <D cn="current-dot">·</D>}
+                {sec}
+              </D>
+            </Link>
           );
         })}
       </D>
@@ -29,32 +33,73 @@ const Menu = (props) => {
 };
 
 const Sidebar = (props) => {
-  const { currentPage, setCurrentPage, menus } = props;
-  const [show, setShow] = React.useState(false);
+  const {
+    currentPage,
+    setCurrentPage,
+    show,
+    handleSidebarToggle,
+    showUserMod,
+    setShowUserMod,
+    menus,
+    user,
+  } = props;
+  const closeSidebarOnMenuClick = React.useRef(false);
+
   const onSelect = (key) => {
     setCurrentPage(key);
+    closeSidebarOnMenuClick.current && handleSidebarToggle(); // Close sidebar if width < 600
   };
 
   React.useEffect(() => {
-    return () => {};
+    // Tells the component to close the sidebar on menu click if window width < 600
+    const shouldCloseSidebarOnMenuToggle = (e, w = e.target.innerWidth) => {
+      if (w < 600 && !closeSidebarOnMenuClick.current) {
+        closeSidebarOnMenuClick.current = true;
+      } else if (w > 600 && closeSidebarOnMenuClick.current) {
+        closeSidebarOnMenuClick.current = false;
+      }
+    };
+    window.addEventListener("resize", shouldCloseSidebarOnMenuToggle);
+
+    return () => {
+      window.removeEventListener("resize", shouldCloseSidebarOnMenuToggle);
+    };
   }, []);
 
   return (
     <D cn={`sidebar ${show ? "open" : "closed"}`}>
       <D cn="hamburger-container">
-        <Hamburger className="hamburger" toggled={show} toggle={setShow} />
+        <Hamburger
+          className="hamburger"
+          toggled={show}
+          toggle={() => handleSidebarToggle()}
+          color="white"
+        />
       </D>
-      <D cn="menus-wrapper">
-        <D cn="menus">
-          {Object.entries(menus).map(([title, sections]) => (
-            <Menu
-              key={title}
-              onSelect={onSelect}
-              {...{ currentPage, title, sections }}
-            />
-          ))}
-        </D>
-      </D>
+      {show && (
+        <>
+          <D
+            cn="user-mod-container"
+            onClick={() => setShowUserMod(!showUserMod)}
+          >
+            <D cn="username-wrapper">{user.current.username}</D>
+            <D cn="user-wrapper">
+              <UserIcon />
+            </D>
+          </D>
+          <D cn="menus-wrapper">
+            <D cn="menus">
+              {Object.entries(menus).map(([title, sections]) => (
+                <Menu
+                  key={uuid()}
+                  onSelect={onSelect}
+                  {...{ currentPage, title, sections }}
+                />
+              ))}
+            </D>
+          </D>
+        </>
+      )}
     </D>
   );
 };

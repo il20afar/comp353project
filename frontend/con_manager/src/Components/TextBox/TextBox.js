@@ -8,6 +8,7 @@ import "../../Styles/Utils.scss";
 const Textbox = React.forwardRef((props, ref) => {
   const {
     type,
+    subType = "text",
     placeholder,
     onChange = () => null,
     focusOnRender = false,
@@ -45,14 +46,18 @@ const Textbox = React.forwardRef((props, ref) => {
         <FontAwesomeIcon icon={faTimes} />
       </D>
       {((
-        props = {
+        rest = {
           ref: ref,
           className: "text-input",
           onChange: onChangeHandler,
           placeholder,
         }
       ) =>
-        type !== "textarea" ? <input {...props} /> : <textarea {...props} />)()}
+        type !== "textarea" ? (
+          <input type={subType} {...rest} />
+        ) : (
+          <textarea {...rest} />
+        ))()}
     </D>
   );
 });

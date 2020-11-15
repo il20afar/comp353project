@@ -43,26 +43,12 @@
 .listing-container {
   display: grid;
   overflow: scroll;
-  &.preview {
-    @include box(
-      $bCol: $border,
-      $bWid: 3px,
-      $bRad: 10px,
-      $bgColor: $main,
-      $width: 400px,
-      $height: 600px
-    );
-    max-height: calc(100vh - 140px);
-    grid-template-rows: repeat(3, 200px);
-    grid-template-columns: repeat(auto-fill, 200px);
-  }
   &.full {
     height: calc(100vh - 140px);
     width: 100%;
     @include abs($top: 140px, $left: 0);
     grid-template-rows: repeat(2, 50%);
     grid-template-columns: repeat(3, 33.33%);
-    animation: fadein 0.25s ease;
 
     .condo-container {
       background-color: transparent;
@@ -85,14 +71,6 @@
       }
     }
   }
-  @keyframes fadein {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
 }
 
 .login-container {
@@ -100,13 +78,44 @@
   position: relative;
   background-color: $bg;
 
+  .invalidLogin {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    @include flex(column, center);
+    background-color: rgba(0, 0, 0, 0.9);
+
+    color: red;
+    font-size: 30px;
+    text-align: center;
+    cursor: pointer;
+
+    animation-name: invalidLogin;
+    animation-duration: 1.2s;
+    animation-timing-function: ease-out;
+    @keyframes invalidLogin {
+      0% {
+        opacity: 1;
+      }
+      75% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+      }
+    }
+  }
+
   .login-logo {
     $h: 100px;
     width: 100%;
     height: $h;
-    @include abs($top: 0, $left: 0);
+    max-width: calc(100% - 140px);
+    @include abs($top: -6px, $left: 0);
     line-height: $h;
-    font-size: 70px;
+    font-size: 46px;
     font-weight: 800;
     font-style: italic;
     text-align: center;
@@ -115,54 +124,107 @@
     pointer-events: none;
   }
 
-  .ads-button {
-    height: 100px;
-    width: 140px;
+  .login-button {
+    height: 40px;
+    width: 120px;
     @include flex(row, center);
-    @include abs($top: 20px, $left: 20px);
-    .listing-preview {
-      display: none;
-      @include abs($top: 100px, $left: 0);
-      max-height: calc(100vh - 120px);
-      .listing-container.preview {
-        opacity: 0;
-      }
-    }
-    .button.show:hover {
-      + .listing-preview {
-        display: block;
-        transition: 0.25s ease-in;
-        .listing-container.preview {
-          opacity: 1;
-        }
-      }
-    }
+    @include abs($top: 20px, $right: 20px);
   }
 
-  .login {
-    max-width: calc(100vw - 30px);
-    width: 500px;
-    height: 260px;
-    @include flex(column, space-between);
+  .login-full-width-wrapper {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: none;
 
-    .login-inputs {
-      max-width: 100%;
-      @include box(
-        $bCol: $border,
-        $bWid: 3px,
-        $bRad: 10px,
-        $bgColor: $main,
-        $width: 500px,
-        $height: 180px
-      );
-      padding: 30px 20px 30px 20px;
-      box-sizing: border-box;
-      @include flex(column, space-between);
+    .login {
+      max-width: calc(100vw - 40px);
+      width: 300px;
+      height: 260px;
+      position: absolute;
+      padding: 20px;
+      top: 84px;
+      right: 18px;
+      border-radius: 8px;
+      background-color: ghostwhite;
+      box-shadow: $boxshadow;
+      border: 2px black solid;
+      @include flex(column, center);
+      pointer-events: all;
+      animation: 0.2s logindowndesktop ease;
+      overflow: hidden;
 
-      .username-container,
-      .password-container {
-        width: 100%;
-        height: 50px;
+      @media only screen and (max-width: 600px) {
+        width: calc(100vw - 80px);
+        height: calc((100vh - 154px));
+        animation: 0.2s logindownmobile ease;
+      }
+
+      @keyframes logindowndesktop {
+        from {
+          height: 0px;
+        }
+        to {
+          height: 260px;
+        }
+      }
+      @keyframes logindownmobile {
+        from {
+          height: 0px;
+        }
+        to {
+          height: calc((100vh - 154px));
+        }
+      }
+
+      .button-container {
+        opacity: 0.3;
+        margin-top: 20px;
+        > .button {
+          cursor: not-allowed !important;
+          color: rgb(179, 179, 179);
+          &:hover {
+            transform: none;
+          }
+        }
+        &.show {
+          opacity: 1;
+          > .button {
+            cursor: pointer !important;
+            color: white;
+            &:hover {
+              transform: none;
+            }
+          }
+        }
+      }
+
+      .login-inputs {
+        max-width: 100%;
+        @include box(
+          $bCol: $border,
+          $bWid: 3px,
+          $bRad: 10px,
+          $bgColor: $main,
+          $width: 100%,
+          $height: 174px
+        );
+        padding: 20px 20px 30px 20px;
+        box-sizing: border-box;
+        // @include flex(column, space-between);
+        .text-input {
+          font-size: 20px !important;
+        }
+
+        .username-container,
+        .password-container {
+          margin: 10px 0 10px 0;
+
+          width: 100%;
+          height: 50px;
+        }
       }
     }
   }

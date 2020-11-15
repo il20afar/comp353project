@@ -5,7 +5,7 @@ import "./Email.scss";
 const Email = (props) => {
   const {} = props;
 
-  return <D cn="Email"></D>;
+  return <D cn="email-page"></D>;
 };
 
 export default Email;

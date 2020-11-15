@@ -1,5 +1,7 @@
 import React from "react";
 import { D } from "../../../../imports";
+import { v4 as uuid } from "uuid";
+
 import Condo from "./Condo";
 import "./Ads.scss";
 import AdDetail from "./AdDetail";
@@ -52,7 +54,15 @@ const makeGeneralAd = (adId, img, city, price, title, type, setDetailsAd) => {
   return (
     <div onClick={() => setDetailsAd(adId)}>
       <Condo
-        {...{ className: "detail", adId, img, city, price, title, type }}
+        {...{
+          className: "detail",
+          adId,
+          img,
+          city,
+          price,
+          title,
+          type,
+        }}
       />
     </div>
   );
@@ -61,7 +71,15 @@ const makeGeneralAd = (adId, img, city, price, title, type, setDetailsAd) => {
 const makeDetailAd = (adId, img, city, price, title, type) => {
   return (
     <AdDetail
-      {...{ className: "detail", adId, img, city, price, title, type }}
+      {...{
+        className: "detail",
+        adId,
+        img,
+        city,
+        price,
+        title,
+        type,
+      }}
     />
   );
 };
@@ -71,17 +89,19 @@ const General = (props) => {
     <>
       <header className="ads-head">Discover Your Future Home</header>
       <div className="containe">
-        {arr.map((obj) =>
-          makeGeneralAd(
-            obj.adId,
-            obj.img,
-            obj.city,
-            obj.price,
-            obj.title,
-            obj.type,
-            props.setDetailsAd
-          )
-        )}
+        {arr.map((obj) => (
+          <div key={uuid()}>
+            {makeGeneralAd(
+              obj.adId,
+              obj.img,
+              obj.city,
+              obj.price,
+              obj.title,
+              obj.type,
+              props.setDetailsAd
+            )}
+          </div>
+        ))}
       </div>
     </>
   );
