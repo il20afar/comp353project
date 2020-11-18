@@ -22,6 +22,7 @@ import Button from "./Components/Button/Button";
 import Chatbox from "./Components/Chatbox/Chatbox";
 import Message from "./Components/Chatbox/Message";
 import Textbox from "./Components/Chatbox/Textbox";
+import RowElem from "./Components/GridLayout/GridLayout";
 import Sidebar from "./Components/Sidebar/Sidebar";
 import TextBox from "./Components/TextBox/TextBox";
 import { UserIcon, UserModModal } from "./Components/User/User";
@@ -49,6 +50,7 @@ export {
   Message,
   Textbox as Txtbox,
   Sidebar,
+  RowElem,
   TextBox,
   UserIcon,
   UserModModal,
