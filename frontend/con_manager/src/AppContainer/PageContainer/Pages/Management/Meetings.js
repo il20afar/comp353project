@@ -2,6 +2,7 @@ import React from "react";
 import "./Meetings.scss";
 import momentJalaali from "moment-jalaali";
 import DatePicker from "react-datepicker2";
+import Agenda from "../../../../Components/Agenda/Agenda";
 
 // const Meetings = (props) => {
 //   const {} = props;
@@ -12,15 +13,9 @@ import DatePicker from "react-datepicker2";
 class Meetings extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { value: momentJalaali() };
   }
   render() {
-    return (
-      <DatePicker
-        value={this.state.value}
-        onChange={(value) => this.setState({ value })}
-      />
-    );
+    return <Agenda />;
   }
 }
 
