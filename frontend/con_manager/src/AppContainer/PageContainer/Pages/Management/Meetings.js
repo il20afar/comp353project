@@ -1,7 +1,5 @@
 import React from "react";
 import "./Meetings.scss";
-import momentJalaali from "moment-jalaali";
-import DatePicker from "react-datepicker2";
 import Agenda from "../../../../Components/Agenda/Agenda";
 
 // const Meetings = (props) => {
