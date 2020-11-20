@@ -16,3 +16,10 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+.status {
+  display: none;
+}
+
+.github {
+  text-align: center;
+}
