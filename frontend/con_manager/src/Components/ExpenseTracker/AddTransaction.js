@@ -44,7 +44,7 @@ export const AddTransaction = () => {
             placeholder="Enter amount..."
           />
         </div>
-        <button className="btn">Add transaction</button>
+        <button className="btnFinance">Add transaction</button>
       </form>
     </>
   );

@@ -52,7 +52,7 @@ function Reviews() {
 
         <fieldset>
           <label>
-            <p>Specify which department you havce an issue/concern with:</p>
+            <p>Specify which department you have an issue/concern with:</p>
             <select name="type" onChange={handleChange}>
               <option value="">--Please choose an option--</option>
               <option value="staff">Staff/Administation</option>
