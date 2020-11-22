@@ -1,11 +1,10 @@
 import React from "react";
-import { D } from "../../../../imports";
 import "./Postings.scss";
 
 const Postings = (props) => {
   const {} = props;
 
-  return <D cn="Postings"></D>;
+  return <div cn="Postings"></div>;
 };
 
 export default Postings;

@@ -1,11 +1,10 @@
 import React from "react";
-import { D } from "../../../../imports";
 import "./Email.scss";
 
 const Email = (props) => {
   const {} = props;
 
-  return <D cn="email-page"></D>;
+  return <div cn="email-page"></div>;
 };
 
 export default Email;

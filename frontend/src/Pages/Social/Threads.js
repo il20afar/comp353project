@@ -1,6 +1,6 @@
 import React from "react";
-import { D, MainContext, TextBox, RowElem } from "../../../../imports";
-import Chatbox from "../../../../Components/Chatbox/Chatbox";
+import { D, MainContext, TextBox } from "../../imports";
+import Chatbox from "../../Components/Chatbox/Chatbox";
 import { v4 as uuid } from "uuid";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

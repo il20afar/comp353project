@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Polls } from "../../../../imports";
+import { Polls } from "../../imports";
 import Poll from "react-polls";
 import "./Polls.scss";
 

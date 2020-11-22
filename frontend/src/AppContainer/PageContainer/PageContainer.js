@@ -17,7 +17,9 @@ import {
   Financial,
   Contracts,
   Meetings,
+  pageActions,
   UserModModal,
+  Header,
 } from "../../imports";
 // .scss
 import "./PageContainer.scss";
@@ -34,6 +36,7 @@ const pages = {
   Contracts: () => <Contracts />,
   Meetings: () => <Meetings />,
 };
+
 const menus = {
   Marketing: ["Ads", "Postings"],
   Social: ["Threads", "Polls", "Activities", "Reviews", "Email"],
@@ -71,10 +74,8 @@ const PageContainer = (props) => {
   return (
     <Router>
       <MainContext.Provider value={defaultContext}>
-        <D cn={`page-container${showSidebar ? " showSidebar" : ""}`}>
-          <div className="page-title">{currentPage.name}</div>
-
-          <D cn="page">
+        <D cn={`page-container`}>
+          <D cn={`page${showSidebar ? " showSidebar" : ""}`}>
             <Switch>
               {Object.values(menus)
                 .flat()

@@ -58,21 +58,21 @@
 
 .box:hover,
 .box:active {
-  overflow: visible;
+  // overflow: visible;
   border-color: black;
-  width: 100%;
-  height: 100%;
+  // width: 100%;
+  // height: 100%;
 
-  .img {
-    border-radius: 6px;
-    width: 360px;
-    height: 260px;
-  }
+  // .img {
+  //   border-radius: 6px;
+  //   width: 360px;
+  //   height: 260px;
+  // }
 
-  .content p {
-    border-radius: 6px;
-    width: 360px;
-    height: 150px;
-    
-  }
+  // .content p {
+  //   border-radius: 6px;
+  //   width: 360px;
+  //   height: 150px;
+
+  // }
 }

@@ -1,6 +1,6 @@
 import React from "react";
-import { D } from "../../../../imports";
 import { v4 as uuid } from "uuid";
+import { Header, Button, data } from "../../imports";
 
 import Condo from "./Condo";
 import "./Ads.scss";
@@ -87,7 +87,7 @@ const makeDetailAd = (adId, img, city, price, title, type) => {
 const General = (props) => {
   return (
     <>
-    <h1 className="ads-head">Discover Your Future Home</h1>
+      <h1 className="ads-head">Discover Your Future Home</h1>
       <div className="container">
         {arr.map((obj) => (
           <div key={uuid()}>
@@ -112,8 +112,33 @@ const Ads = (props) => {
   const [detailsAd, setDetailsAd] = React.useState(-1);
   const elem = arr.find((ad) => ad.adId === detailsAd);
   const { adId, img, city, price, title, type } = elem || {};
+
+  const handler = {
+    actions: {
+      filter: async (eventKey) => {
+        const visibility = eventKey === "public" ? null : eventKey;
+        const res = await data.send("ads", "get", { visibility });
+        console.log(res);
+      },
+    },
+  };
+
+  const actions = [
+    <Button
+      content={{ show: "Filter", hide: "√" }}
+      style={{ show: { width: "200px" }, hide: { width: "200px" } }}
+      dropdown={[
+        { elem: "Classified", eventKey: "classified" },
+        { elem: "General", eventKey: "general" },
+        { elem: "Public", eventKey: "public" },
+      ]}
+      onSelect={handler.actions.filter}
+    />,
+  ];
+
   return (
     <div className="ads">
+      <Header height="40px" actions={actions} />
       {detailsAd === -1 ? (
         <General setDetailsAd={setDetailsAd} />
       ) : (
