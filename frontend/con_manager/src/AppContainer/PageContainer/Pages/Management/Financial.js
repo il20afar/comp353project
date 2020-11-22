@@ -13,9 +13,9 @@ class Financial extends React.Component {
   }
   render() {
     return (
-      <GlobalProvider>
+      <GlobalProvider >
         <Header />
-        <div>
+        <div >
           <Balance />
           <IncomeExpenses />
           <TransactionList />
