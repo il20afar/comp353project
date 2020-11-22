@@ -13,7 +13,7 @@ const arr = [
       "https://www.brickunderground.com/sites/default/files/styles/blog_primary_image/public/blog/images/190501Tribeca111MurrayStMAINPIC.jpg", //part of "Pictures"
     city: "Montreal", //part of "Description"
     price: "$520,000", //part of "Description"
-    title: "2 and a half condo in with furnitures", //?
+    title: "2 and a half with furnitures", //?
     type: "Condo", //(ad, item sale, service)
     visibility: " ", //(public, general, classified)
     creatorID: " ",
@@ -34,7 +34,7 @@ const arr = [
       "https://www.moneyunder30.com/wp-content/uploads/2008/07/so-you-wanna-buy-a-condo-five-questions-to-ask-before-buying-648x364-c-default.jpg",
     city: "Montreal",
     price: "$1450",
-    title: "3 and a half apartment for rent only", //?
+    title: "3 and a half apartment for rent", //?
     type: "Apartment", //(ad, item sale, service)
     visibility: " ", //(public, general, classified)
   },
@@ -87,8 +87,8 @@ const makeDetailAd = (adId, img, city, price, title, type) => {
 const General = (props) => {
   return (
     <>
-      <header className="ads-head">Discover Your Future Home</header>
-      <div className="containe">
+    <h1 className="ads-head">Discover Your Future Home</h1>
+      <div className="container">
         {arr.map((obj) => (
           <div key={uuid()}>
             {makeGeneralAd(
