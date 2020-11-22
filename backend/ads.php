@@ -21,5 +21,12 @@ class ads extends request
         $res = $this->query($query, false);
         return json_encode($res)
     }
+
+    public function get($obj)
+    {
+        $query = $this->select("*", (array)$obj)
+        $res = $this->query($query, true);
+        return json_encode($res);
+    }
 }
 ?>
