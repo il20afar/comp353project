@@ -19,7 +19,7 @@ class ads extends request
     {
         $query = $this->delete((array) $obj);
         $res = $this->query($query, false);
-        return json_encode($res)
+        return json_encode($res);
     }
 
     public function get($obj)
