@@ -1,11 +1,13 @@
 .condo {
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-bottom: 40px;
 }
 
 .box {
   overflow: hidden;
   padding: 0 0 0 0;
   margin: 0 0 0 0;
-
   width: 320px;
   height: 360px;
   border-radius: 6px;
@@ -71,5 +73,6 @@
     border-radius: 6px;
     width: 360px;
     height: 150px;
+    
   }
 }

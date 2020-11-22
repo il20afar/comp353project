@@ -115,7 +115,7 @@ const RowElem = (props: IRowElemProps) => {
       {columns.map((elem: IRowElem_ColumnMemberProps) => (
         /* key=uuid() -> Because React requires a key attributes when generating elements through array mapping*/
         <div key={uuid()} className={`column-element-element ${elem.name}`}>
-          <div className={`column-element ${elem.name}`}>{name}</div>
+          <div className={`column-element ${elem.name}`}>{elem.name}</div>
         </div>
       ))}
     </div>
