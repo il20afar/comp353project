@@ -2,25 +2,26 @@
 /backend/db_config.php
 
 # frontend
-frontend/con_manager/node_modules
-frontend/con_manager/.pnp
-frontend/con_manager/.pnp.js
+frontend/node_modules
+/frontend/package-lock.json
+frontend/.pnp
+frontend/.pnp.js
 
 # testing
-frontend/con_manager/coverage
+frontend/coverage
 
 # production
-frontend/con_manager/build
+frontend/build
 
 # misc
-frontend/con_manager/.DS_Store
-frontend/con_manager/.env.local
-frontend/con_manager/.env.development.local
-frontend/con_manager/.env.test.local
-frontend/con_manager/.env.production.local
-frontend/con_manager/backend/db_config.php
-frontend/con_manager/.env
+frontend/.DS_Store
+frontend/.env.local
+frontend/.env.development.local
+frontend/.env.test.local
+frontend/.env.production.local
+frontend/backend/db_config.php
+frontend/.env
 
-frontend/con_manager/npm-debug.log*
-frontend/con_manager/yarn-debug.log*
-frontend/con_manager/yarn-error.log*
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
