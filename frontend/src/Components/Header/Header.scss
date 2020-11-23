@@ -1,0 +1,40 @@
+@import "../../Styles/Utils.scss";
+
+.header {
+  width: calc(100%);
+  display: flex;
+  justify-content: flex-end;
+
+  position: absolute;
+  top: 0px;
+  right: 0;
+  transition: 0.25s;
+
+  &.sidebar-open {
+    width: calc(100% - 320px);
+  }
+
+  .title-container {
+    line-height: 70px;
+    font-size: 40px;
+    color: $text_bg;
+    align-self: center;
+    width: 100%;
+    text-align: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .actions-container {
+    height: 100%;
+    width: fit-content;
+    padding: 10px 20px 10px 20px;
+    display: flex;
+    .action-wrapper {
+      height: 100%;
+      padding: 0px 10px 0px 10px;
+      width: fit-content;
+    }
+  }
+}

@@ -1,5 +1,5 @@
 <?php
-include('request.php');
+include_once 'request.php';
 
 class users extends request
 {

@@ -1,0 +1,36 @@
+@import "../../Styles/Utils.scss";
+
+.page-container {
+  background-color: $bg;
+  position: relative;
+  font-size: 50px;
+  // color: $main;
+  font-weight: 700;
+  width: 100vw;
+  height: 100vh;
+
+  .page {
+    transition: 0.25s;
+    position: absolute;
+    width: 100%;
+    height: calc(100% - 70px);
+    padding: 30px;
+    overflow-y: scroll;
+    box-sizing: border-box;
+    top: 70px;
+    right: 0;
+
+    &.showSidebar {
+      transition: 0.25s;
+      width: calc(100% - 320px);
+    }
+  }
+
+  > .username {
+    width: fit-content;
+    font-size: 20px;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+  }
+}

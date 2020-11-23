@@ -1,5 +1,5 @@
 <?php
-include('request.php');
+include_once 'request.php';
 
 class ads extends request
 {
@@ -19,7 +19,14 @@ class ads extends request
     {
         $query = $this->delete((array) $obj);
         $res = $this->query($query, false);
-        return json_encode($res)
+        return json_encode($res);
+    }
+
+    public function get($obj)
+    {
+        $query = $this->select("*", (array) $obj);
+        $res = $this->query($query, true);
+        return json_encode($res);
     }
 }
 ?>

@@ -1,6 +1,4 @@
 <?php
-include 'db_config.php';
-
 class request
 {
     private string $table;
@@ -34,15 +32,23 @@ class request
 
     public function select(string $from, array $fields)
     {
-        foreach ($fields as $key => $val) {
-            $where[] = "$key='$val'";
+        if (empty($fields)) {
+            return sprintf(
+                "SELECT %s FROM %s",
+                $from,
+                $this->table
+            );
+        } else {
+            foreach ($fields as $key => $val) {
+                $where[] = "$key='$val'";
+            }
+            return sprintf(
+                "SELECT %s FROM %s WHERE %s;",
+                $from,
+                $this->table,
+                implode(" AND ", $where)
+            );
         }
-        return sprintf(
-            "SELECT %s FROM %s WHERE %s;",
-            $from,
-            $this->table,
-            implode(" AND ", $where)
-        );
     }
 
     public function update(array $fields, string $where)
