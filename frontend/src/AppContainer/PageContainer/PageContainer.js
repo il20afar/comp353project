@@ -18,6 +18,7 @@ import {
   Contracts,
   Meetings,
   pageActions,
+  Button,
   UserModModal,
   Header,
 } from "../../imports";
@@ -71,10 +72,21 @@ const PageContainer = (props) => {
 
   const defaultContext = { user };
 
+  const actions = [
+    <Button
+      content={{ show: "LOG OUT" }}
+      style={{
+        show: { fontSize: "20px", height: "40px", lineHeight: "40px" },
+      }}
+      onClick={() => null}
+    />,
+  ];
+
   return (
     <Router>
       <MainContext.Provider value={defaultContext}>
         <D cn={`page-container`}>
+          <Header title={currentPage.name} actions={actions} />
           <D cn={`page${showSidebar ? " showSidebar" : ""}`}>
             <Switch>
               {Object.values(menus)

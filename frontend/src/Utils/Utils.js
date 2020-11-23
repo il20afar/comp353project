@@ -8,6 +8,13 @@ const D = React.forwardRef((props, ref) => {
 
 const data = {
   send: async (table, action, fields) => {
+    console.log(
+      JSON.stringify({
+        table,
+        action,
+        ...fields,
+      })
+    );
     try {
       const req = await fetch(process.env.REACT_APP_PHP_SERVER_URL, {
         method: "POST",

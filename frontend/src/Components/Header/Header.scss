@@ -19,8 +19,11 @@
     font-size: 40px;
     color: $text_bg;
     align-self: center;
-    width: fit-content;
+    width: 100%;
     text-align: center;
+    position: absolute;
+    top: 0;
+    left: 0;
   }
 
   .actions-container {

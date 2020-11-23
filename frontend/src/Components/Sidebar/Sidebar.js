@@ -1,6 +1,6 @@
 import React from "react";
 import { Fade as Hamburger } from "hamburger-react";
-import { D, UserIcon, UserIconMod } from "../../imports";
+import { D, UserIcon } from "../../imports";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { v4 as uuid } from "uuid";
 import "./Sidebar.scss";

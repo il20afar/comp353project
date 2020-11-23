@@ -1,5 +1,6 @@
 import React from "react";
 import { D } from "../../imports";
+import { v4 as uuid } from "uuid";
 import "./Button.scss";
 import "../../Styles/Utils.scss";
 
@@ -9,6 +10,7 @@ const Dropdown = (props) => {
     <div className="dropdown-container">
       {elements.map((elem) => (
         <div
+          key={uuid()}
           className="dropdown-element"
           onClick={() => onSelect(elem.eventKey)}
         >

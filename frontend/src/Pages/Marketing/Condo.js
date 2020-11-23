@@ -1,36 +1,18 @@
 import React from "react";
 import "./Condo.scss";
-import {
-  BrowserRouter,
-  Route,
-  Link,
-  NavLink,
-  Switch,
-  Redirect,
-} from "react-router-dom";
+import { v4 as uuid } from "uuid";
 
 const Condo = (props) => {
   return (
-    <BrowserRouter>
-      <NavLink activeClassName="active" to={"/"}>
-        <div className="condo">
-          <button className="box">
-            <img className="img" src={props.img} />
-            <div className="content">
-              <p>{props.title} </p>
-              <p>{props.price} </p>
-            </div>
-          </button>
+    <div key={uuid()} className="condo">
+      <button className="box">
+        <img className="img" src={props.img} />
+        <div className="content">
+          <p>{props.title} </p>
+          <p>{props.price} </p>
         </div>
-      </NavLink>
-
-      <Switch>
-        <Route
-          path="/faq"
-          component={() => (window.location.pathname = "/detail")}
-        />
-      </Switch>
-    </BrowserRouter>
+      </button>
+    </div>
   );
 };
 
