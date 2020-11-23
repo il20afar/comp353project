@@ -236,7 +236,7 @@ const Ads = (props) => {
       filter: async (eventKey) => {
         console.log(eventKey);
         const res = await data.send("ads", "get", {
-          visibility: visibilityFilter,
+          visibility: eventKey.toLowerCase(),
         });
         if (res) {
           console.log(res);
