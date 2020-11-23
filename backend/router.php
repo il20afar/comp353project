@@ -1,13 +1,16 @@
 <?php
 include 'users.php';
+include 'ads.php';
 
 class router
 {
     private object $users;
+    private object $ads;
 
     public function __construct(object $conn)
     {
         $this->users= new users($conn);
+        $this->ads= new ads($conn);
     }
 
     public function route()

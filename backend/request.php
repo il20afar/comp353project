@@ -1,6 +1,4 @@
 <?php
-include 'db_config.php';
-
 class request
 {
     private string $table;
