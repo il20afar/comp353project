@@ -5,7 +5,7 @@ class session
     {
         session_start();
         $_SESSION["is_logged_in"] = True;
-        $_SESSION["last_activity"] = time();
+        $_SESSION["creation_time"] = time();
         return json_encode("Session succesfully started.");
     }
     
@@ -19,7 +19,7 @@ class session
     public function check($obj)
     {
         session_start();
-        if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > 1800)) {
+        if (isset($_SESSION["creation_time"]) && (time() - $_SESSION["creation_time"] > 1800)) {
             session_destroy();
             return json_encode(False);
         } else {
