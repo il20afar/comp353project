@@ -4,6 +4,7 @@
   height: 100%;
   overflow-x: hidden;
   overflow-y: scroll;
+  background-color: transparent;
 
   .ad-general-container {
     width: inherit;
@@ -20,5 +21,12 @@
       width: 100%;
       height: 100%;
     }
+  }
+
+  .ad-detail-container {
+    height: inherit;
+
+    border-radius: 8px;
+    overflow: hidden;
   }
 }

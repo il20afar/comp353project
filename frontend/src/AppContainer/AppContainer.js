@@ -12,10 +12,15 @@ const loginStates = {
 //[FUNCTIONAL COMPONENTS]
 const AppContainer = () => {
   const [loginPage, setLoginPage] = React.useState(loginStates.idle);
+  const [loginState, setLoginState] = React.useState(
+    localStorage.getItem("conuser")
+  );
   const user = React.useRef(null);
 
   const handleLogin = async (username, pw) => {
     const res = await data.send("users", "login", { username, pw });
+    localStorage.setItem("conuser", username);
+    console.log(res);
     if (res.users) {
       user.current = { username, ...res.users[0] };
       setLoginPage(loginStates.success);
@@ -26,6 +31,7 @@ const AppContainer = () => {
       setLoginPage(loginStates.invalid);
     }
   };
+  console.log(localStorage.getItem("conuser"));
 
   return (
     <D cn="main-container">

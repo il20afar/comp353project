@@ -1,6 +1,5 @@
 import React from "react";
-import { D, TextBox, Button } from "../../imports";
-import images from "../../condo_pictures/images";
+import { D, TextBox, Button, Ads } from "../../imports";
 import "../../Styles/Utils.scss";
 import "./LoginContainer.scss";
 
@@ -37,10 +36,10 @@ const Listings = (props) => {
   const { type } = props;
   return (
     <D cn={`listing-container ${type}`}>
-      {images.map((elem, index) => (
+      {prices.map((elem, index) => (
         <Condo
           key={prices[index]}
-          picture={elem}
+          picture={null}
           price={`${prices[index]}$`}
           city={cities[index]}
         />
@@ -98,7 +97,9 @@ const LoginContainer = (props) => {
 
   return (
     <D cn={`login-container`}>
-      <Listings ref={refs.adsButton} type={"full"} />
+      <div className="ads-wrapper">
+        <Ads type="login" visibility="public" />
+      </div>
 
       <D cn="login-logo">CON MANAGER</D>
       <D cn="login-button">

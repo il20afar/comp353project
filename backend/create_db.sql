@@ -200,7 +200,7 @@ VALUES
 		'condo',
 		'The illusion which exalts us is dearer to us than ten thousand truths.',
 		'public',
-		'/path/to/picture, /path/to/other/picture',
+		'http://localhost:3001/backend/condo_pictures/a.jpeg, /path/to/other/picture',
 		1
 	),
 	(
@@ -208,7 +208,7 @@ VALUES
 		'condo',
 		'The illusion which exalts us is dearer to us than ten thousand truths.',
 		'public',
-		'/path/to/picture, /path/to/other/picture',
+		'http://localhost:3001/backend/condo_pictures/a.jpeg, /path/to/other/picture',
 		2
 	),
 	(
@@ -216,7 +216,7 @@ VALUES
 		'condo',
 		'The illusion which exalts us is dearer to us than ten thousand truths.',
 		'general',
-		'/path/to/picture, /path/to/other/picture',
+		'http://localhost:3001/backend/condo_pictures/a.jpeg, /path/to/other/picture',
 		3
 	),
 	(
@@ -224,7 +224,7 @@ VALUES
 		'condo',
 		'The illusion which exalts us is dearer to us than ten thousand truths.',
 		'general',
-		'/path/to/picture, /path/to/other/picture',
+		'http://localhost:3001/backend/condo_pictures/a.jpeg, /path/to/other/picture',
 		4
 	),
 	(
@@ -232,7 +232,7 @@ VALUES
 		'condo',
 		'The illusion which exalts us is dearer to us than ten thousand truths.',
 		'Condo Owners Association of Concordia',
-		'/path/to/picture, /path/to/other/picture',
+		'http://localhost:3001/backend/condo_pictures/a.jpeg, /path/to/other/picture',
 		1
 	),
 	(
@@ -240,7 +240,7 @@ VALUES
 		'condo',
 		'The illusion which exalts us is dearer to us than ten thousand truths.',
 		'Condo Owners Association of Concordia',
-		'/path/to/picture, /path/to/other/picture',
+		'http://localhost:3001/backend/condo_pictures/a.jpeg, /path/to/other/picture',
 		2
 	),
 	(
@@ -248,7 +248,7 @@ VALUES
 		'item_sale',
 		'The illusion which exalts us is dearer to us than ten thousand truths.',
 		'public',
-		'/path/to/picture, /path/to/other/picture',
+		'http://localhost:3001/backend/condo_pictures/a.jpeg, /path/to/other/picture',
 		1
 	),
 	(
@@ -256,7 +256,7 @@ VALUES
 		'item_sale',
 		'The illusion which exalts us is dearer to us than ten thousand truths.',
 		'public',
-		'/path/to/picture, /path/to/other/picture',
+		'http://localhost:3001/backend/condo_pictures/a.jpeg, /path/to/other/picture',
 		2
 	),
 	(
@@ -264,7 +264,7 @@ VALUES
 		'item_sale',
 		'The illusion which exalts us is dearer to us than ten thousand truths.',
 		'general',
-		'/path/to/picture, /path/to/other/picture',
+		'http://localhost:3001/backend/condo_pictures/a.jpeg, /path/to/other/picture',
 		3
 	),
 	(
@@ -272,7 +272,7 @@ VALUES
 		'item_sale',
 		'The illusion which exalts us is dearer to us than ten thousand truths.',
 		'general',
-		'/path/to/picture, /path/to/other/picture',
+		'http://localhost:3001/backend/condo_pictures/a.jpeg, /path/to/other/picture',
 		4
 	),
 	(
@@ -280,7 +280,7 @@ VALUES
 		'item_sale',
 		'The illusion which exalts us is dearer to us than ten thousand truths.',
 		'Condo Owners Association of Concordia',
-		'/path/to/picture, /path/to/other/picture',
+		'http://localhost:3001/backend/condo_pictures/a.jpeg, /path/to/other/picture',
 		1
 	),
 	(
@@ -288,7 +288,7 @@ VALUES
 		'item_sale',
 		'The illusion which exalts us is dearer to us than ten thousand truths.',
 		'Condo Owners Association of Concordia',
-		'/path/to/picture, /path/to/other/picture',
+		'http://localhost:3001/backend/condo_pictures/a.jpeg, /path/to/other/picture',
 		2
 	),
 	(
@@ -296,7 +296,7 @@ VALUES
 		'service',
 		'The illusion which exalts us is dearer to us than ten thousand truths.',
 		'public',
-		'/path/to/picture, /path/to/other/picture',
+		'http://localhost:3001/backend/condo_pictures/a.jpeg, /path/to/other/picture',
 		1
 	),
 	(
@@ -304,7 +304,7 @@ VALUES
 		'service',
 		'The illusion which exalts us is dearer to us than ten thousand truths.',
 		'public',
-		'/path/to/picture, /path/to/other/picture',
+		'http://localhost:3001/backend/condo_pictures/a.jpeg, /path/to/other/picture',
 		2
 	),
 	(
@@ -312,7 +312,7 @@ VALUES
 		'service',
 		'The illusion which exalts us is dearer to us than ten thousand truths.',
 		'general',
-		'/path/to/picture, /path/to/other/picture',
+		'http://localhost:3001/backend/condo_pictures/a.jpeg, /path/to/other/picture',
 		3
 	),
 	(
@@ -320,7 +320,7 @@ VALUES
 		'service',
 		'The illusion which exalts us is dearer to us than ten thousand truths.',
 		'general',
-		'/path/to/picture, /path/to/other/picture',
+		'http://localhost:3001/backend/condo_pictures/a.jpeg, /path/to/other/picture',
 		4
 	),
 	(
@@ -328,7 +328,7 @@ VALUES
 		'service',
 		'The illusion which exalts us is dearer to us than ten thousand truths.',
 		'Condo Owners Association of Concordia',
-		'/path/to/picture, /path/to/other/picture',
+		'http://localhost:3001/backend/condo_pictures/a.jpeg, /path/to/other/picture',
 		1
 	),
 	(
@@ -336,6 +336,6 @@ VALUES
 		'service',
 		'The illusion which exalts us is dearer to us than ten thousand truths.',
 		'Condo Owners Association of Concordia',
-		'/path/to/picture, /path/to/other/picture',
+		'http://localhost:3001/backend/condo_pictures/a.jpeg, /path/to/other/picture',
 		2
 	);

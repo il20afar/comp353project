@@ -15,6 +15,7 @@ const Textbox = React.forwardRef((props, ref) => {
     className = "",
     initialValue,
     outlineOnChange = false,
+    ...other
   } = props;
 
   const [outlineState, setOutlineState] = React.useState("inactive");
@@ -54,7 +55,7 @@ const Textbox = React.forwardRef((props, ref) => {
         }
       ) =>
         type !== "textarea" ? (
-          <input type={subType} {...rest} />
+          <input type={subType} {...rest} {...other} />
         ) : (
           <textarea {...rest} />
         ))()}

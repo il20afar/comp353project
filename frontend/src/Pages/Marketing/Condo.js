@@ -4,7 +4,7 @@ import { v4 as uuid } from "uuid";
 
 const Condo = (props) => {
   return (
-    <div key={uuid()} className="condo">
+    <div key={props.key} className="condo">
       <button className="box">
         <img className="img" src={props.img} />
         <div className="content">

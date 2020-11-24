@@ -19,7 +19,7 @@
   .cancel-icon-container {
     position: absolute;
     width: 50px;
-    height: 100%;
+    height: calc(100% - 8px);
     top: 4px;
     right: 0;
     @include flex(column, center);
