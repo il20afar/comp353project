@@ -50,6 +50,8 @@ CREATE TABLE ads (
 	title VARCHAR(50) NOT NULL,
 	ad_type VARCHAR(50) NOT NULL,
 	ad_desc VARCHAR(1000) NOT NULL,
+	ad_price INT NOT NULL,
+	ad_city VARCHAR(50) NOT NULL,
 	visibility VARCHAR(50) NOT NULL,
 	pictures VARCHAR(1000) NOT NULL,
 	creator_id INT NOT NULL,
@@ -190,6 +192,8 @@ INSERT INTO
 		title,
 		ad_type,
 		ad_desc,
+		ad_price,
+		ad_city,
 		visibility,
 		pictures,
 		creator_id
@@ -199,6 +203,8 @@ VALUES
 		'Public Condo Ad #1',
 		'condo',
 		'The illusion which exalts us is dearer to us than ten thousand truths.',
+		4500,
+		'Montreal',
 		'public',
 		'http://localhost:3001/backend/condo_pictures/a.jpeg, /path/to/other/picture',
 		1
@@ -207,6 +213,8 @@ VALUES
 		'Public Condo Ad #2',
 		'condo',
 		'The illusion which exalts us is dearer to us than ten thousand truths.',
+		4500,
+		'Montreal',
 		'public',
 		'http://localhost:3001/backend/condo_pictures/a.jpeg, /path/to/other/picture',
 		2
@@ -215,6 +223,8 @@ VALUES
 		'General Condo Ad #1',
 		'condo',
 		'The illusion which exalts us is dearer to us than ten thousand truths.',
+		4500,
+		'Montreal',
 		'general',
 		'http://localhost:3001/backend/condo_pictures/a.jpeg, /path/to/other/picture',
 		3
@@ -223,6 +233,8 @@ VALUES
 		'General Condo Ad #2',
 		'condo',
 		'The illusion which exalts us is dearer to us than ten thousand truths.',
+		4500,
+		'Montreal',
 		'general',
 		'http://localhost:3001/backend/condo_pictures/a.jpeg, /path/to/other/picture',
 		4
@@ -231,6 +243,8 @@ VALUES
 		'Classified Condo Ad #1',
 		'condo',
 		'The illusion which exalts us is dearer to us than ten thousand truths.',
+		4500,
+		'Montreal',
 		'Condo Owners Association of Concordia',
 		'http://localhost:3001/backend/condo_pictures/a.jpeg, /path/to/other/picture',
 		1
@@ -239,6 +253,8 @@ VALUES
 		'Classified Condo Ad #2',
 		'condo',
 		'The illusion which exalts us is dearer to us than ten thousand truths.',
+		4500,
+		'Montreal',
 		'Condo Owners Association of Concordia',
 		'http://localhost:3001/backend/condo_pictures/a.jpeg, /path/to/other/picture',
 		2
@@ -247,6 +263,8 @@ VALUES
 		'Public Item Sale Ad #1',
 		'item_sale',
 		'The illusion which exalts us is dearer to us than ten thousand truths.',
+		4500,
+		'Montreal',
 		'public',
 		'http://localhost:3001/backend/condo_pictures/a.jpeg, /path/to/other/picture',
 		1
@@ -255,6 +273,8 @@ VALUES
 		'Public Item Sale Ad #2',
 		'item_sale',
 		'The illusion which exalts us is dearer to us than ten thousand truths.',
+		4500,
+		'Montreal',
 		'public',
 		'http://localhost:3001/backend/condo_pictures/a.jpeg, /path/to/other/picture',
 		2
@@ -263,6 +283,8 @@ VALUES
 		'General Item Sale Ad #1',
 		'item_sale',
 		'The illusion which exalts us is dearer to us than ten thousand truths.',
+		4500,
+		'Montreal',
 		'general',
 		'http://localhost:3001/backend/condo_pictures/a.jpeg, /path/to/other/picture',
 		3
@@ -271,6 +293,8 @@ VALUES
 		'General Item Sale Ad #2',
 		'item_sale',
 		'The illusion which exalts us is dearer to us than ten thousand truths.',
+		4500,
+		'Montreal',
 		'general',
 		'http://localhost:3001/backend/condo_pictures/a.jpeg, /path/to/other/picture',
 		4
@@ -279,6 +303,8 @@ VALUES
 		'Classified Item Sale Ad #1',
 		'item_sale',
 		'The illusion which exalts us is dearer to us than ten thousand truths.',
+		4500,
+		'Montreal',
 		'Condo Owners Association of Concordia',
 		'http://localhost:3001/backend/condo_pictures/a.jpeg, /path/to/other/picture',
 		1
@@ -287,6 +313,8 @@ VALUES
 		'Classified Item Sale Ad #2',
 		'item_sale',
 		'The illusion which exalts us is dearer to us than ten thousand truths.',
+		4500,
+		'Montreal',
 		'Condo Owners Association of Concordia',
 		'http://localhost:3001/backend/condo_pictures/a.jpeg, /path/to/other/picture',
 		2
@@ -295,6 +323,8 @@ VALUES
 		'Public Service Ad #1',
 		'service',
 		'The illusion which exalts us is dearer to us than ten thousand truths.',
+		4500,
+		'Montreal',
 		'public',
 		'http://localhost:3001/backend/condo_pictures/a.jpeg, /path/to/other/picture',
 		1
@@ -303,6 +333,8 @@ VALUES
 		'Public Service Ad #2',
 		'service',
 		'The illusion which exalts us is dearer to us than ten thousand truths.',
+		4500,
+		'Montreal',
 		'public',
 		'http://localhost:3001/backend/condo_pictures/a.jpeg, /path/to/other/picture',
 		2
@@ -311,6 +343,8 @@ VALUES
 		'General Service Ad #1',
 		'service',
 		'The illusion which exalts us is dearer to us than ten thousand truths.',
+		4500,
+		'Montreal',
 		'general',
 		'http://localhost:3001/backend/condo_pictures/a.jpeg, /path/to/other/picture',
 		3
@@ -319,6 +353,8 @@ VALUES
 		'General Service Ad #2',
 		'service',
 		'The illusion which exalts us is dearer to us than ten thousand truths.',
+		4500,
+		'Montreal',
 		'general',
 		'http://localhost:3001/backend/condo_pictures/a.jpeg, /path/to/other/picture',
 		4
@@ -327,6 +363,8 @@ VALUES
 		'Classified Service Ad #1',
 		'service',
 		'The illusion which exalts us is dearer to us than ten thousand truths.',
+		4500,
+		'Montreal',
 		'Condo Owners Association of Concordia',
 		'http://localhost:3001/backend/condo_pictures/a.jpeg, /path/to/other/picture',
 		1
@@ -335,6 +373,8 @@ VALUES
 		'Classified Service Ad #2',
 		'service',
 		'The illusion which exalts us is dearer to us than ten thousand truths.',
+		4500,
+		'Montreal',
 		'Condo Owners Association of Concordia',
 		'http://localhost:3001/backend/condo_pictures/a.jpeg, /path/to/other/picture',
 		2
