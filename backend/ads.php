@@ -10,7 +10,7 @@ class ads extends request
 
     public function create($obj)
     {
-        $query = $this->insert((array) $obj);
+        $query = $this->insert("title, ad_type, ad_desc, ad_price, ad_city, visibility, pictures, creator_id", (array) $obj);
         $res = $this->query($query, false);
         return json_encode($res);
     }

@@ -66,11 +66,12 @@ class request
     }
 
     /* Returns a string representing a valid INSERT statement given the supplied values */
-    public function insert(array $values)
+    public function insert(string $columns, array $values)
     {
         return sprintf(
-            'INSERT INTO %s VALUES (%s);',
+            'INSERT INTO %s (%s) VALUES (%s);',
             $this->table,
+            $columns,
             implode(', ', $values)
         );
     }
