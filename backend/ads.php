@@ -28,5 +28,17 @@ class ads extends request
         $res = $this->query($query, true);
         return json_encode($res);
     }
+
+    public function edit($obj)
+    {
+        $ad_id = ((array) $obj)['ad_id'];
+        $where = sprintf(
+            "ad_id=%s",
+            $ad_id
+        );
+        $query = $this->update((array) $obj, $where);
+        $res = $this->query($query, false);
+        return json_encode($res);
+    }
 }
 ?>
