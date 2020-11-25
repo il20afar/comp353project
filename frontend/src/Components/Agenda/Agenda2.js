@@ -72,15 +72,9 @@ export default class Agenda2 extends React.Component {
     this.handleRangeSelection = this.handleRangeSelection.bind(this);
   }
 
-  handleCellSelection(item) {
-    console.log("handleCellSelection", item);
-  }
-  handleItemEdit(item) {
-    console.log("handleItemEdit", item);
-  }
-  handleRangeSelection(item) {
-    console.log("handleRangeSelection", item);
-  }
+  handleCellSelection(item) {}
+  handleItemEdit(item) {}
+  handleRangeSelection(item) {}
   render() {
     return (
       <div>

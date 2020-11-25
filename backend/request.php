@@ -84,9 +84,8 @@ class request
         return sprintf(
             'DELETE FROM $s WHERE %s;',
             $this->table,
-            implode(', ', $where)
+            implode(' AND ', $where)
         );
     }
-
 }
 ?>

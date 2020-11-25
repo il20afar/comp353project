@@ -18,10 +18,13 @@ const AppContainer = () => {
   const user = React.useRef(null);
 
   const handleLogin = async (username, pw) => {
+    // Getting response from server
     const res = await data.send("users", "login", { username, pw });
     localStorage.setItem("conuser", username);
-    console.log(res);
+
     if (res.users) {
+      const session = await data.send("session", "start");
+
       user.current = { username, ...res.users[0] };
       setLoginPage(loginStates.success);
     } else {
@@ -31,7 +34,10 @@ const AppContainer = () => {
       setLoginPage(loginStates.invalid);
     }
   };
-  console.log(localStorage.getItem("conuser"));
+
+  (async () => {
+    const ses = await data.send("session", "check");
+  })();
 
   return (
     <D cn="main-container">

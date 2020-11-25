@@ -28,7 +28,6 @@ const Textbox = React.forwardRef((props, ref) => {
   }, []);
 
   const onChangeHandler = (e) => {
-    console.log("value", e.target.value);
     if (outlineOnChange) {
       setOutlineState(e.target.value !== initialValue ? "active" : "inactive");
     }

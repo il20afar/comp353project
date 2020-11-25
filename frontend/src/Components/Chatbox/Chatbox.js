@@ -20,7 +20,6 @@ const Chatbox = (props) => {
     // if (response !== "message_accepted") {
     //   alert("Your message couldn't be sent!");
     // }
-    console.log(message);
 
     const newMessages = [
       ...messages,
@@ -36,8 +35,6 @@ const Chatbox = (props) => {
       createMessage("10-10-10", "13:44", "afar", "My name is afar.", "self"),
     ]);
   }, []);
-
-  console.log(messages);
 
   return (
     <div className="chatbox">

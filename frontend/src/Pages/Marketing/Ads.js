@@ -5,6 +5,7 @@ import { Header, Button, data } from "../../imports";
 import Condo from "./Condo";
 import "./Ads.scss";
 import AdDetail from "./AdDetail";
+import { MainContext } from "../../AppContainer/PageContainer/PageContainer";
 
 const arr = [
   "https://www.brickunderground.com/sites/default/files/styles/blog_primary_image/public/blog/images/190501Tribeca111MurrayStMAINPIC.jpg", //part of "Pictures"
@@ -57,13 +58,13 @@ const AdGeneralContainer = (props) => {
 };
 
 const AdDetailContainer = (props) => {
-  const { ad, view, setView, editable } = props;
+  const { ad = {}, view, setView, editable, user_id } = props;
 
   const handlers = {
     edit: () => {
       setView("edit");
     },
-    confirm: async () => {
+    confirm: () => {
       setView("general");
     },
     close: async (ad) => {
@@ -71,15 +72,29 @@ const AdDetailContainer = (props) => {
     },
   };
 
+  const inputAd =
+    view === "create"
+      ? {
+          title: "",
+          ad_city: "",
+          ad_price: "",
+          ad_desc: "",
+          visibility: "",
+          pictures: "",
+        }
+      : ad;
+
+  console.log(inputAd);
+
   return (
     <div className="ad-detail-container">
       <AdDetail
         {...{
           view,
-          editable,
-          ad,
+          editable: editable && user_id === ad.creator_id,
+          ad: inputAd,
           onClose: handlers.close,
-          onConfirm: handlers.confirm,
+          user_id,
         }}
       />
     </div>
@@ -88,6 +103,8 @@ const AdDetailContainer = (props) => {
 
 const Ads = (props) => {
   const { type = "page", visibility = "public" } = props;
+
+  const { user } = React.useContext(MainContext);
 
   // "general", "detailed", "edit", "create"
   const [view, setView] = React.useState("general");
@@ -114,7 +131,7 @@ const Ads = (props) => {
         handlers.actions.updateAds(eventKey);
         setVisibilityFilter(eventKey);
       },
-      create: async () => {
+      create: () => {
         setView("create");
       },
     },
@@ -142,17 +159,15 @@ const Ads = (props) => {
       onSelect={handlers.actions.filter}
     />,
     <Button
-      content={{ show: "Create +", hide: "√" }}
+      content={{ show: "Create +" }}
       style={{ show: { width: "200px" }, hide: { width: "200px" } }}
-      onSelect={handlers.actions.filter}
+      onClick={handlers.actions.create}
     />,
   ];
 
   React.useEffect(() => {
     handlers.actions.updateAds(visibilityFilter);
   }, [view]);
-
-  console.log(selectedAd, visibleAds);
 
   return (
     <div className="ads">
@@ -167,7 +182,8 @@ const Ads = (props) => {
       ) : (
         <AdDetailContainer
           ad={selectedAd}
-          editable={!type === "login"}
+          editable={type !== "login"}
+          user_id={user.current?.user_id}
           view={view}
           setView={setView}
         />

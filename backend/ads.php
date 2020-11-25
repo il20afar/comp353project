@@ -15,7 +15,7 @@ class ads extends request
         return json_encode($res);
     }
 
-    public function remove($obj)
+    public function delete($obj)
     {
         $query = $this->delete((array) $obj);
         $res = $this->query($query, false);

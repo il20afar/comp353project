@@ -150,6 +150,46 @@
       }
     }
 
+    .delete-icon-container {
+      $size: 70px;
+      @include assVal(width height, $size);
+      position: absolute;
+      bottom: 8px;
+      right: 10px;
+      border-radius: 4px;
+      pointer-events: all;
+      cursor: pointer;
+      z-index: 3;
+
+      .delete-icon {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+
+        .delete-icon-wrapper {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          @include flex(column, center);
+          transition: 0.3s ease-out;
+
+          svg {
+            margin: 0 auto;
+            @include assVal(width height, 44px);
+            fill: white;
+            color: white;
+          }
+          &:hover {
+            opacity: 0.5;
+          }
+        }
+      }
+    }
+
     .action-icon-container {
       $size: 70px;
       @include assVal(width height, $size);

@@ -102,7 +102,6 @@ const ThreadMenu = (props) => {
 
   React.useEffect(() => {
     const max = 12 * Math.max(...threads.map((elem) => elem.length));
-    console.log(max);
   }, []);
   const max = 11.38 * Math.max(...threads.map((elem) => elem.length));
 
@@ -129,7 +128,6 @@ const Threads = (props) => {
 
   const [showThread, setShowThread] = React.useState("");
 
-  console.log(showThread);
   return (
     <D cn="threads-page">
       {showThread === "" ? (
