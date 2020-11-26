@@ -73,6 +73,8 @@ CREATE TABLE threads (
 	title VARCHAR(50) NOT NULL UNIQUE,
 	creation_time DATETIME NOT NULL,
 	last_update_time DATETIME NOT NULL,
+	number_of_replies INT NOT NULL DEFAULT 0,
+	creator_username VARCHAR(50) NOT NULL,
 	creator_id INT NOT NULL,
 	PRIMARY KEY (thread_id),
 	FOREIGN KEY (creator_id) REFERENCES users(user_id)
@@ -406,6 +408,7 @@ INSERT INTO
 		title,
 		creation_time,
 		last_update_time,
+		creator_username,
 		creator_id
 	)
 VALUES
@@ -413,9 +416,16 @@ VALUES
 		'Suggestions for a Montreal Newcomer?',
 		NOW(),
 		NOW(),
+		'mpob',
 		4
 	),
-	('Nice Area for Students', NOW(), NOW(), 1);
+	(
+		'Nice Area for Students',
+		NOW(),
+		NOW(),
+		'afar',
+		1
+	);
 
 INSERT INTO
 	replies (
@@ -449,3 +459,14 @@ VALUES
 		3,
 		2
 	);
+
+/* Byproduct of creating replies */
+UPDATE
+	threads
+SET
+	number_of_replies = 2;
+
+UPDATE
+	threads
+SET
+	last_update_time = NOW();
