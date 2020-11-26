@@ -66,11 +66,15 @@ class request
     }
 
     /* Returns a string representing a valid INSERT statement given the supplied values */
-    public function insert(array $values)
+    public function insert(string $columns, array $values)
     {
+        foreach ($values as $key => $val) {
+            $values[$key] = "'$val'";
+        }
         return sprintf(
-            'INSERT INTO %s VALUES (%s);',
+            'INSERT INTO %s (%s) VALUES (%s);',
             $this->table,
+            $columns,
             implode(', ', $values)
         );
     }
@@ -82,11 +86,10 @@ class request
             $where[] = "$key='$value'";
         }
         return sprintf(
-            'DELETE FROM $s WHERE %s;',
+            'DELETE FROM %s WHERE %s;',
             $this->table,
-            implode(', ', $where)
+            implode(' AND ', $where)
         );
     }
-
 }
 ?>

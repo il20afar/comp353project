@@ -25,7 +25,7 @@
     box-sizing: border-box;
     margin: 0 auto;
     background-color: $main;
-    padding: 30px 80px 30px 80px;
+    padding: 80px 80px 80px 80px;
     box-shadow: $boxshadow;
     position: relative;
     border-radius: 10px;
@@ -64,29 +64,128 @@
 
       margin: auto 0;
 
-      display: grid;
+      display: flex;
+      flex-direction: column;
+      // justify-content: space-around;
       overflow: scroll;
 
-      grid-template-rows: repeat(6, 90px);
-      grid-template-columns: 100%;
-      grid-row-gap: 10px;
+      height: 100%;
 
-      height: fit-content;
+      &.display {
+        .edit-info-field {
+          .textbox {
+            input,
+            textarea {
+              pointer-events: none;
+              background-color: ghostwhite;
+            }
+          }
+        }
+      }
 
       .edit-info-field {
-        height: 100%;
-        width: 100%;
+        height: fit-content;
+        width: calc(100% - 20px);
         .textbox {
           // margin-bottom: 10px;
-          height: calc(100% - 30px);
+          height: fit-content;
+          input {
+            height: 50px;
+            font-size: 20px !important;
+          }
+          textarea {
+            font-size: 20px !important;
+            height: 100px;
+          }
+          margin-bottom: 10px;
         }
         .title {
           height: 20px;
-          font-size: 16px;
+          font-size: 18px;
           line-height: 20px;
           font-style: italic;
-          color: $bg;
-          // margin-bottom: 10px;
+          color: ghostwhite;
+          margin-bottom: 4px;
+        }
+      }
+    }
+
+    .edit-icon-container {
+      $size: 70px;
+      @include assVal(width height, $size);
+      position: absolute;
+      top: 8px;
+      right: 74px;
+      border-radius: 4px;
+      pointer-events: all;
+      cursor: pointer;
+      z-index: 3;
+
+      .edit-icon {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+
+        .edit-icon-wrapper {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          @include flex(column, center);
+          transition: 0.3s ease-out;
+
+          svg {
+            margin: 0 auto;
+            @include assVal(width height, 44px);
+            fill: white;
+            color: white;
+          }
+          &:hover {
+            opacity: 0.5;
+          }
+        }
+      }
+    }
+
+    .delete-icon-container {
+      $size: 70px;
+      @include assVal(width height, $size);
+      position: absolute;
+      bottom: 8px;
+      right: 10px;
+      border-radius: 4px;
+      pointer-events: all;
+      cursor: pointer;
+      z-index: 3;
+
+      .delete-icon {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+
+        .delete-icon-wrapper {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          @include flex(column, center);
+          transition: 0.3s ease-out;
+
+          svg {
+            margin: 0 auto;
+            @include assVal(width height, 44px);
+            fill: white;
+            color: white;
+          }
+          &:hover {
+            opacity: 0.5;
+          }
         }
       }
     }
@@ -127,7 +226,7 @@
               }
             }
             &.confirm {
-              animation: dropdown 0.3s ease-out forwards;
+              animation: dropdown 0.1s ease-out forwards;
 
               svg {
                 fill: $confirm_green;

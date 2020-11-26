@@ -229,7 +229,7 @@ VALUES
 		4500,
 		'Montreal',
 		'public',
-		'/path/to/picture, /path/to/other/picture',
+		'http://localhost:3001/backend/condo_pictures/a.jpeg, /path/to/other/picture',
 		1
 	),
 	(
@@ -239,7 +239,7 @@ VALUES
 		4500,
 		'Montreal',
 		'public',
-		'/path/to/picture, /path/to/other/picture',
+		'http://localhost:3001/backend/condo_pictures/a.jpeg, /path/to/other/picture',
 		2
 	),
 	(
@@ -249,7 +249,7 @@ VALUES
 		4500,
 		'Montreal',
 		'general',
-		'/path/to/picture, /path/to/other/picture',
+		'http://localhost:3001/backend/condo_pictures/a.jpeg, /path/to/other/picture',
 		3
 	),
 	(
@@ -259,7 +259,7 @@ VALUES
 		4500,
 		'Montreal',
 		'general',
-		'/path/to/picture, /path/to/other/picture',
+		'http://localhost:3001/backend/condo_pictures/a.jpeg, /path/to/other/picture',
 		4
 	),
 	(
@@ -269,7 +269,7 @@ VALUES
 		4500,
 		'Montreal',
 		'Condo Owners Association of Concordia',
-		'/path/to/picture, /path/to/other/picture',
+		'http://localhost:3001/backend/condo_pictures/a.jpeg, /path/to/other/picture',
 		1
 	),
 	(
@@ -279,7 +279,7 @@ VALUES
 		4500,
 		'Montreal',
 		'Condo Owners Association of Concordia',
-		'/path/to/picture, /path/to/other/picture',
+		'http://localhost:3001/backend/condo_pictures/a.jpeg, /path/to/other/picture',
 		2
 	),
 	(
@@ -289,7 +289,7 @@ VALUES
 		4500,
 		'Montreal',
 		'public',
-		'/path/to/picture, /path/to/other/picture',
+		'http://localhost:3001/backend/condo_pictures/a.jpeg, /path/to/other/picture',
 		1
 	),
 	(
@@ -299,7 +299,7 @@ VALUES
 		4500,
 		'Montreal',
 		'public',
-		'/path/to/picture, /path/to/other/picture',
+		'http://localhost:3001/backend/condo_pictures/a.jpeg, /path/to/other/picture',
 		2
 	),
 	(
@@ -309,7 +309,7 @@ VALUES
 		4500,
 		'Montreal',
 		'general',
-		'/path/to/picture, /path/to/other/picture',
+		'http://localhost:3001/backend/condo_pictures/a.jpeg, /path/to/other/picture',
 		3
 	),
 	(
@@ -319,7 +319,7 @@ VALUES
 		4500,
 		'Montreal',
 		'general',
-		'/path/to/picture, /path/to/other/picture',
+		'http://localhost:3001/backend/condo_pictures/a.jpeg, /path/to/other/picture',
 		4
 	),
 	(
@@ -329,7 +329,7 @@ VALUES
 		4500,
 		'Montreal',
 		'Condo Owners Association of Concordia',
-		'/path/to/picture, /path/to/other/picture',
+		'http://localhost:3001/backend/condo_pictures/a.jpeg, /path/to/other/picture',
 		1
 	),
 	(
@@ -339,7 +339,7 @@ VALUES
 		4500,
 		'Montreal',
 		'Condo Owners Association of Concordia',
-		'/path/to/picture, /path/to/other/picture',
+		'http://localhost:3001/backend/condo_pictures/a.jpeg, /path/to/other/picture',
 		2
 	),
 	(
@@ -349,7 +349,7 @@ VALUES
 		4500,
 		'Montreal',
 		'public',
-		'/path/to/picture, /path/to/other/picture',
+		'http://localhost:3001/backend/condo_pictures/a.jpeg, /path/to/other/picture',
 		1
 	),
 	(
@@ -359,7 +359,7 @@ VALUES
 		4500,
 		'Montreal',
 		'public',
-		'/path/to/picture, /path/to/other/picture',
+		'http://localhost:3001/backend/condo_pictures/a.jpeg, /path/to/other/picture',
 		2
 	),
 	(
@@ -369,7 +369,7 @@ VALUES
 		4500,
 		'Montreal',
 		'general',
-		'/path/to/picture, /path/to/other/picture',
+		'http://localhost:3001/backend/condo_pictures/a.jpeg, /path/to/other/picture',
 		3
 	),
 	(
@@ -379,7 +379,7 @@ VALUES
 		4500,
 		'Montreal',
 		'general',
-		'/path/to/picture, /path/to/other/picture',
+		'http://localhost:3001/backend/condo_pictures/a.jpeg, /path/to/other/picture',
 		4
 	),
 	(
@@ -389,7 +389,7 @@ VALUES
 		4500,
 		'Montreal',
 		'Condo Owners Association of Concordia',
-		'/path/to/picture, /path/to/other/picture',
+		'http://localhost:3001/backend/condo_pictures/a.jpeg, /path/to/other/picture',
 		1
 	),
 	(
@@ -399,7 +399,7 @@ VALUES
 		4500,
 		'Montreal',
 		'Condo Owners Association of Concordia',
-		'/path/to/picture, /path/to/other/picture',
+		'http://localhost:3001/backend/condo_pictures/a.jpeg, /path/to/other/picture',
 		2
 	);
 
