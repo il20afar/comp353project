@@ -15,7 +15,7 @@ class ads extends request
         return json_encode($res);
     }
 
-    public function delete($obj)
+    public function remove($obj)
     {
         $query = $this->delete((array) $obj);
         $res = $this->query($query, false);
@@ -32,6 +32,7 @@ class ads extends request
     public function edit($obj)
     {
         $ad_id = ((array) $obj)['ad_id'];
+        unset($obj['ad_id']);
         $where = sprintf(
             "ad_id=%s",
             $ad_id

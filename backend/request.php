@@ -68,6 +68,9 @@ class request
     /* Returns a string representing a valid INSERT statement given the supplied values */
     public function insert(string $columns, array $values)
     {
+        foreach ($values as $key => $val) {
+            $values[$key] = "'$val'";
+        }
         return sprintf(
             'INSERT INTO %s (%s) VALUES (%s);',
             $this->table,
@@ -83,7 +86,7 @@ class request
             $where[] = "$key='$value'";
         }
         return sprintf(
-            'DELETE FROM $s WHERE %s;',
+            'DELETE FROM %s WHERE %s;',
             $this->table,
             implode(' AND ', $where)
         );
