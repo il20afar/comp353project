@@ -70,13 +70,12 @@ CREATE TABLE owns (
 
 CREATE TABLE threads (
 	thread_id INT NOT NULL AUTO_INCREMENT,
-	title VARCHAR(50) NOT NULL,
+	title VARCHAR(50) NOT NULL UNIQUE,
 	creation_time DATETIME NOT NULL,
 	last_update_time DATETIME NOT NULL,
 	creator_id INT NOT NULL,
 	PRIMARY KEY (thread_id),
-	FOREIGN KEY (creator_id) REFERENCES users(user_id),
-	UNIQUE (title)
+	FOREIGN KEY (creator_id) REFERENCES users(user_id)
 );
 
 CREATE TABLE replies (
