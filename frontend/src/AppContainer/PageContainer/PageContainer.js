@@ -63,7 +63,6 @@ const PageContainer = (props) => {
   };
 
   const handleSidebarState = (name) => {
-    console.log(name, pages);
     setCurrentPage({
       name: name,
       elem: pages[name],

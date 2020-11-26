@@ -243,7 +243,6 @@ export default class Agenda extends Component {
 
   render() {
     var AgendaItem = function (props) {
-      console.log(" item component props", props);
       return (
         <div
           style={{ display: "block", position: "absolute", background: "#FFF" }}

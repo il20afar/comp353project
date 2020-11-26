@@ -1,53 +1,7 @@
 import React from "react";
-import { D, TextBox, Button } from "../../imports";
-import images from "../../condo_pictures/images";
+import { D, TextBox, Button, Ads } from "../../imports";
 import "../../Styles/Utils.scss";
 import "./LoginContainer.scss";
-
-const cities = [
-  "Toronto",
-  "Montreal",
-  "Calgary",
-  "Edmonton",
-  "Ottawa",
-  "Vancouver",
-];
-const prices = [
-  "10 000 000",
-  "1 000 000",
-  "500 000",
-  "325 000",
-  "3 000 000",
-  "39 000 000",
-];
-
-const Condo = (props) => {
-  const { picture, price, city } = props;
-
-  return (
-    <D cn="condo-container">
-      <D cn="condo-picture">{picture}</D>
-      <D cn="condo-price"> {price}</D>
-      <D cn="condo-city"> {city}</D>
-    </D>
-  );
-};
-
-const Listings = (props) => {
-  const { type } = props;
-  return (
-    <D cn={`listing-container ${type}`}>
-      {images.map((elem, index) => (
-        <Condo
-          key={prices[index]}
-          picture={elem}
-          price={`${prices[index]}$`}
-          city={cities[index]}
-        />
-      ))}
-    </D>
-  );
-};
 
 const LoginContainer = (props) => {
   const { loginStates, setLoginPage, handleLogin, invalidLogin } = props;
@@ -98,7 +52,9 @@ const LoginContainer = (props) => {
 
   return (
     <D cn={`login-container`}>
-      <Listings ref={refs.adsButton} type={"full"} />
+      <div className="ads-wrapper">
+        <Ads type="login" visibility="public" />
+      </div>
 
       <D cn="login-logo">CON MANAGER</D>
       <D cn="login-button">

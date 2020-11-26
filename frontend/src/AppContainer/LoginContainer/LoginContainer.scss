@@ -1,82 +1,17 @@
 @import "../../Styles/Utils.scss";
 
-.condo-container {
-  @include vFlex(space-between);
-  padding: 2px;
-  box-sizing: border-box;
-  border-radius: 10px;
-  background-color: ghostwhite;
-  border: 4px solid $main;
-  max-height: 100%;
-  overflow: hidden;
-
-  .condo-picture {
-    height: auto;
-    overflow: hidden;
-    box-sizing: border-box;
-    border-radius: 5px;
-    background-size: cover;
-
-    img {
-      min-height: 80px;
-      width: 100%;
-      height: auto;
-      background-size: cover;
-    }
-  }
-  .condo-price,
-  .condo-city {
-    width: 100%;
-    height: 24px;
-    box-sizing: border-box;
-    margin: 2px 0 2px 0px;
-
-    font-size: 16px;
-    line-height: 24px;
-    text-align: center;
-    background-color: $main;
-    border-radius: 3px;
-    color: $text_bg;
-  }
-}
-
-.listing-container {
-  display: grid;
-  overflow: scroll;
-  &.full {
-    height: calc(100vh - 140px);
-    width: 100%;
-    @include abs($top: 140px, $left: 0);
-    grid-template-rows: repeat(2, 50%);
-    grid-template-columns: repeat(3, 33.33%);
-
-    .condo-container {
-      background-color: transparent;
-      border-color: transparent;
-      padding: 30px;
-
-      .condo-price,
-      .condo-city {
-        width: 100%;
-        height: 40px;
-        box-sizing: border-box;
-        margin: 2px 0 2px 0px;
-
-        font-size: 22px;
-        line-height: 40px;
-        text-align: center;
-        background-color: black;
-        border-radius: 3px;
-        color: $text_bg;
-      }
-    }
-  }
-}
-
 .login-container {
   @include fullFlex();
   position: relative;
   background-color: $bg;
+
+  .ads-wrapper {
+    position: absolute;
+    height: calc(100% - 180px);
+    width: calc(100% - 100px);
+    top: 120px;
+    left: 50px;
+  }
 
   .invalidLogin {
     width: 100%;
@@ -110,9 +45,9 @@
 
   .login-logo {
     $h: 100px;
-    width: 100%;
+    width: 100vw;
     height: $h;
-    max-width: calc(100% - 140px);
+
     @include abs($top: -6px, $left: 0);
     line-height: $h;
     font-size: 46px;

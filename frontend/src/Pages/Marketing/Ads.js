@@ -5,178 +5,23 @@ import { Header, Button, data } from "../../imports";
 import Condo from "./Condo";
 import "./Ads.scss";
 import AdDetail from "./AdDetail";
+import { MainContext } from "../../AppContainer/PageContainer/PageContainer";
 
 const arr = [
-  {
-    adId: 316, //primary key
-    img:
-      "https://www.brickunderground.com/sites/default/files/styles/blog_primary_image/public/blog/images/190501Tribeca111MurrayStMAINPIC.jpg", //part of "Pictures"
-    city: "Montreal", //part of "Description"
-    price: "$520,000", //part of "Description"
-    title: "2 and a half with furnitures", //?
-    type: "Condo", //(ad, item sale, service)
-    visibility: " ", //(public, general, classified)
-    creatorID: " ",
-  },
-  {
-    adId: 251,
-    img:
-      "https://torontostoreys.com/wp-content/uploads/2018/01/roseanne-condo-770x514.jpg",
-    city: "Montreal",
-    price: "$650,000",
-    title: "4 and a half condo near subway", //?
-    type: "Condo", //(ad, item sale, service)
-    visibility: " ", //(public, general, classified)
-  },
-  {
-    adId: 103,
-    img:
-      "https://www.moneyunder30.com/wp-content/uploads/2008/07/so-you-wanna-buy-a-condo-five-questions-to-ask-before-buying-648x364-c-default.jpg",
-    city: "Montreal",
-    price: "$1450",
-    title: "3 and a half apartment for rent", //?
-    type: "Apartment", //(ad, item sale, service)
-    visibility: " ", //(public, general, classified)
-  },
-  {
-    adId: 167,
-    img:
-      "https://images.unsplash.com/photo-1539693010221-cd218dfe6565?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80",
-    city: "Ottawa",
-    price: "$600,000",
-    title: "2 and a half condo for sale", //?
-    type: "Condo", //(ad, item sale, service)
-    visibility: " ", //(public, general, classified)
-  },
-  {
-    adId: 316, //primary key
-    img:
-      "https://www.brickunderground.com/sites/default/files/styles/blog_primary_image/public/blog/images/190501Tribeca111MurrayStMAINPIC.jpg", //part of "Pictures"
-    city: "Montreal", //part of "Description"
-    price: "$520,000", //part of "Description"
-    title: "2 and a half with furnitures", //?
-    type: "Condo", //(ad, item sale, service)
-    visibility: " ", //(public, general, classified)
-    creatorID: " ",
-  },
-  {
-    adId: 251,
-    img:
-      "https://torontostoreys.com/wp-content/uploads/2018/01/roseanne-condo-770x514.jpg",
-    city: "Montreal",
-    price: "$650,000",
-    title: "4 and a half condo near subway", //?
-    type: "Condo", //(ad, item sale, service)
-    visibility: " ", //(public, general, classified)
-  },
-  {
-    adId: 103,
-    img:
-      "https://www.moneyunder30.com/wp-content/uploads/2008/07/so-you-wanna-buy-a-condo-five-questions-to-ask-before-buying-648x364-c-default.jpg",
-    city: "Montreal",
-    price: "$1450",
-    title: "3 and a half apartment for rent", //?
-    type: "Apartment", //(ad, item sale, service)
-    visibility: " ", //(public, general, classified)
-  },
-  {
-    adId: 167,
-    img:
-      "https://images.unsplash.com/photo-1539693010221-cd218dfe6565?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80",
-    city: "Ottawa",
-    price: "$600,000",
-    title: "2 and a half condo for sale", //?
-    type: "Condo", //(ad, item sale, service)
-    visibility: " ", //(public, general, classified)
-  },
-  {
-    adId: 316, //primary key
-    img:
-      "https://www.brickunderground.com/sites/default/files/styles/blog_primary_image/public/blog/images/190501Tribeca111MurrayStMAINPIC.jpg", //part of "Pictures"
-    city: "Montreal", //part of "Description"
-    price: "$520,000", //part of "Description"
-    title: "2 and a half with furnitures", //?
-    type: "Condo", //(ad, item sale, service)
-    visibility: " ", //(public, general, classified)
-    creatorID: " ",
-  },
-  {
-    adId: 251,
-    img:
-      "https://torontostoreys.com/wp-content/uploads/2018/01/roseanne-condo-770x514.jpg",
-    city: "Montreal",
-    price: "$650,000",
-    title: "4 and a half condo near subway", //?
-    type: "Condo", //(ad, item sale, service)
-    visibility: " ", //(public, general, classified)
-  },
-  {
-    adId: 103,
-    img:
-      "https://www.moneyunder30.com/wp-content/uploads/2008/07/so-you-wanna-buy-a-condo-five-questions-to-ask-before-buying-648x364-c-default.jpg",
-    city: "Montreal",
-    price: "$1450",
-    title: "3 and a half apartment for rent", //?
-    type: "Apartment", //(ad, item sale, service)
-    visibility: " ", //(public, general, classified)
-  },
-  {
-    adId: 167,
-    img:
-      "https://images.unsplash.com/photo-1539693010221-cd218dfe6565?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80",
-    city: "Ottawa",
-    price: "$600,000",
-    title: "2 and a half condo for sale", //?
-    type: "Condo", //(ad, item sale, service)
-    visibility: " ", //(public, general, classified)
-  },
-  {
-    adId: 316, //primary key
-    img:
-      "https://www.brickunderground.com/sites/default/files/styles/blog_primary_image/public/blog/images/190501Tribeca111MurrayStMAINPIC.jpg", //part of "Pictures"
-    city: "Montreal", //part of "Description"
-    price: "$520,000", //part of "Description"
-    title: "2 and a half with furnitures", //?
-    type: "Condo", //(ad, item sale, service)
-    visibility: " ", //(public, general, classified)
-    creatorID: " ",
-  },
-  {
-    adId: 251,
-    img:
-      "https://torontostoreys.com/wp-content/uploads/2018/01/roseanne-condo-770x514.jpg",
-    city: "Montreal",
-    price: "$650,000",
-    title: "4 and a half condo near subway", //?
-    type: "Condo", //(ad, item sale, service)
-    visibility: " ", //(public, general, classified)
-  },
-  {
-    adId: 103,
-    img:
-      "https://www.moneyunder30.com/wp-content/uploads/2008/07/so-you-wanna-buy-a-condo-five-questions-to-ask-before-buying-648x364-c-default.jpg",
-    city: "Montreal",
-    price: "$1450",
-    title: "3 and a half apartment for rent", //?
-    type: "Apartment", //(ad, item sale, service)
-    visibility: " ", //(public, general, classified)
-  },
-  {
-    adId: 167,
-    img:
-      "https://images.unsplash.com/photo-1539693010221-cd218dfe6565?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80",
-    city: "Ottawa",
-    price: "$600,000",
-    title: "2 and a half condo for sale", //?
-    type: "Condo", //(ad, item sale, service)
-    visibility: " ", //(public, general, classified)
-  },
+  "https://www.brickunderground.com/sites/default/files/styles/blog_primary_image/public/blog/images/190501Tribeca111MurrayStMAINPIC.jpg", //part of "Pictures"
+  ,
+  "https://torontostoreys.com/wp-content/uploads/2018/01/roseanne-condo-770x514.jpg",
+  ,
+  "https://www.moneyunder30.com/wp-content/uploads/2008/07/so-you-wanna-buy-a-condo-five-questions-to-ask-before-buying-648x364-c-default.jpg",
+  ,
+  "https://images.unsplash.com/photo-1539693010221-cd218dfe6565?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80",
 ];
 
 const makeGeneralAd = (adId, img, city, price, title, type, setDetailsAd) => {
   return (
     <div className="ad-container" onClick={() => setDetailsAd(adId)}>
       <Condo
+        key={uuid()}
         {...{
           className: "detail",
           adId: Number.parseInt(adId),
@@ -192,18 +37,18 @@ const makeGeneralAd = (adId, img, city, price, title, type, setDetailsAd) => {
 };
 
 const AdGeneralContainer = (props) => {
-  const { setDetailsAd } = props;
+  const { ads, setDetailsAd } = props;
   return (
     <>
       <div className="ad-general-container">
-        {arr.map((obj) =>
+        {ads.map((obj) =>
           makeGeneralAd(
-            obj.adId,
-            obj.img,
-            obj.city,
-            obj.price,
+            obj.ad_id,
+            arr[2],
+            "Montreal",
+            100000,
             obj.title,
-            obj.type,
+            obj.ad_type,
             setDetailsAd
           )
         )}
@@ -212,59 +57,89 @@ const AdGeneralContainer = (props) => {
   );
 };
 
-const Ads = (props) => {
-  const { advertisements } = props;
-  const [detailedView, setDetailedView] = React.useState(-1);
-  const [editView, setEditView] = React.useState(false);
-  const [visibilityFilter, setVisibilityFilter] = React.useState("Public");
-  const isCreatingAdd = React.useRef(false);
+const AdDetailContainer = (props) => {
+  const { ad = {}, view, setView, editable, user_id } = props;
 
-  const elem = arr.find((ad) => ad.adId === detailedView);
-  const {
-    ad_id = "",
-    title = "",
-    city = "",
-    price = "",
-    description = "",
-    visibility = "",
-    img = null,
-  } = elem || {};
-  console.log(elem, detailedView);
+  const handlers = {
+    edit: () => {
+      setView("edit");
+    },
+    confirm: () => {
+      setView("general");
+    },
+    close: async (ad) => {
+      setView("general");
+    },
+  };
+
+  const inputAd =
+    view === "create"
+      ? {
+          title: "",
+          ad_city: "",
+          ad_price: "",
+          ad_desc: "",
+          visibility: "",
+          pictures: "",
+        }
+      : ad;
+
+  console.log(inputAd);
+
+  return (
+    <div className="ad-detail-container">
+      <AdDetail
+        {...{
+          view,
+          editable: editable && user_id === ad.creator_id,
+          ad: inputAd,
+          onClose: handlers.close,
+          user_id,
+        }}
+      />
+    </div>
+  );
+};
+
+const Ads = (props) => {
+  const { type = "page", visibility = "public" } = props;
+
+  const { user } = React.useContext(MainContext);
+
+  // "general", "detailed", "edit", "create"
+  const [view, setView] = React.useState("general");
+
+  // This is a list of all visible ads
+  const [visibleAds, setVisibleAds] = React.useState([]);
+
+  // If ad is selected, it means we return the detailed view
+  const [selectedAd, setSelectedAd] = React.useState({});
+
+  // This is the current visibility filter
+  const [visibilityFilter, setVisibilityFilter] = React.useState(visibility);
 
   const handlers = {
     actions: {
-      filter: async (eventKey) => {
-        console.log(eventKey);
+      updateAds: async (visibility) => {
         const res = await data.send("ads", "get", {
-          visibility: eventKey.toLowerCase(),
+          visibility: visibility.toLowerCase(),
         });
-        if (res) {
-          console.log(res);
-        } else {
-        }
+        setVisibleAds(res.ads || []);
       },
-      create: async () => {
-        isCreatingAdd.current = true;
+
+      filter: (eventKey) => {
+        handlers.actions.updateAds(eventKey);
+        setVisibilityFilter(eventKey);
+      },
+      create: () => {
+        setView("create");
       },
     },
 
     adGrid: {
       open: (adNumber) => {
-        console.log(adNumber, detailedView);
-        setDetailedView(adNumber);
-      },
-    },
-    detailedView: {
-      edit: () => {
-        setEditView(true);
-      },
-      close: async (ad) => {
-        if (isCreatingAdd.current) {
-          const res = await data.send("ads", "get", ad);
-        }
-
-        if (editView) setEditView(false);
-        setDetailedView(-1);
+        setSelectedAd(visibleAds.find((ad) => ad.ad_id === adNumber) || {});
+        setView("specific");
       },
     },
   };
@@ -272,7 +147,10 @@ const Ads = (props) => {
   const actions = [
     <Button
       content={{ show: visibilityFilter, hide: "√" }}
-      style={{ show: { width: "200px" }, hide: { width: "200px" } }}
+      style={{
+        show: { width: "200px", textTransform: "capitalize" },
+        hide: { width: "200px", textTransform: "capitalize" },
+      }}
       dropdown={[
         { elem: "Classified", eventKey: "classified" },
         { elem: "General", eventKey: "general" },
@@ -281,36 +159,34 @@ const Ads = (props) => {
       onSelect={handlers.actions.filter}
     />,
     <Button
-      content={{ show: "Create +", hide: "√" }}
+      content={{ show: "Create +" }}
       style={{ show: { width: "200px" }, hide: { width: "200px" } }}
-      onSelect={handlers.actions.filter}
+      onClick={handlers.actions.create}
     />,
   ];
 
-  const ad = React.useRef({
-    ad_id,
-    title,
-    city,
-    price,
-    description,
-    visibility,
-    img,
-  });
+  React.useEffect(() => {
+    handlers.actions.updateAds(visibilityFilter);
+  }, [view]);
 
   return (
     <div className="ads">
-      {detailedView === -1 && <Header height="40px" actions={actions} />}
-      {detailedView === -1 ? (
-        <AdGeneralContainer setDetailsAd={handlers.adGrid.open} />
+      {type === "page" && view === "general" && (
+        <Header height="40px" actions={actions} />
+      )}
+      {view === "general" ? (
+        <AdGeneralContainer
+          ads={visibleAds}
+          setDetailsAd={handlers.adGrid.open}
+        />
       ) : (
-        <div className="ad-detail-container">
-          <AdDetail
-            {...{
-              ad,
-              onClose: handlers.detailedView.close,
-            }}
-          />
-        </div>
+        <AdDetailContainer
+          ad={selectedAd}
+          editable={type !== "login"}
+          user_id={user.current?.user_id}
+          view={view}
+          setView={setView}
+        />
       )}
     </div>
   );

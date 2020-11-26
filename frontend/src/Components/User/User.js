@@ -49,7 +49,7 @@ const UserModModal = (props) => {
     const entries = Object.entries(refs).filter(
       ([key, val]) => val.current.value !== user.current[key]
     );
-    console.log(user);
+
     closeOrConfirm.current.className = `action-icon ${
       entries.length === 0 ? "close" : "confirm"
     }`;
@@ -70,8 +70,6 @@ const UserModModal = (props) => {
     };
     const res = await data.send("users", "modify", userIfUpdateSuccessful);
     window.setTimeout(() => {
-      console.log(res);
-
       if (res !== 0) {
         closeOrConfirm.current.className = "action-icon close";
         user.current = userIfUpdateSuccessful;
