@@ -9,7 +9,7 @@ class threads extends request
 
     public function create($obj)
     {
-        $query = $this->insert("title, creation_time, last_update_time, creator_username, creator_id", (array) $obj);
+        $query = $this->insert("title, creator_username, creator_id", (array) $obj);
         $res = $this->query($query, false);
         return json_encode($res);
     }

@@ -71,8 +71,8 @@ CREATE TABLE owns (
 CREATE TABLE threads (
 	thread_id INT NOT NULL AUTO_INCREMENT,
 	title VARCHAR(50) NOT NULL UNIQUE,
-	creation_time DATETIME NOT NULL,
-	last_update_time DATETIME NOT NULL,
+	creation_time DATETIME NOT NULL DEFAULT NOW(),
+	last_update_time DATETIME NOT NULL DEFAULT NOW(),
 	number_of_replies INT NOT NULL DEFAULT 0,
 	creator_username VARCHAR(50) NOT NULL,
 	creator_id INT NOT NULL,
@@ -83,7 +83,7 @@ CREATE TABLE threads (
 CREATE TABLE replies (
 	reply_id INT NOT NULL AUTO_INCREMENT,
 	content VARCHAR(500) NOT NULL,
-	creation_time DATETIME NOT NULL,
+	creation_time DATETIME NOT NULL DEFAULT NOW(),
 	author_id INT NOT NULL,
 	thread_id INT NOT NULL,
 	PRIMARY KEY (reply_id),
@@ -404,61 +404,34 @@ VALUES
 	);
 
 INSERT INTO
-	threads (
-		title,
-		creation_time,
-		last_update_time,
-		creator_username,
-		creator_id
-	)
+	threads (title, creator_username, creator_id)
 VALUES
 	(
 		'Suggestions for a Montreal Newcomer?',
-		NOW(),
-		NOW(),
 		'mpob',
 		4
 	),
-	(
-		'Nice Area for Students',
-		NOW(),
-		NOW(),
-		'afar',
-		1
-	);
+	('Nice Area for Students', 'afar', 1);
 
 INSERT INTO
-	replies (
-		content,
-		creation_time,
-		author_id,
-		thread_id
-	)
+	replies (content, author_id, thread_id)
 VALUES
 	(
 		'What exactly are you looking for?',
-		NOW(),
 		2,
 		1
 	),
 	(
 		'Please elaborate and we''ll gladly help!',
-		NOW(),
 		3,
 		1
 	),
 	(
 		'I would suggest either Cote-des-Neiges or anywhere near Concordia University.',
-		NOW(),
 		4,
 		2
 	),
-	(
-		'What''s your budget?',
-		NOW(),
-		3,
-		2
-	);
+	('What''s your budget?', 3, 2);
 
 /* Byproduct of creating replies */
 UPDATE
