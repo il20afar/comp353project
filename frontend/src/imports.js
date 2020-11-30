@@ -28,8 +28,10 @@ export { default as Sidebar } from "./Components/Sidebar/Sidebar";
 export { default as TextBox } from "./Components/TextBox/TextBox";
 export { default as Agenda } from "./Components/Agenda/Agenda";
 export { default as Header } from "./Components/Header/Header";
+export { default as InputModal } from "./Components/InputModal/InputModal";
+export { default as SearchBar } from "./Components/SearchBar/SearchBar";
 
 export { UserIcon, UserModModal } from "./Components/User/User";
 
 // /Utils
-export { D, data } from "./Utils/Utils";
+export { D, data, HighlightedContent } from "./Utils/Utils";

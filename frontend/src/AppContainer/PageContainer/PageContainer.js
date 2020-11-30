@@ -49,7 +49,7 @@ export const MainContext = React.createContext({
 });
 
 const PageContainer = (props) => {
-  const { user } = props;
+  const { user, handleLogOut } = props;
   const [currentPage, setCurrentPage] = React.useState({
     name: "Ads",
     elem: pages.Ads(),
@@ -77,7 +77,7 @@ const PageContainer = (props) => {
       style={{
         show: { fontSize: "20px", height: "40px", lineHeight: "40px" },
       }}
-      onClick={() => null}
+      onClick={() => handleLogOut()}
     />,
   ];
 

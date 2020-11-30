@@ -1,8 +1,8 @@
 @import "../../Styles/Utils.scss";
 
 .button {
-  $h: 60px;
-  $fontSize: 30px;
+  $h: 50px;
+  $fontSize: 24px;
 
   @include box(
     $bCol: $main,
@@ -12,7 +12,7 @@
     $width: 100%,
     $height: $h
   );
-  min-width: 60px;
+  min-width: $h;
   user-select: none;
   font-size: $fontSize;
   line-height: $h;
@@ -26,14 +26,14 @@
     width: fit-content;
     transition: 0.25s ease-in-out;
   }
-  &:hover {
-    &:not(.dropdown) {
+  &:not(.dropdown) {
+    &:hover {
       transform: scale(1.05);
     }
-  }
-  &:active {
-    box-shadow: none;
-    transform: translateY(-2px);
+    &:active {
+      box-shadow: none;
+      transform: translateY(-2px);
+    }
   }
 
   .dropdown-container {
@@ -47,7 +47,7 @@
     left: 0;
 
     .dropdown-element {
-      height: 60px;
+      height: 50px;
       font-size: inherit;
       line-height: inherit;
       font-weight: 300;
@@ -55,6 +55,33 @@
       color: $text_bg;
       &:hover {
         opacity: 0.7;
+      }
+    }
+  }
+
+  .icon-container {
+    width: 46px;
+    height: 46px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    &:hover {
+      opacity: 0.5;
+    }
+
+    svg {
+      margin: 0 auto;
+      color: black;
+      transform: scale(1.4);
+    }
+
+    &.show {
+      svg {
+        transform: scale(-1.4);
       }
     }
   }

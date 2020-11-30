@@ -1,6 +1,8 @@
 import React from "react";
 import { D } from "../../imports";
 import { v4 as uuid } from "uuid";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAngleUp } from "@fortawesome/free-solid-svg-icons";
 import "./Button.scss";
 import "../../Styles/Utils.scss";
 
@@ -57,6 +59,11 @@ const Button = (props) => {
       {show ? content.show : content.hide ?? content.show}
       {!show && dropdown && (
         <Dropdown elements={dropdown} onSelect={handlers.onSelect} />
+      )}
+      {dropdown && (
+        <div className={`icon-container ${show ? "show" : "hide"}`}>
+          <FontAwesomeIcon icon={faAngleUp} />
+        </div>
       )}
     </D>
   );
