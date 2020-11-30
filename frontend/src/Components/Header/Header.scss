@@ -29,12 +29,13 @@
   .actions-container {
     height: 100%;
     width: fit-content;
-    padding: 10px 20px 10px 20px;
+    padding: 0px 20px 0px 20px;
     display: flex;
     .action-wrapper {
       height: 100%;
       padding: 0px 10px 0px 10px;
       width: fit-content;
+      @include flex(column, center);
     }
   }
 }

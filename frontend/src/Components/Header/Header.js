@@ -5,12 +5,19 @@ import "./Header.scss";
 import "../../Styles/Utils.scss";
 
 const Header = (props) => {
-  const { title = null, showSidebar, actions = [], height = "70px" } = props;
+  const {
+    title = null,
+    showSidebar,
+    actions = [],
+    height = "70px",
+    ...rest
+  } = props;
 
   return (
     <div
       style={{ height }}
-      className={`header${showSidebar ? " sidebar-open" : ""}`}
+      className={`header ${showSidebar ? " sidebar-open" : ""}`}
+      {...rest}
     >
       {title && <div className="title-container">{title}</div>}{" "}
       <div className="actions-container">

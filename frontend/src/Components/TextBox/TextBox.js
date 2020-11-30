@@ -15,13 +15,15 @@ const Textbox = React.forwardRef((props, ref) => {
     className = "",
     initialValue,
     outlineOnChange = false,
+    match = null,
+    height = null,
     ...other
   } = props;
 
   const [outlineState, setOutlineState] = React.useState("inactive");
 
   React.useEffect(() => {
-    focusOnRender && ref.input.current.focus();
+    focusOnRender && ref.current.focus();
     if (initialValue) {
       ref.current.value = initialValue;
     }
@@ -34,6 +36,16 @@ const Textbox = React.forwardRef((props, ref) => {
     onChange(e);
   };
 
+  const onKeyPress = (e) => {
+    const val = e.key;
+    if (match === "number" && !val.match(/[0-9]{1}/)) {
+      e.preventDefault();
+      // if (!val.match(/[0-9]+[.]{0,1}[0-9]+/)[0].length !== val.length) {
+      //   e.stopPropagation();
+      // }
+    }
+  };
+
   const onCancelClick = () => {
     ref.current.value = initialValue;
     onChange();
@@ -41,7 +53,7 @@ const Textbox = React.forwardRef((props, ref) => {
   };
 
   return (
-    <D cn={`textbox ${outlineState} ${className}`}>
+    <D cn={`textbox ${outlineState} ${className}`} style={{ height: height }}>
       <D cn={`cancel-icon-container ${outlineState}`} onClick={onCancelClick}>
         <FontAwesomeIcon icon={faTimes} />
       </D>
@@ -50,13 +62,13 @@ const Textbox = React.forwardRef((props, ref) => {
           ref: ref,
           className: "text-input",
           onChange: onChangeHandler,
-          placeholder,
+          onKeyPress: onKeyPress,
         }
       ) =>
         type !== "textarea" ? (
           <input type={subType} {...rest} {...other} />
         ) : (
-          <textarea {...rest} />
+          <textarea {...rest} {...other} />
         ))()}
     </D>
   );

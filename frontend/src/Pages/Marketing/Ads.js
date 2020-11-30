@@ -19,9 +19,12 @@ const arr = [
 
 const makeGeneralAd = (adId, img, city, price, title, type, setDetailsAd) => {
   return (
-    <div className="ad-container" onClick={() => setDetailsAd(adId)}>
+    <div
+      key={uuid()}
+      className="ad-container"
+      onClick={() => setDetailsAd(adId)}
+    >
       <Condo
-        key={uuid()}
         {...{
           className: "detail",
           adId: Number.parseInt(adId),
@@ -38,20 +41,21 @@ const makeGeneralAd = (adId, img, city, price, title, type, setDetailsAd) => {
 
 const AdGeneralContainer = (props) => {
   const { ads, setDetailsAd } = props;
+
   return (
     <>
       <div className="ad-general-container">
-        {ads.map((obj) =>
-          makeGeneralAd(
-            obj.ad_id,
-            arr[2],
-            "Montreal",
-            100000,
-            obj.title,
-            obj.ad_type,
+        {ads.map((ad) => {
+          return makeGeneralAd(
+            ad.ad_id,
+            ad.pictures.replace(" ", "").split(",")[0],
+            ad.ad_city,
+            ad.ad_price,
+            ad.title,
+            ad.ad_type,
             setDetailsAd
-          )
-        )}
+          );
+        })}
       </div>
     </>
   );
@@ -84,8 +88,6 @@ const AdDetailContainer = (props) => {
         }
       : ad;
 
-  console.log(inputAd);
-
   return (
     <div className="ad-detail-container">
       <AdDetail
@@ -93,6 +95,7 @@ const AdDetailContainer = (props) => {
           view,
           editable: editable && user_id === ad.creator_id,
           ad: inputAd,
+          onEdit: handlers.edit,
           onClose: handlers.close,
           user_id,
         }}

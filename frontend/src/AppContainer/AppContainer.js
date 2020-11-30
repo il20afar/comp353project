@@ -12,20 +12,22 @@ const loginStates = {
 //[FUNCTIONAL COMPONENTS]
 const AppContainer = () => {
   const [loginPage, setLoginPage] = React.useState(loginStates.idle);
-  const [loginState, setLoginState] = React.useState(
-    localStorage.getItem("conuser")
-  );
+
   const user = React.useRef(null);
+  const setUser = (newUser) => {
+    user.current = newUser;
+  };
 
   const handleLogin = async (username, pw) => {
     // Getting response from server
     const res = await data.send("users", "login", { username, pw });
-    localStorage.setItem("conuser", username);
 
     if (res.users) {
       const session = await data.send("session", "start");
 
-      user.current = { username, ...res.users[0] };
+      setUser({ username, ...res.users[0] });
+      localStorage.setItem("con_manager_user", JSON.stringify(user.current));
+
       setLoginPage(loginStates.success);
     } else {
       window.setTimeout(() => {
@@ -35,9 +37,22 @@ const AppContainer = () => {
     }
   };
 
-  (async () => {
-    const ses = await data.send("session", "check");
-  })();
+  const handleLogOut = () => {
+    localStorage.removeItem("con_manager_user");
+    setLoginPage(loginStates.idle);
+  };
+
+  React.useEffect(() => {
+    (async () => {
+      const ses = await data.send("session", "check");
+      const localUserString = localStorage.getItem("con_manager_user");
+
+      if (localUserString) {
+        setUser(JSON.parse(localUserString));
+        setLoginPage(loginStates.success);
+      }
+    })();
+  }, []);
 
   return (
     <D cn="main-container">
@@ -51,7 +66,7 @@ const AppContainer = () => {
           }}
         />
       ) : (
-        <PageContainer {...{ user: user }} />
+        <PageContainer {...{ user: user, handleLogOut: handleLogOut }} />
       )}
     </D>
   );

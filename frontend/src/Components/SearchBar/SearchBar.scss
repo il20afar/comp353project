@@ -1,0 +1,32 @@
+@import "../../Styles/Utils.scss";
+
+.searchbar {
+  width: 300px;
+  position: relative;
+
+  .textbox {
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 40px;
+    input {
+      padding-left: 44px;
+      border-radius: 40px;
+      font-size: 26px;
+
+      display: block;
+    }
+  }
+  .menu-search-icon {
+    width: 40px;
+    height: 100%;
+    @include flex(column, center);
+    position: absolute;
+    top: 0;
+    left: 10px;
+    svg {
+      width: 28px;
+      height: 28px;
+    }
+  }
+}

@@ -1,4 +1,5 @@
 import * as React from "react";
+import { v4 as uuid } from "uuid";
 
 // [HELPER COMPONENTS] -> Better code styling
 const D = React.forwardRef((props, ref) => {
@@ -8,13 +9,11 @@ const D = React.forwardRef((props, ref) => {
 
 const data = {
   send: async (table, action, fields) => {
-    console.log(
-      JSON.stringify({
-        table,
-        action,
-        ...fields,
-      })
-    );
+    JSON.stringify({
+      table,
+      action,
+      ...fields,
+    });
     try {
       const req = await fetch(process.env.REACT_APP_PHP_SERVER_URL, {
         method: "POST",
@@ -44,4 +43,23 @@ const data = {
   },
 };
 
-export { D, data };
+const HighlightedContent = (props) => {
+  const { content, searchTerm } = props;
+
+  const separatedString = content
+    .replace(searchTerm, `*&*${searchTerm}*&*`)
+    .split("*&*");
+
+  return searchTerm === ""
+    ? content
+    : separatedString.map((elem) => (
+        <span
+          key={uuid()}
+          style={elem === searchTerm ? { color: "#f55538" } : {}}
+        >
+          {elem}
+        </span>
+      ));
+};
+
+export { D, data, HighlightedContent };

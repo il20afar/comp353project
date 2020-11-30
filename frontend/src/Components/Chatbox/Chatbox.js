@@ -6,40 +6,42 @@ import { v4 as uuid } from "uuid";
 
 import "./Chatbox.scss";
 
-const createMessage = (date, time, username, content, type = "others") => {
-  return <Message key={uuid()} {...{ date, time, content, username, type }} />;
-};
-
 const Chatbox = (props) => {
-  const { user, messages: inputMessage = [] } = props;
+  const { user, replies = [], searchTerm = "" } = props;
   const intervalId = useRef(0);
-  const [messages, setMessages] = useState(inputMessage);
 
   const sendMessage = async (message, username = user.current.name) => {
     // const response = await sendData({ username: username, message: message });
     // if (response !== "message_accepted") {
     //   alert("Your message couldn't be sent!");
     // }
-
-    const newMessages = [
-      ...messages,
-
-      createMessage("10-10-10", "13:44", username, message, "self"),
-    ];
-
-    setMessages(newMessages);
+    // const newreplies = [
+    //   ...replies,
+    // ];
+    // setreplies(newreplies);
   };
 
-  React.useEffect(() => {
-    setMessages([
-      createMessage("10-10-10", "13:44", "afar", "My name is afar.", "self"),
-    ]);
-  }, []);
+  // React.useEffect(() => {
+  //   setreplies([
+  //     createMessage("10-10-10", "13:44", "afar", "My name is afar.", "self"),
+  //   ]);
+  // }, []);
 
   return (
     <div className="chatbox">
       <div className="messagebox-container">
-        <div className="messagebox">{messages}</div>
+        <div className="messagebox">
+          {replies.map((elem) => (
+            <Message
+              type="others"
+              content={elem.content}
+              date={elem.creation_time}
+              time=""
+              username={elem.author_id}
+              searchTerm={searchTerm}
+            />
+          ))}
+        </div>
       </div>
       <div className="textbox-container">
         <Textbox

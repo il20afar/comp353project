@@ -50,10 +50,12 @@
     border: 3px solid $border;
     border-radius: 7px;
     font-size: 34px;
-    padding: 0 12px 0 12px;
+    padding: 10px;
     outline: none;
     box-sizing: border-box;
     transition: 0.25s ease;
+    font-family: Roboto, sans-serif !important;
+    font-weight: 300;
 
     &::-webkit-input-placeholder {
       font-style: italic;
