@@ -209,7 +209,7 @@ VALUES
 		'Montreal',
 		'Quebec',
 		'Canada',
-		'All the kitchen applainces (Wolf & Sub-Zero & Monogram), Washer/Dryer (Maytag), All the motorized blinds, All the built-in speakers, All the built-in''s, All the Lutron lighting control system.'
+		'All the kitchen appliances (Wolf & Sub-Zero & Monogram), Washer/Dryer (Maytag), All the motorized blinds, All the built-in speakers, All the built-in''s, All the Lutron lighting control system.'
 	);
 
 INSERT INTO
@@ -253,34 +253,14 @@ VALUES
 		2
 	),
 	(
-		'General Condo Ad #1',
-		'condo',
-		'The illusion which exalts us is dearer to us than ten thousand truths.',
-		4500,
-		'Montreal',
-		'general',
-		'http://localhost:3001/backend/condo_pictures/c.jpeg, http://localhost:3001/backend/condo_pictures/building.jpeg',
-		3
-	),
-	(
-		'General Condo Ad #2',
-		'condo',
-		'The illusion which exalts us is dearer to us than ten thousand truths.',
-		4500,
-		'Montreal',
-		'general',
-		'http://localhost:3001/backend/condo_pictures/d.jpeg, http://localhost:3001/backend/condo_pictures/building.jpeg',
-		4
-	),
-	(
 		'Classified Condo Ad #1',
 		'condo',
 		'The illusion which exalts us is dearer to us than ten thousand truths.',
 		4500,
 		'Montreal',
-		'Condo Owners Association of Concordia',
+		'1',
 		'http://localhost:3001/backend/condo_pictures/e.jpeg, http://localhost:3001/backend/condo_pictures/building.jpeg',
-		1
+		3
 	),
 	(
 		'Classified Condo Ad #2',
@@ -288,9 +268,9 @@ VALUES
 		'The illusion which exalts us is dearer to us than ten thousand truths.',
 		4500,
 		'Montreal',
-		'Condo Owners Association of Concordia',
+		'1',
 		'http://localhost:3001/backend/condo_pictures/f.jpeg, http://localhost:3001/backend/condo_pictures/building.jpeg',
-		2
+		4
 	),
 	(
 		'Public Item Sale Ad #1',
@@ -313,34 +293,14 @@ VALUES
 		2
 	),
 	(
-		'General Item Sale Ad #1',
-		'item_sale',
-		'The illusion which exalts us is dearer to us than ten thousand truths.',
-		4500,
-		'Montreal',
-		'general',
-		'http://localhost:3001/backend/condo_pictures/a.jpeg, /path/to/other/picture',
-		3
-	),
-	(
-		'General Item Sale Ad #2',
-		'item_sale',
-		'The illusion which exalts us is dearer to us than ten thousand truths.',
-		4500,
-		'Montreal',
-		'general',
-		'http://localhost:3001/backend/condo_pictures/a.jpeg, /path/to/other/picture',
-		4
-	),
-	(
 		'Classified Item Sale Ad #1',
 		'item_sale',
 		'The illusion which exalts us is dearer to us than ten thousand truths.',
 		4500,
 		'Montreal',
-		'Condo Owners Association of Concordia',
+		'1',
 		'http://localhost:3001/backend/condo_pictures/a.jpeg, /path/to/other/picture',
-		1
+		3
 	),
 	(
 		'Classified Item Sale Ad #2',
@@ -348,9 +308,9 @@ VALUES
 		'The illusion which exalts us is dearer to us than ten thousand truths.',
 		4500,
 		'Montreal',
-		'Condo Owners Association of Concordia',
+		'1',
 		'http://localhost:3001/backend/condo_pictures/a.jpeg, /path/to/other/picture',
-		2
+		4
 	),
 	(
 		'Public Service Ad #1',
@@ -373,34 +333,14 @@ VALUES
 		2
 	),
 	(
-		'General Service Ad #1',
-		'service',
-		'The illusion which exalts us is dearer to us than ten thousand truths.',
-		4500,
-		'Montreal',
-		'general',
-		'http://localhost:3001/backend/condo_pictures/a.jpeg, /path/to/other/picture',
-		3
-	),
-	(
-		'General Service Ad #2',
-		'service',
-		'The illusion which exalts us is dearer to us than ten thousand truths.',
-		4500,
-		'Montreal',
-		'general',
-		'http://localhost:3001/backend/condo_pictures/a.jpeg, /path/to/other/picture',
-		4
-	),
-	(
 		'Classified Service Ad #1',
 		'service',
 		'The illusion which exalts us is dearer to us than ten thousand truths.',
 		4500,
 		'Montreal',
-		'Condo Owners Association of Concordia',
+		'1',
 		'http://localhost:3001/backend/condo_pictures/a.jpeg, /path/to/other/picture',
-		1
+		3
 	),
 	(
 		'Classified Service Ad #2',
@@ -408,9 +348,9 @@ VALUES
 		'The illusion which exalts us is dearer to us than ten thousand truths.',
 		4500,
 		'Montreal',
-		'Condo Owners Association of Concordia',
+		'1',
 		'http://localhost:3001/backend/condo_pictures/a.jpeg, /path/to/other/picture',
-		2
+		4
 	);
 
 INSERT INTO
