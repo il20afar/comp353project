@@ -18,6 +18,7 @@ CREATE TABLE users (
 	email VARCHAR(100) NOT NULL,
 	phone_number BIGINT NOT NULL,
 	profile_picture VARCHAR(1000) NOT NULL,
+	asso_id INT,
 	PRIMARY KEY (user_id)
 );
 
@@ -26,23 +27,27 @@ CREATE TABLE associations (
 	asso_name VARCHAR(50) NOT NULL UNIQUE,
 	asso_desc VARCHAR(1000) NOT NULL,
 	admin_id INT NOT NULL,
-	PRIMARY KEY(asso_id),
-	FOREIGN KEY(admin_id) REFERENCES users(user_id)
+	PRIMARY KEY (asso_id),
+	FOREIGN KEY (admin_id) REFERENCES users(user_id)
 );
+
+ALTER TABLE
+	users
+ADD
+	FOREIGN KEY (asso_id) REFERENCES associations(asso_id);
 
 CREATE TABLE condos (
 	condo_id INT NOT NULL AUTO_INCREMENT,
 	price INT NOT NULL,
 	area INT NOT NULL,
+	condo_number VARCHAR(50) NOT NULL,
 	street VARCHAR(50) NOT NULL,
 	city VARCHAR(50) NOT NULL,
 	province VARCHAR(50) NOT NULL,
 	country VARCHAR(50) NOT NULL,
 	features VARCHAR(1000) NOT NULL,
-	asso_id INT,
-	PRIMARY KEY(condo_id),
-	FOREIGN KEY(asso_id) REFERENCES associations(asso_id),
-	UNIQUE(street, city, province, country)
+	PRIMARY KEY (condo_id),
+	UNIQUE (street, city, province, country)
 );
 
 CREATE TABLE ads (
@@ -169,37 +174,42 @@ VALUES
 		1
 	);
 
+UPDATE
+	users
+SET
+	asso_id = 1;
+
 INSERT INTO
 	condos (
 		price,
 		area,
+		condo_number,
 		street,
 		city,
 		province,
 		country,
-		features,
-		asso_id
+		features
 	)
 VALUES
 	(
-		500000,
+		8500000,
 		3000,
-		'15 Some Street',
+		'PH1230',
+		'1280 Sherbrooke Street West',
 		'Montreal',
 		'Quebec',
 		'Canada',
-		'Gas fireplace, AC system',
-		1
+		'All kitchen appliances, washer-dryer, all motorized blinds, all garage remotes, all curtains and rods, custom-built shelves in the upper level den, retractable exterior awnings, staircase chandelier, living room fireplace mantel, home automation system "Creston".'
 	),
 	(
-		700000,
-		3500,
-		'20 Some Street',
+		6900000,
+		2700,
+		'4801',
+		'1050 Drummond Street',
 		'Montreal',
 		'Quebec',
 		'Canada',
-		'Granite kitchen countertop, Close to subway',
-		1
+		'All the kitchen applainces (Wolf & Sub-Zero & Monogram), Washer/Dryer (Maytag), All the motorized blinds, All the built-in speakers, All the built-in''s, All the Lutron lighting control system.'
 	);
 
 INSERT INTO
