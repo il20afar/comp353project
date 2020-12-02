@@ -1,5 +1,6 @@
 import React from "react";
 import { useState, useRef } from "react";
+import { data } from "../../imports";
 import Textbox from "./Textbox";
 import Message from "./Message";
 import { v4 as uuid } from "uuid";
@@ -7,37 +8,44 @@ import { v4 as uuid } from "uuid";
 import "./Chatbox.scss";
 
 const Chatbox = (props) => {
-  const { user, replies = [], searchTerm = "" } = props;
-  const intervalId = useRef(0);
+  const {
+    user,
+    replies = [],
+    updateView,
+    currentThread,
+    searchTerm = "",
+  } = props;
 
-  const sendMessage = async (message, username = user.current.name) => {
-    // const response = await sendData({ username: username, message: message });
-    // if (response !== "message_accepted") {
-    //   alert("Your message couldn't be sent!");
-    // }
-    // const newreplies = [
-    //   ...replies,
-    // ];
-    // setreplies(newreplies);
+  const sendMessage = async (message) => {
+    const newReply = {
+      content: message,
+      author_id: user.current.user_id,
+      thread_id: currentThread.thread_id,
+    };
+    const response = await data.send("replies", "create", newReply);
+    if (response !== 1) {
+      alert("Your message couldn't be sent!");
+    }
+    updateView();
   };
 
-  // React.useEffect(() => {
-  //   setreplies([
-  //     createMessage("10-10-10", "13:44", "afar", "My name is afar.", "self"),
-  //   ]);
-  // }, []);
+  const ref = React.useRef(null);
+
+  React.useEffect(() => {
+    ref.current.scrollTo(0, ref.current.getBoundingClientRect().height);
+  }, []);
 
   return (
     <div className="chatbox">
       <div className="messagebox-container">
-        <div className="messagebox">
+        <div ref={ref} className="messagebox">
           {replies.map((elem) => (
             <Message
-              type="others"
+              type={elem.author_id === user.current.user_id ? "self" : "others"}
               content={elem.content}
               date={elem.creation_time}
               time=""
-              username={elem.author_id}
+              username={elem.creator_username}
               searchTerm={searchTerm}
             />
           ))}
@@ -48,7 +56,7 @@ const Chatbox = (props) => {
           type="textarea"
           placeholder="Send a message!"
           buttonContent="Send"
-          onClick={(e) => sendMessage(e, user.current.username)}
+          onClick={(e) => sendMessage(e)}
         />
       </div>
     </div>

@@ -77,7 +77,7 @@ const ThreadMenu = (props) => {
           numberMessages={elem.number_of_replies}
           modifiedOn={elem.last_update_time}
           createdBy={elem.creator_username}
-          onClick={() => setView(elem.title)}
+          onClick={() => setView(elem)}
           gridTemplateColumns={`minmax(300px, ${max}px) minmax(0px, 300px) minmax(0px,300px) minmax(60px, 80px)`}
         />
       ))}
@@ -86,9 +86,11 @@ const ThreadMenu = (props) => {
 };
 
 const ThreadView = (props) => {
-  const { user, messages, view, setView } = props;
+  const { user, messages, view, setView, setReplies } = props;
   const [visibleReplies, setVisibleReplies] = React.useState(messages);
   const searchRef = React.useRef("");
+
+  console.log(view, messages);
 
   const onChangeSearchHandler = (e) => {
     const val = e.target.value;
@@ -101,10 +103,18 @@ const ThreadView = (props) => {
     );
   };
 
+  const updateView = async () => {
+    const res = await data.send("replies", "get");
+    setReplies(res.replies);
+    setVisibleReplies(
+      res.replies.filter((elem) => elem.thread_id === view.thread_id)
+    );
+  };
+
   return (
     <div className="thread-view">
       <div className="thread-name-container">
-        <div className="thread-name-text">{view}</div>
+        <div className="thread-name-text">{view.title}</div>
       </div>
       <div className="threads-header-container">
         <div className="menu-toggle-container" onClick={(e) => setView("menu")}>
@@ -121,7 +131,9 @@ const ThreadView = (props) => {
       <div className="chatbox-container">
         <Chatbox
           user={user}
+          currentThread={view}
           replies={visibleReplies}
+          updateView={updateView}
           searchTerm={searchRef.current}
         />
       </div>
@@ -164,7 +176,7 @@ const ThreadCreate = (props) => {
             (elem) =>
               elem.title === ref.current.value &&
               elem.creator_id === user.current.user_id
-          ).title
+          )
         );
       }}
     >
@@ -197,7 +209,7 @@ const getRepliesByThread = (view, visibleThreads, replies) => {
   const filtered = replies.filter(
     (elem) =>
       elem.thread_id ===
-      visibleThreads.find((elem) => elem.title === view)?.thread_id
+      visibleThreads.find((elem) => elem.title === view.title)?.thread_id
   );
   console.log(filtered);
   return filtered;
@@ -254,7 +266,6 @@ const Threads = (props) => {
       setVisibleThreads(serverThreads.current);
 
       const res = await data.send("replies", "get");
-
       setReplies(res.replies);
     })();
   }, [view]);
@@ -265,7 +276,7 @@ const Threads = (props) => {
     <D cn="threads-page">
       {view === "create" && <ThreadCreate user={user} setView={setView} />}
       {view === "menu" && (
-        <Header key={uuid()} height="08px" actions={actions.current} />
+        <Header key={uuid()} height="80px" actions={actions.current} />
       )}
       {view === "menu" || view === "create" ? (
         <ThreadMenu
@@ -276,8 +287,10 @@ const Threads = (props) => {
         />
       ) : (
         <ThreadView
+          user={user}
           view={view}
           setView={setView}
+          setReplies={setReplies}
           messages={getRepliesByThread(view, visibleThreads, replies)}
         />
       )}

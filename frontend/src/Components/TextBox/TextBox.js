@@ -61,6 +61,7 @@ const Textbox = React.forwardRef((props, ref) => {
         rest = {
           ref: ref,
           className: "text-input",
+          placeholder: placeholder,
           onChange: onChangeHandler,
           onKeyPress: onKeyPress,
         }
