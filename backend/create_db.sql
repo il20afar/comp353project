@@ -18,6 +18,7 @@ CREATE TABLE users (
 	email VARCHAR(100) NOT NULL,
 	phone_number BIGINT NOT NULL,
 	profile_picture VARCHAR(1000) NOT NULL,
+	asso_id INT,
 	PRIMARY KEY (user_id)
 );
 
@@ -26,23 +27,27 @@ CREATE TABLE associations (
 	asso_name VARCHAR(50) NOT NULL UNIQUE,
 	asso_desc VARCHAR(1000) NOT NULL,
 	admin_id INT NOT NULL,
-	PRIMARY KEY(asso_id),
-	FOREIGN KEY(admin_id) REFERENCES users(user_id)
+	PRIMARY KEY (asso_id),
+	FOREIGN KEY (admin_id) REFERENCES users(user_id)
 );
+
+ALTER TABLE
+	users
+ADD
+	FOREIGN KEY (asso_id) REFERENCES associations(asso_id);
 
 CREATE TABLE condos (
 	condo_id INT NOT NULL AUTO_INCREMENT,
 	price INT NOT NULL,
 	area INT NOT NULL,
+	condo_number VARCHAR(50) NOT NULL,
 	street VARCHAR(50) NOT NULL,
 	city VARCHAR(50) NOT NULL,
 	province VARCHAR(50) NOT NULL,
 	country VARCHAR(50) NOT NULL,
 	features VARCHAR(1000) NOT NULL,
-	asso_id INT,
-	PRIMARY KEY(condo_id),
-	FOREIGN KEY(asso_id) REFERENCES associations(asso_id),
-	UNIQUE(street, city, province, country)
+	PRIMARY KEY (condo_id),
+	UNIQUE (street, city, province, country)
 );
 
 CREATE TABLE ads (
@@ -71,8 +76,8 @@ CREATE TABLE owns (
 CREATE TABLE threads (
 	thread_id INT NOT NULL AUTO_INCREMENT,
 	title VARCHAR(50) NOT NULL UNIQUE,
-	creation_time DATETIME NOT NULL,
-	last_update_time DATETIME NOT NULL,
+	creation_time DATETIME NOT NULL DEFAULT NOW(),
+	last_update_time DATETIME NOT NULL DEFAULT NOW(),
 	number_of_replies INT NOT NULL DEFAULT 0,
 	creator_username VARCHAR(50) NOT NULL,
 	creator_id INT NOT NULL,
@@ -83,7 +88,7 @@ CREATE TABLE threads (
 CREATE TABLE replies (
 	reply_id INT NOT NULL AUTO_INCREMENT,
 	content VARCHAR(500) NOT NULL,
-	creation_time DATETIME NOT NULL,
+	creation_time DATETIME NOT NULL DEFAULT NOW(),
 	author_id INT NOT NULL,
 	thread_id INT NOT NULL,
 	PRIMARY KEY (reply_id),
@@ -169,37 +174,42 @@ VALUES
 		1
 	);
 
+UPDATE
+	users
+SET
+	asso_id = 1;
+
 INSERT INTO
 	condos (
 		price,
 		area,
+		condo_number,
 		street,
 		city,
 		province,
 		country,
-		features,
-		asso_id
+		features
 	)
 VALUES
 	(
-		500000,
+		8500000,
 		3000,
-		'15 Some Street',
+		'PH1230',
+		'1280 Sherbrooke Street West',
 		'Montreal',
 		'Quebec',
 		'Canada',
-		'Gas fireplace, AC system',
-		1
+		'All kitchen appliances, washer-dryer, all motorized blinds, all garage remotes, all curtains and rods, custom-built shelves in the upper level den, retractable exterior awnings, staircase chandelier, living room fireplace mantel, home automation system "Creston".'
 	),
 	(
-		700000,
-		3500,
-		'20 Some Street',
+		6900000,
+		2700,
+		'4801',
+		'1050 Drummond Street',
 		'Montreal',
 		'Quebec',
 		'Canada',
-		'Granite kitchen countertop, Close to subway',
-		1
+		'All the kitchen appliances (Wolf & Sub-Zero & Monogram), Washer/Dryer (Maytag), All the motorized blinds, All the built-in speakers, All the built-in''s, All the Lutron lighting control system.'
 	);
 
 INSERT INTO
@@ -243,34 +253,14 @@ VALUES
 		2
 	),
 	(
-		'General Condo Ad #1',
-		'condo',
-		'The illusion which exalts us is dearer to us than ten thousand truths.',
-		4500,
-		'Montreal',
-		'general',
-		'http://localhost:3001/backend/condo_pictures/c.jpeg, http://localhost:3001/backend/condo_pictures/building.jpeg',
-		3
-	),
-	(
-		'General Condo Ad #2',
-		'condo',
-		'The illusion which exalts us is dearer to us than ten thousand truths.',
-		4500,
-		'Montreal',
-		'general',
-		'http://localhost:3001/backend/condo_pictures/d.jpeg, http://localhost:3001/backend/condo_pictures/building.jpeg',
-		4
-	),
-	(
 		'Classified Condo Ad #1',
 		'condo',
 		'The illusion which exalts us is dearer to us than ten thousand truths.',
 		4500,
 		'Montreal',
-		'Condo Owners Association of Concordia',
+		'1',
 		'http://localhost:3001/backend/condo_pictures/e.jpeg, http://localhost:3001/backend/condo_pictures/building.jpeg',
-		1
+		3
 	),
 	(
 		'Classified Condo Ad #2',
@@ -278,9 +268,9 @@ VALUES
 		'The illusion which exalts us is dearer to us than ten thousand truths.',
 		4500,
 		'Montreal',
-		'Condo Owners Association of Concordia',
+		'1',
 		'http://localhost:3001/backend/condo_pictures/f.jpeg, http://localhost:3001/backend/condo_pictures/building.jpeg',
-		2
+		4
 	),
 	(
 		'Public Item Sale Ad #1',
@@ -303,34 +293,14 @@ VALUES
 		2
 	),
 	(
-		'General Item Sale Ad #1',
-		'item_sale',
-		'The illusion which exalts us is dearer to us than ten thousand truths.',
-		4500,
-		'Montreal',
-		'general',
-		'http://localhost:3001/backend/condo_pictures/a.jpeg, /path/to/other/picture',
-		3
-	),
-	(
-		'General Item Sale Ad #2',
-		'item_sale',
-		'The illusion which exalts us is dearer to us than ten thousand truths.',
-		4500,
-		'Montreal',
-		'general',
-		'http://localhost:3001/backend/condo_pictures/a.jpeg, /path/to/other/picture',
-		4
-	),
-	(
 		'Classified Item Sale Ad #1',
 		'item_sale',
 		'The illusion which exalts us is dearer to us than ten thousand truths.',
 		4500,
 		'Montreal',
-		'Condo Owners Association of Concordia',
+		'1',
 		'http://localhost:3001/backend/condo_pictures/a.jpeg, /path/to/other/picture',
-		1
+		3
 	),
 	(
 		'Classified Item Sale Ad #2',
@@ -338,9 +308,9 @@ VALUES
 		'The illusion which exalts us is dearer to us than ten thousand truths.',
 		4500,
 		'Montreal',
-		'Condo Owners Association of Concordia',
+		'1',
 		'http://localhost:3001/backend/condo_pictures/a.jpeg, /path/to/other/picture',
-		2
+		4
 	),
 	(
 		'Public Service Ad #1',
@@ -363,34 +333,14 @@ VALUES
 		2
 	),
 	(
-		'General Service Ad #1',
-		'service',
-		'The illusion which exalts us is dearer to us than ten thousand truths.',
-		4500,
-		'Montreal',
-		'general',
-		'http://localhost:3001/backend/condo_pictures/a.jpeg, /path/to/other/picture',
-		3
-	),
-	(
-		'General Service Ad #2',
-		'service',
-		'The illusion which exalts us is dearer to us than ten thousand truths.',
-		4500,
-		'Montreal',
-		'general',
-		'http://localhost:3001/backend/condo_pictures/a.jpeg, /path/to/other/picture',
-		4
-	),
-	(
 		'Classified Service Ad #1',
 		'service',
 		'The illusion which exalts us is dearer to us than ten thousand truths.',
 		4500,
 		'Montreal',
-		'Condo Owners Association of Concordia',
+		'1',
 		'http://localhost:3001/backend/condo_pictures/a.jpeg, /path/to/other/picture',
-		1
+		3
 	),
 	(
 		'Classified Service Ad #2',
@@ -398,67 +348,40 @@ VALUES
 		'The illusion which exalts us is dearer to us than ten thousand truths.',
 		4500,
 		'Montreal',
-		'Condo Owners Association of Concordia',
+		'1',
 		'http://localhost:3001/backend/condo_pictures/a.jpeg, /path/to/other/picture',
-		2
+		4
 	);
 
 INSERT INTO
-	threads (
-		title,
-		creation_time,
-		last_update_time,
-		creator_username,
-		creator_id
-	)
+	threads (title, creator_username, creator_id)
 VALUES
 	(
 		'Suggestions for a Montreal Newcomer?',
-		NOW(),
-		NOW(),
 		'mpob',
 		4
 	),
-	(
-		'Nice Area for Students',
-		NOW(),
-		NOW(),
-		'afar',
-		1
-	);
+	('Nice Area for Students', 'afar', 1);
 
 INSERT INTO
-	replies (
-		content,
-		creation_time,
-		author_id,
-		thread_id
-	)
+	replies (content, author_id, thread_id)
 VALUES
 	(
 		'What exactly are you looking for?',
-		NOW(),
 		2,
 		1
 	),
 	(
 		'Please elaborate and we''ll gladly help!',
-		NOW(),
 		3,
 		1
 	),
 	(
 		'I would suggest either Cote-des-Neiges or anywhere near Concordia University.',
-		NOW(),
 		4,
 		2
 	),
-	(
-		'What''s your budget?',
-		NOW(),
-		3,
-		2
-	);
+	('What''s your budget?', 3, 2);
 
 /* Byproduct of creating replies */
 UPDATE
