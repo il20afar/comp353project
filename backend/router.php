@@ -32,8 +32,7 @@ class router
         header('Access-Control-Allow-Headers: Content-Type');
 
         // Retrieve destructured parameters
-        // $json = file_get_contents('php://input');
-        $json = '{"table":"polls","action":"create","question":"Is this an interesting question?","asso_id":1,"answers":["Yes", "No"]}';
+        $json = file_get_contents('php://input');
         $obj = json_decode($json, true);
         $table = $obj['table'];
         $action = $obj['action'];

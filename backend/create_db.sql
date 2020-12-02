@@ -116,6 +116,14 @@ CREATE TABLE answers (
 	UNIQUE (answer_id, content)
 );
 
+CREATE TABLE voted_in (
+	user_id INT NOT NULL,
+	poll_id INT NOT NULL,
+	PRIMARY KEY (user_id, poll_id),
+	FOREIGN KEY (user_id) REFERENCES users(user_id),
+	FOREIGN KEY (poll_id) REFERENCES polls(poll_id)
+);
+
 /* Inserting data */
 INSERT INTO
 	users (
@@ -431,3 +439,63 @@ VALUES
 	('Yes', 2),
 	('No', 2),
 	('Mixed feelings', 2);
+
+UPDATE
+	polls
+SET
+	number_of_votes = 4
+WHERE
+	poll_id = 1;
+
+UPDATE
+	polls
+SET
+	number_of_votes = 3
+WHERE
+	poll_id = 2;
+
+UPDATE
+	answers
+SET
+	number_of_votes = 2
+WHERE
+	answer_id = 1;
+
+UPDATE
+	answers
+SET
+	number_of_votes = 2
+WHERE
+	answer_id = 2;
+
+UPDATE
+	answers
+SET
+	number_of_votes = 2
+WHERE
+	answer_id = 3;
+
+UPDATE
+	answers
+SET
+	number_of_votes = 1
+WHERE
+	answer_id = 4;
+
+UPDATE
+	answers
+SET
+	number_of_votes = 0
+WHERE
+	answer_id = 5;
+
+INSERT INTO
+	voted_in (user_id, poll_id)
+VALUES
+	(1, 1),
+	(2, 1),
+	(3, 1),
+	(4, 1),
+	(1, 2),
+	(2, 2),
+	(3, 2);
