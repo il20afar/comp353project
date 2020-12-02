@@ -96,6 +96,25 @@ CREATE TABLE replies (
 	FOREIGN KEY (thread_id) REFERENCES threads(thread_id)
 );
 
+CREATE TABLE polls (
+	poll_id INT NOT NULL AUTO_INCREMENT,
+	question VARCHAR(200) NOT NULL UNIQUE,
+	number_of_votes INT NOT NULL DEFAULT 0,
+	asso_id INT NOT NULL,
+	PRIMARY KEY (poll_id),
+	FOREIGN KEY (asso_id) REFERENCES associations(asso_id)
+);
+
+CREATE TABLE answers (
+	answer_id INT NOT NULL AUTO_INCREMENT,
+	content VARCHAR(200) NOT NULL,
+	number_of_votes INT NOT NULL DEFAULT 0,
+	poll_id INT NOT NULL,
+	PRIMARY KEY (answer_id),
+	FOREIGN KEY (poll_id) REFERENCES polls(poll_id),
+	UNIQUE (answer_id, content)
+);
+
 /* Inserting data */
 INSERT INTO
 	users (
@@ -393,3 +412,21 @@ UPDATE
 	threads
 SET
 	last_update_time = NOW();
+
+INSERT INTO
+	polls (question, asso_id)
+VALUES
+	('When should we hold the next elections?', 1),
+	(
+		'Are you satisfied with the way our association is currently managed?',
+		'1'
+	);
+
+INSERT INTO
+	answers (content, poll_id)
+VALUES
+	('Next month', 1),
+	('In march', 1),
+	('Yes', 2),
+	('No', 2),
+	('Mixed feelings', 2);
