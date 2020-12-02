@@ -30,6 +30,26 @@ class request
         else return mysqli_affected_rows($this->conn);
     }
 
+    public function gquery(string $query, bool $returnRows)
+    {
+        if (!$this->conn) {
+            die('Connection failed: ' . mysqli_connect_error());
+        }
+        $res = mysqli_query($this->conn, $query);
+        $rows = array();
+        if($returnRows){
+            if (mysqli_num_rows($res) > 0) {
+                while($r = mysqli_fetch_assoc($res)) {
+                    $rows[] = $r;
+                }
+                return $rows;
+            } else {
+                return "Empty set.";
+            }
+        }
+        else return mysqli_affected_rows($this->conn);
+    }
+
     public function select(string $from, array $fields)
     {
         if (empty($fields)) {

@@ -4,6 +4,7 @@ include 'ads.php';
 include 'session.php';
 include 'threads.php';
 include 'replies.php';
+include 'polls.php';
 
 class router
 {
@@ -12,6 +13,7 @@ class router
     private object $session;
     private object $threads;
     private object $replies;
+    private object $polls;
 
     public function __construct(object $conn)
     {
@@ -20,6 +22,7 @@ class router
         $this->session = new session($conn);
         $this->threads = new threads($conn);
         $this->replies = new replies($conn);
+        $this->polls = new polls($conn);
     }
 
     public function route()

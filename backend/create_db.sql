@@ -96,6 +96,34 @@ CREATE TABLE replies (
 	FOREIGN KEY (thread_id) REFERENCES threads(thread_id)
 );
 
+CREATE TABLE polls (
+	poll_id INT NOT NULL AUTO_INCREMENT,
+	question VARCHAR(200) NOT NULL UNIQUE,
+	number_of_votes INT NOT NULL DEFAULT 0,
+	poll_status VARCHAR(50) NOT NULL DEFAULT "open",
+	asso_id INT NOT NULL,
+	PRIMARY KEY (poll_id),
+	FOREIGN KEY (asso_id) REFERENCES associations(asso_id)
+);
+
+CREATE TABLE answers (
+	answer_id INT NOT NULL AUTO_INCREMENT,
+	content VARCHAR(200) NOT NULL,
+	number_of_votes INT NOT NULL DEFAULT 0,
+	poll_id INT NOT NULL,
+	PRIMARY KEY (answer_id),
+	FOREIGN KEY (poll_id) REFERENCES polls(poll_id),
+	UNIQUE (answer_id, content)
+);
+
+CREATE TABLE voted_in (
+	user_id INT NOT NULL,
+	poll_id INT NOT NULL,
+	PRIMARY KEY (user_id, poll_id),
+	FOREIGN KEY (user_id) REFERENCES users(user_id),
+	FOREIGN KEY (poll_id) REFERENCES polls(poll_id)
+);
+
 /* Inserting data */
 INSERT INTO
 	users (
@@ -393,3 +421,81 @@ UPDATE
 	threads
 SET
 	last_update_time = NOW();
+
+INSERT INTO
+	polls (question, asso_id)
+VALUES
+	('When should we hold the next elections?', 1),
+	(
+		'Are you satisfied with the way our association is currently managed?',
+		'1'
+	);
+
+INSERT INTO
+	answers (content, poll_id)
+VALUES
+	('Next month', 1),
+	('In march', 1),
+	('Yes', 2),
+	('No', 2),
+	('Mixed feelings', 2);
+
+UPDATE
+	polls
+SET
+	number_of_votes = 4
+WHERE
+	poll_id = 1;
+
+UPDATE
+	polls
+SET
+	number_of_votes = 3
+WHERE
+	poll_id = 2;
+
+UPDATE
+	answers
+SET
+	number_of_votes = 2
+WHERE
+	answer_id = 1;
+
+UPDATE
+	answers
+SET
+	number_of_votes = 2
+WHERE
+	answer_id = 2;
+
+UPDATE
+	answers
+SET
+	number_of_votes = 2
+WHERE
+	answer_id = 3;
+
+UPDATE
+	answers
+SET
+	number_of_votes = 1
+WHERE
+	answer_id = 4;
+
+UPDATE
+	answers
+SET
+	number_of_votes = 0
+WHERE
+	answer_id = 5;
+
+INSERT INTO
+	voted_in (user_id, poll_id)
+VALUES
+	(1, 1),
+	(2, 1),
+	(3, 1),
+	(4, 1),
+	(1, 2),
+	(2, 2),
+	(3, 2);
