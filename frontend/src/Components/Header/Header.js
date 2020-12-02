@@ -6,6 +6,7 @@ import "../../Styles/Utils.scss";
 
 const Header = (props) => {
   const {
+    keyName = "",
     title = null,
     showSidebar,
     actions = [],
@@ -13,6 +14,7 @@ const Header = (props) => {
     ...rest
   } = props;
 
+  console.log(actions[0].props.key);
   return (
     <div
       style={{ height }}
@@ -21,8 +23,11 @@ const Header = (props) => {
     >
       {title && <div className="title-container">{title}</div>}{" "}
       <div className="actions-container">
-        {actions.map((elem) => (
-          <div key={uuid()} className="action-wrapper">
+        {actions.map((elem, index) => (
+          <div
+            key={keyName ? `${keyName}${index}` : uuid()}
+            className="action-wrapper"
+          >
             {elem}
           </div>
         ))}

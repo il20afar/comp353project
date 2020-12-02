@@ -198,6 +198,7 @@ $transition: all 0.15s ease-in;
     }
     .user-mod-container {
       opacity: 0;
+      display: none;
       pointer-events: none;
     }
     .menus {

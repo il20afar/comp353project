@@ -214,14 +214,15 @@ const Threads = (props) => {
   const serverThreads = React.useRef(null);
 
   const onSearchThreadChange = (e) => {
-    const val = e.target.value;
+    const val = e ? e.target.value : "";
     searchTerm.current = val;
     const filtered = visibleThreads.filter((elem) => elem.title.includes(val));
     setVisibleThreads(val === "" ? serverThreads.current : filtered);
   };
 
-  const actions = React.useRef([
+  const actions = [
     <Button
+      key="button"
       content={{ show: "all", hide: "√" }}
       style={{
         show: { width: "200px", textTransform: "capitalize" },
@@ -241,11 +242,12 @@ const Threads = (props) => {
     />,
     <SearchBar
       key={"searchbar"}
+      initialValue={""}
       placeholder={"Search threads..."}
       onChange={onSearchThreadChange}
       style={{ height: "46px" }}
     />,
-  ]);
+  ];
 
   React.useEffect(() => {
     (async () => {
@@ -265,7 +267,7 @@ const Threads = (props) => {
     <D cn="threads-page">
       {view === "create" && <ThreadCreate user={user} setView={setView} />}
       {view === "menu" && (
-        <Header key={uuid()} height="08px" actions={actions.current} />
+        <Header keyName="threads-header" height="80px" actions={actions} />
       )}
       {view === "menu" || view === "create" ? (
         <ThreadMenu
@@ -276,6 +278,7 @@ const Threads = (props) => {
         />
       ) : (
         <ThreadView
+          user={user}
           view={view}
           setView={setView}
           messages={getRepliesByThread(view, visibleThreads, replies)}

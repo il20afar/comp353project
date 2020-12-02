@@ -36,7 +36,7 @@ const Sidebar = (props) => {
   const {
     currentPage,
     setCurrentPage,
-    show,
+    sidebarRef,
     handleSidebarToggle,
     showUserMod,
     setShowUserMod,
@@ -66,40 +66,38 @@ const Sidebar = (props) => {
     };
   }, []);
 
+  const [hamburgerShow, setHamburgerShow] = React.useState(null);
+
   return (
-    <D cn={`sidebar ${show ? "open" : "closed"}`}>
+    <D ref={sidebarRef} cn={`sidebar closed`}>
       <D cn="hamburger-container">
         <Hamburger
           className="hamburger"
-          toggled={show}
-          toggle={() => handleSidebarToggle()}
+          toggled={false}
+          toggle={() => {
+            console.log("hekjh");
+            handleSidebarToggle();
+          }}
           color="white"
         />
       </D>
-      {show && (
-        <>
-          <D
-            cn="user-mod-container"
-            onClick={() => setShowUserMod(!showUserMod)}
-          >
-            <D cn="username-wrapper">{user.current.username}</D>
-            <D cn="user-wrapper">
-              <UserIcon />
-            </D>
-          </D>
-          <D cn="menus-wrapper">
-            <D cn="menus">
-              {Object.entries(menus).map(([title, sections]) => (
-                <Menu
-                  key={uuid()}
-                  onSelect={onSelect}
-                  {...{ currentPage, title, sections }}
-                />
-              ))}
-            </D>
-          </D>
-        </>
-      )}
+      <D cn="user-mod-container" onClick={() => setShowUserMod(!showUserMod)}>
+        <D cn="username-wrapper">{user.current.username}</D>
+        <D cn="user-wrapper">
+          <UserIcon />
+        </D>
+      </D>
+      <D cn="menus-wrapper">
+        <D cn="menus">
+          {Object.entries(menus).map(([title, sections]) => (
+            <Menu
+              key={uuid()}
+              onSelect={onSelect}
+              {...{ currentPage, title, sections }}
+            />
+          ))}
+        </D>
+      </D>
     </D>
   );
 };

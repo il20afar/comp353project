@@ -175,7 +175,7 @@ const Ads = (props) => {
   return (
     <div className="ads">
       {type === "page" && view === "general" && (
-        <Header height="40px" actions={actions} />
+        <Header height="80px" actions={actions} />
       )}
       {view === "general" ? (
         <AdGeneralContainer

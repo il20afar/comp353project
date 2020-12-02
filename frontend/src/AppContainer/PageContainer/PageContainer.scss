@@ -24,6 +24,12 @@
       transition: 0.25s;
       width: calc(100% - 320px);
     }
+    &:not(.showSidebar) {
+      + .header {
+        transition: 0.25s;
+        width: 0 !important;
+      }
+    }
   }
 
   > .username {
