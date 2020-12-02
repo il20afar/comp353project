@@ -1,8 +1,8 @@
 @import "../../Styles/Utils.scss";
 
 .threads-page {
-  @include fullsize();
-  // position: relative;
+  width: 100%;
+  height: calc(100% - 80px); // position: relative;
 
   .thread-view {
     @include fullsize();
@@ -127,11 +127,18 @@
 
           font-size: 20px;
           color: whitesmoke;
-          &.name,
+          &.name {
+            width: 100%;
+
+            grid-row: 1 / span 1;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+          }
           &.numbermsg,
           &.modified-on,
           &.created-by {
             width: 100%;
+            display: flex;
             @include flex(row, space-between);
             grid-row: 1 / span 1;
             text-overflow: ellipsis;
