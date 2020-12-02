@@ -54,12 +54,20 @@ const PageContainer = (props) => {
     name: "Ads",
     elem: pages.Ads(),
   });
-  const [showSidebar, setShowSidebar] = React.useState(false);
+  const pageRef = React.useRef(null);
+  const sidebarRef = React.useRef(null);
 
   const [showUserMod, setShowUserMod] = React.useState(false);
 
   const handleSidebarToggle = () => {
-    setShowSidebar(!showSidebar);
+    console.log("hello");
+    pageRef.current.className = `page ${
+      !pageRef.current.classList.contains("showSidebar") ? "showSidebar" : ""
+    }`;
+    console.log(sidebarRef.current);
+    sidebarRef.current.className = `sidebar ${
+      sidebarRef.current.classList.contains("open") ? "closed" : "open"
+    }`;
   };
 
   const handleSidebarState = (name) => {
@@ -86,7 +94,7 @@ const PageContainer = (props) => {
       <MainContext.Provider value={defaultContext}>
         <D cn={`page-container`}>
           <Header title={currentPage.name} actions={actions} />
-          <D cn={`page${showSidebar ? " showSidebar" : ""}`}>
+          <D ref={pageRef} cn={`page`}>
             <Switch>
               {Object.values(menus)
                 .flat()
@@ -102,7 +110,7 @@ const PageContainer = (props) => {
           <Sidebar
             {...{
               currentPage: currentPage.name,
-              show: showSidebar,
+              sidebarRef: sidebarRef,
               setCurrentPage: handleSidebarState,
               handleSidebarToggle,
               showUserMod,
