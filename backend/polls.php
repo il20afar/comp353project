@@ -81,7 +81,7 @@ class polls extends request
             }
             unset($poll);
         }
-        echo json_encode($res);
+        return json_encode($res);
     }
 }
 ?>
