@@ -83,5 +83,43 @@ class polls extends request
         }
         return json_encode($res);
     }
+
+    public function vote($obj)
+    {
+        $user_id = $obj['user_id'];
+        $answer_id = $obj['answer_id'];
+        // Increment number_of_votes of answer
+        $update_answer_query = sprintf(
+            "UPDATE answers SET number_of_votes = number_of_votes + 1 WHERE answer_id=%s;",
+            $answer_id
+        );
+        $res = $this->gquery($update_answer_query, false);
+        if ($res != 1) {
+            return json_encode(-1);
+        }
+        // Increment number_of_votes of poll
+        $get_poll_id_query = sprintf(
+            "SELECT poll_id FROM answers WHERE answer_id=%s;",
+            $answer_id
+        );
+        $res = $this->gquery($get_poll_id_query, true);
+        $poll_id = $res[0]['poll_id'];
+        $update_poll_query = sprintf(
+            "UPDATE polls SET number_of_votes = number_of_votes + 1 WHERE poll_id=%s;",
+            $poll_id
+        );
+        $res = $this->gquery($update_poll_query, false);
+        if ($res != 1) {
+            return json_encode(-1);
+        }
+        // Add (user_id, poll_id) pair to voted_in
+        $insert_voted_in_query = sprintf(
+            "INSERT INTO voted_in (user_id, poll_id) VALUES (%s, %s);",
+            $user_id,
+            $poll_id
+        );
+        $res = $this->gquery($insert_voted_in_query, false);
+        return json_encode($res);
+    }
 }
 ?>
