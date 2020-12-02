@@ -100,6 +100,7 @@ CREATE TABLE polls (
 	poll_id INT NOT NULL AUTO_INCREMENT,
 	question VARCHAR(200) NOT NULL UNIQUE,
 	number_of_votes INT NOT NULL DEFAULT 0,
+	poll_status VARCHAR(50) NOT NULL DEFAULT "open",
 	asso_id INT NOT NULL,
 	PRIMARY KEY (poll_id),
 	FOREIGN KEY (asso_id) REFERENCES associations(asso_id)
