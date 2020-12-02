@@ -121,5 +121,16 @@ class polls extends request
         $res = $this->gquery($insert_voted_in_query, false);
         return json_encode($res);
     }
+
+    public function close($obj)
+    {
+        $poll_id = $obj['poll_id'];
+        $close_poll_query = sprintf(
+            "UPDATE polls SET poll_status='closed' WHERE poll_id=%s;",
+            $poll_id
+        );
+        $res = $this->query($close_poll_query, false);
+        return json_encode($res);
+    }
 }
 ?>
