@@ -66,16 +66,16 @@ const Sidebar = (props) => {
     };
   }, []);
 
-  const [hamburgerShow, setHamburgerShow] = React.useState(null);
+  const [hamburgerShow, setHamburgerShow] = React.useState(false);
 
   return (
     <D ref={sidebarRef} cn={`sidebar closed`}>
       <D cn="hamburger-container">
         <Hamburger
           className="hamburger"
-          toggled={false}
+          toggled={hamburgerShow}
           toggle={() => {
-            console.log("hekjh");
+            setHamburgerShow(!hamburgerShow);
             handleSidebarToggle();
           }}
           color="white"

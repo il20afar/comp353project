@@ -2,7 +2,14 @@
 
 .threads-page {
   width: 100%;
-  height: calc(100% - 80px); // position: relative;
+  height: calc(100%);
+
+  .header {
+    .actions-container {
+      width: 100%;
+      justify-content: space-between;
+    }
+  }
 
   .thread-view {
     @include fullsize();

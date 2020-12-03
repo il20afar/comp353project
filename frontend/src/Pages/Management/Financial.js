@@ -11,24 +11,16 @@ import { faHashtag } from "@fortawesome/free-solid-svg-icons";
 
 const ConMenu = (props) => {
   const { showCon, setShowCon } = props;
-  
+
   return (
     <div className="act-menu">
-  <Con title = "Special Contributors" 
-  onClick={setShowCon}
-  />
+      <Con title="Special Contributors" onClick={setShowCon} />
     </div>
   );
-}
-
+};
 
 const Con = (props) => {
-  const {
-    title,
-    nameOfContributor,
-    onClick,
-    gridTemplateColumns,
-  } = props;
+  const { title, nameOfContributor, onClick, gridTemplateColumns } = props;
   return (
     <div
       className="contri"
@@ -51,10 +43,7 @@ const ConView = (props) => {
         <div className="thread-name-text">{showCon}</div>
       </div>
       <div className="threads-header-container">
-        <div
-          className="menu-toggle-container"
-          onClick={(e) => setShowCon("")}
-        >
+        <div className="menu-toggle-container" onClick={(e) => setShowCon("")}>
           <div className="menu-toggle-icon">
             <FontAwesomeIcon icon={faHashtag} color="black" />
           </div>
@@ -75,22 +64,16 @@ const ConView = (props) => {
 
 const MaintMenu = (props) => {
   const { showMaint, setShowMaint } = props;
-  
+
   return (
     <div className="act-menu">
-  <Maint title = "Maintainence and Repairs" 
-  onClick={setShowMaint}
-  />
+      <Maint title="Maintainence and Repairs" onClick={setShowMaint} />
     </div>
   );
-}
+};
 
 const Maint = (props) => {
-  const {
-    title,
-    onClick,
-    gridTemplateColumns,
-  } = props;
+  const { title, onClick, gridTemplateColumns } = props;
   return (
     <div
       className="contri"
@@ -105,7 +88,14 @@ const Maint = (props) => {
 };
 
 const MaintView = (props) => {
-  const { rationales, dates, contractor, cost,showMaint ,setShowMaint } = props;
+  const {
+    rationales,
+    dates,
+    contractor,
+    cost,
+    showMaint,
+    setShowMaint,
+  } = props;
 
   return (
     <div className="con-view">
@@ -133,44 +123,45 @@ const MaintView = (props) => {
   );
 };
 
-
 const Financial = (props) => {
-  
   const {} = props;
   const [showCon, setShowCon] = React.useState("");
   const [showMaint, setShowMaint] = React.useState("");
-  console.log(showCon);
 
-    return (
-      <GlobalProvider>
-        <Header />
-        <div>
+  return (
+    <GlobalProvider>
+      <Header />
+      <div>
         {showCon === "" ? (
-        <ConMenu showCon={showCon} setShowCon={setShowCon} />
-      ) : (
-        <ConView nameOfContributor = "Antoine" showCon={showCon} setShowCon={setShowCon} />
-      )}
+          <ConMenu showCon={showCon} setShowCon={setShowCon} />
+        ) : (
+          <ConView
+            nameOfContributor="Antoine"
+            showCon={showCon}
+            setShowCon={setShowCon}
+          />
+        )}
 
-    {showMaint === "" ? (
-        <MaintMenu showMaint={showMaint} setShowMaint={setShowMaint} />
-      ) : (
-        <MaintView 
-        rationales = "Someone shit too much and block the whole dirty water pumping system of the bulding" 
-        dates = "4/6/1989"
-        contractor = "CCP Pumping Company"
-        cost = "198964 Cad"
-        showMaint={showMaint} setShowMaint={setShowMaint} />
-      )}
+        {showMaint === "" ? (
+          <MaintMenu showMaint={showMaint} setShowMaint={setShowMaint} />
+        ) : (
+          <MaintView
+            rationales="Someone shit too much and block the whole dirty water pumping system of the bulding"
+            dates="4/6/1989"
+            contractor="CCP Pumping Company"
+            cost="198964 Cad"
+            showMaint={showMaint}
+            setShowMaint={setShowMaint}
+          />
+        )}
 
-
-          <Balance />
-          <IncomeExpenses />
-          <TransactionList />
-          <AddTransaction />
-        </div>
-      </GlobalProvider>
-    );
-  }
-
+        <Balance />
+        <IncomeExpenses />
+        <TransactionList />
+        <AddTransaction />
+      </div>
+    </GlobalProvider>
+  );
+};
 
 export default Financial;

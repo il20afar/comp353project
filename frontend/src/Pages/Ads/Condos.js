@@ -1,21 +1,9 @@
 import React from "react";
 import { v4 as uuid } from "uuid";
-import { Header, Button, data } from "../../imports";
+import { Header, Button, data, MainContext, AdThumbnail } from "../../imports";
 
-import Condo from "./Condo";
-import "./Ads.scss";
-import AdDetail from "./AdDetail";
-import { MainContext } from "../../AppContainer/PageContainer/PageContainer";
-
-const arr = [
-  "https://www.brickunderground.com/sites/default/files/styles/blog_primary_image/public/blog/images/190501Tribeca111MurrayStMAINPIC.jpg", //part of "Pictures"
-  ,
-  "https://torontostoreys.com/wp-content/uploads/2018/01/roseanne-condo-770x514.jpg",
-  ,
-  "https://www.moneyunder30.com/wp-content/uploads/2008/07/so-you-wanna-buy-a-condo-five-questions-to-ask-before-buying-648x364-c-default.jpg",
-  ,
-  "https://images.unsplash.com/photo-1539693010221-cd218dfe6565?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80",
-];
+import "./Condos.scss";
+import AdDetail from "./Helpers/AdDetail";
 
 const makeGeneralAd = (adId, img, city, price, title, type, setDetailsAd) => {
   return (
@@ -24,16 +12,12 @@ const makeGeneralAd = (adId, img, city, price, title, type, setDetailsAd) => {
       className="ad-container"
       onClick={() => setDetailsAd(adId)}
     >
-      <Condo
-        {...{
-          className: "detail",
-          adId: Number.parseInt(adId),
-          img,
-          city,
-          price,
-          title,
-          type,
-        }}
+      <AdThumbnail
+        type="condo"
+        images={img}
+        title={title}
+        city={city}
+        price={price}
       />
     </div>
   );
@@ -44,7 +28,7 @@ const AdGeneralContainer = (props) => {
 
   return (
     <>
-      <div className="ad-general-container">
+      <div className="ad-menu-container">
         {ads.map((ad) => {
           return makeGeneralAd(
             ad.ad_id,
@@ -69,10 +53,10 @@ const AdDetailContainer = (props) => {
       setView("edit");
     },
     confirm: () => {
-      setView("general");
+      setView("menu");
     },
     close: async (ad) => {
-      setView("general");
+      setView("menu");
     },
   };
 
@@ -104,16 +88,16 @@ const AdDetailContainer = (props) => {
   );
 };
 
-const Ads = (props) => {
+const Condos = (props) => {
   const { type = "page", visibility = "public" } = props;
 
   const { user } = React.useContext(MainContext);
 
-  // "general", "detailed", "edit", "create"
-  const [view, setView] = React.useState("general");
+  // "menu", "detailed", "edit", "create"
+  const [view, setView] = React.useState("menu");
 
   // This is a list of all visible ads
-  const [visibleAds, setVisibleAds] = React.useState([]);
+  const [visibleCondos, setVisibleCondos] = React.useState([]);
 
   // If ad is selected, it means we return the detailed view
   const [selectedAd, setSelectedAd] = React.useState({});
@@ -123,15 +107,17 @@ const Ads = (props) => {
 
   const handlers = {
     actions: {
-      updateAds: async (visibility) => {
+      updateCondos: async (visibility) => {
         const res = await data.send("ads", "get", {
           visibility: visibility.toLowerCase(),
         });
-        setVisibleAds(res.ads || []);
+        console.log(res.ads);
+
+        setVisibleCondos(res.ads.filter((ad) => ad.ad_type === "condo") || []);
       },
 
       filter: (eventKey) => {
-        handlers.actions.updateAds(eventKey);
+        handlers.actions.updateCondos(eventKey);
         setVisibilityFilter(eventKey);
       },
       create: () => {
@@ -141,7 +127,7 @@ const Ads = (props) => {
 
     adGrid: {
       open: (adNumber) => {
-        setSelectedAd(visibleAds.find((ad) => ad.ad_id === adNumber) || {});
+        setSelectedAd(visibleCondos.find((ad) => ad.ad_id === adNumber) || {});
         setView("specific");
       },
     },
@@ -156,7 +142,7 @@ const Ads = (props) => {
       }}
       dropdown={[
         { elem: "Classified", eventKey: "classified" },
-        { elem: "General", eventKey: "general" },
+        { elem: "General", eventKey: "menu" },
         { elem: "Public", eventKey: "public" },
       ]}
       onSelect={handlers.actions.filter}
@@ -169,17 +155,17 @@ const Ads = (props) => {
   ];
 
   React.useEffect(() => {
-    handlers.actions.updateAds(visibilityFilter);
+    handlers.actions.updateCondos(visibilityFilter);
   }, [view]);
 
   return (
-    <div className="ads">
-      {type === "page" && view === "general" && (
+    <div className="condos">
+      {type === "page" && view === "menu" && (
         <Header height="80px" actions={actions} />
       )}
-      {view === "general" ? (
+      {view === "menu" ? (
         <AdGeneralContainer
-          ads={visibleAds}
+          ads={visibleCondos}
           setDetailsAd={handlers.adGrid.open}
         />
       ) : (
@@ -195,4 +181,4 @@ const Ads = (props) => {
   );
 };
 
-export default Ads;
+export default Condos;

@@ -1,7 +1,7 @@
 import React from "react";
 import { D, TextBox, data } from "../../imports";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser } from "@fortawesome/free-regular-svg-icons";
+import { faUserEdit } from "@fortawesome/free-solid-svg-icons";
 import { faCheckCircle } from "@fortawesome/free-regular-svg-icons";
 import { faTimesCircle } from "@fortawesome/free-solid-svg-icons";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
@@ -22,7 +22,7 @@ const UserIcon = (props) => {
       <D cn="user-icon-container">
         {profilepic}
         <D cn="preference-icon">
-          <FontAwesomeIcon icon={faUser} />
+          <FontAwesomeIcon icon={faUserEdit} />
         </D>
       </D>
     </D>

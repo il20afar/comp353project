@@ -19,6 +19,7 @@
     "pure-react-carousel": "^1.27.6",
     "react": "^16.14.0",
     "react-agenda": "0.0.8",
+    "react-aspect-ratio": "^1.0.46",
     "react-datepicker": "^3.3.0",
     "react-datepicker2": "^3.3.13",
     "react-dom": "^16.14.0",

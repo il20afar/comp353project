@@ -71,7 +71,6 @@ const EmailMenu = (props) => {
   const max =
     11.38 * Math.max(...visibleEmail.map((elem) => elem.title.length));
 
-  console.log(visibleEmail);
   return (
     <div className="email-menu">
       {visibleEmail.map((elem) => (
@@ -113,12 +112,9 @@ const EmailCreate = (props) => {
       content: value,
       author_id: user.current.user_id,
     };
-    console.log(email);
   };
 
-  const onContentChange = (value) => {
-    console.log();
-  };
+  const onContentChange = (value) => {};
 
   return (
     <InputModal
@@ -250,8 +246,6 @@ const Email = (props) => {
       setReplies(res.replies);
     })();
   }, [view]);
-
-  console.log(view, replies);
 
   return (
     <D cn="email-page">
