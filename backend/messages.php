@@ -27,5 +27,17 @@ class messages extends request
         $res = $this->query($query, true);
         return json_encode($res);
     }
+
+    public function read($obj)
+    {
+        $message_id = $obj['message_id'];
+        $where = sprintf(
+            "message_id=%s",
+            $message_id
+        );
+        $query = $this->update(["read_status" => "read"], $where);
+        $res = $this->query($query, false);
+        return json_encode($res);
+    }
 }
 ?>

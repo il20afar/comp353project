@@ -35,8 +35,7 @@ class router
         header('Access-Control-Allow-Headers: Content-Type');
 
         // Retrieve destructured parameters
-        // $json = file_get_contents('php://input');
-        $json = '{"table":"messages","action":"get","user_id":4}';
+        $json = file_get_contents('php://input');
         $obj = json_decode($json, true);
         $table = $obj['table'];
         $action = $obj['action'];
