@@ -506,7 +506,8 @@ VALUES
 	(
 		'Do you think real estate in Montreal is in a good spot?',
 		1
-	);
+	),
+	('Should we change our associations name?', 1);
 
 INSERT INTO
 	answers (content, poll_id)
@@ -520,7 +521,9 @@ VALUES
 	('Between 4 and 8', 3),
 	('More than 8', 3),
 	('Yes', 4),
-	('No', 4);
+	('No', 4),
+	('Yes. I don''t like the current name', 5),
+	('No. The current name is fine.', 5);
 
 UPDATE
 	polls
@@ -535,6 +538,13 @@ SET
 	number_of_votes = 3
 WHERE
 	poll_id = 2;
+
+UPDATE
+	polls
+SET
+	number_of_votes = 4
+WHERE
+	poll_id = 5;
 
 UPDATE
 	answers
@@ -571,6 +581,20 @@ SET
 WHERE
 	answer_id = 5;
 
+UPDATE
+	answers
+SET
+	number_of_votes = 3
+WHERE
+	answer_id = 11;
+
+UPDATE
+	answers
+SET
+	number_of_votes = 1
+WHERE
+	answer_id = 12;
+
 INSERT INTO
 	votes (user_id, poll_id, answer_id)
 VALUES
@@ -580,4 +604,15 @@ VALUES
 	(4, 1, 2),
 	(1, 2, 3),
 	(2, 2, 3),
-	(3, 2, 4);
+	(3, 2, 4),
+	(1, 5, 11),
+	(2, 5, 11),
+	(3, 5, 11),
+	(4, 5, 12);
+
+UPDATE
+	polls
+SET
+	poll_status = 'closed'
+WHERE
+	poll_id = 5;
