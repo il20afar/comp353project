@@ -116,12 +116,14 @@ CREATE TABLE answers (
 	UNIQUE (answer_id, content)
 );
 
-CREATE TABLE voted_in (
+CREATE TABLE votes (
 	user_id INT NOT NULL,
 	poll_id INT NOT NULL,
-	PRIMARY KEY (user_id, poll_id),
+	answer_id INT NOT NULL,
+	PRIMARY KEY (user_id, poll_id, answer_id),
 	FOREIGN KEY (user_id) REFERENCES users(user_id),
-	FOREIGN KEY (poll_id) REFERENCES polls(poll_id)
+	FOREIGN KEY (poll_id) REFERENCES polls(poll_id),
+	FOREIGN KEY (answer_id) REFERENCES answers(answer_id)
 );
 
 /* Inserting data */
@@ -428,7 +430,12 @@ VALUES
 	('When should we hold the next elections?', 1),
 	(
 		'Are you satisfied with the way our association is currently managed?',
-		'1'
+		1
+	),
+	('How many properties do you currently own?', 1),
+	(
+		'Do you think real estate in Montreal is in a good spot?',
+		1
 	);
 
 INSERT INTO
@@ -438,7 +445,12 @@ VALUES
 	('In march', 1),
 	('Yes', 2),
 	('No', 2),
-	('Mixed feelings', 2);
+	('Mixed feelings', 2),
+	('Less than 3', 3),
+	('Between 4 and 8', 3),
+	('More than 8', 3),
+	('Yes', 4),
+	('No', 4);
 
 UPDATE
 	polls
@@ -490,12 +502,12 @@ WHERE
 	answer_id = 5;
 
 INSERT INTO
-	voted_in (user_id, poll_id)
+	votes (user_id, poll_id, answer_id)
 VALUES
-	(1, 1),
-	(2, 1),
-	(3, 1),
-	(4, 1),
-	(1, 2),
-	(2, 2),
-	(3, 2);
+	(1, 1, 1),
+	(2, 1, 1),
+	(3, 1, 2),
+	(4, 1, 2),
+	(1, 2, 3),
+	(2, 2, 3),
+	(3, 2, 4);
