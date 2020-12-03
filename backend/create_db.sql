@@ -282,7 +282,7 @@ VALUES
 		'http://localhost:3001/backend/condo_pictures/b.jpeg, http://localhost:3001/backend/condo_pictures/building.jpeg',
 		2
 	),
-		(
+	(
 		'Public Condo Ad #3',
 		'condo',
 		'Live in the upper echelons of Quartier des Spectacles in Montreal. Enjoy a unique location at the crossroads of culture and the arts – the largest concentration of museums, theatres and galleries in North America – near major academic institutions and the Place des Arts metro. Live in the upper echelons of Quartier des Spectacles in Montreal. Enjoy a unique location at the crossroads of culture and the arts – the largest concentration of museums, theatres and galleries in North America – near major academic institutions and the Place des Arts metro.',
@@ -292,7 +292,7 @@ VALUES
 		'http://localhost:3001/backend/condo_pictures/c.jpeg, http://localhost:3001/backend/condo_pictures/building.jpeg',
 		1
 	),
-		(
+	(
 		'Public Condo Ad #4',
 		'condo',
 		'The illusion which exalts us is dearer to us than ten thousand truths.',
@@ -302,7 +302,7 @@ VALUES
 		'http://localhost:3001/backend/condo_pictures/d.jpeg, http://localhost:3001/backend/condo_pictures/building.jpeg',
 		1
 	),
-		(
+	(
 		'Public Condo Ad #5',
 		'condo',
 		'The illusion which exalts us is dearer to us than ten thousand truths.',
@@ -312,7 +312,7 @@ VALUES
 		'http://localhost:3001/backend/condo_pictures/e.jpeg, http://localhost:3001/backend/condo_pictures/building.jpeg',
 		1
 	),
-		(
+	(
 		'Public Condo Ad #6',
 		'condo',
 		'The illusion which exalts us is dearer to us than ten thousand truths.',
@@ -362,7 +362,7 @@ VALUES
 		'http://localhost:3001/backend/condo_pictures/oven.jpeg, /path/to/other/picture',
 		2
 	),
-		(
+	(
 		'Altia couch (GREAT PRICE)',
 		'item_sale',
 		'Altia classic design is derived from a sophisticated form of soft lines and a just-right low profile. The compact size of the original sofa is ideal for smaller spaces, while custom configurations of the sectional can be a perfect fit for any living room. The low backrest matched with high feather filled removable cushions creates an elegantly stylish aesthetic. Design your own sofa with your favorite upholstery. The base is also available in an assortment of colors and finishes for a truly unique look. ',
@@ -382,7 +382,7 @@ VALUES
 		'http://localhost:3001/backend/condo_pictures/ps5.jpeg, /path/to/other/picture',
 		2
 	),
-		(
+	(
 		'Dyson',
 		'item_sale',
 		'The Dyson Cyclone V10 Motorhead Cordless Stick Vacuum offers the same suction as a corded vacuum. Get rid of dirt, dust, pet hair and more with the ease and convenience of a lightweight vacuum cleaner. The Cyclone V10 Motorhead traps everything from fine dust to large debris. Includes 3 accessories.',
