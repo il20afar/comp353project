@@ -126,6 +126,21 @@ CREATE TABLE votes (
 	FOREIGN KEY (answer_id) REFERENCES answers(answer_id)
 );
 
+CREATE TABLE messages (
+	message_id INT NOT NULL AUTO_INCREMENT,
+	message_subject VARCHAR(50),
+	content VARCHAR(1000),
+	creation_time DATETIME NOT NULL DEFAULT NOW(),
+	read_status VARCHAR(50) NOT NULL DEFAULT "unread",
+	attachments VARCHAR(500),
+	author_id INT NOT NULL,
+	recipient_id INT NOT NULL,
+	PRIMARY KEY (message_id),
+	FOREIGN KEY (author_id) REFERENCES users(user_id),
+	FOREIGN KEY (recipient_id) REFERENCES users(user_id),
+	UNIQUE (author_id, recipient_id)
+);
+
 /* Inserting data */
 INSERT INTO
 	users (
@@ -616,3 +631,24 @@ SET
 	poll_status = 'closed'
 WHERE
 	poll_id = 5;
+
+INSERT INTO
+	messages (
+		message_subject,
+		content,
+		author_id,
+		recipient_id
+	)
+VALUES
+	(
+		'Welcome to Condo Owners Association of Concordia!',
+		'Hello Maxim,\n\nI just wanted to give you a warm welcome to our association. Feel free to reach out to me with any questions you might have!\n\nAntoine',
+		1,
+		4
+	),
+	(
+		'Fellow Concordian',
+		'Hey Maxim,\n\nIt''s always a pleasure to connect with Concordia graduates. What did you major in?\n\nIf not for this pandemic, we wouldn''ve had a proper introduction!\n\nRohhaan',
+		2,
+		4
+	);
