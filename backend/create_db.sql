@@ -116,12 +116,14 @@ CREATE TABLE answers (
 	UNIQUE (answer_id, content)
 );
 
-CREATE TABLE voted_in (
+CREATE TABLE votes (
 	user_id INT NOT NULL,
 	poll_id INT NOT NULL,
-	PRIMARY KEY (user_id, poll_id),
+	answer_id INT NOT NULL,
+	PRIMARY KEY (user_id, poll_id, answer_id),
 	FOREIGN KEY (user_id) REFERENCES users(user_id),
-	FOREIGN KEY (poll_id) REFERENCES polls(poll_id)
+	FOREIGN KEY (poll_id) REFERENCES polls(poll_id),
+	FOREIGN KEY (answer_id) REFERENCES answers(answer_id)
 );
 
 /* Inserting data */
@@ -490,12 +492,12 @@ WHERE
 	answer_id = 5;
 
 INSERT INTO
-	voted_in (user_id, poll_id)
+	votes (user_id, poll_id, answer_id)
 VALUES
-	(1, 1),
-	(2, 1),
-	(3, 1),
-	(4, 1),
-	(1, 2),
-	(2, 2),
-	(3, 2);
+	(1, 1, 1),
+	(2, 1, 1),
+	(3, 1, 2),
+	(4, 1, 2),
+	(1, 2, 3),
+	(2, 2, 3),
+	(3, 2, 4);

@@ -69,15 +69,15 @@ class polls extends request
             }
             $poll['answers'] = $answers;
             $has_voted_query = sprintf(
-                "SELECT * FROM voted_in WHERE user_id=%s AND poll_id=%s;",
+                "SELECT * FROM votes WHERE user_id=%s AND poll_id=%s;",
                 $user_id,
                 $poll_id
             );
             $has_voted = $this->gquery($has_voted_query, true);
             if (is_string($has_voted) and $has_voted == "Empty set.") {
-                $poll['has_voted_in'] = false;
+                $poll['answer_id'] = -1;
             } else {
-                $poll['has_voted_in'] = true;
+                $poll['answer_id'] = $has_voted[0]['answer_id'];
             }
             unset($poll);
         }
@@ -112,11 +112,12 @@ class polls extends request
         if ($res != 1) {
             return json_encode(-1);
         }
-        // Add (user_id, poll_id) pair to voted_in
+        // Add (user_id, poll_id, answer_id) tuple to votes
         $insert_voted_in_query = sprintf(
-            "INSERT INTO voted_in (user_id, poll_id) VALUES (%s, %s);",
+            "INSERT INTO votes (user_id, poll_id, answer_id) VALUES (%s, %s, %s);",
             $user_id,
-            $poll_id
+            $poll_id,
+            $answer_id
         );
         $res = $this->gquery($insert_voted_in_query, false);
         return json_encode($res);
