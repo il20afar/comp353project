@@ -81,7 +81,7 @@ class polls extends request
             }
             unset($poll);
         }
-        return json_encode($res);
+        return json_encode($res, JSON_NUMERIC_CHECK);
     }
 
     public function vote($obj)
