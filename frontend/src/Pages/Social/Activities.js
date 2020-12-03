@@ -11,7 +11,15 @@ import { faUser } from "@fortawesome/free-regular-svg-icons";
 import "./Activities.scss";
 
 const ActView = (props) => {
-  const { name, description, startTime, endTime, date, showAct, setShowAct } = props;
+  const {
+    name,
+    description,
+    startTime,
+    endTime,
+    date,
+    showAct,
+    setShowAct,
+  } = props;
 
   return (
     <div className="act-view">
@@ -19,10 +27,7 @@ const ActView = (props) => {
         <div className="thread-name-text">{showAct}</div>
       </div>
       <div className="threads-header-container">
-        <div
-          className="menu-toggle-container"
-          onClick={(e) => setShowAct("")}
-        >
+        <div className="menu-toggle-container" onClick={(e) => setShowAct("")}>
           <div className="menu-toggle-icon">
             <FontAwesomeIcon icon={faHashtag} color="black" />
           </div>
@@ -47,7 +52,6 @@ const acts = [
   "Christmas Party",
   "New-Year Brunch",
 ];
-
 
 const Act = (props) => {
   const {
@@ -94,7 +98,6 @@ const ActMenu = (props) => {
 
   React.useEffect(() => {
     const max = 12 * Math.max(...acts.map((elem) => elem.length));
-    console.log(max);
   }, []);
   const max = 11.38 * Math.max(...acts.map((elem) => elem.length));
 
@@ -121,7 +124,6 @@ const Activities = (props) => {
 
   const [showAct, setShowAct] = React.useState("");
 
-  console.log(showAct);
   return (
     <D cn="act-page">
       {showAct === "" ? (

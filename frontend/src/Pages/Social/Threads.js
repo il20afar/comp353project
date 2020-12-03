@@ -77,7 +77,7 @@ const ThreadMenu = (props) => {
           numberMessages={elem.number_of_replies}
           modifiedOn={elem.last_update_time}
           createdBy={elem.creator_username}
-          onClick={() => setView(elem.title)}
+          onClick={() => setView(elem)}
           gridTemplateColumns={`minmax(300px, ${max}px) minmax(0px, 300px) minmax(0px,300px) minmax(60px, 80px)`}
         />
       ))}
@@ -86,7 +86,7 @@ const ThreadMenu = (props) => {
 };
 
 const ThreadView = (props) => {
-  const { user, messages, view, setView } = props;
+  const { user, messages, currentThread, setView } = props;
   const [visibleReplies, setVisibleReplies] = React.useState(messages);
   const searchRef = React.useRef("");
 
@@ -100,11 +100,23 @@ const ThreadView = (props) => {
         : visibleReplies.filter((elem) => elem.content.includes(val))
     );
   };
+  const updateReplies = async () => {
+    const res = await data.send("replies", "get", {
+      thread_id: currentThread.thread_id,
+    });
+    setVisibleReplies(res.replies);
+  };
+
+  React.useEffect(() => {
+    updateReplies();
+  }, []);
+
+  console.log(visibleReplies);
 
   return (
     <div className="thread-view">
       <div className="thread-name-container">
-        <div className="thread-name-text">{view}</div>
+        <div className="thread-name-text">{currentThread.title}</div>
       </div>
       <div className="threads-header-container">
         <div className="menu-toggle-container" onClick={(e) => setView("menu")}>
@@ -121,6 +133,8 @@ const ThreadView = (props) => {
       <div className="chatbox-container">
         <Chatbox
           user={user}
+          currentThread={currentThread}
+          updateReplies={updateReplies}
           replies={visibleReplies}
           searchTerm={searchRef.current}
         />
@@ -193,23 +207,12 @@ const ThreadCreate = (props) => {
   );
 };
 
-const getRepliesByThread = (view, visibleThreads, replies) => {
-  const filtered = replies.filter(
-    (elem) =>
-      elem.thread_id ===
-      visibleThreads.find((elem) => elem.title === view)?.thread_id
-  );
-  console.log(filtered);
-  return filtered;
-};
-
 const Threads = (props) => {
   const {} = props;
   const { user } = React.useContext(MainContext);
 
   const [view, setView] = React.useState("menu");
   const [visibleThreads, setVisibleThreads] = React.useState([]);
-  const [replies, setReplies] = React.useState(null);
   const searchTerm = React.useRef("");
   const serverThreads = React.useRef(null);
 
@@ -221,25 +224,6 @@ const Threads = (props) => {
   };
 
   const actions = [
-    <Button
-      key="button"
-      content={{ show: "all", hide: "√" }}
-      style={{
-        show: { width: "200px", textTransform: "capitalize" },
-        hide: { width: "200px", textTransform: "capitalize" },
-      }}
-      dropdown={[
-        { elem: "Classified", eventKey: "classified" },
-        { elem: "General", eventKey: "general" },
-        { elem: "Public", eventKey: "public" },
-      ]}
-      onSelect={null}
-    />,
-    <Button
-      content={{ show: "Create +" }}
-      style={{ show: { width: "200px" }, hide: { width: "200px" } }}
-      onClick={() => setView("create")}
-    />,
     <SearchBar
       key={"searchbar"}
       initialValue={""}
@@ -247,21 +231,46 @@ const Threads = (props) => {
       onChange={onSearchThreadChange}
       style={{ height: "46px" }}
     />,
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "space-between",
+        width: "420px",
+      }}
+    >
+      <Button
+        key="button"
+        content={{ show: "all", hide: "√" }}
+        style={{
+          show: { width: "200px", textTransform: "capitalize" },
+          hide: { width: "200px", textTransform: "capitalize" },
+        }}
+        dropdown={[
+          { elem: "Classified", eventKey: "classified" },
+          { elem: "General", eventKey: "general" },
+          { elem: "Public", eventKey: "public" },
+        ]}
+        onSelect={null}
+      />
+      <Button
+        content={{ show: "Create +" }}
+        style={{ show: { width: "200px" }, hide: { width: "200px" } }}
+        onClick={() => setView("create")}
+      />
+    </div>,
   ];
 
   React.useEffect(() => {
-    (async () => {
-      const threads = await data.send("threads", "get");
-      serverThreads.current = threads.threads;
-      setVisibleThreads(serverThreads.current);
+    updateThreads();
+  }, []);
 
-      const res = await data.send("replies", "get");
+  const updateThreads = async () => {
+    const threads = await data.send("threads", "get");
+    serverThreads.current = threads.threads;
+    setVisibleThreads(serverThreads.current);
+  };
 
-      setReplies(res.replies);
-    })();
-  }, [view]);
-
-  console.log(view, replies);
+  console.log(visibleThreads, view);
 
   return (
     <D cn="threads-page">
@@ -277,12 +286,7 @@ const Threads = (props) => {
           searchTerm={searchTerm.current}
         />
       ) : (
-        <ThreadView
-          user={user}
-          view={view}
-          setView={setView}
-          messages={getRepliesByThread(view, visibleThreads, replies)}
-        />
+        <ThreadView user={user} currentThread={view} setView={setView} />
       )}
     </D>
   );

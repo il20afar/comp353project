@@ -11,7 +11,7 @@ const Chatbox = (props) => {
   const {
     user,
     replies = [],
-    updateView,
+    updateReplies,
     currentThread,
     searchTerm = "",
   } = props;
@@ -26,7 +26,7 @@ const Chatbox = (props) => {
     if (response !== 1) {
       alert("Your message couldn't be sent!");
     }
-    updateView();
+    updateReplies();
   };
 
   const ref = React.useRef(null);

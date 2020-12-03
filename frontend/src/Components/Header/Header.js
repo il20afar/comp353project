@@ -4,7 +4,7 @@ import { v4 as uuid } from "uuid";
 import "./Header.scss";
 import "../../Styles/Utils.scss";
 
-const Header = (props) => {
+const Header = React.forwardRef((props, ref) => {
   const {
     keyName = "",
     title = null,
@@ -14,11 +14,11 @@ const Header = (props) => {
     ...rest
   } = props;
 
-  console.log(actions[0].props.key);
   return (
     <div
       style={{ height }}
       className={`header ${showSidebar ? " sidebar-open" : ""}`}
+      ref={ref}
       {...rest}
     >
       {title && <div className="title-container">{title}</div>}{" "}
@@ -34,6 +34,6 @@ const Header = (props) => {
       </div>
     </div>
   );
-};
+});
 
 export default Header;

@@ -10,8 +10,10 @@ export {
 export { default as Contracts } from "./Pages/Management/Contracts";
 export { default as Financial } from "./Pages/Management/Financial";
 export { default as Meetings } from "./Pages/Management/Meetings";
-export { default as Ads } from "./Pages/Marketing/Ads";
-export { default as Postings } from "./Pages/Marketing/Postings";
+export { default as AdThumbnail } from "./Pages/Ads/Helpers/AdThumbnail";
+
+export { default as Condos } from "./Pages/Ads/Condos";
+export { default as Postings } from "./Pages/Ads/Postings";
 export { default as Activities } from "./Pages/Social/Activities";
 export { default as Email } from "./Pages/Social/Email";
 export { default as Threads } from "./Pages/Social/Threads";

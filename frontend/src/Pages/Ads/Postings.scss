@@ -1,4 +1,6 @@
-.polls {
+@import "../../Styles/Utils.scss";
+
+.postings {
   .edit-view-window {
     padding: "40px";
   }
@@ -14,18 +16,18 @@
     position: absolute;
   }
 
-  .polls-window {
+  .postings-window {
     width: 100%;
     // position: absolute;
-    height: calc(100% - 80px);
+    height: calc(100% - 120px);
     margin-top: 60px;
     left: 0;
     display: flex;
     box-sizing: border-box;
 
     &.both {
-      .polls-container {
-        width: 50%;
+      .postings-container {
+        width: calc(50%);
 
         &.closed {
           padding-right: 10px;
@@ -35,8 +37,8 @@
         }
       }
     }
-    &.open {
-      .polls-container {
+    &.services {
+      .postings-container {
         &.closed {
           width: 0;
           opacity: 0;
@@ -44,8 +46,8 @@
         }
       }
     }
-    &.closed {
-      .polls-container {
+    &.items {
+      .postings-container {
         &.open {
           width: 0;
           opacity: 0;
@@ -54,14 +56,15 @@
       }
     }
 
-    .polls-container {
+    .postings-container {
       // box-sizing: border-box;
       transition: 0.25s;
       width: 100%;
       // padding: 20px;
       overflow: scroll !important;
+      scroll-snap-type: y mandatory;
 
-      .no-polls-shown {
+      .no-postings-shown {
         width: 100%;
         height: 100%;
         display: flex;

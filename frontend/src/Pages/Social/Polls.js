@@ -22,7 +22,11 @@ import { v4 as uuid } from "uuid";
 import "./Polls.scss";
 
 const PollsCreate = (props) => {
-  const { setView, user } = props;
+  const { setView, updatePolls } = props;
+
+  const [numAnswers, setNumAnswers] = React.useState(2);
+  const [inputModalView, setInputModalView] = React.useState("display");
+
   const scrollContainerRef = React.useRef(null);
   const pollQuestionRef = React.useRef(null);
   const [answers, setAnswers] = React.useState([
@@ -36,18 +40,33 @@ const PollsCreate = (props) => {
     React.useRef(null),
   ]);
 
-  const [numAnswers, setNumAnswers] = React.useState(2);
-
-  const onChange = (e) => {
-    const val = e.target.value;
-    setInputModalView(val !== "" ? "edit" : "display");
+  const addField = () => {
+    setNumAnswers(numAnswers + 1);
   };
 
-  const [inputModalView, setInputModalView] = React.useState("display");
+  const deleteField = (index) => {
+    answers[index].current.value = "";
+    setNumAnswers(numAnswers - 1);
+  };
+
+  const isValidPoll = () => {
+    return [pollQuestionRef, answers[0], answers[1]].every(
+      (elem) => elem.current.value !== ""
+    );
+  };
+
+  const onChange = (e) => {
+    setInputModalView(isValidPoll() ? "edit" : "display");
+  };
+
+  React.useEffect(() => {
+    scrollContainerRef.current.scrollTo(0, 1000000);
+  }, [numAnswers]);
 
   const makeField = (ref, index, title, placeholder, type = "question") => {
     return (
       <div
+        key={uuid()}
         className="create-poll-field"
         style={{ height: "fit-content", marginBottom: "20px" }}
       >
@@ -101,19 +120,6 @@ const PollsCreate = (props) => {
     );
   };
 
-  const addField = () => {
-    setNumAnswers(numAnswers + 1);
-  };
-
-  const deleteField = (index) => {
-    answers[index].current.value = "";
-    setNumAnswers(numAnswers - 1);
-  };
-
-  React.useEffect(() => {
-    scrollContainerRef.current.scrollTo(0, 1000000);
-  }, [numAnswers]);
-
   return (
     <InputModal
       view={inputModalView}
@@ -125,10 +131,13 @@ const PollsCreate = (props) => {
         const res = await data.send("polls", "create", {
           question: pollQuestionRef.current.value,
           asso_id: 1,
-          answers: answers.map((elem) => elem.current.value),
+          answers: answers
+            .filter((elem) => elem.current?.value)
+            .map((elem) => elem.current.value),
         });
-        const Polls = await data.send("polls", "get");
-        setView(Polls.Polls);
+
+        setView("menu");
+        updatePolls();
       }}
     >
       <div
@@ -176,34 +185,88 @@ const PollsCreate = (props) => {
     </InputModal>
   );
 };
+const PollsContainer = (props) => {
+  const { user, visiblePolls, type } = props;
+
+  const filteredByType = [...visiblePolls].filter(
+    (elem) => elem.poll_status === type
+  );
+  return (
+    <div className={`polls-container ${type}`}>
+      {filteredByType.length === 0 ? (
+        <div
+          className={`no-polls-shown ${type}`}
+        >{`No ${type} polls to show!`}</div>
+      ) : (
+        filteredByType
+          .sort((a, b) => b.poll_id - a.poll_id)
+          .map((elem) => {
+            const { answer_id, answers, question } = elem;
+            const user_answer =
+              answer_id !== -1
+                ? Object.values(answers).find(
+                    (answer) => answer.answer_id === answer_id
+                  ).content
+                : null;
+            console.log(user_answer);
+            return (
+              <Poll
+                key={uuid()}
+                noStorage
+                vote={user_answer}
+                customStyles={{
+                  theme: "purple",
+                }}
+                question={question}
+                answers={Object.values(answers).map((answer) => ({
+                  option: answer.content,
+                  votes: answer.percentage,
+                }))}
+                onVote={async (voteAnswer) => {
+                  const res = await data.send("polls", "vote", {
+                    user_id: user.current.user_id,
+                    answer_id: answers.find(
+                      (answer) => answer.content === voteAnswer
+                    ).answer_id,
+                  });
+                  console.log(res);
+                }}
+              />
+            );
+          })
+      )}
+    </div>
+  );
+};
 
 const Polls = () => {
   const { user } = React.useContext(MainContext);
-
-  const onVote = async (voteAnswer) => {
-    const res = await data.send("polls", "get");
-  };
 
   const [view, setView] = React.useState("menu");
   const [visibility, setVisiblity] = React.useState("both");
   const [visiblePolls, setVisiblePolls] = React.useState([]);
 
+  const updatePolls = async () => {
+    const res = await data.send("polls", "get", {
+      user_id: user.current.user_id,
+      asso_id: 1,
+    });
+
+    setVisiblePolls(res.polls);
+  };
+
   React.useEffect(() => {
-    (async () => {
-      const res = await data.send("polls", "get", { asso_id: 1 });
-      console.log(res);
-      setVisiblePolls(res);
-    })();
+    updatePolls();
   }, []);
 
   const actions = [
     ...["closed", "both", "open"].map((elem) => {
       const color =
         visibility === "closed"
-          ? "blue"
+          ? "rgb(86, 116, 224)"
           : visibility === "closed"
-          ? "purple"
-          : "#8A2BE2";
+          ? "rgb(109, 75, 148)"
+          : "rgb(98,96,186)";
       const selectedStyling =
         visibility === elem
           ? {
@@ -246,57 +309,15 @@ const Polls = () => {
       <Header key={uuid()} height="80px" actions={actions} />
 
       {view === "create" ? (
-        <PollsCreate setView={setView} />
+        <PollsCreate updatePolls={updatePolls} setView={setView} />
       ) : (
         <div className={`polls-window ${visibility}`}>
-          <div className="polls-container closed">
-            <Poll
-              customStyles={{ theme: "blue" }}
-              question={"Should all humans be alive?"}
-              answers={[
-                { option: "true", votes: 8 },
-                { option: "false", votes: 3 },
-              ]}
-              onVote={(voteAnswer) => onVote(voteAnswer)}
-              // customStyles={pollStyles2}
-              noStorage
-            />
-            <Poll
-              customStyles={{ theme: "blue" }}
-              question={"Should all humans be alive?"}
-              answers={[
-                { option: "true", votes: 8 },
-                { option: "false", votes: 3 },
-              ]}
-              onVote={(voteAnswer) => onVote(voteAnswer)}
-              // customStyles={pollStyles2}
-              noStorage
-            />
-          </div>
-          <div className="polls-container open">
-            <Poll
-              customStyles={{ theme: "purple" }}
-              question={"Should all humans be alive?"}
-              answers={[
-                { option: "true", votes: 8 },
-                { option: "false", votes: 3 },
-              ]}
-              onVote={(voteAnswer) => onVote(voteAnswer)}
-              // customStyles={pollStyles2}
-              noStorage
-            />
-            <Poll
-              customStyles={{ theme: "purple" }}
-              question={"pollQuestion2"}
-              answers={[
-                { option: "yes", votes: 8 },
-                { option: "no", votes: 3 },
-              ]}
-              onVote={(voteAnswer) => onVote(voteAnswer)}
-              // customStyles={pollStyles2}
-              noStorage
-            />
-          </div>
+          <PollsContainer
+            user={user}
+            visiblePolls={visiblePolls}
+            type="closed"
+          />
+          <PollsContainer user={user} visiblePolls={visiblePolls} type="open" />
         </div>
       )}
     </div>

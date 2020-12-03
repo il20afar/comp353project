@@ -32,6 +32,7 @@ const Button = (props) => {
     onClick = (value) => null,
     onSelect,
     size = "md",
+    className,
   } = props;
 
   const [show, setShow] = React.useState(true);
@@ -52,7 +53,7 @@ const Button = (props) => {
     <D
       cn={`button ${type} ${show ? "show" : "hide"}${
         dropdown ? " dropdown" : ""
-      } ${size}`}
+      } ${size} ${className}`}
       onClick={handlers.onClick}
       style={show ? style.show : style.hide ?? style.show}
     >

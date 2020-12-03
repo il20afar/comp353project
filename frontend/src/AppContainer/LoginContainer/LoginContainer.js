@@ -1,5 +1,5 @@
 import React from "react";
-import { D, TextBox, Button, Ads } from "../../imports";
+import { D, TextBox, Button } from "../../imports";
 import "../../Styles/Utils.scss";
 import "./LoginContainer.scss";
 
@@ -53,7 +53,7 @@ const LoginContainer = (props) => {
   return (
     <D cn={`login-container`}>
       <div className="ads-wrapper">
-        <Ads type="login" visibility="public" />
+        {/* <Ads type="login" visibility="public" /> */}
       </div>
 
       <D cn="login-logo">CON MANAGER</D>

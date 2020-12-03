@@ -7,7 +7,7 @@ import { v4 as uuid } from "uuid";
 import {
   D,
   Sidebar,
-  Ads,
+  Condos,
   Postings,
   Threads,
   Polls,
@@ -26,7 +26,7 @@ import {
 import "./PageContainer.scss";
 
 const pages = {
-  Ads: () => <Ads />,
+  Condos: () => <Condos />,
   Postings: () => <Postings />,
   Threads: () => <Threads />,
   Polls: () => <Polls />,
@@ -39,7 +39,7 @@ const pages = {
 };
 
 const menus = {
-  Marketing: ["Ads", "Postings"],
+  Ads: ["Condos", "Postings"],
   Social: ["Threads", "Polls", "Activities", "Reviews", "Email"],
   Management: ["Financial", "Contracts", "Meetings"],
 };
@@ -51,8 +51,8 @@ export const MainContext = React.createContext({
 const PageContainer = (props) => {
   const { user, handleLogOut } = props;
   const [currentPage, setCurrentPage] = React.useState({
-    name: "Ads",
-    elem: pages.Ads(),
+    name: "Condos",
+    elem: pages.Condos(),
   });
   const pageRef = React.useRef(null);
   const sidebarRef = React.useRef(null);
@@ -60,11 +60,10 @@ const PageContainer = (props) => {
   const [showUserMod, setShowUserMod] = React.useState(false);
 
   const handleSidebarToggle = () => {
-    console.log("hello");
-    pageRef.current.className = `page ${
-      !pageRef.current.classList.contains("showSidebar") ? "showSidebar" : ""
-    }`;
-    console.log(sidebarRef.current);
+    const isOpen = pageRef.current.classList.contains("showSidebar");
+
+    pageRef.current.className = `page ${!isOpen ? "showSidebar" : ""}`;
+
     sidebarRef.current.className = `sidebar ${
       sidebarRef.current.classList.contains("open") ? "closed" : "open"
     }`;

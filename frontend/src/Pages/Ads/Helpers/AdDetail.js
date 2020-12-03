@@ -1,5 +1,5 @@
 import React from "react";
-import { D, TextBox, data, Button } from "../../imports";
+import { D, TextBox, data, Button } from "../../../imports";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheckCircle } from "@fortawesome/free-regular-svg-icons";
 import { faEdit } from "@fortawesome/free-solid-svg-icons";
@@ -13,7 +13,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a lo
 import { v4 as uuid } from "uuid";
 
 import "./AdDetail.scss";
-import "../../Styles/Utils.scss";
+import "../../../Styles/Utils.scss";
 
 const fields = {
   title: "Title",
