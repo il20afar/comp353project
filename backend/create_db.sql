@@ -433,7 +433,10 @@ VALUES
 		1
 	),
 	('How many properties do you currently own?', 1),
-	('Do you think real estate in Montreal is in a good spot?', 1);
+	(
+		'Do you think real estate in Montreal is in a good spot?',
+		1
+	);
 
 INSERT INTO
 	answers (content, poll_id)
