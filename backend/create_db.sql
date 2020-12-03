@@ -137,8 +137,7 @@ CREATE TABLE messages (
 	recipient_id INT NOT NULL,
 	PRIMARY KEY (message_id),
 	FOREIGN KEY (author_id) REFERENCES users(user_id),
-	FOREIGN KEY (recipient_id) REFERENCES users(user_id),
-	UNIQUE (author_id, recipient_id)
+	FOREIGN KEY (recipient_id) REFERENCES users(user_id)
 );
 
 /* Inserting data */
