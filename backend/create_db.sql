@@ -430,8 +430,10 @@ VALUES
 	('When should we hold the next elections?', 1),
 	(
 		'Are you satisfied with the way our association is currently managed?',
-		'1'
-	);
+		1
+	),
+	('How many properties do you currently own?', 1),
+	('Do you think real estate in Montreal is in a good spot?', 1);
 
 INSERT INTO
 	answers (content, poll_id)
@@ -440,7 +442,12 @@ VALUES
 	('In march', 1),
 	('Yes', 2),
 	('No', 2),
-	('Mixed feelings', 2);
+	('Mixed feelings', 2),
+	('Less than 3', 3),
+	('Between 4 and 8', 3),
+	('More than 8', 3),
+	('Yes', 4),
+	('No', 4);
 
 UPDATE
 	polls
