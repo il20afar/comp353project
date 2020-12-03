@@ -647,7 +647,7 @@ VALUES
 	),
 	(
 		'Fellow Concordian',
-		'Hey Maxim,\n\nIt''s always a pleasure to connect with Concordia graduates. What did you major in?\n\nIf not for this pandemic, we wouldn''ve had a proper introduction!\n\nRohhaan',
+		'Hey Maxim,\n\nIt''s always a pleasure to connect with Concordia graduates. What did you major in?\n\nIf not for this pandemic, we wouldv''ve had a proper introduction!\n\nRohhaan',
 		2,
 		4
 	);

@@ -15,11 +15,17 @@ class messages extends request
             $columns = "message_subject, content, author_id, recipient_id";
         }
         $query = $this->insert($columns, $obj);
-        echo $query;
-        echo "<br>";
         $res = $this->query($query, false);
-        echo $res;
-        echo "<br>";
+        return json_encode($res);
+    }
+
+    public function get($obj)
+    {
+        $user_id = $obj['user_id'];
+
+        $query = $this->select("*", ["recipient_id" => $user_id]);
+        $res = $this->query($query, true);
+        return json_encode($res);
     }
 }
 ?>
