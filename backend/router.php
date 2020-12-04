@@ -1,7 +1,6 @@
 <?php
 include 'users.php';
 include 'ads.php';
-include 'session.php';
 include 'threads.php';
 include 'replies.php';
 include 'polls.php';
@@ -11,7 +10,6 @@ class router
 {
     private object $users;
     private object $ads;
-    private object $session;
     private object $threads;
     private object $replies;
     private object $polls;
