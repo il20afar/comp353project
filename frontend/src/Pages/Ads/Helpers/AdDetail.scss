@@ -42,27 +42,76 @@
       pointer-events: all;
       grid-row: 1 / span 1;
       grid-column: 1 / span 1;
+      border-radius: 2px;
+      overflow: hidden;
 
       .carousel-root {
         width: 100% !important;
         height: 100% !important;
-        .carousel {
+        .carousel.carousel-slider {
           width: 100% !important;
-          height: 100% !important;
+          height: calc(100% - 88px) !important;
+          margin-bottom: 8px !important;
+
+          button {
+            width: 60px !important;
+          }
           .slider-wrapper {
             width: 100% !important;
             height: 100% !important;
+
             .slider {
-              width: 100% !important;
+              width: fit-content !important;
               height: 100% !important;
               .slide {
                 .img-container {
                   width: 100% !important;
                   height: 100% !important;
+                  display: flex;
+                  flex-direction: column;
+                  justify-content: center;
                   img {
-                    width: auto;
-                    height: 100%;
+                    // width: 100%;
+                    // height: 100%;
+                    // object-fit: cover !important;
+                    overflow: hidden !important;
                   }
+                  p.legend {
+                    display: none;
+                  }
+                }
+              }
+            }
+          }
+          .control-dots {
+            display: none !important;
+          }
+        }
+        .carousel:not(.carousel-slider) {
+          height: 80px !important;
+          > .thumbs-wrapper {
+            height: 80px !important;
+            margin: 0px !important;
+            ul.thumbs.animated {
+              padding-left: 0 !important;
+              height: 80px !important;
+              margin-block-start: 0 !important;
+              margin-block-end: 0 !important;
+              margin: 0 !important;
+
+              li.thumb {
+                height: 80px !important;
+                width: 120px !important;
+                border: 3px solid transparent !important;
+                border-radius: 4px;
+                &.selected {
+                  border: 1px solid rgb(127, 191, 243) !important;
+                }
+                img {
+                  width: 100%;
+                  height: 100%;
+                  object-fit: cover !important;
+                  overflow: hidden !important;
                 }
               }
             }
@@ -116,13 +165,13 @@
         .textbox {
           // margin-bottom: 10px;
           height: fit-content;
-          input {
+          > input {
             height: 50px;
             font-size: 20px !important;
           }
-          textarea {
+          > div {
             font-size: 20px !important;
-            height: 100px !important;
+            height: fit-content !important;
           }
           margin-bottom: 10px;
         }

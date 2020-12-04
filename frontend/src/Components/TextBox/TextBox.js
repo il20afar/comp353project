@@ -17,6 +17,7 @@ const Textbox = React.forwardRef((props, ref) => {
     outlineOnChange = false,
     match = null,
     height = null,
+    readOnly,
     ...other
   } = props;
 
@@ -25,7 +26,7 @@ const Textbox = React.forwardRef((props, ref) => {
   React.useEffect(() => {
     focusOnRender && ref.current.focus();
     if (initialValue) {
-      ref.current.value = initialValue;
+      ref.current[type === "input" ? "value" : "innerHTML"] = initialValue;
     }
   }, []);
 
@@ -64,12 +65,14 @@ const Textbox = React.forwardRef((props, ref) => {
           placeholder: placeholder,
           onChange: onChangeHandler,
           onKeyPress: onKeyPress,
+          ...(type === "input" && { readOnly }),
+          ...(type === "textarea" && { contentEditable: !readOnly }),
         }
       ) =>
         type !== "textarea" ? (
           <input type={subType} {...rest} {...other} />
         ) : (
-          <textarea {...rest} {...other} />
+          <div {...rest} {...other} />
         ))()}
     </D>
   );

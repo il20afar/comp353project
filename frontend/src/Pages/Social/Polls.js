@@ -208,7 +208,6 @@ const PollsContainer = (props) => {
                     (answer) => answer.answer_id === answer_id
                   ).content
                 : null;
-            console.log(user_answer);
             return (
               <Poll
                 key={uuid()}
@@ -229,7 +228,6 @@ const PollsContainer = (props) => {
                       (answer) => answer.content === voteAnswer
                     ).answer_id,
                   });
-                  console.log(res);
                 }}
               />
             );
@@ -242,22 +240,32 @@ const PollsContainer = (props) => {
 const Polls = () => {
   const { user } = React.useContext(MainContext);
 
+  console.log(user.current);
+
   const [view, setView] = React.useState("menu");
   const [visibility, setVisiblity] = React.useState("both");
   const [visiblePolls, setVisiblePolls] = React.useState([]);
 
   const updatePolls = async () => {
+    console.log({
+      user_id: user.current.user_id,
+      asso_id: 1,
+    });
     const res = await data.send("polls", "get", {
       user_id: user.current.user_id,
       asso_id: 1,
     });
 
+    console.log(res);
+
     setVisiblePolls(res.polls);
   };
 
   React.useEffect(() => {
-    updatePolls();
+    // updatePolls();
   }, []);
+
+  console.log(visiblePolls);
 
   const actions = [
     ...["closed", "both", "open"].map((elem) => {

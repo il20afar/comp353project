@@ -1,10 +1,9 @@
 // /AppContainer
-export { default as AppContainer } from "./AppContainer/AppContainer";
-export { default as LoginContainer } from "./AppContainer/LoginContainer/LoginContainer";
 export {
-  default as PageContainer,
+  default as AppContainer,
   MainContext,
-} from "./AppContainer/PageContainer/PageContainer";
+} from "./AppContainer/AppContainer";
+export { default as LoginContainer } from "./AppContainer/LoginContainer/LoginContainer";
 
 // /AppContainer/PageContainer/Pages
 export { default as Contracts } from "./Pages/Management/Contracts";
@@ -32,6 +31,7 @@ export { default as Agenda } from "./Components/Agenda/Agenda";
 export { default as Header } from "./Components/Header/Header";
 export { default as InputModal } from "./Components/InputModal/InputModal";
 export { default as SearchBar } from "./Components/SearchBar/SearchBar";
+export { default as LoadContainer } from "./Components/LoadContainer/LoadContainer";
 
 export { UserIcon, UserModModal } from "./Components/User/User";
 

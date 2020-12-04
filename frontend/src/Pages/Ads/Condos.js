@@ -89,7 +89,7 @@ const AdDetailContainer = (props) => {
 };
 
 const Condos = (props) => {
-  const { type = "page", visibility = "public" } = props;
+  const { type = "page-view", visibility = "public" } = props;
 
   const { user } = React.useContext(MainContext);
 
@@ -159,8 +159,8 @@ const Condos = (props) => {
   }, [view]);
 
   return (
-    <div className="condos">
-      {type === "page" && view === "menu" && (
+    <div className={`condos ${type}`}>
+      {type === "page-view" && view === "menu" && (
         <Header height="80px" actions={actions} />
       )}
       {view === "menu" ? (

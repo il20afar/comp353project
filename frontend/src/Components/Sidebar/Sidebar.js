@@ -37,6 +37,7 @@ const Sidebar = (props) => {
     currentPage,
     setCurrentPage,
     sidebarRef,
+    initiallyExpanded,
     handleSidebarToggle,
     showUserMod,
     setShowUserMod,
@@ -69,7 +70,7 @@ const Sidebar = (props) => {
   const [hamburgerShow, setHamburgerShow] = React.useState(false);
 
   return (
-    <D ref={sidebarRef} cn={`sidebar closed`}>
+    <D ref={sidebarRef} cn={`sidebar`}>
       <D cn="hamburger-container">
         <Hamburger
           className="hamburger"
