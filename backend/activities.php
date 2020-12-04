@@ -13,5 +13,18 @@ class activities extends request
         $res = $this->query($query, false);
         return json_encode($res);
     }
+
+    public function attend($obj)
+    {
+        $user_id = $obj['user_id'];
+        $activity_id = $obj['activity_id'];
+        $query = sprintf(
+            'INSERT INTO attends (user_id, activity_id) VALUES (%s, %s);',
+            $user_id,
+            $activity_id
+        );
+        $res = $this->query($query, false);
+        return json_encode($res);
+    }
 }
 ?>
