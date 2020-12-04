@@ -126,6 +126,20 @@ CREATE TABLE votes (
 	FOREIGN KEY (answer_id) REFERENCES answers(answer_id)
 );
 
+CREATE TABLE messages (
+	message_id INT NOT NULL AUTO_INCREMENT,
+	message_subject VARCHAR(50),
+	content VARCHAR(1000),
+	creation_time DATETIME NOT NULL DEFAULT NOW(),
+	read_status VARCHAR(50) NOT NULL DEFAULT "unread",
+	attachments VARCHAR(500),
+	author_id INT NOT NULL,
+	recipient_id INT NOT NULL,
+	PRIMARY KEY (message_id),
+	FOREIGN KEY (author_id) REFERENCES users(user_id),
+	FOREIGN KEY (recipient_id) REFERENCES users(user_id)
+);
+
 /* Inserting data */
 INSERT INTO
 	users (
@@ -282,7 +296,7 @@ VALUES
 		'http://localhost:3001/backend/condo_pictures/b.jpeg, http://localhost:3001/backend/condo_pictures/building.jpeg',
 		2
 	),
-		(
+	(
 		'Public Condo Ad #3',
 		'condo',
 		'Live in the upper echelons of Quartier des Spectacles in Montreal. Enjoy a unique location at the crossroads of culture and the arts – the largest concentration of museums, theatres and galleries in North America – near major academic institutions and the Place des Arts metro. Live in the upper echelons of Quartier des Spectacles in Montreal. Enjoy a unique location at the crossroads of culture and the arts – the largest concentration of museums, theatres and galleries in North America – near major academic institutions and the Place des Arts metro.',
@@ -292,7 +306,7 @@ VALUES
 		'http://localhost:3001/backend/condo_pictures/c.jpeg, http://localhost:3001/backend/condo_pictures/building.jpeg',
 		1
 	),
-		(
+	(
 		'Public Condo Ad #4',
 		'condo',
 		'The illusion which exalts us is dearer to us than ten thousand truths.',
@@ -302,7 +316,7 @@ VALUES
 		'http://localhost:3001/backend/condo_pictures/d.jpeg, http://localhost:3001/backend/condo_pictures/building.jpeg',
 		1
 	),
-		(
+	(
 		'Public Condo Ad #5',
 		'condo',
 		'The illusion which exalts us is dearer to us than ten thousand truths.',
@@ -312,7 +326,7 @@ VALUES
 		'http://localhost:3001/backend/condo_pictures/e.jpeg, http://localhost:3001/backend/condo_pictures/building.jpeg',
 		1
 	),
-		(
+	(
 		'Public Condo Ad #6',
 		'condo',
 		'The illusion which exalts us is dearer to us than ten thousand truths.',
@@ -362,7 +376,7 @@ VALUES
 		'http://localhost:3001/backend/condo_pictures/oven.jpeg, /path/to/other/picture',
 		2
 	),
-		(
+	(
 		'Altia couch (GREAT PRICE)',
 		'item_sale',
 		'Altia classic design is derived from a sophisticated form of soft lines and a just-right low profile. The compact size of the original sofa is ideal for smaller spaces, while custom configurations of the sectional can be a perfect fit for any living room. The low backrest matched with high feather filled removable cushions creates an elegantly stylish aesthetic. Design your own sofa with your favorite upholstery. The base is also available in an assortment of colors and finishes for a truly unique look. ',
@@ -382,7 +396,7 @@ VALUES
 		'http://localhost:3001/backend/condo_pictures/ps5.jpeg, /path/to/other/picture',
 		2
 	),
-		(
+	(
 		'Dyson',
 		'item_sale',
 		'The Dyson Cyclone V10 Motorhead Cordless Stick Vacuum offers the same suction as a corded vacuum. Get rid of dirt, dust, pet hair and more with the ease and convenience of a lightweight vacuum cleaner. The Cyclone V10 Motorhead traps everything from fine dust to large debris. Includes 3 accessories.',
@@ -506,7 +520,8 @@ VALUES
 	(
 		'Do you think real estate in Montreal is in a good spot?',
 		1
-	);
+	),
+	('Should we change our associations name?', 1);
 
 INSERT INTO
 	answers (content, poll_id)
@@ -520,7 +535,9 @@ VALUES
 	('Between 4 and 8', 3),
 	('More than 8', 3),
 	('Yes', 4),
-	('No', 4);
+	('No', 4),
+	('Yes. I don''t like the current name', 5),
+	('No. The current name is fine.', 5);
 
 UPDATE
 	polls
@@ -535,6 +552,13 @@ SET
 	number_of_votes = 3
 WHERE
 	poll_id = 2;
+
+UPDATE
+	polls
+SET
+	number_of_votes = 4
+WHERE
+	poll_id = 5;
 
 UPDATE
 	answers
@@ -571,6 +595,20 @@ SET
 WHERE
 	answer_id = 5;
 
+UPDATE
+	answers
+SET
+	number_of_votes = 3
+WHERE
+	answer_id = 11;
+
+UPDATE
+	answers
+SET
+	number_of_votes = 1
+WHERE
+	answer_id = 12;
+
 INSERT INTO
 	votes (user_id, poll_id, answer_id)
 VALUES
@@ -580,4 +618,36 @@ VALUES
 	(4, 1, 2),
 	(1, 2, 3),
 	(2, 2, 3),
-	(3, 2, 4);
+	(3, 2, 4),
+	(1, 5, 11),
+	(2, 5, 11),
+	(3, 5, 11),
+	(4, 5, 12);
+
+UPDATE
+	polls
+SET
+	poll_status = 'closed'
+WHERE
+	poll_id = 5;
+
+INSERT INTO
+	messages (
+		message_subject,
+		content,
+		author_id,
+		recipient_id
+	)
+VALUES
+	(
+		'Welcome to Condo Owners Association of Concordia!',
+		'Hello Maxim,\n\nI just wanted to give you a warm welcome to our association. Feel free to reach out to me with any questions you might have!\n\nAntoine',
+		1,
+		4
+	),
+	(
+		'Fellow Concordian',
+		'Hey Maxim,\n\nIt''s always a pleasure to connect with Concordia graduates. What did you major in?\n\nIf not for this pandemic, we wouldv''ve had a proper introduction!\n\nRohhaan',
+		2,
+		4
+	);
