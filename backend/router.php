@@ -5,6 +5,7 @@ include 'threads.php';
 include 'replies.php';
 include 'polls.php';
 include 'messages.php';
+include 'activities.php';
 
 class router
 {
@@ -14,16 +15,17 @@ class router
     private object $replies;
     private object $polls;
     private object $messages;
+    private object $activities;
 
     public function __construct(object $conn)
     {
         $this->users = new users($conn);
         $this->ads = new ads($conn);
-        $this->session = new session($conn);
         $this->threads = new threads($conn);
         $this->replies = new replies($conn);
         $this->polls = new polls($conn);
         $this->messages = new messages($conn);
+        $this->activities = new activities($conn);
     }
 
     public function route()
@@ -33,7 +35,8 @@ class router
         header('Access-Control-Allow-Headers: Content-Type');
 
         // Retrieve destructured parameters
-        $json = file_get_contents('php://input');
+        // $json = file_get_contents('php://input');
+        $json = '{"table":"activities","action":"create","title":"sample title","activity_desc":"sample description","starting_time":"2020-12-25 14:00:00","ending_time":"2020-12-25 16:00:00","creator_id":4,"asso_id":1}';
         $obj = json_decode($json, true);
         $table = $obj['table'];
         $action = $obj['action'];
