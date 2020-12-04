@@ -16,7 +16,35 @@ class activities extends request
 
     public function get($obj)
     {
+        $user_id = $obj['user_id'];
         $asso_id = $obj['asso_id'];
+        $query = $this->select("*", array("asso_id" => $asso_id));
+        $res = $this->query($query, true);
+        foreach ($res['activities'] as $key => &$activity) {
+            $creator_id = $activity['creator_id'];
+            $activity_id = $activity['activity_id'];
+            // Append the creator username
+            $query = sprintf(
+                'SELECT username FROM users WHERE user_id=%s;',
+                $creator_id
+            );
+            $result = $this->gquery($query, true);
+            $activity['creator_username'] = $result[0]['username'];
+            // Append has_responded
+            $query = sprintf(
+                'SELECT * FROM attends WHERE user_id=%s AND activity_id=%s;',
+                $user_id,
+                $activity_id
+            );
+            $result = $this->gquery($query, true);
+            if (is_string($result) and $result == "Empty set.") {
+                $activity['has_responded'] = false;
+            } else {
+                $activity['has_responded'] = true;
+            }
+            unset($activity);
+        }
+        return json_encode($res);
     }
 
     public function attend($obj)
