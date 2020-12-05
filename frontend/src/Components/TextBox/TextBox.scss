@@ -4,15 +4,27 @@
   @include assVal(width height, 100%);
   position: relative;
 
+  &.animate {
+    .text-input {
+      transition: 0.2s ease-out;
+    }
+    .cancel-icon-container {
+      transition: 0.3s ease-out;
+      &:hover {
+        + .text-input {
+          transition: 0.2s ease-out;
+        }
+      }
+    }
+  }
+
   &.active {
     .text-input {
       border: 4px $confirm_green solid;
-      transition: 0.2s ease-out;
     }
     .cancel-icon-container {
       opacity: 1;
       pointer-events: all;
-      transition: 0.3s ease-out;
     }
   }
 
@@ -25,13 +37,11 @@
     @include flex(column, center);
     opacity: 0;
     pointer-events: none;
-    transition: 0.3s ease-out;
     cursor: pointer;
 
     &:hover {
       + .text-input {
         border: 4px $cancel_red solid;
-        transition: 0.2s ease-out;
       }
     }
 
@@ -53,7 +63,6 @@
     padding: 10px;
     outline: none;
     box-sizing: border-box;
-    transition: 0.25s ease;
     font-family: Roboto, sans-serif !important;
     font-weight: 300;
     padding-right: 40px;

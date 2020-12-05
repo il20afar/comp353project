@@ -216,7 +216,7 @@ const Email = (props) => {
   const serverEmail = React.useRef(null);
 
   const onSearchEmailChange = (e) => {
-    const val = e ? e.target.value : "";
+    const val = e ? e : "";
     searchTerm.current = val;
     const filtered = visibleEmail.filter((elem) => elem.title.includes(val));
     setVisibleEmail(val === "" ? serverEmail.current : filtered);

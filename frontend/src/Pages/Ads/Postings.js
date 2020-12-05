@@ -213,9 +213,8 @@ const Postings = () => {
               type="ThreeDots"
               color="rgb(98,96,186)"
               style={{ gridColumn: "1 / span 2" }}
-              height={100}
-              width={100}
-              timeout={0}
+              height="100px"
+              width="100px"
             />
           ) : (
             <>

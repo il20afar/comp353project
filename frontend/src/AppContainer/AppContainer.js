@@ -46,7 +46,7 @@ const authHandler = {
     userRef.current = user;
     setLocalUser &&
       localStorage.setItem("con_manager_user", JSON.stringify(user));
-    // history.push("/condos");
+    history.push("/condos");
     setLoginPage(authHandler.states.success);
   },
   onLoginRequest: async (username, pw, userRef, history, setLoginPage) => {

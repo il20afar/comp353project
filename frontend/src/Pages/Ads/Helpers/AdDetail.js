@@ -200,6 +200,7 @@ const AdDetail = (props) => {
                     type={key === "ad_desc" ? "textarea" : "input"}
                     ref={refs[key]}
                     initialValue={ad[key]}
+                    placeholder={key === "ad_price" ? "Numbers only" : ""}
                     outlineOnChange
                     focusOnRender={false}
                     readOnly={!edit}
