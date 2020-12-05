@@ -1,31 +1,31 @@
 <?php
 include 'users.php';
 include 'ads.php';
-include 'session.php';
 include 'threads.php';
 include 'replies.php';
 include 'polls.php';
 include 'messages.php';
+include 'activities.php';
 
 class router
 {
     private object $users;
     private object $ads;
-    private object $session;
     private object $threads;
     private object $replies;
     private object $polls;
     private object $messages;
+    private object $activities;
 
     public function __construct(object $conn)
     {
         $this->users = new users($conn);
         $this->ads = new ads($conn);
-        $this->session = new session($conn);
         $this->threads = new threads($conn);
         $this->replies = new replies($conn);
         $this->polls = new polls($conn);
         $this->messages = new messages($conn);
+        $this->activities = new activities($conn);
     }
 
     public function route()

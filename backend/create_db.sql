@@ -140,6 +140,28 @@ CREATE TABLE messages (
 	FOREIGN KEY (recipient_id) REFERENCES users(user_id)
 );
 
+CREATE TABLE activities (
+	activity_id INT NOT NULL AUTO_INCREMENT,
+	title VARCHAR(50) NOT NULL UNIQUE,
+	activity_desc VARCHAR(1000) NOT NULL,
+	starting_time DATETIME NOT NULL,
+	ending_time DATETIME NOT NULL,
+	number_of_attendees INT NOT NULL DEFAULT 1,
+	creator_id INT NOT NULL,
+	asso_id INT NOT NULL,
+	PRIMARY KEY (activity_id),
+	FOREIGN KEY (creator_id) REFERENCES users(user_id),
+	FOREIGN KEY (asso_id) REFERENCES associations(asso_id)
+);
+
+CREATE TABLE attends (
+	user_id INT NOT NULL,
+	activity_id INT NOT NULL,
+	PRIMARY KEY (user_id, activity_id),
+	FOREIGN KEY (user_id) REFERENCES users(user_id),
+	FOREIGN KEY (activity_id) REFERENCES activities(activity_id)
+);
+
 /* Inserting data */
 INSERT INTO
 	users (
@@ -651,3 +673,36 @@ VALUES
 		2,
 		4
 	);
+
+INSERT INTO
+	activities (
+		title,
+		activity_desc,
+		starting_time,
+		ending_time,
+		creator_id,
+		asso_id
+	)
+VALUES
+	(
+		'5@7 at Bier Markt',
+		'Hey everyone,\n\nI''ve decided to host this small event to welcome any newcomers to our association. The address of the restaurant is 1221 Rene-Levesque West Boulevard. Please confirm if you can make it and shoot me a message if you have any other suggestions!\n\nThanks,\n\nRohhaan',
+		'2020-12-20 17:00:00',
+		'2020-12-20 19:00:00',
+		2,
+		1
+	);
+
+INSERT INTO
+	attends (user_id, activity_id)
+VALUES
+	(1, 1),
+	(2, 1),
+	(3, 1);
+
+UPDATE
+	activities
+SET
+	number_of_attendees = 3
+WHERE
+	activity_id = 1;
