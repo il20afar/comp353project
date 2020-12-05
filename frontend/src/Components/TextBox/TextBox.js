@@ -13,10 +13,12 @@ const Textbox = React.forwardRef((props, ref) => {
     onChange = () => null,
     focusOnRender = false,
     className = "",
-    initialValue,
+    initialValue = "",
     outlineOnChange = false,
     match = null,
     height = null,
+    readOnly,
+    useAnimation = true,
     ...other
   } = props;
 
@@ -24,16 +26,21 @@ const Textbox = React.forwardRef((props, ref) => {
 
   React.useEffect(() => {
     focusOnRender && ref.current.focus();
+    toggleOutlineState(initialValue);
     if (initialValue) {
-      ref.current.value = initialValue;
+      ref.current[type === "input" ? "value" : "innerHTML"] = initialValue;
     }
   }, []);
 
   const onChangeHandler = (e) => {
+    toggleOutlineState(e.target.value);
+    onChange(e.target.value);
+  };
+
+  const toggleOutlineState = (value) => {
     if (outlineOnChange) {
-      setOutlineState(e.target.value !== initialValue ? "active" : "inactive");
+      setOutlineState(value !== initialValue ? "active" : "inactive");
     }
-    onChange(e);
   };
 
   const onKeyPress = (e) => {
@@ -48,12 +55,17 @@ const Textbox = React.forwardRef((props, ref) => {
 
   const onCancelClick = () => {
     ref.current.value = initialValue;
-    onChange();
+    onChange("");
     setOutlineState("inactive");
   };
 
   return (
-    <D cn={`textbox ${outlineState} ${className}`} style={{ height: height }}>
+    <D
+      cn={`textbox ${outlineState} ${className} ${
+        useAnimation ? "animate" : ""
+      }`}
+      style={{ height: height }}
+    >
       <D cn={`cancel-icon-container ${outlineState}`} onClick={onCancelClick}>
         <FontAwesomeIcon icon={faTimes} />
       </D>
@@ -64,12 +76,14 @@ const Textbox = React.forwardRef((props, ref) => {
           placeholder: placeholder,
           onChange: onChangeHandler,
           onKeyPress: onKeyPress,
+          ...(type === "input" && { readOnly }),
+          ...(type === "textarea" && { contentEditable: !readOnly }),
         }
       ) =>
         type !== "textarea" ? (
           <input type={subType} {...rest} {...other} />
         ) : (
-          <textarea {...rest} {...other} />
+          <div {...rest} {...other} />
         ))()}
     </D>
   );

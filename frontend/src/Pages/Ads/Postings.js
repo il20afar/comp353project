@@ -1,5 +1,4 @@
 import React from "react";
-import Poll from "react-polls";
 
 import {
   D,
@@ -12,14 +11,12 @@ import {
   InputModal,
   SearchBar,
   HighlightedContent,
+  LoadContainer,
 } from "../../imports";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
-
-import AspectRatio from "react-aspect-ratio";
-import "react-aspect-ratio/aspect-ratio.css";
 
 import { v4 as uuid } from "uuid";
 
@@ -75,9 +72,7 @@ const PostingsContainer = (props) => {
   return (
     <div className={`postings-container ${type}`}>
       {visiblePostings.length === 0 ? (
-        <div
-          className={`no-postings-shown ${type}`}
-        >{`No ${type} postings to show!`}</div>
+        <div className={`no-postings-shown ${type}`}></div>
       ) : (
         visiblePostings
           .sort((a, b) => b.ad_id - a.ad_id)
@@ -86,6 +81,7 @@ const PostingsContainer = (props) => {
 
             return (
               <AdThumbnail
+                key={uuid()}
                 type="posting"
                 images={pictures.split(", ")[0]}
                 title={title}
@@ -158,15 +154,17 @@ const Postings = () => {
   };
 
   React.useEffect(() => {
-    updatePostings();
+    window.setTimeout(() => {
+      updatePostings();
+    }, 200);
   }, []);
 
   const actions = [
     ...["items", "both", "services"].map((elem) => {
       const color =
-        visibility === "closed"
+        visibility === "items"
           ? "rgb(86, 116, 224)"
-          : visibility === "closed"
+          : visibility === "services"
           ? "rgb(109, 75, 148)"
           : "rgb(98,96,186)";
       const selectedStyling =
@@ -210,20 +208,32 @@ const Postings = () => {
         />
       ) : (
         <div className={`postings-window ${visibility}`}>
-          <PostingsContainer
-            user={user}
-            visiblePostings={visiblePostings.filter(
-              (elem) => elem.ad_type === "item_sale"
-            )}
-            type="closed"
-          />
-          <PostingsContainer
-            user={user}
-            visiblePostings={visiblePostings.filter(
-              (elem) => elem.ad_type === "service"
-            )}
-            type="open"
-          />
+          {visiblePostings.length === 0 ? (
+            <LoadContainer
+              type="ThreeDots"
+              color="rgb(98,96,186)"
+              style={{ gridColumn: "1 / span 2" }}
+              height="100px"
+              width="100px"
+            />
+          ) : (
+            <>
+              <PostingsContainer
+                user={user}
+                visiblePostings={visiblePostings.filter(
+                  (elem) => elem.ad_type === "item_sale"
+                )}
+                type="closed"
+              />
+              <PostingsContainer
+                user={user}
+                visiblePostings={visiblePostings.filter(
+                  (elem) => elem.ad_type === "service"
+                )}
+                type="open"
+              />
+            </>
+          )}
         </div>
       )}
     </div>

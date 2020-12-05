@@ -3,7 +3,7 @@
 .ad-thumbnail {
   box-sizing: border-box;
   margin-bottom: 10px;
-  scroll-snap-align: start;
+  scroll-snap-align: none;
 
   .thumbnail-container {
     $imgWidth: 240px;

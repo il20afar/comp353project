@@ -10,6 +10,8 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 
+import ImageUploader from "react-images-upload";
+
 import { v4 as uuid } from "uuid";
 
 import "./AdDetail.scss";
@@ -23,14 +25,41 @@ const fields = {
   visibility: "Visibility",
 };
 
-const stockimages = ["a", "b", "c", "d", "e", "f"].map(
-  (elem) => `http://localhost:3001/backend/condo_pictures/${elem}.jpeg`
-);
+class ImageUpload extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { pictures: [] };
+    this.onDrop = this.onDrop.bind(this);
+  }
 
-const ImageCarousel = () => {
+  onDrop(picture) {
+    this.setState({
+      pictures: this.state.pictures.concat(picture),
+    });
+  }
+
+  render() {
+    console.log(this.state.pictures);
+    return (
+      <ImageUploader
+        withIcon={true}
+        withPreview
+        defaultImages={this.props.defaultImages}
+        buttonText="Choose images"
+        onChange={this.onDrop}
+        imgExtension={[".jpg", ".gif", ".png", ".gif"]}
+        maxFileSize={5242880}
+      />
+    );
+  }
+}
+
+const ImageCarousel = (props) => {
+  const { pictures } = props;
+  console.log(pictures);
   return (
-    <Carousel renderThumbs={() => null}>
-      {stockimages.map((elem) => (
+    <Carousel>
+      {pictures.map((elem) => (
         <div className="img-container" key={uuid()}>
           <img alt="" src={elem} />
           <p className="legend">
@@ -54,6 +83,8 @@ const AdDetail = (props) => {
     ad_desc: React.useRef(null),
     visibility: React.useRef(null),
   });
+
+  const picturesArray = ad.pictures.replace(" ", "").split(",");
 
   const onConfirmChange = async () => {
     const updatedAd = {
@@ -143,7 +174,11 @@ const AdDetail = (props) => {
           </D>
         </D>
         <D cn="picture-container">
-          <ImageCarousel />
+          {edit ? (
+            <ImageUpload defaultImages={picturesArray} />
+          ) : (
+            <ImageCarousel pictures={picturesArray} />
+          )}{" "}
         </D>
         <D cn={`edit-info-container ${edit ? "edit" : "display"}`}>
           {Object.entries(fields).map(([key, val]) => {
@@ -165,6 +200,7 @@ const AdDetail = (props) => {
                     type={key === "ad_desc" ? "textarea" : "input"}
                     ref={refs[key]}
                     initialValue={ad[key]}
+                    placeholder={key === "ad_price" ? "Numbers only" : ""}
                     outlineOnChange
                     focusOnRender={false}
                     readOnly={!edit}
