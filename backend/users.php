@@ -1,14 +1,10 @@
 <?php
 include_once 'request.php';
-
 class users extends request
 {
     public function __construct($conn)
     {
-        parent::__construct(
-            'users',
-            $conn
-        );
+        parent::__construct('users', $conn);
     }
 
     public function login($obj)
@@ -18,9 +14,9 @@ class users extends request
         $res = $this->query($query, true);
         return json_encode($res);
     }
-
     
-    public function modify($obj){
+    public function modify($obj)
+    {
         $username = ((array) $obj)['username'];
         $where = sprintf(
             "username='%s'",
@@ -28,6 +24,13 @@ class users extends request
         );
         $query = $this->update((array) $obj, $where);
         $res = $this->query($query, false);
+        return json_encode($res);
+    }
+
+    public function get($obj)
+    {
+        $query = "SELECT user_id, username, first_name, last_name, asso_id FROM users;";
+        $res = $this->query($query, true);
         return json_encode($res);
     }
 }

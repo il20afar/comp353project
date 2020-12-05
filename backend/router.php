@@ -6,6 +6,7 @@ include 'replies.php';
 include 'polls.php';
 include 'messages.php';
 include 'activities.php';
+include 'associations.php';
 
 class router
 {
@@ -16,6 +17,7 @@ class router
     private object $polls;
     private object $messages;
     private object $activities;
+    private object $associations;
 
     public function __construct(object $conn)
     {
@@ -26,6 +28,7 @@ class router
         $this->polls = new polls($conn);
         $this->messages = new messages($conn);
         $this->activities = new activities($conn);
+        $this->associations = new associations($conn);
     }
 
     public function route()
