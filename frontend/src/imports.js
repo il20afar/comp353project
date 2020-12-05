@@ -36,4 +36,4 @@ export { default as LoadContainer } from "./Components/LoadContainer/LoadContain
 export { UserIcon, UserModModal } from "./Components/User/User";
 
 // /Utils
-export { D, data, HighlightedContent } from "./Utils/Utils";
+export { D, data, HighlightedContent, filesToBase64 } from "./Utils/Utils";

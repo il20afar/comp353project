@@ -28,12 +28,13 @@
     .content-container {
       width: calc(100% - $imgWidth);
       height: 100%;
-      @include flex(column, space-between);
+      @include flex(column, flex-start);
 
       .field-container {
         width: 100%;
         height: fit-content;
         @include flex(column, justify-content);
+        margin-bottom: 10px;
 
         $fontsize: 14px;
 
@@ -81,6 +82,8 @@
         grid-template-columns: 50% 50%;
         grid-template-rows: auto auto;
         .field-container:nth-of-type(1) {
+          margin-bottom: 6px;
+
           .field-title {
             display: none;
           }
@@ -96,7 +99,7 @@
           grid-column: 2 / span 1;
         }
         .field-container {
-          margin-bottom: 10px;
+          margin-bottom: 0px;
         }
       }
     }
