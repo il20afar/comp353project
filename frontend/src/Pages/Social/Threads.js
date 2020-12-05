@@ -111,8 +111,6 @@ const ThreadView = (props) => {
     updateReplies();
   }, []);
 
-  console.log(visibleReplies);
-
   return (
     <div className="thread-view">
       <div className="thread-name-container">
@@ -269,8 +267,6 @@ const Threads = (props) => {
     serverThreads.current = threads.threads;
     setVisibleThreads(serverThreads.current);
   };
-
-  console.log(visibleThreads, view);
 
   return (
     <D cn="threads-page">

@@ -9,37 +9,35 @@ const Textbox = React.forwardRef((props, ref) => {
   const {
     type,
     subType = "text",
+    initialValue = "",
+    matchValue = "",
     placeholder,
     onChange = () => null,
     focusOnRender = false,
-    className = "",
-    initialValue = "",
     outlineOnChange = false,
     match = null,
     height = null,
     readOnly,
     useAnimation = true,
+    className = "",
     ...other
   } = props;
 
   const [outlineState, setOutlineState] = React.useState("inactive");
 
-  React.useEffect(() => {
-    focusOnRender && ref.current.focus();
-    toggleOutlineState(initialValue);
-    if (initialValue) {
-      ref.current[type === "input" ? "value" : "innerHTML"] = initialValue;
-    }
-  }, []);
+  const defaultRef = React.useRef(null);
+  const whichRef = ref ?? defaultRef;
 
   const onChangeHandler = (e) => {
-    toggleOutlineState(e.target.value);
-    onChange(e.target.value);
+    const val = e.target[type === "input" ? "value" : "innerHTML"];
+    console.log(val);
+    toggleOutlineState(val);
+    onChange(val);
   };
 
   const toggleOutlineState = (value) => {
     if (outlineOnChange) {
-      setOutlineState(value !== initialValue ? "active" : "inactive");
+      setOutlineState(value !== matchValue ? "active" : "inactive");
     }
   };
 
@@ -47,17 +45,22 @@ const Textbox = React.forwardRef((props, ref) => {
     const val = e.key;
     if (match === "number" && !val.match(/[0-9]{1}/)) {
       e.preventDefault();
-      // if (!val.match(/[0-9]+[.]{0,1}[0-9]+/)[0].length !== val.length) {
-      //   e.stopPropagation();
-      // }
     }
   };
 
   const onCancelClick = () => {
-    ref.current.value = initialValue;
+    whichRef.current.value = initialValue;
     onChange("");
     setOutlineState("inactive");
   };
+
+  // React.useEffect(() => {
+  //   // focusOnRender && ref.current.focus();
+  //   // toggleOutlineState(initialValue);
+  //   if (initialValue) {
+  //     whichRef.current[type === "input" ? "value" : "innerHTML"] = initialValue;
+  //   }
+  // }, []);
 
   return (
     <D
@@ -71,13 +74,15 @@ const Textbox = React.forwardRef((props, ref) => {
       </D>
       {((
         rest = {
-          ref: ref,
+          ref: whichRef,
           className: "text-input",
           placeholder: placeholder,
+          value: initialValue,
           onChange: onChangeHandler,
           onKeyPress: onKeyPress,
           ...(type === "input" && { readOnly }),
           ...(type === "textarea" && { contentEditable: !readOnly }),
+          ...(type === "textarea" && { onInput: onChangeHandler }),
         }
       ) =>
         type !== "textarea" ? (

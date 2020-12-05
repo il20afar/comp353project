@@ -24,7 +24,7 @@ import AdDetail from "./Helpers/AdDetail";
 import "./Postings.scss";
 
 const PostingDetailedContainer = (props) => {
-  const { ad = {}, view, setView, editable, user_id } = props;
+  const { type, ad = {}, view, setView, editable, user_id } = props;
 
   const handlers = {
     edit: () => {
@@ -54,6 +54,7 @@ const PostingDetailedContainer = (props) => {
     <div className="ad-detail-container">
       <AdDetail
         {...{
+          type,
           view,
           editable: editable && user_id === ad.creator_id,
           ad: inputAd,
@@ -98,7 +99,7 @@ const PostingsContainer = (props) => {
 const Postings = () => {
   const { user } = React.useContext(MainContext);
 
-  const [visibility, setVisiblity] = React.useState("both");
+  const [visibleItemType, setVisibleItemsType] = React.useState("both");
 
   // "menu", "detailed", "edit", "create"
   const [view, setView] = React.useState("menu");
@@ -107,27 +108,18 @@ const Postings = () => {
   const [visiblePostings, setVisiblePostings] = React.useState([]);
 
   // If ad is selected, it means we return the detailed view
-  const [selectedAd, setSelectedAd] = React.useState({});
-
-  // This is the current visibility filter
-  const [visibilityFilter, setVisibilityFilter] = React.useState(visibility);
+  const [selectedPosting, setSelectedPosting] = React.useState({});
 
   const handlers = {
     actions: {
       updatePostings: async (visibility) => {
         const res = await data.send("ads", "get", {
-          visibility: visibility.toLowerCase(),
+          visibility: "public",
         });
-        console.log(res.ads);
 
         setVisiblePostings(
-          res.ads.filter((ad) => ad.ad_type === "condo") || []
+          res.ads.filter((ad) => ad.ad_type !== "condo") || []
         );
-      },
-
-      filter: (eventKey) => {
-        handlers.actions.updatePostings(eventKey);
-        setVisibilityFilter(eventKey);
       },
       create: () => {
         setView("create");
@@ -136,7 +128,7 @@ const Postings = () => {
 
     adGrid: {
       open: (adNumber) => {
-        setSelectedAd(
+        setSelectedPosting(
           visiblePostings.find((ad) => ad.ad_id === adNumber) || {}
         );
         setView("specific");
@@ -144,31 +136,16 @@ const Postings = () => {
     },
   };
 
-  const updatePostings = async () => {
-    const res = await data.send("ads", "get", {
-      visibility: "public",
-    });
-
-    console.log(res);
-    setVisiblePostings(res.ads.filter((elem) => elem.ad_type !== "condo"));
-  };
-
-  React.useEffect(() => {
-    window.setTimeout(() => {
-      updatePostings();
-    }, 200);
-  }, []);
-
   const actions = [
     ...["items", "both", "services"].map((elem) => {
       const color =
-        visibility === "items"
+        visibleItemType === "items"
           ? "rgb(86, 116, 224)"
-          : visibility === "services"
+          : visibleItemType === "services"
           ? "rgb(109, 75, 148)"
           : "rgb(98,96,186)";
       const selectedStyling =
-        visibility === elem
+        visibleItemType === elem
           ? {
               fontWeight: "700px",
               backgroundColor: color,
@@ -186,7 +163,7 @@ const Postings = () => {
               ...selectedStyling,
             },
           }}
-          onClick={() => setVisiblity(elem)}
+          onClick={() => setVisibleItemsType(elem)}
         />
       );
     }),
@@ -197,17 +174,17 @@ const Postings = () => {
     />,
   ];
 
+  React.useEffect(() => {
+    window.setTimeout(() => {
+      handlers.actions.updatePostings();
+    }, 200);
+  }, []);
+
   return (
     <div className="postings">
-      <Header key={uuid()} height="80px" actions={actions} />
-
-      {view === "create" ? (
-        <PostingDetailedContainer
-          updatePostings={updatePostings}
-          setView={setView}
-        />
-      ) : (
-        <div className={`postings-window ${visibility}`}>
+      {view === "menu" && <Header height="80px" actions={actions} />}
+      {view === "menu" ? (
+        <div className={`postings-window ${visibleItemType}`}>
           {visiblePostings.length === 0 ? (
             <LoadContainer
               type="ThreeDots"
@@ -235,6 +212,15 @@ const Postings = () => {
             </>
           )}
         </div>
+      ) : (
+        <PostingDetailedContainer
+          type="posting"
+          ad={selectedPosting}
+          editable={true}
+          view={view}
+          updatePostings={handlers.actions.updatePostings}
+          setView={setView}
+        />
       )}
     </div>
   );

@@ -111,7 +111,6 @@ const Condos = (props) => {
         const res = await data.send("ads", "get", {
           visibility: visibility.toLowerCase(),
         });
-        console.log(res.ads);
 
         setVisibleCondos(res.ads.filter((ad) => ad.ad_type === "condo") || []);
       },

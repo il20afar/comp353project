@@ -20,7 +20,7 @@
 
   &.active {
     .text-input {
-      border: 4px $confirm_green solid;
+      border: 3px $confirm_green solid;
     }
     .cancel-icon-container {
       opacity: 1;
@@ -30,9 +30,9 @@
 
   .cancel-icon-container {
     position: absolute;
-    width: 50px;
-    height: calc(100% - 8px);
-    top: 4px;
+    width: 48px;
+    height: calc(100% - 6px);
+    top: 3px;
     right: 0;
     @include flex(column, center);
     opacity: 0;
@@ -41,13 +41,14 @@
 
     &:hover {
       + .text-input {
-        border: 4px $cancel_red solid;
+        border: 3px $cancel_red solid;
       }
     }
 
     > svg {
-      width: 30px;
-      height: 30px;
+      $size: 28px;
+      width: $size;
+      height: $size;
       margin: 0 auto;
       fill: $cancel_red;
       color: $cancel_red;
@@ -59,7 +60,7 @@
     background-color: $text_bg;
     border: 3px solid $border;
     border-radius: 7px;
-    font-size: 34px;
+    font-size: 33px;
     padding: 10px;
     outline: none;
     box-sizing: border-box;
