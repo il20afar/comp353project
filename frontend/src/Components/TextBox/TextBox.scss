@@ -28,6 +28,17 @@
     }
   }
 
+  &.textarea {
+    .cancel-icon-container {
+      height: 43px;
+    }
+    textarea {
+      box-sizing: border-box;
+      overflow: hidden;
+      transition: 0s !important;
+    }
+  }
+
   .cancel-icon-container {
     position: absolute;
     width: 48px;
@@ -58,7 +69,7 @@
   .text-input {
     @include assVal(width height line-height, 100%);
     background-color: $text_bg;
-    border: 3px solid $border;
+    border: 3px solid white;
     border-radius: 7px;
     font-size: 33px;
     padding: 10px;
@@ -67,6 +78,8 @@
     font-family: Roboto, sans-serif !important;
     font-weight: 300;
     padding-right: 40px;
+
+    resize: none;
 
     &::-webkit-input-placeholder {
       font-style: italic;

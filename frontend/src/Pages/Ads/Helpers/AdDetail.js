@@ -226,12 +226,12 @@ const AdDetail = (props) => {
                   <TextBox
                     key={`textbox-field${key}`}
                     type={key === "ad_desc" ? "textarea" : "input"}
-                    // ref={refs[key]}
                     initialValue={inputValues[key]}
                     placeholder={key === "ad_price" ? "Numbers only" : ""}
                     outlineOnChange
                     focusOnRender={false}
                     onChange={(e) => onInputValueChange(key, e)}
+                    onCancel={() => onInputValueChange(key, "")}
                     readOnly={!edit}
                     match={key === "ad_price" ? "number" : null}
                     maxLength={key === "ad_price" ? 9 : null}

@@ -25,24 +25,22 @@ import "./Polls.scss";
 const PollsCreate = (props) => {
   const { setView, updatePolls } = props;
 
-  const scrollContainerRef = React.useRef(null);
-  const refs = React.useRef([
-    React.useRef(null),
-    React.useRef(null),
-    React.useRef(null),
-    React.useRef(null),
-    React.useRef(null),
-    React.useRef(null),
-    React.useRef(null),
-    React.useRef(null),
-  ]);
-
-  const lastEdited = React.useRef(0);
-
   const [inputModalView, setInputModalView] = React.useState("display");
   const [answers, setAnswers] = React.useState(["", "", ""]);
   const [addButtonView, setAddButtonView] = React.useState(false);
 
+  const scrollContainerRef = React.useRef(null);
+  const lastEdited = React.useRef(0);
+
+  const onInputValueChange = (index, newValue) => {
+    lastEdited.current = index;
+    answers[index] = newValue;
+    setAnswers([...answers]);
+    updateButtonState();
+    setInputModalView(isValidPoll() ? "edit" : "display");
+  };
+
+  console.log(answers);
   // Adds an answer field
   const addField = () => {
     const newAnswers = [
@@ -65,9 +63,7 @@ const PollsCreate = (props) => {
 
   // Checks if poll is valid to be sent
   const isValidPoll = () => {
-    return [refs.current[0], refs.current[1], refs.current[2]].every(
-      (elem) => elem.current.value !== ""
-    );
+    return [answers[0], answers[1], answers[2]].every((elem) => elem !== "");
   };
   // Checks if all visible answer boxes are populated
   const allAnswersPopulated = () =>
@@ -77,7 +73,6 @@ const PollsCreate = (props) => {
   const onChange = (value, index) => {
     answers[index] = value;
     lastEdited.current = index;
-    setAnswers(answers);
     updateButtonState();
     setInputModalView(isValidPoll() ? "edit" : "display");
   };
@@ -100,76 +95,6 @@ const PollsCreate = (props) => {
     });
   }, [answers]);
 
-  const InputField = (props) => {
-    const {
-      customRef,
-      index,
-      title,
-      placeholder,
-      initialValue = "",
-      type = "question",
-    } = props;
-    const defaultRef = React.useRef(null);
-
-    return (
-      <div
-        key={`poll-creation-field-${index}`}
-        className="create-poll-field"
-        style={{ height: "fit-content", marginBottom: "20px" }}
-      >
-        <div
-          style={{
-            fontSize: "20px",
-            color: "white",
-            marginBottom: "8px",
-            height: "20px",
-          }}
-        >
-          {title}
-        </div>
-        <div style={{ height: "40px", width: "100%", display: "flex" }}>
-          <TextBox
-            key={`poll-creation-field-textbox-${index}`}
-            type={"input"}
-            ref={customRef || defaultRef}
-            placeholder={placeholder}
-            initialValue={initialValue}
-            onChange={(e) => onChange(e, index)}
-            // outlineOnChange
-            focusOnRender={lastEdited.current === index}
-            readOnly={false}
-            style={{ fontSize: "22px" }}
-            height="50px"
-            useAnimation={false}
-          />
-          {type === "answers" && answers.length >= 4 && (
-            <div
-              style={{
-                height: "58px",
-                width: "58px",
-                marginLeft: "10px",
-                backgroundColor: "red",
-                borderRadius: "4px",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                cursor: "pointer",
-              }}
-              onClick={() => deleteField(index)}
-            >
-              <FontAwesomeIcon
-                icon={faTrash}
-                color={"white"}
-                style={{ margin: "0 auto" }}
-                size={"sm"}
-              />
-            </div>
-          )}
-        </div>
-      </div>
-    );
-  };
-
   return (
     <InputModal
       key="view-input-modal"
@@ -181,13 +106,14 @@ const PollsCreate = (props) => {
       onCancel={() => setView("menu")}
       onConfirm={async () => {
         const res = await data.send("polls", "create", {
-          question: refs.current[0].current.value,
+          question: answers[0],
           asso_id: 1,
-          answers: refs.current
-            .filter((elem, index) => index !== 0 && elem.current?.value)
-            .map((elem) => elem.current.value),
+          answers: answers
+            .filter((elem, index) => index !== 0 && elem)
+            .map((elem) => elem),
         });
 
+        console.log(res);
         if (res === 1) {
           setView("menu");
           updatePolls();
@@ -206,21 +132,70 @@ const PollsCreate = (props) => {
           overflowX: "visible",
         }}
       >
-        {answers.map((value, i) => {
+        {answers.map((value, index) => {
+          const isAnswer = index !== 0;
           return (
-            <InputField
-              key={`poll-creation-field-${i}`}
-              customRef={refs.current[i]}
-              initialValue={answers[i]}
-              index={i}
-              title={i === 0 ? "Create a new poll" : `Answer ${i}`}
-              placeholder={
-                i === 0
-                  ? "Enter your poll question here..."
-                  : `Enter answer #${i}`
-              }
-              type={i === 0 ? "question" : "answers"}
-            />
+            <div
+              key={`poll-creation-field-${index}`}
+              className="create-poll-field"
+              style={{ height: "fit-content", marginBottom: "20px" }}
+            >
+              <div
+                style={{
+                  fontSize: "20px",
+                  color: "white",
+                  marginBottom: "8px",
+                  height: "20px",
+                }}
+              >
+                {isAnswer ? `Answer ${index}` : "Create a new poll"}
+              </div>
+              <div style={{ height: "40px", width: "100%", display: "flex" }}>
+                <TextBox
+                  key={`poll-creation-field-textbox-${index}`}
+                  type={"input"}
+                  initialValue={value}
+                  placeholder={
+                    `Answer ${index}`
+                      ? `Enter answer #${index}`
+                      : "Enter your poll question here..."
+                  }
+                  onChange={(e) => onInputValueChange(index, e)}
+                  onCancel={() => onInputValueChange(index, "")}
+                  focusOnRender={lastEdited.current === index}
+                  readOnly={false}
+                  style={{ fontSize: "22px" }}
+                  height="50px"
+                  useAnimation={false}
+                />
+                {isAnswer && answers.length >= 4 && (
+                  <div
+                    style={{
+                      height: "50px",
+                      width: "50px",
+                      marginLeft: "10px",
+                      backgroundColor: "red",
+                      borderRadius: "4px",
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "center",
+                      cursor: "pointer",
+                    }}
+                    onClick={() => deleteField(index)}
+                  >
+                    <FontAwesomeIcon
+                      icon={faTrash}
+                      color={"white"}
+                      style={{
+                        width: "30px",
+                        height: "30px",
+                        margin: "0 auto",
+                      }}
+                    />
+                  </div>
+                )}
+              </div>
+            </div>
           );
         })}
 
@@ -281,30 +256,38 @@ const PollsContainer = (props) => {
                   ).content
                 : null;
             return (
-              <Poll
-                key={uuid()}
-                noStorage
-                vote={user_answer}
-                customStyles={{
-                  theme: type === "closed" ? "blue" : "purple",
-                }}
-                question={question}
-                answers={Object.values(answers).map((answer) => ({
-                  option: answer.content,
-                  votes: answer.number_of_votes,
-                }))}
-                onVote={async (voteAnswer) => {
-                  const res = await data.send("polls", "vote", {
-                    user_id: user.current.user_id,
-                    answer_id: answers.find(
-                      (answer) => answer.content === voteAnswer
-                    ).answer_id,
-                  });
-                  if (res !== -1) {
-                    updatePolls();
-                  }
-                }}
-              />
+              <div className="polls-wrapper">
+                {" "}
+                <Poll
+                  key={uuid()}
+                  noStorage
+                  vote={user_answer}
+                  customStyles={{
+                    questionSeparator: false,
+                    questionSeparatorWidth: "poll",
+                    questionBold: false,
+                    questionColor: "#4F70D6",
+                    align: "center",
+                    theme: type === "closed" ? "blue" : "purple",
+                  }}
+                  question={question}
+                  answers={Object.values(answers).map((answer) => ({
+                    option: answer.content,
+                    votes: answer.number_of_votes,
+                  }))}
+                  onVote={async (voteAnswer) => {
+                    const res = await data.send("polls", "vote", {
+                      user_id: user.current.user_id,
+                      answer_id: answers.find(
+                        (answer) => answer.content === voteAnswer
+                      ).answer_id,
+                    });
+                    if (res !== -1) {
+                      updatePolls();
+                    }
+                  }}
+                />
+              </div>
             );
           })
       )}
@@ -324,6 +307,7 @@ const Polls = () => {
       user_id: user.current.user_id,
       asso_id: 1,
     });
+    console.log(res);
     if (res.polls) {
       setVisiblePolls(res.polls);
     }
