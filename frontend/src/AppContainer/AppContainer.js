@@ -42,7 +42,6 @@ const authHandler = {
     success: "success",
   },
   login: (user, userRef, setLoginPage, history, setLocalUser = false) => {
-    console.log(user);
     userRef.current = user;
     setLocalUser &&
       localStorage.setItem("con_manager_user", JSON.stringify(user));
@@ -80,7 +79,7 @@ const authHandler = {
 const useLoginPersistence = (userRef, setLoginPage, history) => {
   return React.useEffect(() => {
     const localStorageUser = authHandler.checkStatus();
-    console.log(localStorageUser);
+
     localStorageUser &&
       authHandler.login(
         JSON.parse(localStorageUser),
@@ -140,8 +139,6 @@ const AppContainer = () => {
 
   // Logs in the user if session is active
   useLoginPersistence(userRef, setLoginPage, history);
-
-  console.log(location);
 
   return (
     <MainContext.Provider value={{ user: userRef }}>

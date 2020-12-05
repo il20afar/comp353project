@@ -170,8 +170,6 @@ const PollsCreate = (props) => {
     );
   };
 
-  console.log("RENDER");
-
   return (
     <InputModal
       key="view-input-modal"
@@ -189,13 +187,7 @@ const PollsCreate = (props) => {
             .filter((elem, index) => index !== 0 && elem.current?.value)
             .map((elem) => elem.current.value),
         });
-        console.log({
-          question: refs.current[0].current.value,
-          asso_id: 1,
-          answers: refs.current
-            .filter((elem, index) => index !== 0 && elem.current?.value)
-            .map((elem) => elem.current.value),
-        });
+
         if (res === 1) {
           setView("menu");
           updatePolls();
@@ -288,7 +280,6 @@ const PollsContainer = (props) => {
                     (answer) => answer.answer_id === answer_id
                   ).content
                 : null;
-            console.log(elem);
             return (
               <Poll
                 key={uuid()}
@@ -324,17 +315,11 @@ const PollsContainer = (props) => {
 const Polls = () => {
   const { user } = React.useContext(MainContext);
 
-  console.log(user.current);
-
   const [view, setView] = React.useState("menu");
   const [visibility, setVisiblity] = React.useState("both");
   const [visiblePolls, setVisiblePolls] = React.useState([]);
 
   const updatePolls = async () => {
-    console.log({
-      user_id: user.current.user_id,
-      asso_id: 1,
-    });
     const res = await data.send("polls", "get", {
       user_id: user.current.user_id,
       asso_id: 1,
@@ -385,8 +370,6 @@ const Polls = () => {
       onClick={() => setView("create")}
     />,
   ];
-
-  console.log(visiblePolls);
 
   return (
     <div className="polls">
