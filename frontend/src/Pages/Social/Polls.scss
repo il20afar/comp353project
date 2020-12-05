@@ -14,9 +14,6 @@
     position: absolute;
   }
 
-  .input-modal {
-  }
-
   .polls-window {
     width: 100%;
     // position: absolute;
@@ -63,6 +60,10 @@
       width: 100%;
       // padding: 20px;
       overflow: scroll !important;
+
+      .polls-wrapper {
+        height: 200px;
+      }
 
       .no-polls-shown {
         width: 100%;

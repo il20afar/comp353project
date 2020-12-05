@@ -172,11 +172,15 @@
             height: 50px;
             font-size: 20px !important;
           }
-          > div {
+          > textarea {
             font-size: 20px !important;
+            min-height: 50px;
             // height: fit-content !important;
+            line-height: 20px !important;
           }
-          margin-bottom: 10px;
+          &:not(.textarea) {
+            margin-bottom: 10px;
+          }
         }
         .title {
           height: 20px;

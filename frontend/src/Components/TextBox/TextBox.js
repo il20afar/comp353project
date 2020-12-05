@@ -1,4 +1,6 @@
 import React from "react";
+import TextareaAutosize from "react-textarea-autosize";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { D } from "../../imports";
@@ -13,6 +15,7 @@ const Textbox = React.forwardRef((props, ref) => {
     matchValue = "",
     placeholder,
     onChange = () => null,
+    onCancel = () => null,
     focusOnRender = false,
     outlineOnChange = false,
     match = null,
@@ -26,10 +29,11 @@ const Textbox = React.forwardRef((props, ref) => {
   const [outlineState, setOutlineState] = React.useState("inactive");
 
   const defaultRef = React.useRef(null);
+  const defaultValue = React.useRef(initialValue);
   const whichRef = ref ?? defaultRef;
 
   const onChangeHandler = (e) => {
-    const val = e.target[type === "input" ? "value" : "innerHTML"];
+    const val = e.target[type === "input" ? "value" : "value"];
     console.log(val);
     toggleOutlineState(val);
     onChange(val);
@@ -49,22 +53,20 @@ const Textbox = React.forwardRef((props, ref) => {
   };
 
   const onCancelClick = () => {
-    whichRef.current.value = initialValue;
-    onChange("");
+    // whichRef.current.value = initialValue;
+    // onChange("");
     setOutlineState("inactive");
+    onCancel();
   };
 
-  // React.useEffect(() => {
-  //   // focusOnRender && ref.current.focus();
-  //   // toggleOutlineState(initialValue);
-  //   if (initialValue) {
-  //     whichRef.current[type === "input" ? "value" : "innerHTML"] = initialValue;
-  //   }
-  // }, []);
+  React.useEffect(() => {
+    // if (type === "textarea") whichRef.current.innerHTML = initialValue;
+    focusOnRender && whichRef.current.focus();
+  }, [initialValue]);
 
   return (
     <D
-      cn={`textbox ${outlineState} ${className} ${
+      cn={`textbox ${type} ${outlineState} ${className} ${
         useAnimation ? "animate" : ""
       }`}
       style={{ height: height }}
@@ -80,15 +82,13 @@ const Textbox = React.forwardRef((props, ref) => {
           value: initialValue,
           onChange: onChangeHandler,
           onKeyPress: onKeyPress,
-          ...(type === "input" && { readOnly }),
-          ...(type === "textarea" && { contentEditable: !readOnly }),
-          ...(type === "textarea" && { onInput: onChangeHandler }),
+          readOnly,
         }
       ) =>
         type !== "textarea" ? (
           <input type={subType} {...rest} {...other} />
         ) : (
-          <div {...rest} {...other} />
+          <TextareaAutosize resize={false} minRows={1} {...rest} {...other} />
         ))()}
     </D>
   );

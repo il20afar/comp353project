@@ -118,6 +118,7 @@ const menus = {
 //[FUNCTIONAL COMPONENTS]
 const AppContainer = () => {
   const [loginPage, setLoginPage] = React.useState(authHandler.states.idle);
+  const [showUserMod, setShowUserMod] = React.useState(false);
   const userRef = React.useRef(null);
   const pageRef = React.useRef(null);
 
@@ -214,13 +215,16 @@ const AppContainer = () => {
                             setCurrentPage: () => null,
                             handleSidebarToggle: toggleSidebar,
                             showUserMod: false,
-                            setShowUserMod: () => null,
+                            setShowUserMod,
                             menus,
                             user: userRef,
                           }}
                         />
-                        {false && (
-                          <UserModModal user={userRef} onClose={() => false} />
+                        {showUserMod && (
+                          <UserModModal
+                            user={userRef}
+                            onClose={() => setShowUserMod(false)}
+                          />
                         )}
                       </div>
                     )}

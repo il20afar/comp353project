@@ -6,26 +6,28 @@ import "./LoginContainer.scss";
 const LoginContainer = (props) => {
   const { loginStates, setLoginPage, handleLogin, invalidLogin } = props;
   const [showLogin, setShowLogin] = React.useState(false);
-  const refs = {
-    username: React.useRef(null),
-    password: React.useRef(null),
-    adsButton: React.useRef(null),
-    loginButton: React.useRef(null),
-  };
+  const [inputValues, setInputValues] = React.useState({
+    username: "",
+    password: "",
+  });
+
+  const loginButtonRef = React.useRef(null);
 
   const isLoginEntered = () =>
-    refs.username.current.value != "" && refs.password.current.value !== "";
+    inputValues.username != "" && inputValues.password !== "";
 
   const handlers = {
     login: {
-      onChange: () => {
+      onChange: (eventKey, newValue) => {
+        inputValues[eventKey] = newValue;
+        setInputValues(Object.assign({}, inputValues));
         isLoginEntered()
-          ? refs.loginButton.current.classList.add("show")
-          : refs.loginButton.current.classList.remove("show");
+          ? loginButtonRef.current.classList.add("show")
+          : loginButtonRef.current.classList.remove("show");
       },
       onSubmit: () => {
         isLoginEntered() &&
-          handleLogin(refs.username.current.value, refs.password.current.value);
+          handleLogin(inputValues.username, inputValues.password);
       },
     },
   };
@@ -33,9 +35,6 @@ const LoginContainer = (props) => {
   // Component mounted
   React.useEffect(() => {
     if (showLogin) {
-      ["username", "password"].forEach(
-        (elem) => (refs[elem].current.value = "")
-      );
       const listenEnter = (e) => {
         if (e.key === "Enter") {
           handlers.login.onSubmit();
@@ -48,7 +47,7 @@ const LoginContainer = (props) => {
         document.removeEventListener("keyup", listenEnter);
       };
     }
-  }, [showLogin]);
+  }, [inputValues, showLogin]);
 
   return (
     <D cn={`login-container`}>
@@ -73,17 +72,19 @@ const LoginContainer = (props) => {
               {["username", "password"].map((x) => (
                 <D key={x} cn="username-container">
                   <TextBox
+                    key={`textbox-field${x}`}
                     type={"input"}
                     subType={x}
-                    ref={refs[x]}
+                    initialValue={inputValues[x]}
+                    focusOnRender={x === "username"}
                     placeholder={`${x[0].toUpperCase()}${x.slice(1)}`}
-                    onChange={handlers.login.onChange}
+                    onChange={(value) => handlers.login.onChange(x, value)}
                   />
                 </D>
               ))}
             </D>
             <D
-              ref={refs.loginButton}
+              ref={loginButtonRef}
               cn="button-container"
               style={{ visibility: "visible" }}
             >
