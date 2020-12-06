@@ -1,11 +1,10 @@
 <?php
 include_once 'request.php';
-
 class ads extends request
 {
     public function __construct($conn)
     {
-        parent::__construct('ads',$conn);
+        parent::__construct('ads', $conn);
     }
 
     public function create($obj)
@@ -18,16 +17,25 @@ class ads extends request
             return json_encode($res);
         } else {
             $columns = "title, ad_type, ad_desc, ad_price, ad_city, visibility, pictures, creator_id";
-            $base64_string = $obj['pictures'][0];
-            $image_parts = explode(";base64,", $base64_string);
-            $image_type_aux = explode("image/", $image_parts[0]);
-            $image_type = $image_type_aux[1];
-            $image_base64 = base64_decode($image_parts[1]);
-            $file = 'pictures/ads/' . uniqid() . "." . $image_type;
-            // Save picture to local storage
-            file_put_contents($file, $image_base64);
-            $obj['pictures'] = 'http://localhost:3001/backend/' . $file;
+            // Iterate over each picture
+            $pictures_column = "";
+            foreach ($obj['pictures'] as $key => $picture) {
+                $base64_string = $picture;
+                $image_parts = explode(";base64,", $base64_string);
+                $image_type_aux = explode("image/", $image_parts[0]);
+                $image_type = $image_type_aux[1];
+                $image_base64 = base64_decode($image_parts[1]);
+                $file = 'pictures/ads/' . uniqid() . "." . $image_type;
+                // Save picture to local storage
+                file_put_contents($file, $image_base64);
+                if (($key + 1) == count($obj['pictures'])) {
+                    $pictures_column .= 'http://localhost:3001/backend/' . $file;
+                } else {
+                    $pictures_column .= 'http://localhost:3001/backend/' . $file . ', ';
+                }
+            }
             // Insert ad data to database
+            $obj['pictures'] = $pictures_column;
             $query = $this->insert($columns, $obj);
             $res = $this->query($query, false);
             return json_encode($res);

@@ -129,7 +129,7 @@ CREATE TABLE votes (
 CREATE TABLE messages (
 	message_id INT NOT NULL AUTO_INCREMENT,
 	message_subject VARCHAR(50),
-	content VARCHAR(1000),
+	content VARCHAR(5000),
 	creation_time DATETIME NOT NULL DEFAULT NOW(),
 	read_status VARCHAR(50) NOT NULL DEFAULT "unread",
 	attachments VARCHAR(500),
@@ -678,13 +678,13 @@ INSERT INTO
 VALUES
 	(
 		'Welcome to Condo Owners Association of Concordia!',
-		'Hello Maxim,\n\nI just wanted to give you a warm welcome to our association. Feel free to reach out to me with any questions you might have!\n\nAntoine',
+		'Hello Maxim, I just wanted to give you a warm welcome to our association. Feel free to reach out to me with any questions you might have! Antoine.',
 		1,
 		4
 	),
 	(
 		'Fellow Concordian',
-		'Hey Maxim,\n\nIt''s always a pleasure to connect with Concordia graduates. What did you major in?\n\nIf not for this pandemic, we wouldv''ve had a proper introduction!\n\nRohhaan',
+		'Hey Maxim, It''s always a pleasure to connect with Concordia graduates. What did you major in? If not for this pandemic, we would''ve had a proper introduction! Rohhaan.',
 		2,
 		4
 	);
