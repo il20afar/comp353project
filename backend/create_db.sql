@@ -187,7 +187,7 @@ VALUES
 		'Toronto',
 		'Ontario',
 		'Canada',
-		'vbut@conman.com',
+		'admin@conman.com',
 		4379765687,
 		'path/to/default/picture'
 	),
