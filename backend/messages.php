@@ -22,7 +22,6 @@ class messages extends request
     public function get($obj)
     {
         $user_id = $obj['user_id'];
-
         $query = $this->select("*", ["recipient_id" => $user_id]);
         $res = $this->query($query, true);
         return json_encode($res);
