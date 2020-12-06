@@ -77,7 +77,7 @@ const ImageCarousel = (props) => {
 const AdDetail = (props) => {
   const { type = "condo", ad, view, onClose, onEdit, editable } = props;
   const { user } = React.useContext(MainContext);
-  const { user_id, asso_id } = user.current;
+  const { user_id, asso_id } = user.current || {};
   const [edit, setEdit] = React.useState(view === "create");
 
   const [inputValues, setInputValues] = React.useState({
