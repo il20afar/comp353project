@@ -12,6 +12,7 @@ import {
 } from "../../imports";
 import Chatbox from "../../Components/Chatbox/Chatbox";
 import { v4 as uuid } from "uuid";
+import { Typeahead } from "react-bootstrap-typeahead"; // ES2015
 
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
@@ -69,7 +70,8 @@ const EmailMenu = (props) => {
   const { visibleEmail, setView, searchTerm } = props;
 
   const max =
-    11.38 * Math.max(...visibleEmail.map((elem) => elem.title.length));
+    11.38 *
+    Math.max(...visibleEmail.map((elem) => elem.message_subject.length));
 
   return (
     <div className="email-menu">
@@ -77,7 +79,10 @@ const EmailMenu = (props) => {
         <EmailThumbnail
           key={uuid()}
           name={
-            <HighlightedContent searchTerm={searchTerm} content={elem.title} />
+            <HighlightedContent
+              searchTerm={searchTerm}
+              content={elem.message_subject}
+            />
           }
           numberMessages={elem.number_of_replies}
           modifiedOn={elem.last_update_time}
@@ -96,25 +101,47 @@ const EmailView = (props) => {
   return <div className="email-view"></div>;
 };
 
+const useSetAssociationUsers = (setAssociationUsers, asso_id) => {
+  return React.useRef(() => {
+    (async () => {
+      const users = await data.send("users", "get", { asso_id });
+      console.log(users);
+      setAssociationUsers(users);
+    })();
+  }, []);
+};
+
 const EmailCreate = (props) => {
   const { setView, user } = props;
-  const [value, setValue] = React.useState("");
 
-  const refs = {
-    to: React.useRef(null),
-    subject: React.useRef(null),
+  const [inputValues, setInputValues] = React.useState({
+    to: "",
+    subject: "",
+    content: "",
+  });
+  const [associationUsers, setAssociationUsers] = React.useState([]);
+
+  const onInputValueChange = (eventKey, newValue) => {
+    inputValues[eventKey] = newValue;
+    setInputValues(Object.assign({}, inputValues));
   };
 
   const onEmailSubmit = () => {
     const email = {
-      to: refs.to.current.value,
-      subject: refs.subject.current.value,
-      content: value,
+      message_subject: inputValues.content,
+      content: inputValues.content,
+      attachments: "",
       author_id: user.current.user_id,
+      recipient_id: 1,
     };
   };
 
-  const onContentChange = (value) => {};
+  // Gets available association users
+  useSetAssociationUsers(
+    setAssociationUsers,
+    Number.parseInt(user.current.asso_id)
+  );
+  console.log(associationUsers);
 
   return (
     <InputModal
@@ -128,15 +155,16 @@ const EmailCreate = (props) => {
     >
       <div className="email-controls">
         <div className="left-container">
-          {["to", "subject"].map((elem) => (
+          {["to", "subject"].map((field) => (
             <TextBox
+              key={`email-input${field}`}
               type={"input"}
-              ref={refs[elem]}
-              initialValue=""
-              className={elem}
-              placeholder={`${elem}:`}
+              initialValue={inputValues[field]}
+              onChange={(newValue) => onInputValueChange(field, newValue)}
+              className={field}
+              placeholder={`${field}:`}
               outlineOnChange
-              focusOnRender={false}
+              focusOnRender={field === "to"}
               readOnly={false}
               height="40px"
             />
@@ -162,7 +190,7 @@ const EmailCreate = (props) => {
       </div>
       <ReactQuill
         theme="snow"
-        value={value}
+        value={inputValues.message || ""}
         modules={{
           toolbar: [
             [{ header: "1" }, { header: "2" }, { font: [] }],
@@ -198,7 +226,7 @@ const EmailCreate = (props) => {
           "image",
           "video",
         ]}
-        onChange={setValue}
+        onChange={(content) => setInputValues("message", content)}
         style={{ width: "100%", height: "100%" }}
       />
     </InputModal>
@@ -212,14 +240,22 @@ const Email = (props) => {
   const [view, setView] = React.useState("menu");
   const [visibleEmail, setVisibleEmail] = React.useState([]);
   const [replies, setReplies] = React.useState(null);
-  const searchTerm = React.useRef("");
-  const serverEmail = React.useRef(null);
+
+  const [searchTerm, setSearchTerm] = React.useState("");
 
   const onSearchEmailChange = (e) => {
     const val = e ? e : "";
-    searchTerm.current = val;
+    setSearchTerm(val);
     const filtered = visibleEmail.filter((elem) => elem.title.includes(val));
-    setVisibleEmail(val === "" ? serverEmail.current : filtered);
+    setVisibleEmail(val === "" ? visibleEmail : filtered);
+  };
+
+  const updateMessages = async () => {
+    const res = await data.send("messages", "get", {
+      user_id: Number.parseInt(user.current.user_id),
+    });
+    console.log(res.messages);
+    setVisibleEmail(res.messages);
   };
 
   const actions = [
@@ -230,6 +266,7 @@ const Email = (props) => {
     />,
     <SearchBar
       key={"searchbar"}
+      initialValue={searchTerm}
       placeholder={"Search email..."}
       onChange={onSearchEmailChange}
       style={{ height: "46px" }}
@@ -237,14 +274,7 @@ const Email = (props) => {
   ];
 
   React.useEffect(() => {
-    (async () => {
-      const email = await data.send("threads", "get");
-      serverEmail.current = email.threads;
-      setVisibleEmail(serverEmail.current);
-
-      const res = await data.send("replies", "get");
-      setReplies(res.replies);
-    })();
+    updateMessages();
   }, [view]);
 
   return (

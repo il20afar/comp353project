@@ -28,7 +28,13 @@ const filesToBase64 = async (files) =>
 
 const data = {
   send: async (table, action, fields) => {
-    console.log(fields);
+    console.log(
+      JSON.stringify({
+        table,
+        action,
+        ...fields,
+      })
+    );
     try {
       const req = await fetch(process.env.REACT_APP_PHP_SERVER_URL, {
         method: "POST",
@@ -42,6 +48,7 @@ const data = {
         }),
       });
       const res = await req.json();
+      console.log(res);
       return res;
     } catch (error) {
       return error.toString();
