@@ -27,6 +27,13 @@ class associations extends request
         return json_encode($res);
     }
 
+    public function get($obj)
+    {
+        $query = $this->select("*", $obj);
+        $res = $this->query($query, true);
+        return json_encode($res);
+    }
+
     public function add($obj)
     {
         $user_id = $obj['user_id'];
