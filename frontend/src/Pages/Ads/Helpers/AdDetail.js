@@ -65,7 +65,7 @@ const ImageCarousel = (props) => {
         <div className="img-container" key={uuid()}>
           <img alt="" src={elem} />
           <p className="legend">
-            {elem.replace("http://localhost:3001/backend/condo_pictures/", "")}
+            {elem.replace("http://localhost:3001/backend/pictures/ads/", "")}
           </p>
         </div>
       ))}
@@ -120,8 +120,6 @@ const AdDetail = (props) => {
       pictures: convertedPictures,
       ...(view === "create" && { creator_id: Number.parseInt(user_id) }),
     });
-
-    console.log(res);
 
     window.setTimeout(() => {
       if (res !== 0) {

@@ -34,7 +34,7 @@ const Textbox = React.forwardRef((props, ref) => {
 
   const onChangeHandler = (e) => {
     const val = e.target[type === "input" ? "value" : "value"];
-    console.log(val);
+
     toggleOutlineState(val);
     onChange(val);
   };

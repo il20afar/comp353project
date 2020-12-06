@@ -1,0 +1,86 @@
+@import "../../Styles/Utils.scss";
+
+.admin-container {
+  @include fullFlex();
+  position: relative;
+  background-color: $bg;
+
+  .admin-login-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+
+    > div {
+      margin-bottom: 30px;
+    }
+    .admin-login-text {
+      width: 100%;
+      text-align: center;
+      font-size: 30px;
+      color: ghostwhite;
+    }
+
+    .username-container,
+    .password-container {
+      margin: 10px 0 10px 0;
+      width: 100%;
+      height: 50px;
+    }
+
+    .button-container {
+      opacity: 0.3;
+      margin-top: 20px;
+
+      > .button {
+        cursor: not-allowed !important;
+        color: rgb(179, 179, 179);
+        &:hover {
+          transform: none;
+        }
+      }
+      &.show {
+        opacity: 1;
+        > .button {
+          cursor: pointer !important;
+          color: white;
+          &:hover {
+            transform: none;
+          }
+        }
+      }
+    }
+
+    .invalidLogin {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      left: 0;
+      top: 0;
+      @include flex(column, center);
+      background-color: rgba(0, 0, 0, 0.9);
+
+      color: red;
+      font-size: 30px;
+      text-align: center;
+      cursor: pointer;
+
+      animation-name: invalidLogin;
+      animation-duration: 1.2s;
+      animation-timing-function: ease-out;
+      @keyframes invalidLogin {
+        0% {
+          opacity: 1;
+        }
+        75% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 0;
+        }
+      }
+    }
+  }
+}
