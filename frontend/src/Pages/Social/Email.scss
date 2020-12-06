@@ -37,10 +37,15 @@
               text-transform: capitalize;
             }
             .field-display {
+              max-width: 100%;
               width: 100%;
               font-size: 20px;
               height: fit-content;
               color: ghostwhite;
+              img {
+                width: 100%;
+                height: auto;
+              }
             }
           }
         }

@@ -101,6 +101,7 @@ const EmailMenu = (props) => {
 const EmailView = (props) => {
   const { setView, ...fields } = props;
 
+  console.log(JSON.stringify(fields));
   return (
     <InputModal
       view={"display"}
@@ -117,7 +118,10 @@ const EmailView = (props) => {
           return (
             <D key={`edit-info-field-${key}`} cn={`edit-info-field ${key}`}>
               <D cn="field-title">{key} </D>
-              <div className="field-display">{val}</div>
+              <div
+                className="field-display"
+                dangerouslySetInnerHTML={{ __html: val }}
+              />
             </D>
           );
         })}
@@ -130,9 +134,8 @@ const EmailCreate = (props) => {
   const { user, setView, associationUsers, updateAssociationUsers } = props;
 
   const [inputValues, setInputValues] = React.useState({
-    to: "",
     subject: "",
-    content: "",
+    message: "",
   });
   const [selectedUser, setSelectedUser] = React.useState([]);
 
@@ -145,12 +148,12 @@ const EmailCreate = (props) => {
   const onEmailSubmit = async () => {
     console.log(inputValues, selectedUser);
     const email = {
-      message_subject: inputValues.content,
-      content: inputValues.content,
-      attachments: "",
+      message_subject: inputValues.subject,
+      content: inputValues.message,
       author_id: Number.parseInt(user.current.user_id),
       recipient_id: Number.parseInt(selectedUser.user_id),
     };
+    console.log(email);
     const res = await data.send("messages", "create", email);
     if (res === 1) {
       setView("menu");
@@ -295,10 +298,11 @@ const Email = (props) => {
   };
 
   const updateMessages = async () => {
-    const res = await data.send("messages", "get", {
+    const params = {
       user_id: Number.parseInt(user.current.user_id),
-    });
-    console.log(res.messages);
+    };
+    const res = await data.send("messages", "get", params);
+    console.log(res, params);
     setVisibleEmail(res.messages);
   };
 
@@ -328,7 +332,7 @@ const Email = (props) => {
   React.useEffect(() => {
     updateMessages();
     updateAssociationUsers();
-  }, [view]);
+  }, []);
 
   return (
     <D cn="email-page">
