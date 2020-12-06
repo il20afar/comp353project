@@ -179,6 +179,19 @@ INSERT INTO
 	)
 VALUES
 	(
+		'admin',
+		'admin',
+		'Vitalik',
+		'Buterin',
+		'25 Montgomery Avenue',
+		'Toronto',
+		'Ontario',
+		'Canada',
+		'vbut@conman.com',
+		4379765687,
+		'path/to/default/picture'
+	),
+	(
 		'afar',
 		'afar',
 		'Antoine',
@@ -187,9 +200,9 @@ VALUES
 		'Montreal',
 		'Quebec',
 		'Canada',
-		'afar@hey.you',
+		'afar@conman.com',
 		7776665555,
-		'/some/path/'
+		'path/to/default/picture'
 	),
 	(
 		'rohh',
@@ -200,9 +213,9 @@ VALUES
 		'Montreal',
 		'Quebec',
 		'Canada',
-		'rohh@hey.you',
+		'rohh@conman.com',
 		0009998888,
-		'/some/path/'
+		'path/to/default/picture'
 	),
 	(
 		'poon',
@@ -213,9 +226,9 @@ VALUES
 		'Toronto',
 		'Ontario',
 		'Canada',
-		'poon@hey.you',
+		'poon@conman.com',
 		8447776666,
-		'/some/path/'
+		'path/to/default/picture'
 	),
 	(
 		'mpob',
@@ -226,9 +239,9 @@ VALUES
 		'Ottawa',
 		'Ontario',
 		'Canada',
-		'mpob@hey.you',
+		'mpob@conman.com',
 		6665576532,
-		'/some/path/'
+		'path/to/default/picture'
 	);
 
 INSERT INTO
