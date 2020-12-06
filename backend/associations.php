@@ -14,6 +14,19 @@ class associations extends request
         return json_encode($res);
     }
 
+    public function admin($obj)
+    {
+        $new_admin_id = $obj['user_id'];
+        $asso_id = $obj['asso_id'];
+        $query = sprintf(
+            "UPDATE associations SET admin_id=%s WHERE asso_id=%s;",
+            $new_admin_id,
+            $asso_id
+        );
+        $res = $this->query($query, false);
+        return json_encode($res);
+    }
+
     public function add($obj)
     {
         $user_id = $obj['user_id'];
