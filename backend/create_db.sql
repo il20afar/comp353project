@@ -305,7 +305,7 @@ VALUES
 		500000,
 		'Montreal',
 		'public',
-		'http://localhost:3001/backend/condo_pictures/a.jpeg, http://localhost:3001/backend/condo_pictures/building.jpeg',
+		'http://localhost:3001/backend/pictures/ads/a.jpeg, http://localhost:3001/backend/pictures/ads/building.jpeg',
 		1
 	),
 	(
@@ -315,7 +315,7 @@ VALUES
 		1200000,
 		'Montreal',
 		'public',
-		'http://localhost:3001/backend/condo_pictures/b.jpeg, http://localhost:3001/backend/condo_pictures/building.jpeg',
+		'http://localhost:3001/backend/pictures/ads/b.jpeg, http://localhost:3001/backend/pictures/ads/building.jpeg',
 		2
 	),
 	(
@@ -325,7 +325,7 @@ VALUES
 		100000,
 		'Montreal',
 		'public',
-		'http://localhost:3001/backend/condo_pictures/c.jpeg, http://localhost:3001/backend/condo_pictures/building.jpeg',
+		'http://localhost:3001/backend/pictures/ads/c.jpeg, http://localhost:3001/backend/pictures/ads/building.jpeg',
 		1
 	),
 	(
@@ -335,7 +335,7 @@ VALUES
 		1200000,
 		'Montreal',
 		'public',
-		'http://localhost:3001/backend/condo_pictures/d.jpeg, http://localhost:3001/backend/condo_pictures/building.jpeg',
+		'http://localhost:3001/backend/pictures/ads/d.jpeg, http://localhost:3001/backend/pictures/ads/building.jpeg',
 		1
 	),
 	(
@@ -345,7 +345,7 @@ VALUES
 		5000000,
 		'Montreal',
 		'public',
-		'http://localhost:3001/backend/condo_pictures/e.jpeg, http://localhost:3001/backend/condo_pictures/building.jpeg',
+		'http://localhost:3001/backend/pictures/ads/e.jpeg, http://localhost:3001/backend/pictures/ads/building.jpeg',
 		1
 	),
 	(
@@ -355,7 +355,7 @@ VALUES
 		1000800,
 		'Montreal',
 		'public',
-		'http://localhost:3001/backend/condo_pictures/f.jpeg, http://localhost:3001/backend/condo_pictures/building.jpeg',
+		'http://localhost:3001/backend/pictures/ads/f.jpeg, http://localhost:3001/backend/pictures/ads/building.jpeg',
 		1
 	),
 	(
@@ -365,7 +365,7 @@ VALUES
 		4500,
 		'Montreal',
 		'1',
-		'http://localhost:3001/backend/condo_pictures/e.jpeg, http://localhost:3001/backend/condo_pictures/building.jpeg',
+		'http://localhost:3001/backend/pictures/ads/e.jpeg, http://localhost:3001/backend/pictures/ads/building.jpeg',
 		3
 	),
 	(
@@ -375,7 +375,7 @@ VALUES
 		4500,
 		'Montreal',
 		'1',
-		'http://localhost:3001/backend/condo_pictures/f.jpeg, http://localhost:3001/backend/condo_pictures/building.jpeg',
+		'http://localhost:3001/backend/pictures/ads/f.jpeg, http://localhost:3001/backend/pictures/ads/building.jpeg',
 		4
 	),
 	(
@@ -385,7 +385,7 @@ VALUES
 		4500,
 		'Montreal',
 		'public',
-		'http://localhost:3001/backend/condo_pictures/tv.jpeg, /path/to/other/picture',
+		'http://localhost:3001/backend/pictures/ads/tv.jpeg, /path/to/other/picture',
 		1
 	),
 	(
@@ -395,7 +395,7 @@ VALUES
 		2000,
 		'Montreal',
 		'public',
-		'http://localhost:3001/backend/condo_pictures/oven.jpeg, /path/to/other/picture',
+		'http://localhost:3001/backend/pictures/ads/oven.jpeg, /path/to/other/picture',
 		2
 	),
 	(
@@ -405,7 +405,7 @@ VALUES
 		6000,
 		'Montreal',
 		'public',
-		'http://localhost:3001/backend/condo_pictures/couch.jpeg, /path/to/other/picture',
+		'http://localhost:3001/backend/pictures/ads/couch.jpeg, /path/to/other/picture',
 		1
 	),
 	(
@@ -415,7 +415,7 @@ VALUES
 		1000,
 		'Montreal',
 		'public',
-		'http://localhost:3001/backend/condo_pictures/ps5.jpeg, /path/to/other/picture',
+		'http://localhost:3001/backend/pictures/ads/ps5.jpeg, /path/to/other/picture',
 		2
 	),
 	(
@@ -425,7 +425,7 @@ VALUES
 		400,
 		'Montreal',
 		'public',
-		'http://localhost:3001/backend/condo_pictures/dyson.jpeg, /path/to/other/picture',
+		'http://localhost:3001/backend/pictures/ads/dyson.jpeg, /path/to/other/picture',
 		2
 	),
 	(
@@ -435,7 +435,7 @@ VALUES
 		4500,
 		'Montreal',
 		'1',
-		'http://localhost:3001/backend/condo_pictures/a.jpeg, /path/to/other/picture',
+		'http://localhost:3001/backend/pictures/ads/a.jpeg, /path/to/other/picture',
 		3
 	),
 	(
@@ -445,7 +445,7 @@ VALUES
 		4500,
 		'Montreal',
 		'1',
-		'http://localhost:3001/backend/condo_pictures/a.jpeg, /path/to/other/picture',
+		'http://localhost:3001/backend/pictures/ads/a.jpeg, /path/to/other/picture',
 		4
 	),
 	(
@@ -455,7 +455,7 @@ VALUES
 		4500,
 		'Montreal',
 		'public',
-		'http://localhost:3001/backend/condo_pictures/e.jpeg, /path/to/other/picture',
+		'http://localhost:3001/backend/pictures/ads/e.jpeg, /path/to/other/picture',
 		1
 	),
 	(
@@ -465,7 +465,7 @@ VALUES
 		4500,
 		'Montreal',
 		'public',
-		'http://localhost:3001/backend/condo_pictures/f.jpeg, /path/to/other/picture',
+		'http://localhost:3001/backend/pictures/ads/f.jpeg, /path/to/other/picture',
 		2
 	),
 	(
@@ -475,7 +475,7 @@ VALUES
 		4500,
 		'Montreal',
 		'1',
-		'http://localhost:3001/backend/condo_pictures/a.jpeg, /path/to/other/picture',
+		'http://localhost:3001/backend/pictures/ads/a.jpeg, /path/to/other/picture',
 		3
 	),
 	(
@@ -485,7 +485,7 @@ VALUES
 		4500,
 		'Montreal',
 		'1',
-		'http://localhost:3001/backend/condo_pictures/a.jpeg, /path/to/other/picture',
+		'http://localhost:3001/backend/pictures/ads/a.jpeg, /path/to/other/picture',
 		4
 	);
 
