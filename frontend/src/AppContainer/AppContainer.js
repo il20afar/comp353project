@@ -120,6 +120,7 @@ const AppContainer = () => {
   const [loginPage, setLoginPage] = React.useState(authHandler.states.idle);
   const [showUserMod, setShowUserMod] = React.useState(false);
   const userRef = React.useRef(null);
+  const associationUsersRef = React.useRef(null);
   const pageRef = React.useRef(null);
 
   const history = useHistory();

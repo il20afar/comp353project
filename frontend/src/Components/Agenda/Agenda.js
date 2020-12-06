@@ -247,7 +247,7 @@ export default class Agenda extends Component {
         <div
           style={{ display: "block", position: "absolute", background: "#FFF" }}
         >
-          {props.item.name}{" "}
+          {props.item.name}
           <button onClick={() => props.edit(props.item)}>Edit </button>
         </div>
       );
@@ -256,44 +256,37 @@ export default class Agenda extends Component {
       <div className="content-expanded ">
         <div className="control-buttons">
           <button className="button-control" onClick={this.zoomIn}>
-            {" "}
-            <i className="zoom-plus-icon"></i>{" "}
+            <i className="zoom-plus-icon"></i>
           </button>
           <button className="button-control" onClick={this.zoomOut}>
-            {" "}
-            <i className="zoom-minus-icon"></i>{" "}
+            <i className="zoom-minus-icon"></i>
           </button>
           <button className="button-control" onClick={this._openModal}>
-            {" "}
-            <i className="schedule-icon"></i>{" "}
+            <i className="schedule-icon"></i>
           </button>
           <button
             className="button-control"
             onClick={this.changeView.bind(null, 7)}
           >
-            {" "}
-            {moment.duration(7, "days").humanize()}{" "}
+            {moment.duration(7, "days").humanize()}
           </button>
           <button
             className="button-control"
             onClick={this.changeView.bind(null, 4)}
           >
-            {" "}
-            {moment.duration(4, "days").humanize()}{" "}
+            {moment.duration(4, "days").humanize()}
           </button>
           <button
             className="button-control"
             onClick={this.changeView.bind(null, 3)}
           >
-            {" "}
-            {moment.duration(3, "days").humanize()}{" "}
+            {moment.duration(3, "days").humanize()}
           </button>
           <button
             className="button-control"
             onClick={this.changeView.bind(null, 1)}
           >
-            {" "}
-            {moment.duration(1, "day").humanize()}{" "}
+            {moment.duration(1, "day").humanize()}
           </button>
         </div>
 
@@ -304,7 +297,7 @@ export default class Agenda extends Component {
           startAtTime={8}
           endAtTime={23}
           cellHeight={this.state.cellHeight}
-          locale="fr"
+          locale="en-ca"
           items={this.state.items}
           numberOfDays={this.state.numberOfDays}
           headFormat={"ddd DD MMM"}

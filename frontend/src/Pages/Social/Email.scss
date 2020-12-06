@@ -19,20 +19,141 @@
         flex-direction: column;
         overflow-y: scroll;
 
+        .email-display {
+          width: 100%;
+          height: 100%;
+          .edit-info-field {
+            height: fit-content;
+            width: calc(100% - 20px);
+            margin-bottom: 30px;
+            .field-title {
+              height: 20px;
+              font-size: 18px;
+              line-height: 20px;
+              font-style: italic;
+              color: rgba(109, 109, 255, 1);
+              margin-bottom: 4px;
+              font-style: italic;
+              text-transform: capitalize;
+            }
+            .field-display {
+              max-width: 100%;
+              width: 100%;
+              font-size: 20px;
+              height: fit-content;
+              color: ghostwhite;
+              img {
+                width: 100%;
+                height: auto;
+              }
+            }
+          }
+        }
+
         .email-controls {
           width: 100%;
-          height: 80px;
+          height: 90px;
           display: flex;
           justify-content: space-between;
           margin-bottom: 10px;
 
           .left-container {
+            width: 300px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
 
+            .rbt {
+              width: 100%;
+              height: 40px;
+              background-color: $text_bg;
+              border: 3px solid transparent;
+              border-radius: 7px;
+              font-size: 33px;
+              // padding: 10px;
+              outline: black;
+              box-sizing: border-box;
+              // overflow: hidden;
+
+              // padding-right: 40px;
+              z-index: 1000;
+
+              &:focus-within {
+                border: 3px solid rgb(109, 109, 255);
+                // border-bottom: 3px solid transparent;
+              }
+
+              .rbt-menu {
+                width: calc(100% + 6px) !important;
+                height: fit-content;
+                max-height: 200px;
+                display: flex !important;
+                flex-direction: column;
+                overflow: scroll;
+                background-color: ghostwhite;
+                border-radius: 7px;
+                left: -3px !important;
+                box-sizing: border-box;
+
+                top: 10px !important;
+
+                border: 3px solid rgb(109, 109, 255);
+                // border-top: 3px solid transparent;
+
+                .dropdown-item {
+                  font-size: 20px !important;
+                  width: 100%;
+                  height: 36px;
+                  box-sizing: border-box;
+                  padding: 10px;
+
+                  line-height: 20px;
+
+                  color: black;
+                  font-weight: 300 !important;
+                  text-decoration: none;
+                  font-style: normal !important;
+
+                  &:hover,
+                  &:active,
+                  &:focus,
+                  &:focus-within,
+                  &:target {
+                    background-color: rgba(109, 109, 255, 0.5);
+                  }
+
+                  mark {
+                    font-weight: 300 !important;
+                    text-decoration: underline;
+                  }
+                  font-style: normal;
+                }
+              }
+
+              input {
+                background-color: ghostwhite;
+                border: none;
+                outline: none;
+                font-size: 20px;
+                font-family: Roboto, sans-serif !important;
+                font-weight: 300;
+
+                &::-webkit-input-placeholder {
+                  font-style: italic;
+                }
+                &:-moz-placeholder {
+                  font-style: italic;
+                }
+                &::-moz-placeholder {
+                  font-style: italic;
+                }
+                &:-ms-input-placeholder {
+                  font-style: italic;
+                }
+              }
+            }
             .textbox {
-              width: 400px !important;
+              width: 100% !important;
               input {
                 width: 100% !important;
                 font-size: 20px;
@@ -47,7 +168,7 @@
           .right-container {
             border-radius: 4px;
             width: fit-content;
-            height: 80px;
+            height: 90px;
             display: flex;
             flex-direction: column;
             justify-content: center;

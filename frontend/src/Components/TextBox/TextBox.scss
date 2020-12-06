@@ -69,7 +69,7 @@
   .text-input {
     @include assVal(width height line-height, 100%);
     background-color: $text_bg;
-    border: 3px solid white;
+    border: 3px solid ghostwhite;
     border-radius: 7px;
     font-size: 33px;
     padding: 10px;

@@ -21,7 +21,6 @@ const SearchBar = (props) => {
         ref={ref}
         type="input"
         placeholder={placeholder}
-        buttonContent="Send"
         initialValue={initialValue}
         outlineOnChange
         onChange={onChange}
