@@ -29,7 +29,7 @@ class users extends request
 
     public function get($obj)
     {
-        $query = "SELECT user_id, username, first_name, last_name, asso_id FROM users;";
+        $query = $this->select("*", $obj);
         $res = $this->query($query, true);
         return json_encode($res);
     }

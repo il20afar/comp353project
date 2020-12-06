@@ -54,7 +54,7 @@ class request
     {
         if (empty($fields)) {
             return sprintf(
-                "SELECT %s FROM %s",
+                "SELECT %s FROM %s;",
                 $from,
                 $this->table
             );
