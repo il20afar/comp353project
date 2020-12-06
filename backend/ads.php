@@ -23,11 +23,8 @@ class ads extends request
             $image_type_aux = explode("image/", $image_parts[0]);
             $image_type = $image_type_aux[1];
             $image_base64 = base64_decode($image_parts[1]);
-            $file = 'ads/' . uniqid() . "." . $image_type;
+            $file = 'pictures/ads/' . uniqid() . "." . $image_type;
             // Save picture to local storage
-            if (!is_dir('ads/')) {
-                mkdir('ads/');
-              }
             file_put_contents($file, $image_base64);
             $obj['pictures'] = 'http://localhost:3001/backend/' . $file;
             // Insert ad data to database
