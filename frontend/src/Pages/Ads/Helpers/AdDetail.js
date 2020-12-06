@@ -23,6 +23,7 @@ import { v4 as uuid } from "uuid";
 
 import "./AdDetail.scss";
 import "../../../Styles/Utils.scss";
+import { MainContext } from "../../../AppContainer/AppContainer";
 
 const fields = {
   title: "Title",
@@ -74,15 +75,8 @@ const ImageCarousel = (props) => {
 };
 
 const AdDetail = (props) => {
-  const {
-    type = "condo",
-    ad,
-    view,
-    onClose,
-    onEdit,
-    editable,
-    user_id,
-  } = props;
+  const { type = "condo", ad, view, onClose, onEdit, editable } = props;
+  const { user_id, asso_id } = React.useContext(MainContext);
   const [edit, setEdit] = React.useState(view === "create");
 
   const [inputValues, setInputValues] = React.useState({
@@ -116,7 +110,10 @@ const AdDetail = (props) => {
       ad_desc: inputValues.ad_desc,
       ad_price: Number.parseInt(inputValues.ad_price),
       ad_city: "Montreal",
-      visibility: inputValues.visibilityType,
+      visibility:
+        inputValues.visibilityType === "public"
+          ? "public"
+          : Number.parseInt(asso_id),
       pictures: convertedPictures,
       ...(view === "create" && { creator_id: Number.parseInt(user_id) }),
     });

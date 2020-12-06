@@ -13,6 +13,7 @@ import {
 import Chatbox from "../../Components/Chatbox/Chatbox";
 import { v4 as uuid } from "uuid";
 import { Typeahead } from "react-bootstrap-typeahead"; // ES2015
+import "react-bootstrap-typeahead/css/Typeahead.css";
 
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
@@ -25,6 +26,8 @@ import { faEdit } from "@fortawesome/free-regular-svg-icons";
 import { faStickyNote } from "@fortawesome/free-regular-svg-icons";
 
 import "./Email.scss";
+
+const firstLastName = (user) => `${user.first_name} ${user.last_name}`;
 
 const EmailThumbnail = (props) => {
   const {
@@ -96,51 +99,79 @@ const EmailMenu = (props) => {
 };
 
 const EmailView = (props) => {
-  const { user, messages, view, setView, setReplies } = props;
+  const { setView, ...fields } = props;
 
-  return <div className="email-view"></div>;
-};
-
-const useSetAssociationUsers = (setAssociationUsers, asso_id) => {
-  return React.useRef(() => {
-    (async () => {
-      const users = await data.send("users", "get", { asso_id });
-      console.log(users);
-      setAssociationUsers(users);
-    })();
-  }, []);
+  return (
+    <InputModal
+      view={"display"}
+      isEditable={false}
+      widthPadding={100}
+      heightPadding={100}
+      onCancel={() => setView("menu")}
+      onClose={() => setView("menu")}
+      onConfirm={async () => {}}
+    >
+      <div className="email-display">
+        {Object.entries(fields).map(([key, val]) => {
+          console.log(key, val);
+          return (
+            <D key={`edit-info-field-${key}`} cn={`edit-info-field ${key}`}>
+              <D cn="field-title">{key} </D>
+              <div className="field-display">{val}</div>
+            </D>
+          );
+        })}
+      </div>
+    </InputModal>
+  );
 };
 
 const EmailCreate = (props) => {
-  const { setView, user } = props;
+  const { user, setView, associationUsers, updateAssociationUsers } = props;
 
   const [inputValues, setInputValues] = React.useState({
     to: "",
     subject: "",
     content: "",
   });
-  const [associationUsers, setAssociationUsers] = React.useState([]);
+  const [selectedUser, setSelectedUser] = React.useState([]);
 
   const onInputValueChange = (eventKey, newValue) => {
     inputValues[eventKey] = newValue;
+    console.log(eventKey, newValue);
     setInputValues(Object.assign({}, inputValues));
   };
 
-  const onEmailSubmit = () => {
+  const onEmailSubmit = async () => {
+    console.log(inputValues, selectedUser);
     const email = {
       message_subject: inputValues.content,
       content: inputValues.content,
       attachments: "",
-      author_id: user.current.user_id,
-      recipient_id: 1,
+      author_id: Number.parseInt(user.current.user_id),
+      recipient_id: Number.parseInt(selectedUser.user_id),
     };
+    const res = await data.send("messages", "create", email);
+    if (res === 1) {
+      setView("menu");
+    }
+    console.log(email, res);
+  };
+
+  const onTypeAheadChange = (value) => {
+    const selectionId = value.length === 1 && value[0].id;
+    const isUser = associationUsers.find(
+      (user) => user.user_id === selectionId
+    );
+    if (isUser) {
+      setSelectedUser(isUser);
+    }
   };
 
   // Gets available association users
-  useSetAssociationUsers(
-    setAssociationUsers,
-    Number.parseInt(user.current.asso_id)
-  );
+  React.useEffect(() => {
+    updateAssociationUsers();
+  }, []);
   console.log(associationUsers);
 
   return (
@@ -155,22 +186,35 @@ const EmailCreate = (props) => {
     >
       <div className="email-controls">
         <div className="left-container">
-          {["to", "subject"].map((field) => (
-            <TextBox
-              key={`email-input${field}`}
-              type={"input"}
-              initialValue={inputValues[field]}
-              onChange={(newValue) => onInputValueChange(field, newValue)}
-              className={field}
-              placeholder={`${field}:`}
-              outlineOnChange
-              focusOnRender={field === "to"}
-              readOnly={false}
-              height="40px"
-            />
-          ))}
+          <Typeahead
+            id={uuid()}
+            onChange={(selected) => onTypeAheadChange(selected)}
+            placeholder="To:"
+            options={
+              associationUsers
+                ? associationUsers.map((user) => ({
+                    id: user.user_id,
+                    label: firstLastName(user),
+                  }))
+                : ["no matches"]
+            }
+            selected={null}
+          />
+          <TextBox
+            key={`email-input${"subject"}`}
+            type={"input"}
+            initialValue={inputValues["subject"]}
+            onChange={(newValue) => onInputValueChange("subject", newValue)}
+            className={"subject"}
+            placeholder={`${"subject"}:`}
+            outlineOnChange
+            focusOnRender={"subject" === "to"}
+            readOnly={false}
+            height="40px"
+          />
         </div>
         <div className="right-container">
+          <div className="selected-recipients-container"></div>
           <Button
             content={{
               show: <FontAwesomeIcon icon={faPaperPlane} color="white" />,
@@ -226,7 +270,7 @@ const EmailCreate = (props) => {
           "image",
           "video",
         ]}
-        onChange={(content) => setInputValues("message", content)}
+        onChange={(content) => onInputValueChange("message", content)}
         style={{ width: "100%", height: "100%" }}
       />
     </InputModal>
@@ -239,7 +283,7 @@ const Email = (props) => {
 
   const [view, setView] = React.useState("menu");
   const [visibleEmail, setVisibleEmail] = React.useState([]);
-  const [replies, setReplies] = React.useState(null);
+  const [associationUsers, setAssociationUsers] = React.useState([]);
 
   const [searchTerm, setSearchTerm] = React.useState("");
 
@@ -256,6 +300,14 @@ const Email = (props) => {
     });
     console.log(res.messages);
     setVisibleEmail(res.messages);
+  };
+
+  const updateAssociationUsers = async () => {
+    const res = await data.send("users", "get", {
+      asso_id: user.current.asso_id,
+    });
+    console.log("users: ", res.users);
+    setAssociationUsers(res.users);
   };
 
   const actions = [
@@ -275,11 +327,19 @@ const Email = (props) => {
 
   React.useEffect(() => {
     updateMessages();
+    updateAssociationUsers();
   }, [view]);
 
   return (
     <D cn="email-page">
-      {view === "create" && <EmailCreate user={user} setView={setView} />}
+      {view === "create" && (
+        <EmailCreate
+          user={user}
+          setView={setView}
+          associationUsers={associationUsers}
+          updateAssociationUsers={updateAssociationUsers}
+        />
+      )}
       {view === "menu" && (
         <Header keyName="email-header" height="80px" actions={actions} />
       )}
@@ -291,7 +351,14 @@ const Email = (props) => {
           searchTerm={searchTerm.current}
         />
       ) : (
-        <EmailView />
+        <EmailView
+          from={firstLastName(
+            associationUsers.find((user) => user.user_id === view.author_id)
+          )}
+          subject={view.message_subject}
+          content={view.content}
+          setView={setView}
+        />
       )}
     </D>
   );
