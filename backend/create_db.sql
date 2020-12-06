@@ -58,7 +58,7 @@ CREATE TABLE ads (
 	ad_price INT NOT NULL,
 	ad_city VARCHAR(50) NOT NULL,
 	visibility VARCHAR(50) NOT NULL,
-	pictures VARCHAR(1000) NOT NULL,
+	pictures VARCHAR(1000),
 	creator_id INT NOT NULL,
 	PRIMARY KEY (ad_id),
 	FOREIGN KEY (creator_id) REFERENCES users(user_id)
