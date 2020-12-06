@@ -123,8 +123,6 @@ const AdDetail = (props) => {
 
     const res = await data.send("ads", view, adsParam);
 
-    console.log(res, adsParam, convertedPictures.length);
-
     window.setTimeout(() => {
       if (res !== 0) {
         setEdit(false);

@@ -3,9 +3,15 @@
 .input-modal {
   @include assVal(width height, 100%);
   @include flex(column, center);
-  position: absolute;
-  top: 0;
-  left: 0;
+  &.absolute {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  &.relative {
+    position: relative;
+  }
+
   pointer-events: all;
   background-color: rgba(0, 0, 0, 0.7);
 

@@ -4,6 +4,8 @@ import { Typeahead } from "react-bootstrap-typeahead"; // ES2015
 import "react-bootstrap-typeahead/css/Typeahead.css";
 import { v4 as uuid } from "uuid";
 
+import "./UserList.scss";
+
 const UserList = (props) => {
   const {} = props;
 

@@ -3,9 +3,9 @@
 .thread-menu {
   width: 100%;
   height: 100%;
-  display: grid;
-  grid-auto-rows: 70px;
-  grid-row-gap: 20px;
+  display: flex;
+  flex-direction: column;
+
   // position: absolute;
   // top: 90px;
   // left: 0;
@@ -13,58 +13,49 @@
   .thread {
     width: 100%;
     max-width: 100%;
-    height: 70px;
-    background-color: rgba(0, 0, 0, 0.82);
+    height: fit-content;
+    background-color: rgba(163, 101, 163, 0.8);
     border-radius: 8px;
     @include flex(row, space-between);
-    padding: 0 20px 0 20px;
-    display: grid;
+    padding: 20px;
     box-sizing: border-box;
     box-shadow: $boxshadow;
-    grid-template-rows: 100%;
-    grid-column-gap: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     cursor: pointer;
+    margin-bottom: 20px;
 
     .thread-element-container {
       height: 100%;
-      width: 100%;
+      width: fit-content;
       @include flex(column, center);
+      color: ghostwhite;
+      font-size: 16px;
 
       .thread-element {
         overflow: hidden;
 
         font-size: 20px;
-        color: whitesmoke;
+        color: black;
         &.name {
-          width: 100%;
-
-          grid-row: 1 / span 1;
-          text-overflow: ellipsis;
-          white-space: nowrap;
-        }
-        &.numbermsg,
-        &.modified-on,
-        &.created-by {
-          width: 100%;
-          display: flex;
-          @include flex(row, space-between);
-          grid-row: 1 / span 1;
-          text-overflow: ellipsis;
-          white-space: nowrap;
-        }
-        &.name {
+          width: fit-content;
           grid-column: 1 / span 1;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          margin-bottom: 20px;
         }
-        &.modified-on {
-          grid-column: 3 / span 1;
-        }
-        &.created-by {
+
+        &.admin {
+          width: fit-content;
           grid-column: 4 / span 1;
-          @include flex(row, flex-end);
+          @include flex(row, center);
+          margin-bottom: 20px;
         }
-        &.numbermsg {
+        &.numberusers {
+          width: fit-content;
           grid-column: 2 / span 1;
-          @include flex(row, flex-start);
+          @include flex(row, space-around);
         }
       }
     }
@@ -114,7 +105,7 @@
 
     .button-container {
       opacity: 0.3;
-      margin-top: 20px;
+      margin-top: 0px;
 
       > .button {
         cursor: not-allowed !important;
@@ -168,7 +159,7 @@
     background-color: rgb(150, 78, 150);
 
     .header {
-      justify-content: space-between;
+      // justify-content: space-between;
     }
 
     .admin-page-container {
@@ -183,7 +174,74 @@
 
       .admin-associations {
         width: 50%;
+        height: calc(100% - 40px);
         padding: 20px;
+
+        &.selected {
+          padding: 20px;
+          height: calc(100% - 40px);
+
+          .input-modal {
+            overflow: hidden;
+            border-radius: 8px;
+            .edit-view-window {
+              width: 100%;
+              padding: 0;
+              .current-selection {
+                width: calc(100% - 120px);
+                height: calc(100% - 120px);
+                border-radius: 8px;
+                background-color: black;
+                padding: 60px;
+                display: flex;
+                flex-direction: column;
+                overflow: scroll;
+              }
+              .edit-info-field {
+                height: fit-content;
+                width: calc(100% - 20px);
+                margin-bottom: 30px;
+                .field-title {
+                  height: 20px;
+                  font-size: 18px;
+                  line-height: 20px;
+                  font-style: italic;
+                  color: ghostwhite;
+                  margin-bottom: 4px;
+                  font-style: italic;
+                  text-transform: capitalize;
+                }
+                .field-display {
+                  max-width: 100%;
+                  width: 100%;
+                  font-size: 20px;
+                  height: fit-content;
+                  color: ghostwhite;
+                  img {
+                    width: 100%;
+                    height: auto;
+                  }
+
+                  .textbox {
+                    width: 100% !important;
+                    // height: 46px !important;
+                    input,
+                    textarea {
+                      width: 100% !important;
+                      font-size: 20px;
+                      // min-height: 50px;
+                      // height: fit-content !important;
+                      line-height: 20px !important;
+                      &::placeholder {
+                        text-transform: capitalize;
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     }
   }
