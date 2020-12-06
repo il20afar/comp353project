@@ -32,8 +32,15 @@ export { default as Header } from "./Components/Header/Header";
 export { default as InputModal } from "./Components/InputModal/InputModal";
 export { default as SearchBar } from "./Components/SearchBar/SearchBar";
 export { default as LoadContainer } from "./Components/LoadContainer/LoadContainer";
+export { default as UserList } from "./Components/UserList/UserList";
 
 export { UserIcon, UserModModal } from "./Components/User/User";
 
 // /Utils
-export { D, data, HighlightedContent, filesToBase64 } from "./Utils/Utils";
+export {
+  D,
+  data,
+  HighlightedContent,
+  filesToBase64,
+  userFirstLastName,
+} from "./Utils/Utils";

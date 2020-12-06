@@ -9,8 +9,9 @@ import {
   InputModal,
   SearchBar,
   HighlightedContent,
+  userFirstLastName,
+  UserList,
 } from "../../imports";
-import Chatbox from "../../Components/Chatbox/Chatbox";
 import { v4 as uuid } from "uuid";
 import { Typeahead } from "react-bootstrap-typeahead"; // ES2015
 import "react-bootstrap-typeahead/css/Typeahead.css";
@@ -26,8 +27,6 @@ import { faEdit } from "@fortawesome/free-regular-svg-icons";
 import { faStickyNote } from "@fortawesome/free-regular-svg-icons";
 
 import "./Email.scss";
-
-const firstLastName = (user) => `${user.first_name} ${user.last_name}`;
 
 const EmailThumbnail = (props) => {
   const {
@@ -189,19 +188,9 @@ const EmailCreate = (props) => {
     >
       <div className="email-controls">
         <div className="left-container">
-          <Typeahead
-            id={uuid()}
-            onChange={(selected) => onTypeAheadChange(selected)}
-            placeholder="To:"
-            options={
-              associationUsers
-                ? associationUsers.map((user) => ({
-                    id: user.user_id,
-                    label: firstLastName(user),
-                  }))
-                : ["no matches"]
-            }
-            selected={null}
+          <UserList
+            associationUsers={associationUsers}
+            onTypeAheadChange={onTypeAheadChange}
           />
           <TextBox
             key={`email-input${"subject"}`}
@@ -356,7 +345,7 @@ const Email = (props) => {
         />
       ) : (
         <EmailView
-          from={firstLastName(
+          from={userFirstLastName(
             associationUsers.find((user) => user.user_id === view.author_id)
           )}
           subject={view.message_subject}

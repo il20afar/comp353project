@@ -7,6 +7,8 @@ const D = React.forwardRef((props, ref) => {
   return <div ref={ref} className={cn} {...rest} />;
 });
 
+const userFirstLastName = (user) => `${user.first_name} ${user.last_name}`;
+
 const readUploadedFileAsText = (inputFile) => {
   const temporaryFileReader = new FileReader();
 
@@ -75,4 +77,4 @@ const HighlightedContent = (props) => {
       ));
 };
 
-export { D, data, HighlightedContent, filesToBase64 };
+export { D, data, HighlightedContent, filesToBase64, userFirstLastName };
