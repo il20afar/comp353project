@@ -39,7 +39,6 @@ class router
 
         // Retrieve destructured parameters
         $json = file_get_contents('php://input');
-        $json = '{"table":"users","action":"get"}';
         $obj = json_decode($json, true);
         $table = $obj['table'];
         $action = $obj['action'];
