@@ -23,6 +23,7 @@ import { v4 as uuid } from "uuid";
 
 import "./AdDetail.scss";
 import "../../../Styles/Utils.scss";
+import { MainContext } from "../../../AppContainer/AppContainer";
 
 const fields = {
   title: "Title",
@@ -74,15 +75,9 @@ const ImageCarousel = (props) => {
 };
 
 const AdDetail = (props) => {
-  const {
-    type = "condo",
-    ad,
-    view,
-    onClose,
-    onEdit,
-    editable,
-    user_id,
-  } = props;
+  const { type = "condo", ad, view, onClose, onEdit, editable } = props;
+  const { user } = React.useContext(MainContext);
+  const { user_id, asso_id } = user.current || {};
   const [edit, setEdit] = React.useState(view === "create");
 
   const [inputValues, setInputValues] = React.useState({
@@ -93,7 +88,9 @@ const AdDetail = (props) => {
     visibilityType: type === "condo" ? "public" : "item",
   });
 
-  const uploadPictures = React.useRef([]);
+  const uploadPictures = React.useRef(
+    ad.pictures ? ad.pictures.replace(" ", "").split(",") : []
+  );
   const loadContainerRef = React.useRef(null);
 
   const picturesArray = ad.pictures
@@ -109,17 +106,24 @@ const AdDetail = (props) => {
     loadContainerRef.current.classList.remove("hide");
     const convertedPictures = await filesToBase64(uploadPictures.current);
 
-    const res = await data.send("ads", view, {
+    const adsParam = {
       ...(view === "edit" && { ad_id: Number.parseInt(ad.ad_id) }),
       title: inputValues.title,
       ad_type: type === "condo" ? "condo" : inputValues.visibilityType,
       ad_desc: inputValues.ad_desc,
       ad_price: Number.parseInt(inputValues.ad_price),
       ad_city: "Montreal",
-      visibility: inputValues.visibilityType,
-      pictures: convertedPictures,
+      visibility:
+        inputValues.visibilityType === "public"
+          ? "public"
+          : Number.parseInt(asso_id),
+      pictures: convertedPictures.length === 0 ? [""] : convertedPictures,
       ...(view === "create" && { creator_id: Number.parseInt(user_id) }),
-    });
+    };
+
+    const res = await data.send("ads", view, adsParam);
+
+    console.log(res, adsParam, convertedPictures.length);
 
     window.setTimeout(() => {
       if (res !== 0) {
@@ -232,7 +236,9 @@ const AdDetail = (props) => {
                     onCancel={() => onInputValueChange(key, "")}
                     readOnly={!edit}
                     match={key === "ad_price" ? "number" : null}
-                    maxLength={key === "ad_price" ? 9 : null}
+                    maxLength={
+                      key === "ad_price" ? 9 : key === "ad_desc" ? 1000 : null
+                    }
                   />
                 )}
               </D>

@@ -6,7 +6,6 @@ export {
 export { default as LoginContainer } from "./AppContainer/LoginContainer/LoginContainer";
 export { default as AdminContainer } from "./AppContainer/AdminContainer/AdminContainer";
 
-// /AppContainer/PageContainer/Pages
 export { default as Contracts } from "./Pages/Management/Contracts";
 export { default as Financial } from "./Pages/Management/Financial";
 export { default as Meetings } from "./Pages/Management/Meetings";
