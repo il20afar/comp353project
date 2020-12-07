@@ -52,12 +52,12 @@ CREATE TABLE condos (
 
 CREATE TABLE ads (
 	ad_id INT NOT NULL AUTO_INCREMENT,
-	title VARCHAR(50) NOT NULL,
-	ad_type VARCHAR(50) NOT NULL,
+	title VARCHAR(200) NOT NULL,
+	ad_type VARCHAR(100) NOT NULL,
 	ad_desc VARCHAR(1000) NOT NULL,
 	ad_price INT NOT NULL,
 	ad_city VARCHAR(50) NOT NULL,
-	visibility VARCHAR(50) NOT NULL,
+	visibility VARCHAR(100) NOT NULL,
 	pictures VARCHAR(1000),
 	creator_id INT NOT NULL,
 	PRIMARY KEY (ad_id),
