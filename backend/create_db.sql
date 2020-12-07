@@ -449,7 +449,7 @@ VALUES
 		'Standing office desk w/ remote. Originally from IKEA, used for less than a year. No observable damages.',
 		200,
 		'Montreal',
-		'1',
+		'public',
 		'http://localhost:3001/backend/pictures/ads/desk.jpeg',
 		3
 	),
@@ -459,7 +459,7 @@ VALUES
 		'Live the 4k Experience with this monitor from Samsung. Option to be mountable available. Contact for more details.',
 		390,
 		'Montreal',
-		'1',
+		'public',
 		'http://localhost:3001/backend/pictures/ads/monitor.jpeg',
 		4
 	),
@@ -489,7 +489,7 @@ VALUES
 		'Order food from select restaurants using our very own staff.',
 		150,
 		'Montreal',
-		'1',
+		'public',
 		'http://localhost:3001/backend/pictures/ads/food.jpeg',
 		3
 	),
@@ -499,7 +499,7 @@ VALUES
 		'Hire your very own personal trainer to get fit and live the fit life. Contact for more info.',
 		100,
 		'Montreal',
-		'1',
+		'public',
 		'http://localhost:3001/backend/pictures/ads/trainer.jpeg',
 		4
 	);
