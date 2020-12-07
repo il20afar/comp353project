@@ -341,7 +341,7 @@ VALUES
 		'Montreal',
 		'public',
 		'http://localhost:3001/backend/pictures/ads/c.jpeg, http://localhost:3001/backend/pictures/ads/building.jpeg',
-		1
+		3
 	),
 	(
 		'Gorgeous 1 Bedroom Condo (+ BALCONY), 650sqt, At the heart of Montreal, Downtown!',
@@ -351,7 +351,7 @@ VALUES
 		'Montreal',
 		'public',
 		'http://localhost:3001/backend/pictures/ads/d.jpeg, http://localhost:3001/backend/pictures/ads/building.jpeg',
-		1
+		4
 	),
 	(
 		'CONDO FOR SALE! 2 Beds, 1 Bath, Very Modern, LOCATED IN DOWNTOWN, MONTREAL!',
@@ -371,7 +371,7 @@ VALUES
 		'Montreal',
 		'public',
 		'http://localhost:3001/backend/pictures/ads/f.jpeg, http://localhost:3001/backend/pictures/ads/building.jpeg',
-		1
+		2
 	),
 	(
 		'Luxurious Penthouse Suite for SALE, 2 Bedrooms, FOR SALE',
@@ -386,7 +386,7 @@ VALUES
 	(
 		'3 Bedroom Condo FOR SALE, Recently Renovated, NEAR CONCORDIA UNIVERSITY',
 		'condo',
-		'3 Beds/2 Baths - 810sqt - Smart Home Included - Free Indoor Parking - Various condo amenities',
+		'3 Beds/2 Baths - 810sf - Smart Home Included - Free Indoor Parking - Various condo amenities',
 		4500,
 		'Montreal',
 		'1',
