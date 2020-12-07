@@ -188,7 +188,7 @@ VALUES
 		'Quebec',
 		'Canada',
 		'afar@conman.com',
-		7776665555,
+		5149635321,
 		'path/to/default/picture'
 	),
 	(
@@ -201,7 +201,7 @@ VALUES
 		'Quebec',
 		'Canada',
 		'rohh@conman.com',
-		0009998888,
+		5149548888,
 		'path/to/default/picture'
 	),
 	(
@@ -210,11 +210,11 @@ VALUES
 		'Brian',
 		'Poon',
 		'18 Main Street',
-		'Toronto',
+		'Montreal',
 		'Ontario',
 		'Canada',
 		'poon@conman.com',
-		8447776666,
+		5149766539,
 		'path/to/default/picture'
 	),
 	(
@@ -227,7 +227,7 @@ VALUES
 		'Ontario',
 		'Canada',
 		'mpob@conman.com',
-		6665576532,
+		6135576532,
 		'path/to/default/picture'
 	),
 	(
