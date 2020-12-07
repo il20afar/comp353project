@@ -8,6 +8,7 @@ import TransactionList from "../../Components/ExpenseTracker/TransactionList";
 import { GlobalProvider } from "../../context/GlobalState";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHashtag } from "@fortawesome/free-solid-svg-icons";
+import Chart from "./Chart";
 
 const ConMenu = (props) => {
   const { showCon, setShowCon } = props;
@@ -51,11 +52,10 @@ const ConView = (props) => {
         </div>
       </div>
       <div className="box-container">
-        <h1 className = "contri-title">Special Contributors: </h1>
-        <p>Antoine Farley</p>
-        <p>Maxim Pobudzey</p>
-        <p>Rohhaan Thambithurai</p>
-        <p>Tik Man Poon</p>
+        <h1 className = "contri-title">Special Contributors of Repairs and Maintainence: </h1>
+        <p>ZETA Maintainence LTD</p>
+        <p>ACC International INC.</p>
+        <p>MR HandyMan Canada</p>
       </div>
     </div>
   );
@@ -134,26 +134,95 @@ const MaintView = (props) => {
   );
 };
 
+const ConFeeMenu = (props) => {
+  const { showConFee, setShowConFee } = props;
+
+  return (
+    <div className="act-menu">
+      <Maint title="Current Fees of Condo Units" onClick={setShowConFee} />
+    </div>
+  );
+};
+
+const ConFee = (props) => {
+  const { title, onClick, gridTemplateColumns } = props;
+  return (
+    <div
+      className="contri"
+      style={{ gridTemplateColumns }}
+      onClick={() => onClick(title)}
+    >
+      <div className="contri-element-container title">
+        <div className="contri-element title">{title}</div>
+      </div>
+    </div>
+  );
+};
+
+const ConFeeView = (props) => {
+  const {
+    rationales,
+    dates,
+    contractor,
+    cost,
+    showConFee,
+    setShowConFee,
+  } = props;
+
+  return (
+    <div className="con-view">
+      <div className="con-name-container">
+        <div className="thread-name-text"></div>
+      </div>
+      <div className="threads-header-container">
+        <div
+          className="menu-toggle-container"
+          onClick={(e) => setShowConFee("")}
+        >
+          <div className="menu-toggle-icon">
+            <FontAwesomeIcon icon={faHashtag} color="black" />
+          </div>
+          <div className="menu-toggle-text">&nbsp;Hide</div>
+        </div>
+      </div>
+      <div className="box-container">
+        <h1 className = "maint-title">Current Fees of Condo Units</h1>
+        <h1 className = "borderline"></h1>
+        <p>Condo ID: 01</p>
+        <p>Pending Fee: $1250</p>
+        <p>Due Date: 31/12/2020</p>
+        <h1 className = "borderline"></h1>
+      </div>
+    </div>
+  );
+};
+
 const Financial = (props) => {
   const {} = props;
   const [showCon, setShowCon] = React.useState("");
   const [showMaint, setShowMaint] = React.useState("");
+  const [showConFee, setShowConFee] = React.useState("");
 
   return (
     <GlobalProvider>
-      <Header />
       <div>
-        {showCon === "" ? (
-          <ConMenu showCon={showCon} setShowCon={setShowCon} />
-        ) : (
-          <ConView
-            nameOfContributor="Antoine"
-            showCon={showCon}
-            setShowCon={setShowCon}
-          />
-        )}
+      <Chart id = "1"/>
+      <p className = "sep"></p>
 
-        {showMaint === "" ? (
+      {showConFee === "" ? (
+          <ConFeeMenu showConFee={showConFee} setShowConFee={setShowConFee} />
+        ) : (
+          <ConFeeView
+            rationales=""
+            dates=""
+            contractor=""
+            cost=""
+            showConFee={showConFee}
+            setShowConFee={setShowConFee}
+          />
+
+        )}
+      {showMaint === "" ? (
           <MaintMenu showMaint={showMaint} setShowMaint={setShowMaint} />
         ) : (
           <MaintView
@@ -166,7 +235,15 @@ const Financial = (props) => {
           />
 
         )}
-
+        {showCon === "" ? (
+          <ConMenu showCon={showCon} setShowCon={setShowCon} />
+        ) : (
+          <ConView
+            nameOfContributor="Antoine"
+            showCon={showCon}
+            setShowCon={setShowCon}
+          />
+        )}
         <Balance />
         <IncomeExpenses />
         <TransactionList />
