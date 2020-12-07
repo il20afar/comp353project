@@ -31,6 +31,7 @@ import {
 } from "../imports";
 
 import "./AppContainer.scss";
+import AdminContainer from "./AdminContainer/AdminContainer";
 
 export const MainContext = React.createContext({ user: null });
 
@@ -155,6 +156,23 @@ const AppContainer = () => {
         <Switch>
           <Route path="/login">
             <LoginContainer
+              {...{
+                loginStates: authHandler.states,
+                setLoginPage,
+                handleLogin: (username, pw) =>
+                  authHandler.onLoginRequest(
+                    username,
+                    pw,
+                    userRef,
+                    history,
+                    setLoginPage
+                  ),
+                invalidLogin: loginPage === authHandler.states.invalid,
+              }}
+            />
+          </Route>
+          <Route path="/admin">
+            <AdminContainer
               {...{
                 loginStates: authHandler.states,
                 setLoginPage,

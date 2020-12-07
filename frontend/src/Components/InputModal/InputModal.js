@@ -16,6 +16,7 @@ const views = ["diplay", "edit"];
 
 const AdDetail = (props) => {
   const {
+    type = "absolute",
     view = "display",
     onClose = () => null,
     onConfirm = () => null,
@@ -27,10 +28,11 @@ const AdDetail = (props) => {
     widthPadding = 0,
     heightPadding = 50,
     children = null,
+    isCloseable = true,
   } = props;
 
   return (
-    <D cn="input-modal">
+    <D cn={`input-modal ${type}`}>
       <D
         className="edit-view-window"
         style={{
@@ -52,7 +54,7 @@ const AdDetail = (props) => {
             </D>
           </D>
         )}
-        {isDeletable && view === "edit" && (
+        {isDeletable && (isEditable ? view === "edit" : true) && (
           <D cn="delete-icon-container">
             <D cn={`delete-icon`}>
               <D cn="delete-icon-wrapper close" onClick={onDelete}>
@@ -61,22 +63,24 @@ const AdDetail = (props) => {
             </D>
           </D>
         )}
-        <D cn="action-icon-container">
-          <D cn={`action-icon ${view === "edit" ? "confirm" : "close"}`}>
-            <D
-              cn="action-icon-wrapper close"
-              onClick={() => (view !== "edit" ? onClose() : onCancel())}
-            >
-              <FontAwesomeIcon icon={faTimesCircle} />
-            </D>
-            <D cn="action-icon-wrapper confirm" onClick={onConfirm}>
-              <FontAwesomeIcon icon={faCheckCircle} />
-            </D>
-            <D cn="action-icon-wrapper loading">
-              <FontAwesomeIcon icon={faSpinner} />
+        {isCloseable && (
+          <D cn="action-icon-container">
+            <D cn={`action-icon ${view === "edit" ? "confirm" : "close"}`}>
+              <D
+                cn="action-icon-wrapper close"
+                onClick={() => (view !== "edit" ? onClose() : onCancel())}
+              >
+                <FontAwesomeIcon icon={faTimesCircle} />
+              </D>
+              <D cn="action-icon-wrapper confirm" onClick={onConfirm}>
+                <FontAwesomeIcon icon={faCheckCircle} />
+              </D>
+              <D cn="action-icon-wrapper loading">
+                <FontAwesomeIcon icon={faSpinner} />
+              </D>
             </D>
           </D>
-        </D>
+        )}
         <D cn={`content-container`}>{children}</D>
       </D>
     </D>

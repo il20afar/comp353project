@@ -7,6 +7,8 @@ const D = React.forwardRef((props, ref) => {
   return <div ref={ref} className={cn} {...rest} />;
 });
 
+const userFirstLastName = (user) => `${user.first_name} ${user.last_name}`;
+
 const readUploadedFileAsText = (inputFile) => {
   const temporaryFileReader = new FileReader();
 
@@ -28,13 +30,13 @@ const filesToBase64 = async (files) =>
 
 const data = {
   send: async (table, action, fields) => {
-    console.log(
-      JSON.stringify({
-        table,
-        action,
-        ...fields,
-      })
-    );
+    // console.log(
+    //   JSON.stringify({
+    //     table,
+    //     action,
+    //     ...fields,
+    //   })
+    // );
     try {
       const req = await fetch(process.env.REACT_APP_PHP_SERVER_URL, {
         method: "POST",
@@ -48,7 +50,7 @@ const data = {
         }),
       });
       const res = await req.json();
-      console.log(res);
+      // console.log(res);
       return res;
     } catch (error) {
       return error.toString();
@@ -75,4 +77,4 @@ const HighlightedContent = (props) => {
       ));
 };
 
-export { D, data, HighlightedContent, filesToBase64 };
+export { D, data, HighlightedContent, filesToBase64, userFirstLastName };

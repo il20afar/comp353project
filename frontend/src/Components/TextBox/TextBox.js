@@ -34,7 +34,7 @@ const Textbox = React.forwardRef((props, ref) => {
 
   const onChangeHandler = (e) => {
     const val = e.target[type === "input" ? "value" : "value"];
-    console.log(val);
+
     toggleOutlineState(val);
     onChange(val);
   };
@@ -88,7 +88,7 @@ const Textbox = React.forwardRef((props, ref) => {
         type !== "textarea" ? (
           <input type={subType} {...rest} {...other} />
         ) : (
-          <TextareaAutosize resize={false} minRows={1} {...rest} {...other} />
+          <TextareaAutosize minRows={1} {...rest} {...other} />
         ))()}
     </D>
   );

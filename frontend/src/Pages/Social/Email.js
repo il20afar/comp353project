@@ -9,8 +9,9 @@ import {
   InputModal,
   SearchBar,
   HighlightedContent,
+  userFirstLastName,
+  UserList,
 } from "../../imports";
-import Chatbox from "../../Components/Chatbox/Chatbox";
 import { v4 as uuid } from "uuid";
 import { Typeahead } from "react-bootstrap-typeahead"; // ES2015
 import "react-bootstrap-typeahead/css/Typeahead.css";
@@ -26,8 +27,6 @@ import { faEdit } from "@fortawesome/free-regular-svg-icons";
 import { faStickyNote } from "@fortawesome/free-regular-svg-icons";
 
 import "./Email.scss";
-
-const firstLastName = (user) => `${user.first_name} ${user.last_name}`;
 
 const EmailThumbnail = (props) => {
   const {
@@ -101,7 +100,6 @@ const EmailMenu = (props) => {
 const EmailView = (props) => {
   const { setView, ...fields } = props;
 
-  console.log(JSON.stringify(fields));
   return (
     <InputModal
       view={"display"}
@@ -114,7 +112,6 @@ const EmailView = (props) => {
     >
       <div className="email-display">
         {Object.entries(fields).map(([key, val]) => {
-          console.log(key, val);
           return (
             <D key={`edit-info-field-${key}`} cn={`edit-info-field ${key}`}>
               <D cn="field-title">{key} </D>
@@ -141,24 +138,22 @@ const EmailCreate = (props) => {
 
   const onInputValueChange = (eventKey, newValue) => {
     inputValues[eventKey] = newValue;
-    console.log(eventKey, newValue);
+
     setInputValues(Object.assign({}, inputValues));
   };
 
   const onEmailSubmit = async () => {
-    console.log(inputValues, selectedUser);
     const email = {
       message_subject: inputValues.subject,
       content: inputValues.message,
       author_id: Number.parseInt(user.current.user_id),
       recipient_id: Number.parseInt(selectedUser.user_id),
     };
-    console.log(email);
+
     const res = await data.send("messages", "create", email);
     if (res === 1) {
       setView("menu");
     }
-    console.log(email, res);
   };
 
   const onTypeAheadChange = (value) => {
@@ -175,7 +170,6 @@ const EmailCreate = (props) => {
   React.useEffect(() => {
     updateAssociationUsers();
   }, []);
-  console.log(associationUsers);
 
   return (
     <InputModal
@@ -189,19 +183,9 @@ const EmailCreate = (props) => {
     >
       <div className="email-controls">
         <div className="left-container">
-          <Typeahead
-            id={uuid()}
-            onChange={(selected) => onTypeAheadChange(selected)}
-            placeholder="To:"
-            options={
-              associationUsers
-                ? associationUsers.map((user) => ({
-                    id: user.user_id,
-                    label: firstLastName(user),
-                  }))
-                : ["no matches"]
-            }
-            selected={null}
+          <UserList
+            associationUsers={associationUsers}
+            onTypeAheadChange={onTypeAheadChange}
           />
           <TextBox
             key={`email-input${"subject"}`}
@@ -302,7 +286,7 @@ const Email = (props) => {
       user_id: Number.parseInt(user.current.user_id),
     };
     const res = await data.send("messages", "get", params);
-    console.log(res, params);
+
     setVisibleEmail(res.messages);
   };
 
@@ -310,7 +294,7 @@ const Email = (props) => {
     const res = await data.send("users", "get", {
       asso_id: user.current.asso_id,
     });
-    console.log("users: ", res.users);
+
     setAssociationUsers(res.users);
   };
 
@@ -356,7 +340,7 @@ const Email = (props) => {
         />
       ) : (
         <EmailView
-          from={firstLastName(
+          from={userFirstLastName(
             associationUsers.find((user) => user.user_id === view.author_id)
           )}
           subject={view.message_subject}

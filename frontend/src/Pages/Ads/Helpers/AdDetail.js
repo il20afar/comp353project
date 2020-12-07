@@ -66,7 +66,7 @@ const ImageCarousel = (props) => {
         <div className="img-container" key={uuid()}>
           <img alt="" src={elem} />
           <p className="legend">
-            {elem.replace("http://localhost:3001/backend/condo_pictures/", "")}
+            {elem.replace("http://localhost:3001/backend/pictures/ads/", "")}
           </p>
         </div>
       ))}
@@ -122,8 +122,6 @@ const AdDetail = (props) => {
     };
 
     const res = await data.send("ads", view, adsParam);
-
-    console.log(res, adsParam, convertedPictures.length);
 
     window.setTimeout(() => {
       if (res !== 0) {

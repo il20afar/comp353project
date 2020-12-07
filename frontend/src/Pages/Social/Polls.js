@@ -40,7 +40,6 @@ const PollsCreate = (props) => {
     setInputModalView(isValidPoll() ? "edit" : "display");
   };
 
-  console.log(answers);
   // Adds an answer field
   const addField = () => {
     const newAnswers = [
@@ -113,7 +112,6 @@ const PollsCreate = (props) => {
             .map((elem) => elem),
         });
 
-        console.log(res);
         if (res === 1) {
           setView("menu");
           updatePolls();
@@ -307,7 +305,7 @@ const Polls = () => {
       user_id: user.current.user_id,
       asso_id: 1,
     });
-    console.log(res);
+
     if (res.polls) {
       setVisiblePolls(res.polls);
     }

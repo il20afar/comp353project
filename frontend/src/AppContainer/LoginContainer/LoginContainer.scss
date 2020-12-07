@@ -60,10 +60,10 @@
   }
 
   .login-button {
-    height: 40px;
+    width: 100px;
+  }
+  .admin-button {
     width: 120px;
-    @include flex(row, center);
-    @include abs($top: 20px, $right: 20px);
   }
 
   .login-full-width-wrapper {

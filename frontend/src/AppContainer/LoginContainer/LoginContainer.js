@@ -1,5 +1,14 @@
 import React from "react";
-import { D, TextBox, Button, Condos } from "../../imports";
+import { D, TextBox, Button, Condos, Header } from "../../imports";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useHistory,
+  useLocation,
+  Redirect,
+} from "react-router-dom";
 import "../../Styles/Utils.scss";
 import "./LoginContainer.scss";
 
@@ -12,6 +21,8 @@ const LoginContainer = (props) => {
   });
 
   const loginButtonRef = React.useRef(null);
+
+  const history = useHistory();
 
   const isLoginEntered = () =>
     inputValues.username != "" && inputValues.password !== "";
@@ -54,17 +65,37 @@ const LoginContainer = (props) => {
       <div className="ads-wrapper">
         <Condos type="login" visibility="public" />
       </div>
+      <Header
+        title={"CON MANAGER"}
+        height="90px"
+        actions={[
+          <Link to="/admin">
+            <D cn="admin-button">
+              <Button
+                content={{ show: "ADMIN" }}
+                style={{
+                  show: {
+                    fontSize: "20px",
+                    height: "50px",
+                    lineHeight: "50px",
+                  },
+                }}
+                onClick={() => history.push("/admin")}
+              />
+            </D>
+          </Link>,
+          <D cn="login-button">
+            <Button
+              content={{ show: "LOGIN" }}
+              style={{
+                show: { fontSize: "20px", height: "50px", lineHeight: "50px" },
+              }}
+              onClick={() => setShowLogin(!showLogin)}
+            />
+          </D>,
+        ]}
+      />
 
-      <D cn="login-logo">CON MANAGER</D>
-      <D cn="login-button">
-        <Button
-          content={{ show: "LOGIN" }}
-          style={{
-            show: { fontSize: "20px", height: "40px", lineHeight: "40px" },
-          }}
-          onClick={() => setShowLogin(!showLogin)}
-        />
-      </D>
       {showLogin && (
         <D cn="login-full-width-wrapper">
           <D cn="login">
