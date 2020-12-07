@@ -57,5 +57,25 @@ class associations extends request
         $res = $this->query($query, false);
         return json_encode($res);
     }
+    
+    public function get_admin($obj)
+    {
+        $asso_id = $obj['asso_id'];
+        // Get the admin_id
+        $query = sprintf(
+            "SELECT admin_id FROM associations WHERE asso_id=%s;",
+            $asso_id
+        );
+        $res = $this->query($query, true);
+        $admin_id = $res['associations'][0]['admin_id'];
+        // Get the admin username
+        $query = sprintf(
+            "SELECT username FROM users WHERE user_id=%s;",
+            $admin_id
+        );
+        $res = $this->gquery($query, true);
+        $admin_username = $res[0]['username'];
+        return json_encode(["admin_id" => $admin_id, "admin_username" => $admin_username], JSON_NUMERIC_CHECK);
+    }
 }
 ?>
