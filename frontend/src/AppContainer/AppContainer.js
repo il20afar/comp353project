@@ -121,8 +121,9 @@ const AppContainer = () => {
   const [loginPage, setLoginPage] = React.useState(authHandler.states.idle);
   const [showUserMod, setShowUserMod] = React.useState(false);
   const userRef = React.useRef(null);
-  const associationUsersRef = React.useRef(null);
   const pageRef = React.useRef(null);
+
+  const [associations, setAssociations] = React.useState([]);
 
   const history = useHistory();
   const location = useLocation();
@@ -142,6 +143,18 @@ const AppContainer = () => {
 
   // Logs in the user if session is active
   useLoginPersistence(userRef, setLoginPage, history);
+
+  const updateAssociations = async () => {
+    const res = await data.send("associations", "get");
+
+    setAssociations(res.associations);
+    // if (!selectedAssociation) {
+    //   setSelectedAssociation(res.associations[0]);
+    // }
+  };
+  React.useEffect(() => {
+    updateAssociations();
+  }, []);
 
   return (
     <MainContext.Provider value={{ user: userRef }}>
@@ -204,7 +217,12 @@ const AppContainer = () => {
                         }`}
                       >
                         <Header
-                          title={elem}
+                          title={
+                            associations?.find(
+                              (elem) =>
+                                elem?.asso_id === userRef.current.asso_id
+                            )?.asso_name
+                          }
                           actions={[
                             <Button
                               content={{ show: "LOG OUT" }}

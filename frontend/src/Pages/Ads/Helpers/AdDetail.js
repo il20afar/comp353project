@@ -225,7 +225,9 @@ const AdDetail = (props) => {
                 ) : (
                   <TextBox
                     key={`textbox-field${key}`}
-                    type={key === "ad_desc" ? "textarea" : "input"}
+                    type={
+                      key === "ad_desc" || key == "title" ? "textarea" : "input"
+                    }
                     initialValue={inputValues[key]}
                     placeholder={key === "ad_price" ? "Numbers only" : ""}
                     outlineOnChange

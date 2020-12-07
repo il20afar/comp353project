@@ -65,12 +65,9 @@ const Act = (props) => {
 };
 
 const Field = (props) => {
-  const { key, title, content } = props;
+  const { title, content } = props;
   return (
-    <div
-      key={`edivit-info-fieldiv-${key}`}
-      className={`edit-info-field ${key}`}
-    >
+    <div key={`edit-info-field${title}`} className={`edit-info-field ${title}`}>
       <div className="field-title">{title} </div>
       <div className="field-display">{content}</div>
     </div>
@@ -147,7 +144,7 @@ const ActSpecific = (props) => {
         {inputModalView === "display" ? (
           <>
             {Object.entries(fields).map(([key, val]) => {
-              return <Field title={val} content={activity[key]} />;
+              return <Field key={key} title={val} content={activity[key]} />;
             })}
           </>
         ) : (

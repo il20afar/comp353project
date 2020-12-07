@@ -118,7 +118,7 @@ const AdminContainer = (props) => {
       login: async (username, pw) => {
         const res = await data.send("users", "login", { username, pw });
 
-        if (res.users.is_admin) {
+        if (res.users[0].is_admin) {
           setAdminUser(res.users[0]);
           setView("adminpage");
         } else {

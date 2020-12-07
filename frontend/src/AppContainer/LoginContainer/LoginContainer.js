@@ -66,7 +66,13 @@ const LoginContainer = (props) => {
         <Condos type="login" visibility="public" />
       </div>
       <Header
-        title={"CON MANAGER"}
+        title={
+          <div
+            style={{ height: "90px", lineHeight: "90px", fontWeight: "bold" }}
+          >
+            CON MANAGER
+          </div>
+        }
         height="90px"
         actions={[
           <Link to="/admin">

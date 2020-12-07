@@ -19,7 +19,8 @@ $transition: all 0.15s ease-in;
     height: 100vh;
 
     &.open {
-      .page {
+      .page,
+      .header {
         transition: 0.25s;
         width: calc(100% - 320px);
       }

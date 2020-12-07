@@ -92,7 +92,6 @@ const ThreadView = (props) => {
   const [searchValue, setSearchValue] = React.useState("");
 
   const onChangeSearchHandler = (e) => {
-    console.log(e);
     setSearchValue(e);
     setVisibleReplies(
       e === "" ? messages : messages.filter((elem) => elem.content.includes(e))

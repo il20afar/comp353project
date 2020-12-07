@@ -65,6 +65,9 @@
       color: $cancel_red;
     }
   }
+  textarea {
+    box-sizing: content-box;
+  }
 
   .text-input {
     @include assVal(width height line-height, 100%);

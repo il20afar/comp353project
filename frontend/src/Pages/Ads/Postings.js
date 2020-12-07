@@ -48,7 +48,7 @@ const PostingDetailedContainer = (props) => {
           visibility: "",
           pictures: "",
         }
-      : ad;
+      : view;
 
   return (
     <div className="ad-detail-container">
@@ -56,7 +56,7 @@ const PostingDetailedContainer = (props) => {
         {...{
           type,
           view,
-          editable: editable && user_id === ad.creator_id,
+          editable: editable && user_id === view.creator_id,
           ad: inputAd,
           onEdit: handlers.edit,
           onClose: handlers.close,
@@ -68,7 +68,7 @@ const PostingDetailedContainer = (props) => {
 };
 
 const PostingsContainer = (props) => {
-  const { user, visiblePostings, type } = props;
+  const { user, visiblePostings, type, setView } = props;
 
   return (
     <div className={`postings-container ${type}`}>
@@ -88,6 +88,7 @@ const PostingsContainer = (props) => {
                 title={title}
                 city={ad_city}
                 price={ad_price}
+                onClick={() => setView(elem)}
               />
             );
           })
@@ -175,9 +176,7 @@ const Postings = () => {
   ];
 
   React.useEffect(() => {
-    window.setTimeout(() => {
-      handlers.actions.updatePostings();
-    }, 200);
+    handlers.actions.updatePostings();
   }, []);
 
   return (
@@ -201,6 +200,7 @@ const Postings = () => {
                   (elem) => elem.ad_type === "item_sale"
                 )}
                 type="closed"
+                setView={setView}
               />
               <PostingsContainer
                 user={user}
@@ -208,6 +208,7 @@ const Postings = () => {
                   (elem) => elem.ad_type === "service"
                 )}
                 type="open"
+                setView={setView}
               />
             </>
           )}

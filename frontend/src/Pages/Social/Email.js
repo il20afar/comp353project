@@ -269,6 +269,7 @@ const Email = (props) => {
   const { user } = React.useContext(MainContext);
 
   const [view, setView] = React.useState("menu");
+  const [emails, setEmails] = React.useState([]);
   const [visibleEmail, setVisibleEmail] = React.useState([]);
   const [associationUsers, setAssociationUsers] = React.useState([]);
 
@@ -277,8 +278,10 @@ const Email = (props) => {
   const onSearchEmailChange = (e) => {
     const val = e ? e : "";
     setSearchTerm(val);
-    const filtered = visibleEmail.filter((elem) => elem.title.includes(val));
-    setVisibleEmail(val === "" ? visibleEmail : filtered);
+    const filtered = emails.filter((elem) =>
+      elem.message_subject.includes(val)
+    );
+    setVisibleEmail(val === "" ? emails : filtered);
   };
 
   const updateMessages = async () => {
@@ -286,7 +289,7 @@ const Email = (props) => {
       user_id: Number.parseInt(user.current.user_id),
     };
     const res = await data.send("messages", "get", params);
-
+    setEmails(res.messages);
     setVisibleEmail(res.messages);
   };
 
@@ -308,7 +311,8 @@ const Email = (props) => {
       key={"searchbar"}
       initialValue={searchTerm}
       placeholder={"Search email..."}
-      onChange={onSearchEmailChange}
+      onChange={(e) => onSearchEmailChange(e)}
+      onCancel={() => onSearchEmailChange("")}
       style={{ height: "46px" }}
     />,
   ];
@@ -336,7 +340,7 @@ const Email = (props) => {
           visibleEmail={visibleEmail}
           view={view}
           setView={setView}
-          searchTerm={searchTerm.current}
+          searchTerm={searchTerm}
         />
       ) : (
         <EmailView
