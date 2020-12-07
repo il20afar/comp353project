@@ -7,10 +7,12 @@ import {
   Header,
   InputModal,
   data,
+  ConfirmDelete,
 } from "../../imports";
 import Chatbox from "../../Components/Chatbox/Chatbox";
 import { v4 as uuid } from "uuid";
-import DateTimePicker from "react-datetime-picker";
+import Datetime from "react-datetime";
+import "react-datetime/css/react-datetime.css";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHashtag } from "@fortawesome/free-solid-svg-icons";
@@ -18,39 +20,6 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { faUser } from "@fortawesome/free-regular-svg-icons";
 
 import "./Activities.scss";
-
-const ActView = (props) => {
-  // const {
-  //   title,
-  //   starting_time,
-  //   ending_time,
-  //   number_of_attendees,
-  //   creator_username,
-  //   onClick,
-  // } = props;
-  // return (
-  //   <div className="act-view">
-  //     <div className="act-name-container">
-  //       <div className="thread-name-text">{showAct}</div>
-  //     </div>
-  //     <div className="threads-header-container">
-  //       <div className="menu-toggle-container" onClick={(e) => setShowAct("")}>
-  //         <div className="menu-toggle-icon">
-  //           <FontAwesomeIcon icon={faHashtag} color="black" />
-  //         </div>
-  //         <div className="menu-toggle-text">&nbsp;Activities</div>
-  //       </div>
-  //     </div>
-  //     <div className="box-container">
-  //       <p>Title: {name}</p>
-  //       <p>Description: {description}</p>
-  //       <p>Starting Time: {startTime}</p>
-  //       <p>Ending Time: {endTime}</p>
-  //       <p>Date: {date}</p>
-  //     </div>
-  //   </div>
-  // );
-};
 
 const Act = (props) => {
   const {
@@ -95,51 +64,135 @@ const Act = (props) => {
   );
 };
 
-const Field = (key, title, content) => {
+const Field = (props) => {
+  const { key, title, content } = props;
   return (
-    <D key={`edit-info-field-${key}`} cn={`edit-info-field ${key}`}>
-      <D cn="field-title">{title} </D>
+    <div
+      key={`edivit-info-fieldiv-${key}`}
+      className={`edit-info-field ${key}`}
+    >
+      <div className="field-title">{title} </div>
       <div className="field-display">{content}</div>
-    </D>
+    </div>
   );
 };
 
 const ActSpecific = (props) => {
-  const { activity, user, setView } = props;
+  const {
+    activity = {},
+    user,
+    setView,
+    type = "display",
+    updateActivities,
+  } = props;
 
-  const [inputModalView, setInputModalView] = React.useState("display");
-  const [inputFields, setInputFields] = React.useState({
-    title: "",
-    starting_time: "",
-    ending_time: "",
+  const [inputModalView, setInputModalView] = React.useState(type);
+  const [isDeleting, setIsDeleting] = React.useState(false);
+  const [inputValues, setInputValues] = React.useState({
+    title: activity.title || "",
+    activity_desc: activity.activity_desc || "",
+    starting_time: activity.starting_time || "",
+    ending_time: activity.ending_time || "",
+    creator_username: activity.creator_username || "",
+    number_of_attendees: activity.number_of_attendees || "",
   });
 
   const fields = {
     title: "Title: ",
+    activity_desc: "Activity description: ",
     starting_time: "Starting time: ",
     ending_time: "Ending time: ",
+    creator_username: "Creator username: ",
+    number_of_attendees: "Number of attendees",
   };
 
-  const onChange = (e) => {
-    const val = e.target.value;
-
-    setInputModalView(val !== "" ? "edit" : "display");
+  const onInputValueChange = (eventKey, newValue) => {
+    inputValues[eventKey] = newValue;
+    setInputValues(Object.assign({}, inputValues));
   };
+
+  console.log(inputValues);
 
   return (
     <InputModal
       view={inputModalView}
-      isEditable={
-        Number.parseInt(user.current.user_id) ===
-        Number.parseInt(activity.creator_id)
-      }
-      widthPadding={100}
-      heightPadding={100}
+      isEditable={false}
+      isDeletable={false}
+      widthPadding={200}
+      heightPadding={180}
       onClose={() => setView("menu")}
-      onConfirm={async () => {}}
+      onDelete={() => {}}
+      onConfirm={async () => {
+        const params = {
+          title: inputValues.title,
+          activity_desc: inputValues.activity_desc,
+          starting_time: inputValues.starting_time.format(
+            "YYYY-MM-DD HH:mm:ss"
+          ),
+          ending_time: inputValues.ending_time.format("YYYY-MM-DD HH:mm:ss"),
+          creator_id: Number.parseInt(user.current.user_id),
+          number_of_attendees: Number.parseInt(user.current.asso_id),
+        };
+        const res = await data.send("activities", "create", params);
+        if (res === 1) {
+          updateActivities();
+
+          setView("menu");
+        }
+      }}
+      onCancel={() => setInputModalView("display")}
+      onEdit={() => setInputModalView("edit")}
     >
       <div className="content">
-        {inputModalView === "display" ? <div></div> : null}
+        {inputModalView === "display" ? (
+          <>
+            {Object.entries(fields).map(([key, val]) => {
+              return <Field title={val} content={activity[key]} />;
+            })}
+          </>
+        ) : (
+          <>
+            {Object.entries(fields).map(([key, val]) => {
+              // console.log)()
+              return (
+                <Field
+                  key={key}
+                  title={val}
+                  content={
+                    key === "title" || key === "activity_desc" ? (
+                      <TextBox
+                        key={`email-input${key}`}
+                        type={key === "title" ? "input" : "textarea"}
+                        initialValue={inputValues[key]}
+                        onChange={(newValue) =>
+                          onInputValueChange(key, newValue)
+                        }
+                        onCancel={() => onInputValueChange(key, "")}
+                        placeholder={`${val}`}
+                        outlineOnChange
+                        focusOnRender={true}
+                        readOnly={false}
+                        height={key === "title" ? "50px" : "fit-content"}
+                      />
+                    ) : key === "starting_time" || key === "ending_time" ? (
+                      <Datetime
+                        value={inputValues[key]}
+                        onChange={(e) => {
+                          console.log(e);
+                          onInputValueChange(key, e);
+                        }}
+                      />
+                    ) : key === "creator_username" ? (
+                      user.current.username
+                    ) : (
+                      inputValues.number_of_attendees || 0
+                    )
+                  }
+                />
+              );
+            })}
+          </>
+        )}
       </div>
     </InputModal>
   );
@@ -175,24 +228,10 @@ const Activities = (props) => {
     <div
       style={{
         display: "flex",
-        justifyContent: "space-between",
-        width: "420px",
+        justifyContent: "flex-end",
+        width: "fit-content",
       }}
     >
-      <Button
-        key="button"
-        content={{ show: "all", hide: "√" }}
-        style={{
-          show: { width: "200px", textTransform: "capitalize" },
-          hide: { width: "200px", textTransform: "capitalize" },
-        }}
-        dropdown={[
-          { elem: "Classified", eventKey: "classified" },
-          { elem: "General", eventKey: "general" },
-          { elem: "Public", eventKey: "public" },
-        ]}
-        onSelect={null}
-      />
       <Button
         content={{ show: "Create +" }}
         style={{ show: { width: "200px" }, hide: { width: "200px" } }}
@@ -225,9 +264,14 @@ const Activities = (props) => {
       {view === "menu" ? (
         <ActMenu activities={activities || []} setView={setView} />
       ) : view === "create" ? (
-        <ActSpecific user={user} setView={setView} />
+        <ActSpecific
+          user={user}
+          setView={setView}
+          type={"edit"}
+          updateActivities={updateActivities}
+        />
       ) : (
-        <ActView showAct={view} />
+        <ActSpecific user={user} activity={view} setView={setView} />
       )}
     </D>
   );

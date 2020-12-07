@@ -33,6 +33,7 @@ export { default as InputModal } from "./Components/InputModal/InputModal";
 export { default as SearchBar } from "./Components/SearchBar/SearchBar";
 export { default as LoadContainer } from "./Components/LoadContainer/LoadContainer";
 export { default as UserList } from "./Components/UserList/UserList";
+export { default as ConfirmDelete } from "./Components/ConfirmDelete/ConfirmDelete";
 
 export { UserIcon, UserModModal } from "./Components/User/User";
 

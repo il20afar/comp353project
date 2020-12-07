@@ -54,7 +54,7 @@ const AdDetail = (props) => {
             </D>
           </D>
         )}
-        {isDeletable && view === "edit" && (
+        {isDeletable && (isEditable ? view === "edit" : true) && (
           <D cn="delete-icon-container">
             <D cn={`delete-icon`}>
               <D cn="delete-icon-wrapper close" onClick={onDelete}>
