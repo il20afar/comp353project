@@ -52,12 +52,12 @@ CREATE TABLE condos (
 
 CREATE TABLE ads (
 	ad_id INT NOT NULL AUTO_INCREMENT,
-	title VARCHAR(50) NOT NULL,
-	ad_type VARCHAR(50) NOT NULL,
+	title VARCHAR(200) NOT NULL,
+	ad_type VARCHAR(100) NOT NULL,
 	ad_desc VARCHAR(1000) NOT NULL,
 	ad_price INT NOT NULL,
 	ad_city VARCHAR(50) NOT NULL,
-	visibility VARCHAR(50) NOT NULL,
+	visibility VARCHAR(100) NOT NULL,
 	pictures VARCHAR(1000),
 	creator_id INT NOT NULL,
 	PRIMARY KEY (ad_id),
@@ -188,7 +188,7 @@ VALUES
 		'Quebec',
 		'Canada',
 		'afar@conman.com',
-		7776665555,
+		5149635321,
 		'path/to/default/picture'
 	),
 	(
@@ -201,7 +201,7 @@ VALUES
 		'Quebec',
 		'Canada',
 		'rohh@conman.com',
-		0009998888,
+		5149548888,
 		'path/to/default/picture'
 	),
 	(
@@ -210,11 +210,11 @@ VALUES
 		'Brian',
 		'Poon',
 		'18 Main Street',
-		'Toronto',
-		'Ontario',
+		'Montreal',
+		'Quebec',
 		'Canada',
 		'poon@conman.com',
-		8447776666,
+		5149766539,
 		'path/to/default/picture'
 	),
 	(
@@ -227,7 +227,7 @@ VALUES
 		'Ontario',
 		'Canada',
 		'mpob@conman.com',
-		6665576532,
+		6135576532,
 		'path/to/default/picture'
 	),
 	(
@@ -314,9 +314,9 @@ INSERT INTO
 	)
 VALUES
 	(
-		'Public Condo Ad #1',
+		'Perfect 2 Bedroom Condo, Located in Downtown, Montreal - 6mins from Guy Metro!',
 		'condo',
-		'Live in the upper echelons of Quartier des Spectacles in Montreal. Enjoy a unique location at the crossroads of culture and the arts – the largest concentration of museums, theatres and galleries in North America – near major academic institutions and the Place des Arts metro.',
+		'2 Beds/2 Baths - 850sqt - Furniture all included - Smart Home Included - Free Indoor Parking - Various condo amenities',
 		500000,
 		'Montreal',
 		'public',
@@ -324,69 +324,69 @@ VALUES
 		1
 	),
 	(
-		'Public Condo Ad #2',
+		'Modern Clean Condo, 1 Bedroom Condo, DOWNTOWN, Near Concordia University!',
 		'condo',
-		'The illusion which exalts us is dearer to us than ten thousand truths.',
-		1200000,
+		'1 Bed/1 Bath - 700sqt - Master bedroom Balcony - Furniture all included - Free Indoor Parking - Various condo amenities',
+		320000,
 		'Montreal',
 		'public',
 		'http://localhost:3001/backend/pictures/ads/b.jpeg, http://localhost:3001/backend/pictures/ads/building.jpeg',
 		2
 	),
 	(
-		'Public Condo Ad #3',
+		'2 Beds, 2 Baths Apartment/Condo, Recently Renovated',
 		'condo',
-		'Live in the upper echelons of Quartier des Spectacles in Montreal. Enjoy a unique location at the crossroads of culture and the arts – the largest concentration of museums, theatres and galleries in North America – near major academic institutions and the Place des Arts metro. Live in the upper echelons of Quartier des Spectacles in Montreal. Enjoy a unique location at the crossroads of culture and the arts – the largest concentration of museums, theatres and galleries in North America – near major academic institutions and the Place des Arts metro.',
-		100000,
+		'2 Beds/2 Baths - 720sqt - Recently Renovated - Smart Home Included - Free Indoor Parking - Various condo amenities',
+		450000,
 		'Montreal',
 		'public',
 		'http://localhost:3001/backend/pictures/ads/c.jpeg, http://localhost:3001/backend/pictures/ads/building.jpeg',
-		1
+		3
 	),
 	(
-		'Public Condo Ad #4',
+		'Gorgeous 1 Bedroom Condo (+ BALCONY), 650sqt, At the heart of Montreal, Downtown!',
 		'condo',
-		'The illusion which exalts us is dearer to us than ten thousand truths.',
-		1200000,
+		'1 Bed/1 Bath - 650sqt - Furniture all included - Balcony - Free Indoor Parking - Various condo amenities',
+		390000,
 		'Montreal',
 		'public',
 		'http://localhost:3001/backend/pictures/ads/d.jpeg, http://localhost:3001/backend/pictures/ads/building.jpeg',
-		1
+		4
 	),
 	(
-		'Public Condo Ad #5',
+		'CONDO FOR SALE! 2 Beds, 1 Bath, Very Modern, LOCATED IN DOWNTOWN, MONTREAL!',
 		'condo',
-		'The illusion which exalts us is dearer to us than ten thousand truths.',
-		5000000,
+		'2 Beds/1 Bath - 800sqt - Recently Renovated - Free Indoor Parking - Various condo amenities',
+		550000,
 		'Montreal',
 		'public',
 		'http://localhost:3001/backend/pictures/ads/e.jpeg, http://localhost:3001/backend/pictures/ads/building.jpeg',
 		1
 	),
 	(
-		'Public Condo Ad #6',
+		'Beautiful Penthouse Condo for SALE, 800sqt, Located near BUS/METRO',
 		'condo',
-		'The illusion which exalts us is dearer to us than ten thousand truths.',
-		1000800,
+		'2 Beds/1 Bath - 900sqt - Penthouse Suite - Smart Home Included - Furniture all included - Free Indoor Parking - Various condo amenities',
+		700000,
 		'Montreal',
 		'public',
 		'http://localhost:3001/backend/pictures/ads/f.jpeg, http://localhost:3001/backend/pictures/ads/building.jpeg',
-		1
+		2
 	),
 	(
-		'Classified Condo Ad #1',
+		'Luxurious Penthouse Suite for SALE, 2 Bedrooms, FOR SALE',
 		'condo',
-		'The illusion which exalts us is dearer to us than ten thousand truths.',
-		4500,
+		'2 Beds/2 Baths - 760sqt - Floor Recently Renovated - Smart Home Included - Furniture all included - Free Indoor Parking - Various condo amenities',
+		450000,
 		'Montreal',
 		'1',
 		'http://localhost:3001/backend/pictures/ads/e.jpeg, http://localhost:3001/backend/pictures/ads/building.jpeg',
 		3
 	),
 	(
-		'Classified Condo Ad #2',
+		'3 Bedroom Condo FOR SALE, Recently Renovated, NEAR CONCORDIA UNIVERSITY',
 		'condo',
-		'The illusion which exalts us is dearer to us than ten thousand truths.',
+		'3 Beds/2 Baths - 810sf - Smart Home Included - Free Indoor Parking - Various condo amenities',
 		4500,
 		'Montreal',
 		'1',
@@ -400,107 +400,107 @@ VALUES
 		4500,
 		'Montreal',
 		'public',
-		'http://localhost:3001/backend/pictures/ads/tv.jpeg, /path/to/other/picture',
+		'http://localhost:3001/backend/pictures/ads/tv.jpeg',
 		1
 	),
 	(
-		'Crazy hot oven',
+		'Brand New Oven',
 		'item_sale',
 		'Create many more or much larger dishes with a huge 3.1 cu. ft. capacity oven. It opens up more possibilities in home cooking. You can prepare multiple dishes at once, like vegetables, pastries or casseroles. Or easily cook large items, like a big roast or holiday turkey with all the trimmings.',
 		2000,
 		'Montreal',
 		'public',
-		'http://localhost:3001/backend/pictures/ads/oven.jpeg, /path/to/other/picture',
+		'http://localhost:3001/backend/pictures/ads/oven.jpeg',
 		2
 	),
 	(
-		'Altia couch (GREAT PRICE)',
+		'Altia Couch (GREAT PRICE)',
 		'item_sale',
-		'Altia classic design is derived from a sophisticated form of soft lines and a just-right low profile. The compact size of the original sofa is ideal for smaller spaces, while custom configurations of the sectional can be a perfect fit for any living room. The low backrest matched with high feather filled removable cushions creates an elegantly stylish aesthetic. Design your own sofa with your favorite upholstery. The base is also available in an assortment of colors and finishes for a truly unique look. ',
+		'Altia classic design is derived from a sophisticated form of soft lines and a just-right low profile. The compact size of the original sofa is ideal for smaller spaces, while custom configurations of the sectional can be a perfect fit for any living room. The low backrest matched with high feather filled removable cushions creates an elegantly stylish aesthetic. Design your own sofa with your favorite upholstery. The base is also available in an assortment of colors and finishes for a truly unique look.',
 		6000,
 		'Montreal',
 		'public',
-		'http://localhost:3001/backend/pictures/ads/couch.jpeg, /path/to/other/picture',
+		'http://localhost:3001/backend/pictures/ads/couch.jpeg',
 		1
 	),
 	(
-		'Playstation 5 (Brand new)',
+		'Playstation 5 (Brand New)',
 		'item_sale',
-		'Discover new gaming possibilities that will surpass your wildest dreams with the PlayStation 5 Digital Edition console. Enjoy super-fast load times on the PS5 with an ultra-high-speed solid-state drive, a deeper immersive experience with haptic feedback, adaptive triggers, 3D audio technology, 4K and 8K output, and a whole new generation of amazing PlayStation games .',
+		'Discover new gaming possibilities that will surpass your wildest dreams with the PlayStation 5 Digital Edition console. Enjoy super-fast load times on the PS5 with an ultra-high-speed solid-state drive, a deeper immersive experience with haptic feedback, adaptive triggers, 3D audio technology, 4K and 8K output, and a whole new generation of amazing PlayStation games.',
 		1000,
 		'Montreal',
 		'public',
-		'http://localhost:3001/backend/pictures/ads/ps5.jpeg, /path/to/other/picture',
+		'http://localhost:3001/backend/pictures/ads/ps5.jpeg',
 		2
 	),
 	(
-		'Dyson',
+		'Dyson Vacuum',
 		'item_sale',
 		'The Dyson Cyclone V10 Motorhead Cordless Stick Vacuum offers the same suction as a corded vacuum. Get rid of dirt, dust, pet hair and more with the ease and convenience of a lightweight vacuum cleaner. The Cyclone V10 Motorhead traps everything from fine dust to large debris. Includes 3 accessories.',
 		400,
 		'Montreal',
 		'public',
-		'http://localhost:3001/backend/pictures/ads/dyson.jpeg, /path/to/other/picture',
+		'http://localhost:3001/backend/pictures/ads/dyson.jpeg',
 		2
 	),
 	(
-		'Classified Item Sale Ad #1',
+		'Standing Office Desk (LIKE NEW)',
 		'item_sale',
-		'The illusion which exalts us is dearer to us than ten thousand truths.',
-		4500,
+		'Standing office desk w/ remote. Originally from IKEA, used for less than a year. No observable damages.',
+		200,
 		'Montreal',
 		'1',
-		'http://localhost:3001/backend/pictures/ads/a.jpeg, /path/to/other/picture',
+		'http://localhost:3001/backend/pictures/ads/desk.jpeg',
 		3
 	),
 	(
-		'Classified Item Sale Ad #2',
+		'27 inch 4k Curved Monitor',
 		'item_sale',
-		'The illusion which exalts us is dearer to us than ten thousand truths.',
-		4500,
+		'Live the 4k Experience with this monitor from Samsung. Option to be mountable available. Contact for more details.',
+		390,
 		'Montreal',
 		'1',
-		'http://localhost:3001/backend/pictures/ads/a.jpeg, /path/to/other/picture',
+		'http://localhost:3001/backend/pictures/ads/monitor.jpeg',
 		4
 	),
 	(
-		'Public Service Ad #1',
+		'Plumber',
 		'service',
-		'The illusion which exalts us is dearer to us than ten thousand truths.',
-		4500,
+		'Famous plumber seen from TV advertisements can be the one fixing your condo plumbing! Call Rohhaan for his services and get 10% OFF any condo amenity!',
+		100,
 		'Montreal',
 		'public',
-		'http://localhost:3001/backend/pictures/ads/e.jpeg, /path/to/other/picture',
+		'http://localhost:3001/backend/pictures/ads/plumber.jpeg',
 		1
 	),
 	(
-		'Public Service Ad #2',
+		'Technician',
 		'service',
-		'The illusion which exalts us is dearer to us than ten thousand truths.',
-		4500,
+		'Hire me for any issues regarding wiring, stud finding, network issues, & more!',
+		60,
 		'Montreal',
 		'public',
-		'http://localhost:3001/backend/pictures/ads/f.jpeg, /path/to/other/picture',
+		'http://localhost:3001/backend/pictures/ads/technician.jpeg',
 		2
 	),
 	(
-		'Classified Service Ad #1',
+		'CON Food Delivery',
 		'service',
-		'The illusion which exalts us is dearer to us than ten thousand truths.',
-		4500,
+		'Order food from select restaurants using our very own staff.',
+		150,
 		'Montreal',
 		'1',
-		'http://localhost:3001/backend/pictures/ads/a.jpeg, /path/to/other/picture',
+		'http://localhost:3001/backend/pictures/ads/food.jpeg',
 		3
 	),
 	(
-		'Classified Service Ad #2',
+		'Personal Trainer',
 		'service',
-		'The illusion which exalts us is dearer to us than ten thousand truths.',
-		4500,
+		'Hire your very own personal trainer to get fit and live the fit life. Contact for more info.',
+		100,
 		'Montreal',
 		'1',
-		'http://localhost:3001/backend/pictures/ads/a.jpeg, /path/to/other/picture',
+		'http://localhost:3001/backend/pictures/ads/trainer.jpeg',
 		4
 	);
 
