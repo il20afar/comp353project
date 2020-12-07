@@ -350,7 +350,7 @@ const AdminContainer = (props) => {
                   onClose={() => setIsCreating(false)}
                   onCancel={() => setIsCreating(false)}
                   isCloseable={isCreating}
-                  isDeleteable={false}
+                  isDeletable={false}
                 >
                   <div
                     className="current-selection"
@@ -441,7 +441,7 @@ const AdminContainer = (props) => {
                         );
                       }
                     )}
-                    <div
+                    {/* <div
                       className="delete-asso-container"
                       onClick={() => setIsDeleting(true)}
                     >
@@ -450,7 +450,7 @@ const AdminContainer = (props) => {
                         style={{ width: "50px", height: "50px" }}
                         color="white"
                       />
-                    </div>
+                    </div> */}
                   </div>
                 </InputModal>
               ) : (

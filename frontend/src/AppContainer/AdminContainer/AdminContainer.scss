@@ -76,8 +76,6 @@
   @include fullFlex();
   position: relative;
   background-color: $bg;
-  .header {
-  }
 
   .admin-login-container {
     width: 100%;
@@ -160,10 +158,6 @@
     height: 100%;
     background-color: rgb(150, 78, 150);
 
-    .header {
-      // justify-content: space-between;
-    }
-
     .admin-page-container {
       width: 100%;
       height: calc(100% - 80px);
@@ -222,6 +216,7 @@
                     font-size: 20px;
                     height: fit-content;
                     color: ghostwhite;
+                    overflow-wrap: break-word;
                     word-break: break-all;
                     img {
                       width: 100%;
