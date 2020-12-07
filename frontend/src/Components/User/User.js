@@ -92,7 +92,6 @@ const UserModModal = (props) => {
       <D className="user-edit-container">
         <D className="user-edit-window">
           <div className="content-container">
-            {" "}
             <D cn="action-icon-container">
               <D ref={closeOrConfirm} cn={`action-icon close`}>
                 <D cn="action-icon-wrapper close" onClick={() => onClose()}>
