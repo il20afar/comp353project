@@ -314,9 +314,9 @@ INSERT INTO
 	)
 VALUES
 	(
-		'Public Condo Ad #1',
+		'Perfect 2 Bedroom Condo, Located in Downtown, Montreal - 6mins from Guy Metro!',
 		'condo',
-		'Live in the upper echelons of Quartier des Spectacles in Montreal. Enjoy a unique location at the crossroads of culture and the arts – the largest concentration of museums, theatres and galleries in North America – near major academic institutions and the Place des Arts metro.',
+		'2 Beds/2 Baths - 850sqt - Furniture all included - Smart Home Included - Free Indoor Parking - Various condo amenities',
 		500000,
 		'Montreal',
 		'public',
@@ -324,69 +324,69 @@ VALUES
 		1
 	),
 	(
-		'Public Condo Ad #2',
+		'Modern Clean Condo, 1 Bedroom Condo, DOWNTOWN, Near Concordia University!',
 		'condo',
-		'The illusion which exalts us is dearer to us than ten thousand truths.',
-		1200000,
+		'1 Bed/1 Bath - 700sqt - Master bedroom Balcony - Furniture all included - Free Indoor Parking - Various condo amenities',
+		320000,
 		'Montreal',
 		'public',
 		'http://localhost:3001/backend/pictures/ads/b.jpeg, http://localhost:3001/backend/pictures/ads/building.jpeg',
 		2
 	),
 	(
-		'Public Condo Ad #3',
+		'2 Beds, 2 Baths Apartment/Condo, Recently Renovated',
 		'condo',
-		'Live in the upper echelons of Quartier des Spectacles in Montreal. Enjoy a unique location at the crossroads of culture and the arts – the largest concentration of museums, theatres and galleries in North America – near major academic institutions and the Place des Arts metro. Live in the upper echelons of Quartier des Spectacles in Montreal. Enjoy a unique location at the crossroads of culture and the arts – the largest concentration of museums, theatres and galleries in North America – near major academic institutions and the Place des Arts metro.',
-		100000,
+		'2 Beds/2 Baths - 720sqt - Recently Renovated - Smart Home Included - Free Indoor Parking - Various condo amenities',
+		450000,
 		'Montreal',
 		'public',
 		'http://localhost:3001/backend/pictures/ads/c.jpeg, http://localhost:3001/backend/pictures/ads/building.jpeg',
 		1
 	),
 	(
-		'Public Condo Ad #4',
+		'Gorgeous 1 Bedroom Condo (+ BALCONY), 650sqt, At the heart of Montreal, Downtown!',
 		'condo',
-		'The illusion which exalts us is dearer to us than ten thousand truths.',
-		1200000,
+		'1 Bed/1 Bath - 650sqt - Furniture all included - Balcony - Free Indoor Parking - Various condo amenities',
+		390000,
 		'Montreal',
 		'public',
 		'http://localhost:3001/backend/pictures/ads/d.jpeg, http://localhost:3001/backend/pictures/ads/building.jpeg',
 		1
 	),
 	(
-		'Public Condo Ad #5',
+		'CONDO FOR SALE! 2 Beds, 1 Bath, Very Modern, LOCATED IN DOWNTOWN, MONTREAL!',
 		'condo',
-		'The illusion which exalts us is dearer to us than ten thousand truths.',
-		5000000,
+		'2 Beds/1 Bath - 800sqt - Recently Renovated - Free Indoor Parking - Various condo amenities',
+		550000,
 		'Montreal',
 		'public',
 		'http://localhost:3001/backend/pictures/ads/e.jpeg, http://localhost:3001/backend/pictures/ads/building.jpeg',
 		1
 	),
 	(
-		'Public Condo Ad #6',
+		'Beautiful Penthouse Condo for SALE, 800sqt, Located near BUS/METRO',
 		'condo',
-		'The illusion which exalts us is dearer to us than ten thousand truths.',
-		1000800,
+		'2 Beds/1 Bath - 900sqt - Penthouse Suite - Smart Home Included - Furniture all included - Free Indoor Parking - Various condo amenities',
+		700000,
 		'Montreal',
 		'public',
 		'http://localhost:3001/backend/pictures/ads/f.jpeg, http://localhost:3001/backend/pictures/ads/building.jpeg',
 		1
 	),
 	(
-		'Classified Condo Ad #1',
+		'Luxurious Penthouse Suite for SALE, 2 Bedrooms, FOR SALE',
 		'condo',
-		'The illusion which exalts us is dearer to us than ten thousand truths.',
-		4500,
+		'2 Beds/2 Baths - 760sqt - Floor Recently Renovated - Smart Home Included - Furniture all included - Free Indoor Parking - Various condo amenities',
+		450000,
 		'Montreal',
 		'1',
 		'http://localhost:3001/backend/pictures/ads/e.jpeg, http://localhost:3001/backend/pictures/ads/building.jpeg',
 		3
 	),
 	(
-		'Classified Condo Ad #2',
+		'3 Bedroom Condo FOR SALE, Recently Renovated, NEAR CONCORDIA UNIVERSITY',
 		'condo',
-		'The illusion which exalts us is dearer to us than ten thousand truths.',
+		'3 Beds/2 Baths - 810sqt - Smart Home Included - Free Indoor Parking - Various condo amenities',
 		4500,
 		'Montreal',
 		'1',
@@ -434,7 +434,7 @@ VALUES
 		2
 	),
 	(
-		'Dyson',
+		'Dyson Vacuum',
 		'item_sale',
 		'The Dyson Cyclone V10 Motorhead Cordless Stick Vacuum offers the same suction as a corded vacuum. Get rid of dirt, dust, pet hair and more with the ease and convenience of a lightweight vacuum cleaner. The Cyclone V10 Motorhead traps everything from fine dust to large debris. Includes 3 accessories.',
 		400,
@@ -444,39 +444,39 @@ VALUES
 		2
 	),
 	(
-		'Classified Item Sale Ad #1',
+		'Standing Office Table (LIKE NEW)',
 		'item_sale',
-		'The illusion which exalts us is dearer to us than ten thousand truths.',
-		4500,
+		'Standing Office Table w/ Remote. Originally from IKEA, used for less than a year. No obervable damages.',
+		200,
 		'Montreal',
 		'1',
 		'http://localhost:3001/backend/pictures/ads/a.jpeg, /path/to/other/picture',
 		3
 	),
 	(
-		'Classified Item Sale Ad #2',
+		'27inch 4k Curved Monitor',
 		'item_sale',
-		'The illusion which exalts us is dearer to us than ten thousand truths.',
-		4500,
+		'Live the 4k Experience with this monitor from SAMSUNG. Option to be mountable available. Contact for more details.',
+		390,
 		'Montreal',
 		'1',
 		'http://localhost:3001/backend/pictures/ads/a.jpeg, /path/to/other/picture',
 		4
 	),
 	(
-		'Public Service Ad #1',
+		'Services - Rohhaan The Plumber',
 		'service',
-		'The illusion which exalts us is dearer to us than ten thousand truths.',
-		4500,
+		'Famous plumber seen from TV advertisements can be the one fixing your condo plumbing! Call Rohhaan for his services and get 10% OFF any condo amenety!',
+		100,
 		'Montreal',
 		'public',
 		'http://localhost:3001/backend/pictures/ads/e.jpeg, /path/to/other/picture',
 		1
 	),
 	(
-		'Public Service Ad #2',
+		'Services - Technician',
 		'service',
-		'The illusion which exalts us is dearer to us than ten thousand truths.',
+		'Hire our personal condo technician for issues regarding (wiring, stud finding, network issues, & more!)',
 		4500,
 		'Montreal',
 		'public',
@@ -484,9 +484,9 @@ VALUES
 		2
 	),
 	(
-		'Classified Service Ad #1',
+		'Services - CON Food Delivery',
 		'service',
-		'The illusion which exalts us is dearer to us than ten thousand truths.',
+		'Order food from select restaurants using our very own staff.',
 		4500,
 		'Montreal',
 		'1',
@@ -494,9 +494,9 @@ VALUES
 		3
 	),
 	(
-		'Classified Service Ad #2',
+		'Services - Personal Trainer',
 		'service',
-		'The illusion which exalts us is dearer to us than ten thousand truths.',
+		'Hire your very own Personal Trainer located on the TOP FLOOR, to get fit and live the fit life.',
 		4500,
 		'Montreal',
 		'1',
