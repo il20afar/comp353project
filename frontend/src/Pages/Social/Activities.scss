@@ -87,28 +87,34 @@
     .box-container {
       font-weight: 500;
       color: whitesmoke;
-      background-color: black;
+      background-color: rgba(201, 240, 157, 0.82);
       width: 100%;
       height: calc(100% - 40px - 25px);
     }
   }
 
   .act-menu {
-    width: 100%;
-    height: 100%;
-    display: grid;
+    width: calc(100% - 40px);
+    height: calc(100% - 90px);
+    position: absolute;
+    top: 70px;
+    left: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
     grid-auto-rows: 70px;
     grid-row-gap: 20px;
 
     .act {
       width: 100%;
       max-width: 100%;
-      height: 70px;
-      background-color:  rgba(0, 0, 0, 0.82);
+      height: 80px;
+      background-color: rgba(201, 240, 157, 0.82);
       border-radius: 8px;
       @include flex(row, space-between);
       padding: 0 20px 0 20px;
-      display: grid;
+      display: flex;
+
       box-sizing: border-box;
       box-shadow: $boxshadow;
       grid-template-rows: 100%;
@@ -117,38 +123,21 @@
 
       .act-element-container {
         height: 100%;
-        width: 100%;
+        width: fit-content;
+        font-size: 18px;
+        color: rgb(83, 72, 83);
+        font-style: italic;
+
         @include flex(column, center);
 
         .act-element {
           overflow: hidden;
-
           font-size: 20px;
-          color: whitesmoke;
-          &.name,
-          &.numberppl,
-          &.date,
-          &.created-by {
-            width: 100%;
-            @include flex(row, space-between);
-            grid-row: 1 / span 1;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-          }
-          &.name {
-            grid-column: 1 / span 1;
-          }
-          &.date {
-            grid-column: 3 / span 1;
-          }
-          &.created-by {
-            grid-column: 4 / span 1;
-            @include flex(row, flex-end);
-          }
-          &.numberppl {
-            grid-column: 2 / span 1;
-            @include flex(row, flex-start);
-          }
+          color: black;
+          width: fit-content;
+          display: flex;
+          font-style: normal;
+          margin-top: 6px;
         }
       }
 
@@ -160,6 +149,37 @@
       &:active {
         box-shadow: none;
         transform: translateY(-2px);
+      }
+    }
+  }
+
+  .edit-view-window {
+    background-color: rgba(201, 240, 157, 0.82) !important;
+  }
+
+  .edit-info-field {
+    height: fit-content;
+    width: calc(100% - 20px);
+    margin-bottom: 30px;
+    .field-title {
+      height: 20px;
+      font-size: 18px;
+      line-height: 20px;
+      font-style: italic;
+      color: black;
+      margin-bottom: 4px;
+      font-style: italic;
+      text-transform: capitalize;
+    }
+    .field-display {
+      max-width: 100%;
+      width: 100%;
+      font-size: 20px;
+      height: fit-content;
+      color: black;
+      img {
+        width: 100%;
+        height: auto;
       }
     }
   }
