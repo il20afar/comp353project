@@ -181,18 +181,40 @@ input[type="number"] {
     width: 300px;
   }
 }
+.contri {
+  margin-bottom: 20px;
+}
+
 .con-view {
   @include fullsize();
 
-  .con-name-container {
-    width: 100%;
-    height: 40px;
+.box-container {
+    border-radius: 8px;
+    width: 80%;
+    height: 35px;
     line-height: 40px;
-    font-size: 34px;
     color: black;
     text-align: center;
+    
   }
+  .contri-title {
+  font-size: 24px;
+}
+.box-container p {
+    margin: 5px;
+    font-size: 22px;
+    }
 
+.borderline {
+  padding-bottom: 2px;
+  border-bottom: solid whitesmoke 2px;
+}
+
+.maint-title {
+  padding-top: 2px;
+  font-size: 24px;
+  padding-bottom: 2px;
+}
   .threads-header-container {
     width: 100%;
     height: 40px;

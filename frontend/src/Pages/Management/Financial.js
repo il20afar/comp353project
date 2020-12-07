@@ -40,7 +40,7 @@ const ConView = (props) => {
   return (
     <div className="con-view">
       <div className="con-name-container">
-        <div className="thread-name-text">{showCon}</div>
+        <div className="thread-name-text"></div>
       </div>
       <div className="threads-header-container">
         <div className="menu-toggle-container" onClick={(e) => setShowCon("")}>
@@ -51,12 +51,11 @@ const ConView = (props) => {
         </div>
       </div>
       <div className="box-container">
-        <p>Special Contributors: </p>
-        <p>{nameOfContributor}</p>
-        <p>{nameOfContributor}</p>
-        <p>{nameOfContributor}</p>
-        <p>{nameOfContributor}</p>
-        <p>{nameOfContributor}</p>
+        <h1 className = "contri-title">Special Contributors: </h1>
+        <p>Antoine Farley</p>
+        <p>Maxim Pobudzey</p>
+        <p>Rohhaan Thambithurai</p>
+        <p>Tik Man Poon</p>
       </div>
     </div>
   );
@@ -100,7 +99,7 @@ const MaintView = (props) => {
   return (
     <div className="con-view">
       <div className="con-name-container">
-        <div className="thread-name-text">{showMaint}</div>
+        <div className="thread-name-text"></div>
       </div>
       <div className="threads-header-container">
         <div
@@ -114,10 +113,22 @@ const MaintView = (props) => {
         </div>
       </div>
       <div className="box-container">
-        <p>Description: {rationales}</p>
-        <p>Date: {dates}</p>
-        <p>Contractor: {contractor}</p>
-        <p>Cost: {cost}</p>
+        <h1 className = "maint-title">Maintainence and Repairs</h1>
+        <h1 className = "borderline"></h1>
+        <p>Description: Repair of Broken Air Conditioning</p>
+        <p>Date: 01/12/2020</p>
+        <p>Contractor: Airvitech Inc.</p>
+        <p>Cost: $1060</p>
+        <h1 className = "borderline"></h1>
+        <p>Description: Maintainence of Main Pipes of the Building</p>
+        <p>Date: 24/11/2020</p>
+        <p>Contractor: Ledcor Ip Holdings LTD</p>
+        <p>Cost: $5200</p>
+        <h1 className = "borderline"></h1>
+        <p>Description: Repair of Damaged Bathtub</p>
+        <p>Date: 16/12/2020</p>
+        <p>Contractor: Tub Expert LTD</p>
+        <p>Cost: $140</p>
       </div>
     </div>
   );
@@ -146,13 +157,14 @@ const Financial = (props) => {
           <MaintMenu showMaint={showMaint} setShowMaint={setShowMaint} />
         ) : (
           <MaintView
-            rationales="Someone shit too much and block the whole dirty water pumping system of the bulding"
-            dates="4/6/1989"
-            contractor="CCP Pumping Company"
-            cost="198964 Cad"
+            rationales=""
+            dates=""
+            contractor=""
+            cost=""
             showMaint={showMaint}
             setShowMaint={setShowMaint}
           />
+
         )}
 
         <Balance />
