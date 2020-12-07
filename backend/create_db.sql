@@ -211,7 +211,7 @@ VALUES
 		'Poon',
 		'18 Main Street',
 		'Montreal',
-		'Ontario',
+		'Quebec',
 		'Canada',
 		'poon@conman.com',
 		5149766539,
