@@ -12,7 +12,7 @@ import { useHistory } from "react-router-dom";
 import { v4 as uuid } from "uuid";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser } from "@fortawesome/free-regular-svg-icons";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 import "../../Styles/Utils.scss";
 import "./AdminContainer.scss";
@@ -73,11 +73,14 @@ const AdminContainer = (props) => {
   const [associationUsers, setAssociationUsers] = React.useState([null]);
 
   const [isCreating, setIsCreating] = React.useState(false);
+  const [isDeleting, setIsDeleting] = React.useState(false);
 
   const [inputValues, setInputValues] = React.useState({
     username: "",
     password: "",
   });
+
+  const adminAssociationRef = React.useRef(null);
 
   const [
     createAssociationInputValues,
@@ -136,10 +139,14 @@ const AdminContainer = (props) => {
         const params = {
           asso_name: createAssociationInputValues.asso_name,
           asso_desc: createAssociationInputValues.asso_desc,
-          admin_id: Number.parseInt(adminUser.user_id),
+          admin_id: 3,
         };
         const res = await data.send("associations", "create", params);
-        console.log(res, params);
+        if (res === 1) {
+          updateAssociations();
+          setSelectedAssociation(associations[associations.length - 1]);
+          setIsCreating(false);
+        }
       },
     },
     users: {
@@ -147,6 +154,9 @@ const AdminContainer = (props) => {
         const res = await data.send("users", "get");
         //
         setAssociationUsers(res.users);
+        console.log("scroll");
+
+        adminAssociationRef.current.scrollTo(0, 10000);
       },
     },
   };
@@ -225,6 +235,7 @@ const AdminContainer = (props) => {
                     backgroundColor: "black",
                     border: "3px solid white",
                     color: "white",
+                    marginTop: "10px",
                   },
                 }}
                 onClick={handlers.login.onSubmit}
@@ -257,7 +268,7 @@ const AdminContainer = (props) => {
             ]}
           />
           <div className="admin-page-container">
-            <div className="admin-associations menu">
+            <div ref={adminAssociationRef} className="admin-associations menu">
               {associations.length > 0 ? (
                 <>
                   <div className="thread-menu">
@@ -294,26 +305,28 @@ const AdminContainer = (props) => {
                         style={{ opacity: 0.7 }}
                       />
                     )}
-                    <Button
-                      content={{
-                        show: "Add a new association...",
-                      }}
-                      style={{
-                        show: {
-                          height: "80px",
-                          marginTop: "0px",
-                          width: "100%",
-                          border: "4px solid rgba(163, 101, 163, 1)",
-                          backgroundColor: "transparent",
-                          color: "rgba(163, 101, 163, 1)",
-                        },
-                      }}
-                      // dropdown={[]}
-                      height="60px"
-                      onClick={() => {
-                        setIsCreating(true);
-                      }}
-                    />
+                    {!isCreating && (
+                      <Button
+                        content={{
+                          show: "Add a new association...",
+                        }}
+                        style={{
+                          show: {
+                            height: "100px",
+                            marginTop: "0px",
+                            width: "100%",
+                            border: "4px solid rgba(163, 101, 163, 1)",
+                            backgroundColor: "transparent",
+                            color: "rgba(163, 101, 163, 1)",
+                          },
+                        }}
+                        // dropdown={[]}
+                        height="100px"
+                        onClick={() => {
+                          setIsCreating(true);
+                        }}
+                      />
+                    )}
                   </div>
                 </>
               ) : (
@@ -335,7 +348,8 @@ const AdminContainer = (props) => {
                   widthPadding={0}
                   heightPadding={0}
                   onConfirm={handlers.associations.onCreate}
-                  onClose={() => history.replace("/login")}
+                  onClose={() => setIsCreating(false)}
+                  onCancel={() => setIsCreating(false)}
                   isCloseable={isCreating}
                 >
                   <div
@@ -427,6 +441,16 @@ const AdminContainer = (props) => {
                         );
                       }
                     )}
+                    <div
+                      className="delete-asso-container"
+                      onClick={() => setIsDeleting(true)}
+                    >
+                      <FontAwesomeIcon
+                        icon={faTrash}
+                        style={{ width: "50px", height: "50px" }}
+                        color="white"
+                      />
+                    </div>
                   </div>
                 </InputModal>
               ) : (
@@ -438,6 +462,83 @@ const AdminContainer = (props) => {
                 />
               )}
             </div>
+            {isDeleting && (
+              <InputModal
+                type={"absolute"}
+                key="view-input-modal"
+                view={isCreating ? "edit" : "display"}
+                isEditable={false}
+                widthPadding={200}
+                heightPadding={200}
+                onConfirm={handlers.associations.onCreate}
+                onClose={() => setIsCreating(false)}
+                onCancel={() => setIsCreating(false)}
+                isCloseable={isCreating}
+              >
+                <div
+                  style={{
+                    color: "ghostwhite",
+                    fontSize: "30px",
+                    textAlign: "center",
+                  }}
+                >
+                  Are you sure you want to delete the association?
+                </div>
+                <div style={{ display: "flex", justifyContent: "center" }}>
+                  <Button
+                    content={{
+                      show: "Cancel",
+                    }}
+                    style={{
+                      show: {
+                        height: "70px",
+                        margin: "10px",
+                        width: "100px",
+                        border: "4px solid rgba(163, 101, 163, 1)",
+                        backgroundColor: "transparent",
+                        color: "rgba(163, 101, 163, 1)",
+                      },
+                    }}
+                    // dropdown={[]}
+                    onClick={() => {
+                      setIsDeleting(false);
+                    }}
+                  />{" "}
+                  <Button
+                    content={{
+                      show: "Delete",
+                    }}
+                    style={{
+                      show: {
+                        height: "70px",
+
+                        margin: "10px",
+                        width: "100px",
+                        border: "4px solid rgba(163, 101, 163, 1)",
+                        backgroundColor: "transparent",
+                        color: "rgba(163, 101, 163, 1)",
+                      },
+                    }}
+                    // dropdown={[]}
+                    height="100px"
+                    onClick={async () => {
+                      const params = {
+                        user_id: adminUser.user_id,
+                        asso_id: selectedAssociation.asso_id,
+                      };
+                      const res = await data.send(
+                        "associations",
+                        "remove",
+                        params
+                      );
+                      console.log(res);
+                      setIsDeleting(false);
+                      updateAssociations();
+                    }}
+                  />
+                </div>
+              </InputModal>
+            )}
           </div>
         </div>
       )}
