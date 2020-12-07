@@ -117,11 +117,10 @@ const AdminContainer = (props) => {
       },
       login: async (username, pw) => {
         const res = await data.send("users", "login", { username, pw });
-        //
 
         if (res.users) {
-          console.log("USER USER:   ", res.users);
-          setAdminUser(res.users);
+          console.log("USER USER:   ", res.users[0]);
+          setAdminUser(res.users[0]);
           setView("adminpage");
         } else {
           window.setTimeout(() => {
@@ -351,6 +350,7 @@ const AdminContainer = (props) => {
                   onClose={() => setIsCreating(false)}
                   onCancel={() => setIsCreating(false)}
                   isCloseable={isCreating}
+                  isDeleteable={false}
                 >
                   <div
                     className="current-selection"
@@ -462,7 +462,7 @@ const AdminContainer = (props) => {
                 />
               )}
             </div>
-            {isDeleting && (
+            {/* {isDeleting && (
               <InputModal
                 type={"absolute"}
                 key="view-input-modal"
@@ -531,14 +531,14 @@ const AdminContainer = (props) => {
                         "remove",
                         params
                       );
-                      console.log(res);
+                      console.log(res, params);
                       setIsDeleting(false);
                       updateAssociations();
                     }}
                   />
                 </div>
               </InputModal>
-            )}
+            )} */}
           </div>
         </div>
       )}
