@@ -3,12 +3,6 @@
 .email-page {
   width: 100%;
   height: calc(100% - 80px);
-  // position: relative;
-
-  .header > .actions-container {
-    // width: 100%;
-    // justify-content: space-between;
-  }
 
   .input-modal {
     .edit-view-window {
@@ -95,9 +89,6 @@
           border-radius: 8px;
           background-color: ghostwhite;
 
-          .ql-toolbar {
-            // height: 30px;
-          }
           .ql-container {
             height: calc(100% - 80px);
           }

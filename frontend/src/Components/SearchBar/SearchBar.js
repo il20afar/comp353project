@@ -10,6 +10,7 @@ const SearchBar = (props) => {
     placeholder = "",
     initialValue = null,
     onChange = () => null,
+    onCancel = () => null,
     ...rest
   } = props;
 
@@ -24,6 +25,7 @@ const SearchBar = (props) => {
         initialValue={initialValue}
         outlineOnChange
         onChange={onChange}
+        onCancel={onCancel}
       />
       <div className="menu-search-icon">
         <FontAwesomeIcon icon={faSearch} color="black" size="sm" />

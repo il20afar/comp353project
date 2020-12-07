@@ -41,6 +41,7 @@ const Chatbox = (props) => {
         <div ref={ref} className="messagebox">
           {replies.map((elem) => (
             <Message
+              key={uuid()}
               type={elem.author_id === user.current.user_id ? "self" : "others"}
               content={elem.content}
               date={elem.creation_time}

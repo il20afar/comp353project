@@ -124,19 +124,18 @@
       grid-column-gap: 20px;
       cursor: pointer;
 
-      .thread-element-container {
+      .thread-element-container-div {
         height: 100%;
         width: 100%;
         @include flex(column, center);
 
-        .thread-element {
+        .thread-element-div {
           overflow: hidden;
 
           font-size: 20px;
           color: whitesmoke;
           &.name {
             width: 100%;
-
             grid-row: 1 / span 1;
             text-overflow: ellipsis;
             white-space: nowrap;
