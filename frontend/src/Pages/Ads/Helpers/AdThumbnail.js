@@ -7,7 +7,7 @@ import { v4 as uuid } from "uuid";
 import "./AdThumbnail.scss";
 
 const AdThumbnail = (props) => {
-  const { type, images, title, city, price } = props;
+  const { type, images, title, city, price, onClick = () => null } = props;
 
   const Field = (props) => {
     const { title, content } = props;
@@ -39,7 +39,7 @@ const AdThumbnail = (props) => {
     <Button
       className={`ad-thumbnail ${type}`}
       content={{ show: <AdThumbnailContainer /> }}
-      onClick={() => null}
+      onClick={onClick}
     />
   );
 };

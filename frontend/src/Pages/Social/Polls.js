@@ -254,8 +254,7 @@ const PollsContainer = (props) => {
                   ).content
                 : null;
             return (
-              <div className="polls-wrapper">
-                {" "}
+              <div key={uuid()} className="polls-wrapper">
                 <Poll
                   key={uuid()}
                   noStorage

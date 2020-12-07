@@ -10,4 +10,8 @@ $transition: all 0.15s ease-in;
   left: 0;
 
   overflow: auto;
+
+  a {
+    text-decoration: none !important;
+  }
 }

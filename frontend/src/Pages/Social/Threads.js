@@ -35,23 +35,23 @@ const ThreadThumbnail = (props) => {
       style={{ gridTemplateColumns }}
       onClick={() => onClick(name)}
     >
-      <div className="thread-element-container name">
-        <div className="thread-element name">{name}</div>
+      <div className="thread-element-container-div name">
+        <div className="thread-element-div name">{name}</div>
       </div>
-      <div className="thread-element-container modified-on">
-        <div className="thread-element modified-on">
+      <div className="thread-element-container-div modified-on">
+        <div className="thread-element-div modified-on">
           <div>Last updated: </div>
           <div>&nbsp;&nbsp;{modifiedOn}</div>
         </div>
       </div>
-      <div className="thread-element-container created-by">
-        <div className="thread-element created-by">
+      <div className="thread-element-container-div created-by">
+        <div className="thread-element-div created-by">
           <div>Created by: </div>
           <div>&nbsp;&nbsp;{createdBy}</div>
         </div>
       </div>
-      <div className="thread-element-container numbermsg">
-        <div className="thread-element numbermsg">
+      <div className="thread-element-container-div numbermsg">
+        <div className="thread-element-div numbermsg">
           <FontAwesomeIcon icon={faStickyNote} />
           <div>&nbsp;&nbsp;{numberMessages}</div>
         </div>
@@ -86,24 +86,22 @@ const ThreadMenu = (props) => {
 };
 
 const ThreadView = (props) => {
-  const { user, messages, currentThread, setView } = props;
-  const [visibleReplies, setVisibleReplies] = React.useState(messages);
-  const searchRef = React.useRef("");
+  const { user, currentThread, setView } = props;
+  const [visibleReplies, setVisibleReplies] = React.useState([]);
+  const [messages, setMessages] = React.useState([]);
+  const [searchValue, setSearchValue] = React.useState("");
 
   const onChangeSearchHandler = (e) => {
-    const val = e.target.value;
-    searchRef.current = val;
-
+    setSearchValue(e);
     setVisibleReplies(
-      val === ""
-        ? messages
-        : visibleReplies.filter((elem) => elem.content.includes(val))
+      e === "" ? messages : messages.filter((elem) => elem.content.includes(e))
     );
   };
   const updateReplies = async () => {
     const res = await data.send("replies", "get", {
       thread_id: currentThread.thread_id,
     });
+    setMessages(res.replies);
     setVisibleReplies(res.replies);
   };
 
@@ -125,7 +123,9 @@ const ThreadView = (props) => {
         </div>
         <SearchBar
           placeholder={"Search replies..."}
+          initialValue={searchValue}
           onChange={onChangeSearchHandler}
+          onCancel={() => onChangeSearchHandler("")}
         />
       </div>
       <div className="chatbox-container">
@@ -134,7 +134,7 @@ const ThreadView = (props) => {
           currentThread={currentThread}
           updateReplies={updateReplies}
           replies={visibleReplies}
-          searchTerm={searchRef.current}
+          searchTerm={searchValue}
         />
       </div>
     </div>
@@ -185,11 +185,11 @@ const ThreadCreate = (props) => {
         style={{
           fontSize: "24px",
           color: "white",
-          marginBottom: "20px",
+          marginBottom: "0px",
           height: "30px",
         }}
       >
-        Create a new thread:{" "}
+        Create a new thread:
       </div>
       <TextBox
         type={"input"}
@@ -211,22 +211,22 @@ const Threads = (props) => {
 
   const [view, setView] = React.useState("menu");
   const [visibleThreads, setVisibleThreads] = React.useState([]);
-  const searchTerm = React.useRef("");
+  const [searchValue, setSearchValue] = React.useState("");
   const serverThreads = React.useRef(null);
 
   const onSearchThreadChange = (e) => {
-    const val = e ? e.target.value : "";
-    searchTerm.current = val;
-    const filtered = visibleThreads.filter((elem) => elem.title.includes(val));
-    setVisibleThreads(val === "" ? serverThreads.current : filtered);
+    setSearchValue(e);
+    const filtered = visibleThreads.filter((elem) => elem.title.includes(e));
+    setVisibleThreads(e === "" ? serverThreads.current : filtered);
   };
 
   const actions = [
     <SearchBar
       key={"searchbar"}
-      initialValue={""}
+      initialValue={searchValue}
       placeholder={"Search threads..."}
       onChange={onSearchThreadChange}
+      onCancel={() => onSearchThreadChange("")}
       style={{ height: "46px" }}
     />,
     <div
@@ -279,7 +279,7 @@ const Threads = (props) => {
           visibleThreads={visibleThreads}
           view={view}
           setView={setView}
-          searchTerm={searchTerm.current}
+          searchTerm={searchValue}
         />
       ) : (
         <ThreadView user={user} currentThread={view} setView={setView} />
