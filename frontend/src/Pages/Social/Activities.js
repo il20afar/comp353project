@@ -138,7 +138,9 @@ const ActSpecific = (props) => {
           setView("menu");
         }
       }}
-      onCancel={() => setInputModalView("display")}
+      onCancel={() =>
+        type === "edit" ? setView("menu") : setInputModalView("display")
+      }
       onEdit={() => setInputModalView("edit")}
     >
       <div className="content">

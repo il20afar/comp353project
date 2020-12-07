@@ -185,11 +185,11 @@ const ThreadCreate = (props) => {
         style={{
           fontSize: "24px",
           color: "white",
-          marginBottom: "20px",
+          marginBottom: "0px",
           height: "30px",
         }}
       >
-        Create a new thread:{" "}
+        Create a new thread:
       </div>
       <TextBox
         type={"input"}
