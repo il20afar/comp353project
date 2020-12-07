@@ -146,7 +146,7 @@ CREATE TABLE activities (
 	activity_desc VARCHAR(1000) NOT NULL,
 	starting_time DATETIME NOT NULL,
 	ending_time DATETIME NOT NULL,
-	number_of_attendees INT NOT NULL DEFAULT 1,
+	number_of_attendees INT NOT NULL DEFAULT 0,
 	creator_id INT NOT NULL,
 	asso_id INT NOT NULL,
 	PRIMARY KEY (activity_id),
@@ -701,10 +701,26 @@ INSERT INTO
 VALUES
 	(
 		'5@7 at Bier Markt',
-		'Hey everyone,\n\nI''ve decided to host this small event to welcome any newcomers to our association. The address of the restaurant is 1221 Rene-Levesque West Boulevard. Please confirm if you can make it and shoot me a message if you have any other suggestions!\n\nThanks,\n\nRohhaan',
+		'Hey everyone, I''ve decided to host this small event to welcome any newcomers to our association. The address of the restaurant is 1221 Rene-Levesque West Boulevard. Please confirm if you can make it and shoot me a message if you have any other suggestions! Thanks, Rohhaan.',
 		'2020-12-20 17:00:00',
 		'2020-12-20 19:00:00',
 		2,
+		1
+	),
+	(
+		'Wine & Cheese',
+		'Hello, I would like to organize a Wine & Cheese event with some representatives from another condo association. This would be an amazing opportunity to network. Thoughts?',
+		'2021-01-15 17:30:00',
+		'2021-01-15 19:30:00',
+		4,
+		1
+	),
+	(
+		'Impact of COVID-19 on Real Estate',
+		'Don''t miss out on this amazing presentation by world famous economist Dr. Keynes! Held in Concordia''s EV building.',
+		'2021-02-22 14:30:00',
+		'2021-02-22 16:30:00',
+		4,
 		1
 	);
 
@@ -713,7 +729,10 @@ INSERT INTO
 VALUES
 	(1, 1),
 	(2, 1),
-	(3, 1);
+	(3, 1),
+	(4, 2),
+	(4, 3),
+	(3, 3);
 
 UPDATE
 	activities
@@ -721,3 +740,17 @@ SET
 	number_of_attendees = 3
 WHERE
 	activity_id = 1;
+
+UPDATE
+	activities
+SET
+	number_of_attendees = 1
+WHERE
+	activity_id = 2;
+
+UPDATE
+	activities
+SET
+	number_of_attendees = 2
+WHERE
+	activity_id = 3;

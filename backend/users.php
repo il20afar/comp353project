@@ -12,6 +12,19 @@ class users extends request
 
         $query = $this->select("user_id, first_name, last_name, street, city, province, country, email, phone_number, profile_picture, asso_id", (array) $obj);
         $res = $this->query($query, true);
+        // Append is_admin
+        $asso_id = $res['users'][0]['asso_id'];
+        $user_id = $res['users'][0]['user_id'];
+        $query = sprintf(
+            "SELECT admin_id FROM associations WHERE asso_id=%s;",
+            $asso_id
+        );
+        $result = $this->gquery($query, true);
+        if ($user_id == $result[0]['admin_id']) {
+            $res['users'][0]['is_admin'] = true;
+        } else {
+            $res['users'][0]['is_admin'] = false;
+        }
         return json_encode($res);
     }
     
