@@ -118,8 +118,7 @@ const AdminContainer = (props) => {
       login: async (username, pw) => {
         const res = await data.send("users", "login", { username, pw });
 
-        if (res.users) {
-          console.log("USER USER:   ", res.users[0]);
+        if (res.users.is_admin) {
           setAdminUser(res.users[0]);
           setView("adminpage");
         } else {
@@ -153,7 +152,6 @@ const AdminContainer = (props) => {
         const res = await data.send("users", "get");
         //
         setAssociationUsers(res.users);
-        console.log("scroll");
 
         adminAssociationRef.current.scrollTo(0, 10000);
       },
@@ -192,8 +190,6 @@ const AdminContainer = (props) => {
       updateAssociations();
     }
   }, [view]);
-
-  console.log("adminUser", adminUser);
 
   return (
     <D cn={`admin-container`}>
@@ -462,83 +458,6 @@ const AdminContainer = (props) => {
                 />
               )}
             </div>
-            {/* {isDeleting && (
-              <InputModal
-                type={"absolute"}
-                key="view-input-modal"
-                view={isCreating ? "edit" : "display"}
-                isEditable={false}
-                widthPadding={200}
-                heightPadding={200}
-                onConfirm={handlers.associations.onCreate}
-                onClose={() => setIsCreating(false)}
-                onCancel={() => setIsCreating(false)}
-                isCloseable={isCreating}
-              >
-                <div
-                  style={{
-                    color: "ghostwhite",
-                    fontSize: "30px",
-                    textAlign: "center",
-                  }}
-                >
-                  Are you sure you want to delete the association?
-                </div>
-                <div style={{ display: "flex", justifyContent: "center" }}>
-                  <Button
-                    content={{
-                      show: "Cancel",
-                    }}
-                    style={{
-                      show: {
-                        height: "70px",
-                        margin: "10px",
-                        width: "100px",
-                        border: "4px solid rgba(163, 101, 163, 1)",
-                        backgroundColor: "transparent",
-                        color: "rgba(163, 101, 163, 1)",
-                      },
-                    }}
-                    // dropdown={[]}
-                    onClick={() => {
-                      setIsDeleting(false);
-                    }}
-                  />{" "}
-                  <Button
-                    content={{
-                      show: "Delete",
-                    }}
-                    style={{
-                      show: {
-                        height: "70px",
-
-                        margin: "10px",
-                        width: "100px",
-                        border: "4px solid rgba(163, 101, 163, 1)",
-                        backgroundColor: "transparent",
-                        color: "rgba(163, 101, 163, 1)",
-                      },
-                    }}
-                    // dropdown={[]}
-                    height="100px"
-                    onClick={async () => {
-                      const params = {
-                        user_id: adminUser.user_id,
-                        asso_id: selectedAssociation.asso_id,
-                      };
-                      const res = await data.send(
-                        "associations",
-                        "remove",
-                        params
-                      );
-                      console.log(res, params);
-                      setIsDeleting(false);
-                      updateAssociations();
-                    }}
-                  />
-                </div>
-              </InputModal>
-            )} */}
           </div>
         </div>
       )}

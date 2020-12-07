@@ -111,8 +111,6 @@ const ActSpecific = (props) => {
     setInputValues(Object.assign({}, inputValues));
   };
 
-  console.log(inputValues);
-
   return (
     <InputModal
       view={inputModalView}
@@ -153,7 +151,7 @@ const ActSpecific = (props) => {
         ) : (
           <>
             {Object.entries(fields).map(([key, val]) => {
-              // console.log)()
+              //
               return (
                 <Field
                   key={key}
@@ -178,7 +176,6 @@ const ActSpecific = (props) => {
                       <Datetime
                         value={inputValues[key]}
                         onChange={(e) => {
-                          console.log(e);
                           onInputValueChange(key, e);
                         }}
                       />
@@ -250,11 +247,9 @@ const Activities = (props) => {
       asso_id: Number.parseInt(user.current.asso_id),
     };
     const res = await data.send("activities", "get", params);
-    console.log(res, params);
+
     setActivities(res.activities);
   };
-
-  console.log(activities);
 
   return (
     <D cn="act-page">
