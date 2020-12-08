@@ -53,11 +53,13 @@ const data = {
           }),
         }
       );
+      console.log(req);
       const res = await req.json();
 
       console.table(res);
       return res;
     } catch (error) {
+      console.log(error.toString());
       return error.toString();
     }
   },
