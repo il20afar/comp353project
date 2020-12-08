@@ -54,7 +54,7 @@ const data = {
         }
       );
       console.log(req);
-      const res = await req.json();
+      const res = await req.text();
 
       console.table(res);
       return res;
