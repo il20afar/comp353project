@@ -6,6 +6,7 @@ frontend/node_modules
 frontend/package-lock.json
 frontend/.pnp
 frontend/.pnp.js
+frontend/build
 
 # testing
 frontend/coverage
@@ -15,12 +16,12 @@ frontend/build
 
 # misc
 frontend/.DS_Store
-frontend/.env.local
+# frontend/.env.local
 frontend/.env.development.local
 frontend/.env.test.local
 frontend/.env.production.local
 frontend/backend/db_config.php
-frontend/.env
+# frontend/.env
 
 frontend/npm-debug.log*
 frontend/yarn-debug.log*
