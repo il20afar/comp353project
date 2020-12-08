@@ -85,39 +85,43 @@ const EmailMenu = (props) => {
     updateAssoUsers();
   }, [view]);
 
-  console.log(associationUsers);
+  console.log(visibleEmail);
 
   return (
     <div className="email-menu">
-      {visibleEmail.map((elem) => (
-        <EmailThumbnail
-          key={uuid()}
-          name={
-            <HighlightedContent
-              searchTerm={searchTerm}
-              content={elem.message_subject}
-            />
-          }
-          date={elem.creation_time}
-          from={
-            associationUsers.find((user) => user.user_id === elem.author_id)
-              ? userFirstLastName(
-                  associationUsers.find(
-                    (user) => user.user_id === elem.author_id
+      {visibleEmail ? (
+        visibleEmail.map((elem) => (
+          <EmailThumbnail
+            key={uuid()}
+            name={
+              <HighlightedContent
+                searchTerm={searchTerm}
+                content={elem.message_subject}
+              />
+            }
+            date={elem.creation_time}
+            from={
+              associationUsers.find((user) => user.user_id === elem.author_id)
+                ? userFirstLastName(
+                    associationUsers.find(
+                      (user) => user.user_id === elem.author_id
+                    )
                   )
-                )
-              : ""
-          }
-          read={elem.read_status}
-          onClick={async () => {
-            const res = await data.send("messages", "read", {
-              message_id: Number.parseInt(elem.message_id),
-            });
-            console.log(res);
-            setView(elem);
-          }}
-        />
-      ))}
+                : ""
+            }
+            read={elem.read_status}
+            onClick={async () => {
+              const res = await data.send("messages", "read", {
+                message_id: Number.parseInt(elem.message_id),
+              });
+              console.log(res);
+              setView(elem);
+            }}
+          />
+        ))
+      ) : (
+        <div className="no-emails">Inbox empty...</div>
+      )}
     </div>
   );
 };
