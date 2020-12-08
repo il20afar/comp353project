@@ -37,6 +37,12 @@ const data = {
     //     ...fields,
     //   })
     // );
+    const headers = new Headers();
+    headers.set(
+      "Authorization",
+      "Basic " + base64.encode("hac353_2" + ":" + "F3J9Rj")
+    );
+
     try {
       const req = await fetch(
         "https://hac353.encs.concordia.ca/comp353project/backend/main.php",
