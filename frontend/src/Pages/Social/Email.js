@@ -307,6 +307,8 @@ const Email = (props) => {
   const onSearchEmailChange = (e) => {
     const val = e ? e : "";
     setSearchTerm(val);
+    if (!visibleEmail) return null;
+
     const filtered = emails.filter((elem) =>
       elem.message_subject.includes(val)
     );
