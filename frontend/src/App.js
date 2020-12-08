@@ -11,7 +11,7 @@ import {
 } from "react-router-dom";
 
 const App = () => (
-  <Router>
+  <Router basename="/comp353project/frontend/build">
     <AppContainer />
   </Router>
 );
