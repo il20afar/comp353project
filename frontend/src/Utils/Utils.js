@@ -55,7 +55,7 @@ const data = {
       );
       const res = await req.json();
 
-      console.table([res, rest]);
+      console.table(res);
       return res;
     } catch (error) {
       return error.toString();
