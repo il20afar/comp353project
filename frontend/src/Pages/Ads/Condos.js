@@ -116,7 +116,9 @@ const Condos = (props) => {
         });
         console.log(res);
 
-        setVisibleCondos(res.ads.filter((ad) => ad.ad_type === "condo") || []);
+        setVisibleCondos(
+          res.ads ? res.ads.filter((ad) => ad.ad_type === "condo") : []
+        );
       },
 
       filter: (eventKey) => {

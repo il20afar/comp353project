@@ -85,7 +85,7 @@ const Sidebar = (props) => {
       <D cn="user-mod-container" onClick={() => setShowUserMod(!showUserMod)}>
         <D cn="username-wrapper">{user.current.username}</D>
         <D cn="user-wrapper">
-          <UserIcon />
+          <UserIcon profilepic={<img src={user.current.profile_picture} />} />
         </D>
       </D>
       <D cn="menus-wrapper">

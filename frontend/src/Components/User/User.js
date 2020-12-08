@@ -32,7 +32,7 @@ const UserIcon = (props) => {
 const UserModModal = (props) => {
   const { user, onClose } = props;
   const closeOrConfirm = React.useRef(null);
-  const profilepic = <img src={aisle20copy} alt="user-picture-profile" />;
+  const profilepic = <img src={user.current.profile_picture} />;
 
   const [inputValues, setInputValues] = React.useState({
     first_name: user.current.first_name,
