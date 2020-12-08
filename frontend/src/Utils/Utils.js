@@ -38,17 +38,20 @@ const data = {
     //   })
     // );
     try {
-      const req = await fetch(process.env.REACT_APP_PHP_SERVER_URL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          table,
-          action,
-          ...fields,
-        }),
-      });
+      const req = await fetch(
+        "https://hac353.encs.concordia.ca/comp353project/backend/main.php",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            table,
+            action,
+            ...fields,
+          }),
+        }
+      );
       const res = await req.json();
       // console.log(res);
       return res;
