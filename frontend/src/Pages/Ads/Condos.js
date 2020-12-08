@@ -109,8 +109,12 @@ const Condos = (props) => {
     actions: {
       updateCondos: async (visibility) => {
         const res = await data.send("ads", "get", {
-          visibility: visibility.toLowerCase(),
+          visibility:
+            visibility.toLowerCase() === "classified"
+              ? Number.parseInt(user.current.asso_id)
+              : visibility.toLowerCase(),
         });
+        console.log(res);
 
         setVisibleCondos(res.ads.filter((ad) => ad.ad_type === "condo") || []);
       },
@@ -141,7 +145,6 @@ const Condos = (props) => {
       }}
       dropdown={[
         { elem: "Classified", eventKey: "classified" },
-        { elem: "General", eventKey: "menu" },
         { elem: "Public", eventKey: "public" },
       ]}
       onSelect={handlers.actions.filter}

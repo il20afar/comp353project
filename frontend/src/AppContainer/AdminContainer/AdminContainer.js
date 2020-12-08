@@ -116,10 +116,7 @@ const AdminContainer = (props) => {
           handlers.login.login(inputValues.username, inputValues.password);
       },
       login: async (username, pw) => {
-        const res = await data.send("users", "login", { username, pw });
-
-        if (res.users[0].is_admin) {
-          setAdminUser(res.users[0]);
+        if ([username, pw].every((elem) => elem === "admin")) {
           setView("adminpage");
         } else {
           window.setTimeout(() => {
@@ -137,9 +134,16 @@ const AdminContainer = (props) => {
         const params = {
           asso_name: createAssociationInputValues.asso_name,
           asso_desc: createAssociationInputValues.asso_desc,
-          admin_id: 3,
+          admin_id: Number.parseInt(
+            Object.values(associationUsers).find(
+              (elem) =>
+                userFirstLastName(elem) ===
+                createAssociationInputValues.admin_id
+            ).user_id
+          ),
         };
         const res = await data.send("associations", "create", params);
+
         if (res === 1) {
           updateAssociations();
           setSelectedAssociation(associations[associations.length - 1]);
@@ -198,7 +202,7 @@ const AdminContainer = (props) => {
           key="view-input-modal"
           view={"display"}
           isEditable={false}
-          widthPadding={400}
+          widthPadding={200}
           heightPadding={200}
           onClose={() => history.replace("/login")}
         >
@@ -274,16 +278,18 @@ const AdminContainer = (props) => {
                           Number.parseInt(elem.asso_id)
                         );
                       }).length;
+                      const admin = associationUsers.find(
+                        (user) =>
+                          Number.parseInt(user.user_id) ===
+                          Number.parseInt(elem.admin_id)
+                      );
+
                       return (
                         <AssociationThumbnail
                           key={uuid()}
                           name={elem.asso_name}
                           description={elem.asso_desc}
-                          admin={userFirstLastName(
-                            associationUsers.find(
-                              (elem) => elem.asso_id === elem.asso_id
-                            )
-                          )}
+                          admin={admin ? userFirstLastName(admin) : ""}
                           numberUsers={numberUsers}
                           onClick={() => setSelectedAssociation(elem)}
                         />
@@ -338,7 +344,14 @@ const AdminContainer = (props) => {
                 <InputModal
                   type={"relative"}
                   key="view-input-modal"
-                  view={isCreating ? "edit" : "display"}
+                  view={
+                    isCreating &&
+                    Object.values(createAssociationInputValues).every(
+                      (elem) => elem !== ""
+                    )
+                      ? "edit"
+                      : "display"
+                  }
                   isEditable={false}
                   widthPadding={0}
                   heightPadding={0}
@@ -365,7 +378,11 @@ const AdminContainer = (props) => {
                             cn={`edit-info-field ${key}`}
                           >
                             <D cn="field-title">
-                              {key === "asso_name" ? "Name:" : "Description"}{" "}
+                              {key === "asso_name"
+                                ? "Name:"
+                                : key === "asso_desc"
+                                ? "Description:"
+                                : "Association Administrator:"}
                             </D>
                             <div className="field-display">
                               {isCreating ? (
@@ -400,6 +417,7 @@ const AdminContainer = (props) => {
                                 ) : (
                                   <UserList
                                     associationUsers={associationUsers}
+                                    placeholder={""}
                                     onTypeAheadChange={(value) => {
                                       const selectionId =
                                         value.length === 1 && value[0].id;

@@ -24,19 +24,15 @@ import "react-quill/dist/quill.snow.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaperPlane } from "@fortawesome/free-regular-svg-icons";
 import { faEdit } from "@fortawesome/free-regular-svg-icons";
+import { faEnvelope, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faEnvelopeOpen } from "@fortawesome/free-solid-svg-icons";
+
 import { faStickyNote } from "@fortawesome/free-regular-svg-icons";
 
 import "./Email.scss";
 
 const EmailThumbnail = (props) => {
-  const {
-    name,
-    numberMessages,
-    modifiedOn,
-    createdBy,
-    onClick,
-    gridTemplateColumns,
-  } = props;
+  const { name, date, from, read, onClick, gridTemplateColumns } = props;
   return (
     <div
       className="email-thumbnail"
@@ -44,36 +40,52 @@ const EmailThumbnail = (props) => {
       onClick={() => onClick(name)}
     >
       <div className="email-element-container name">
+        Message subject:
         <div className="email-element name">{name}</div>
       </div>
-      <div className="email-element-container modified-on">
-        <div className="email-element modified-on">
-          <div>Last updated: </div>
-          <div>&nbsp;&nbsp;{modifiedOn}</div>
+      <div className="email-element-container date">
+        Date:
+        <div className="email-element date">
+          <div>{date}</div>
         </div>
       </div>
-      <div className="email-element-container created-by">
-        <div className="email-element created-by">
-          <div>Created by: </div>
-          <div>&nbsp;&nbsp;{createdBy}</div>
+      <div className="email-element-container from">
+        <span>
+          <FontAwesomeIcon icon={faUser} />
+          From:{" "}
+        </span>
+        <div className="email-element from">
+          <div>{from}</div>
         </div>
       </div>
-      <div className="email-element-container numbermsg">
-        <div className="email-element numbermsg">
-          <FontAwesomeIcon icon={faStickyNote} />
-          <div>&nbsp;&nbsp;{numberMessages}</div>
-        </div>
+      <div className="email-element-container read">
+        <FontAwesomeIcon
+          icon={read === "unread" ? faEnvelope : faEnvelopeOpen}
+          color={read === "unread" ? "rgb(255, 169, 112)" : "ghostwhite"}
+        />
+
+        <div className="email-element read"></div>
       </div>
     </div>
   );
 };
 
 const EmailMenu = (props) => {
-  const { visibleEmail, setView, searchTerm } = props;
+  const { visibleEmail, view, setView, searchTerm } = props;
 
-  const max =
-    11.38 *
-    Math.max(...visibleEmail.map((elem) => elem.message_subject.length));
+  const [associationUsers, setAssociationUsers] = React.useState([]);
+
+  const updateAssoUsers = async () => {
+    const res = await data.send("users", "get");
+    setAssociationUsers(res.users);
+  };
+  console.log(visibleEmail);
+
+  React.useEffect(() => {
+    updateAssoUsers();
+  }, [view]);
+
+  console.log(associationUsers);
 
   return (
     <div className="email-menu">
@@ -86,11 +98,24 @@ const EmailMenu = (props) => {
               content={elem.message_subject}
             />
           }
-          numberMessages={elem.number_of_replies}
-          modifiedOn={elem.last_update_time}
-          createdBy={elem.creator_username}
-          onClick={() => setView(elem)}
-          gridTemplateColumns={`minmax(300px, ${max}px) minmax(0px, 300px) minmax(0px,300px) minmax(60px, 80px)`}
+          date={elem.creation_time}
+          from={
+            associationUsers.find((user) => user.user_id === elem.author_id)
+              ? userFirstLastName(
+                  associationUsers.find(
+                    (user) => user.user_id === elem.author_id
+                  )
+                )
+              : ""
+          }
+          read={elem.read_status}
+          onClick={async () => {
+            const res = await data.send("messages", "read", {
+              message_id: Number.parseInt(elem.message_id),
+            });
+            console.log(res);
+            setView(elem);
+          }}
         />
       ))}
     </div>
@@ -302,11 +327,6 @@ const Email = (props) => {
   };
 
   const actions = [
-    <Button
-      content={{ show: <FontAwesomeIcon icon={faEdit} color="white" /> }}
-      style={{ show: { width: "200px" }, hide: { width: "200px" } }}
-      onClick={() => setView("create")}
-    />,
     <SearchBar
       key={"searchbar"}
       initialValue={searchTerm}
@@ -315,12 +335,17 @@ const Email = (props) => {
       onCancel={() => onSearchEmailChange("")}
       style={{ height: "46px" }}
     />,
+    <Button
+      content={{ show: <FontAwesomeIcon icon={faEdit} color="white" /> }}
+      style={{ show: { width: "200px" }, hide: { width: "200px" } }}
+      onClick={() => setView("create")}
+    />,
   ];
 
   React.useEffect(() => {
     updateMessages();
     updateAssociationUsers();
-  }, []);
+  }, [view]);
 
   return (
     <D cn="email-page">
@@ -347,6 +372,7 @@ const Email = (props) => {
           from={userFirstLastName(
             associationUsers.find((user) => user.user_id === view.author_id)
           )}
+          date={view.creation_time}
           subject={view.message_subject}
           content={view.content}
           setView={setView}

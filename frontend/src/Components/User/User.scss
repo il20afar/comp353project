@@ -51,6 +51,7 @@
   @include assVal(width height, 100%);
   position: absolute;
   pointer-events: none;
+  z-index: 1002;
 
   .user-edit-container {
     @include assVal(width height, 100%);

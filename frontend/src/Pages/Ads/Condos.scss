@@ -11,9 +11,9 @@ $gridgap: 20px;
   height: 100%;
   overflow: hidden;
 
-  // .header {
-  //   z-index: 10000;
-  // }
+  .header {
+    z-index: 1001;
+  }
 
   &.login {
     .ad-menu-container {
@@ -43,14 +43,11 @@ $gridgap: 20px;
     @media (max-height: 650px) {
       grid-template-rows: 100%;
     }
-    @media (max-width: 600px) {
-      grid-template-columns: 100%;
-    }
 
-    @media (max-width: 600px) {
+    @media (max-width: 700px) {
       grid-template-columns: 100%;
     }
-    @media (max-width: 1000px) {
+    @media screen and (max-width: 1000px) {
       grid-template-rows: repeat(2, calc(50% - 9px));
     }
 

@@ -9,13 +9,13 @@ import "./UserList.scss";
 const UserList = (props) => {
   const {} = props;
 
-  const { associationUsers, onTypeAheadChange } = props;
+  const { associationUsers, onTypeAheadChange, placeholder = "To: " } = props;
 
   return (
     <Typeahead
       id={uuid()}
       onChange={(selected) => onTypeAheadChange(selected)}
-      placeholder="To:"
+      placeholder={placeholder}
       options={
         associationUsers
           ? associationUsers.map((user) => ({

@@ -200,7 +200,12 @@ const AdDetail = (props) => {
           {Object.entries(fields).map(([key, val]) => {
             return (
               <D key={`edit-info-field${key}`} cn={`edit-info-field ${key}`}>
-                <D cn="title"> {val}</D>
+                <D cn="title">
+                  {" "}
+                  {key === "visibilityType"
+                    ? type === "posting" && "Ad type"
+                    : val}
+                </D>
                 {edit && key === "visibilityType" ? (
                   <Button
                     content={{

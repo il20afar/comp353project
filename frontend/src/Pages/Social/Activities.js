@@ -15,8 +15,8 @@ import Datetime from "react-datetime";
 import "react-datetime/css/react-datetime.css";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHashtag } from "@fortawesome/free-solid-svg-icons";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faCheckSquare } from "@fortawesome/free-solid-svg-icons";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { faUser } from "@fortawesome/free-regular-svg-icons";
 
 import "./Activities.scss";
@@ -108,6 +108,20 @@ const ActSpecific = (props) => {
     setInputValues(Object.assign({}, inputValues));
   };
 
+  console.log("activity: ", activity);
+
+  const attendEvent = async () => {
+    const params = {
+      user_id: Number.parseInt(user.current.user_id),
+      activity_id: Number.parseInt(activity.activity_id),
+    };
+    const res = await data.send("activities", "attend", params);
+    updateActivities();
+    console.log(res, params);
+  };
+
+  console.log(activity);
+
   return (
     <InputModal
       view={inputModalView}
@@ -188,6 +202,31 @@ const ActSpecific = (props) => {
               );
             })}
           </>
+        )}
+        {type === "display" && (
+          <Button
+            className={`send-review-button ${
+              !activity.has_responded ? "active" : "inactive"
+            }`}
+            content={{
+              show: (
+                <div className="send-review-content-container">
+                  <span>
+                    {!activity.has_responded
+                      ? "Attend this event..."
+                      : "Already attending!"}
+                  </span>
+                  <div className="send-review-icon-container">
+                    <FontAwesomeIcon
+                      icon={!activity.has_responded ? faPlus : faCheckSquare}
+                      color="white"
+                    />
+                  </div>
+                </div>
+              ),
+            }}
+            onClick={() => (!activity.has_responded ? attendEvent() : null)}
+          />
         )}
       </div>
     </InputModal>
