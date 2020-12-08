@@ -30,13 +30,13 @@ const filesToBase64 = async (files) =>
 
 const data = {
   send: async (table, action, fields) => {
-    console.log(
-      JSON.stringify({
-        table,
-        action,
-        ...fields,
-      })
-    );
+    // console.log(
+    //   JSON.stringify({
+    //     table,
+    //     action,
+    //     ...fields,
+    //   })
+    // );
 
     try {
       const req = await fetch(
@@ -53,25 +53,8 @@ const data = {
           }),
         }
       );
-      const res = await req.text();
+      const res = await req.json();
       console.table(res);
-
-      const req2 = await fetch(
-        "https://hac353.encs.concordia.ca/comp353project/backend/main.php",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            table,
-            action,
-            ...fields,
-          }),
-        }
-      );
-      const text = await req2.text();
-      console.table(text);
 
       return res;
     } catch (error) {
