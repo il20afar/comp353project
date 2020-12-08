@@ -65,9 +65,6 @@ const ImageCarousel = (props) => {
       {pictures.map((elem) => (
         <div className="img-container" key={uuid()}>
           <img alt="" src={elem} />
-          <p className="legend">
-            {elem.replace("http://localhost:3001/backend/pictures/ads/", "")}
-          </p>
         </div>
       ))}
     </Carousel>

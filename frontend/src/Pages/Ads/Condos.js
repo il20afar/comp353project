@@ -162,6 +162,8 @@ const Condos = (props) => {
     handlers.actions.updateCondos(visibilityFilter);
   }, [view]);
 
+  console.log(visibleCondos);
+
   return (
     <div className={`condos ${type}`}>
       {type === "page-view" && view === "menu" && (
