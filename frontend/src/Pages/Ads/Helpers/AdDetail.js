@@ -51,7 +51,7 @@ const ImageUpload = (props) => {
       defaultImages={defaultImages}
       buttonText="Choose images"
       onChange={onDrop}
-      imgExtension={[".jpg", ".gif", ".png", ".gif"]}
+      imgExtension={[".jpg", ".jpeg", ".gif", ".png", ".gif"]}
       maxFileSize={5242880}
     />
   );
