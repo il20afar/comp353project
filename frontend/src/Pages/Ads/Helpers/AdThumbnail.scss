@@ -6,7 +6,6 @@
   scroll-snap-align: none;
 
   .thumbnail-container {
-    $imgWidth: 240px;
     width: 100%;
     height: 100%;
     padding: 4px 5px 0px 5px;
@@ -26,7 +25,7 @@
       }
     }
     .content-container {
-      width: calc(100% - $imgWidth);
+      width: calc(100% - 240px);
       height: 100%;
       @include flex(column, flex-start);
 
