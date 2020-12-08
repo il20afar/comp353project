@@ -1,8 +1,8 @@
 <?php
 class request
 {
-    private string $table;
-    private object $conn;
+    private  $table;
+    private $conn;
 
     public function __construct(string $table, object $conn)
     {
