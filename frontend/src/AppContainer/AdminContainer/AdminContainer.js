@@ -80,8 +80,6 @@ const AdminContainer = (props) => {
     password: "",
   });
 
-  const adminAssociationRef = React.useRef(null);
-
   const [
     createAssociationInputValues,
     setCreateAssociationInputValues,
@@ -156,8 +154,6 @@ const AdminContainer = (props) => {
         const res = await data.send("users", "get");
         //
         setAssociationUsers(res.users);
-
-        adminAssociationRef.current.scrollTo(0, 10000);
       },
     },
   };
@@ -267,7 +263,7 @@ const AdminContainer = (props) => {
             ]}
           />
           <div className="admin-page-container">
-            <div ref={adminAssociationRef} className="admin-associations menu">
+            <div className="admin-associations menu">
               {associations.length > 0 ? (
                 <>
                   <div className="thread-menu">
