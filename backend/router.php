@@ -10,14 +10,14 @@ include 'associations.php';
 
 class router
 {
-    private object $users;
-    private object $ads;
-    private object $threads;
-    private object $replies;
-    private object $polls;
-    private object $messages;
-    private object $activities;
-    private object $associations;
+    // private object $users  = (object)[]; 
+    // private object $ads  = (object)[];
+    // private object $threads  = (object)[];
+    // private object $replies  = (object)[];
+    // private object $polls  = (object)[];
+    // private object $messages  = (object)[];
+    // private object $activities  = (object)[];
+    // private object $associations  = (object)[];
 
     public function __construct(object $conn)
     {
