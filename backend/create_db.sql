@@ -1,4 +1,8 @@
-USE hac353_2;
+DROP DATABASE IF EXISTS comp353;
+
+CREATE DATABASE comp353;
+
+USE comp353;
 
 /* Creating tables */
 CREATE TABLE users (

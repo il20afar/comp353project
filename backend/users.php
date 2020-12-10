@@ -66,5 +66,12 @@ class users extends request
         }
         return json_encode($res);
     }
+    
+    public function create($obj)
+    {
+        $query = $this->insert("username, pw, first_name, last_name, street, city, province, country, email, phone_number, profile_picture", $obj);
+        $res = $this->query($query, false);
+        return json_encode($res);
+    }
 }
 ?>
