@@ -6,6 +6,7 @@ import {
   Button,
   filesToBase64,
   LoadContainer,
+  userFirstLastName,
 } from "../../../imports";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheckCircle } from "@fortawesome/free-regular-svg-icons";
@@ -85,6 +86,8 @@ const AdDetail = (props) => {
     visibilityType: type === "condo" ? "public" : "item",
   });
 
+  const [username, setUsername] = React.useState();
+
   const uploadPictures = React.useRef(
     ad.pictures ? ad.pictures.replace(" ", "").split(",") : []
   );
@@ -138,9 +141,29 @@ const AdDetail = (props) => {
     onClose();
   };
 
+  const getUsers = async () => {
+    const res = await data.send("users", "get");
+    setUsername(
+      userFirstLastName(
+        res.users.find((elem) => elem.user_id === ad.creator_id)
+      )
+    );
+  };
+
+  React.useEffect(() => {
+    getUsers();
+  }, []);
+
+  console.log(ad, username);
+
   return (
     <D cn="edit-view">
       <D className="edit-view-window">
+        <div className="creator-username">
+          <span className="username-title">Owner:</span>
+          <span className="separator" />
+          <span className="username">{username}</span>
+        </div>
         {editable && !edit && (
           <D cn="edit-icon-container">
             <D cn={`edit-icon`}>

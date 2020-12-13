@@ -73,7 +73,7 @@ const AdminContainer = (props) => {
   const [associationUsers, setAssociationUsers] = React.useState([null]);
 
   const [isCreating, setIsCreating] = React.useState(false);
-  const [isDeleting, setIsDeleting] = React.useState(false);
+  const [createMembers, setCreateMembers] = React.useState([]);
 
   const [inputValues, setInputValues] = React.useState({
     username: "",
@@ -87,6 +87,7 @@ const AdminContainer = (props) => {
     asso_name: "",
     asso_desc: "",
     admin_id: "",
+    asso_users: "",
   });
   const onCreateAssociationInputValuesChange = (eventKey, newValue) => {
     createAssociationInputValues[eventKey] = newValue;
@@ -145,6 +146,18 @@ const AdminContainer = (props) => {
         if (res === 1) {
           updateAssociations();
           setSelectedAssociation(associations[associations.length - 1]);
+
+          createMembers.forEach(async (elem) => {
+            const param = {
+              user_id: Number.parseInt(elem.user_id),
+              asso_id: Number.parseInt(selectedAssociation.asso_id),
+            };
+            const tempres = await data.send("associations", "add", param);
+            console.log(tempres, param);
+          });
+
+          updateAssociations();
+
           setIsCreating(false);
         }
       },
@@ -157,6 +170,8 @@ const AdminContainer = (props) => {
       },
     },
   };
+
+  const addUsers = async () => {};
 
   const updateAssociations = async () => {
     const res = await data.send("associations", "get");
@@ -190,6 +205,14 @@ const AdminContainer = (props) => {
       updateAssociations();
     }
   }, [view]);
+
+  associationUsers &&
+    selectedAssociation &&
+    console.log(
+      associationUsers.filter(
+        (user) => user.asso_id === selectedAssociation.asso_id
+      )
+    );
 
   return (
     <D cn={`admin-container`}>
@@ -342,9 +365,9 @@ const AdminContainer = (props) => {
                   key="view-input-modal"
                   view={
                     isCreating &&
-                    Object.values(createAssociationInputValues).every(
-                      (elem) => elem !== ""
-                    )
+                    Object.values(
+                      createAssociationInputValues
+                    ).every((elem, i) => (i === 3 ? true : elem !== ""))
                       ? "edit"
                       : "display"
                   }
@@ -378,11 +401,13 @@ const AdminContainer = (props) => {
                                 ? "Name:"
                                 : key === "asso_desc"
                                 ? "Description:"
-                                : "Association Administrator:"}
+                                : key === "admin_id"
+                                ? "Association administrator:"
+                                : "Association members"}
                             </D>
                             <div className="field-display">
                               {isCreating ? (
-                                key !== "admin_id" ? (
+                                !["admin_id", "asso_users"].includes(key) ? (
                                   <TextBox
                                     key={`email-input${key}`}
                                     type={
@@ -411,23 +436,57 @@ const AdminContainer = (props) => {
                                     height={"asso_desc" ? "auto" : "40px"}
                                   />
                                 ) : (
-                                  <UserList
-                                    associationUsers={associationUsers}
-                                    placeholder={""}
-                                    onTypeAheadChange={(value) => {
-                                      const selectionId =
-                                        value.length === 1 && value[0].id;
-                                      const isUser = associationUsers.find(
-                                        (user) => user.user_id === selectionId
-                                      );
-                                      if (isUser) {
-                                        onCreateAssociationInputValuesChange(
-                                          "admin_id",
-                                          userFirstLastName(isUser)
-                                        );
+                                  <div className={`userlist-${key}`}>
+                                    <UserList
+                                      associationUsers={
+                                        key === "asso_users"
+                                          ? associationUsers.filter(
+                                              (elem) =>
+                                                !createMembers
+                                                  .map((elem) => elem.user_id)
+                                                  .includes(elem.user_id)
+                                            )
+                                          : associationUsers
                                       }
-                                    }}
-                                  />
+                                      placeholder={""}
+                                      onTypeAheadChange={(value) => {
+                                        const selectionId =
+                                          value.length === 1 && value[0].id;
+                                        const isUser = associationUsers.find(
+                                          (user) => user.user_id === selectionId
+                                        );
+                                        if (isUser) {
+                                          if (key === "admin_id") {
+                                            onCreateAssociationInputValuesChange(
+                                              "admin_id",
+                                              userFirstLastName(isUser)
+                                            );
+                                          } else {
+                                            const members = [
+                                              isUser,
+                                              ...createMembers,
+                                            ];
+                                            setCreateMembers(members);
+                                          }
+                                        }
+                                      }}
+                                    />
+                                    {key === "asso_users" && (
+                                      <div>
+                                        {createMembers
+                                          .filter(
+                                            (user) =>
+                                              user.asso_id ===
+                                              selectedAssociation.asso_id
+                                          )
+                                          .map((user) => (
+                                            <div className="createUserBubble">
+                                              {userFirstLastName(user)}
+                                            </div>
+                                          ))}
+                                      </div>
+                                    )}
+                                  </div>
                                 )
                               ) : key === "admin_id" ? (
                                 userFirstLastName(
@@ -442,10 +501,25 @@ const AdminContainer = (props) => {
                                     Number.parseInt(selectedAssociation.asso_id)
                                   );
                                 }).length
+                              ) : key === "asso_users" ? (
+                                <div
+                                  onClick={() => {
+                                    setCreateMembers();
+                                  }}
+                                >
+                                  {associationUsers
+                                    .filter(
+                                      (user) =>
+                                        user.asso_id ===
+                                        selectedAssociation.asso_id
+                                    )
+                                    .map((user) => (
+                                      <div>{userFirstLastName(user)}</div>
+                                    ))}
+                                </div>
                               ) : (
                                 selectedAssociation[key]
                               )}
-                              {}
                             </div>
                           </D>
                         );

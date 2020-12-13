@@ -107,13 +107,12 @@ const pages = {
   Reviews: () => <Reviews />,
   Email: () => <Email />,
   Financial: () => <Financial />,
-  Contracts: () => <Contracts />,
   Meetings: () => <Meetings />,
 };
 const menus = {
   Ads: ["Condos", "Postings"],
   Social: ["Threads", "Polls", "Activities", "Reviews", "Email"],
-  Management: ["Financial", "Contracts", "Meetings"],
+  Management: ["Financial", "Meetings"],
 };
 
 //[FUNCTIONAL COMPONENTS]
