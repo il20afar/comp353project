@@ -79,13 +79,10 @@ const EmailMenu = (props) => {
     const res = await data.send("users", "get");
     setAssociationUsers(res.users);
   };
-  console.log(visibleEmail);
 
   React.useEffect(() => {
     updateAssoUsers();
   }, [view]);
-
-  console.log(visibleEmail);
 
   return (
     <div className="email-menu">
@@ -114,7 +111,7 @@ const EmailMenu = (props) => {
               const res = await data.send("messages", "read", {
                 message_id: Number.parseInt(elem.message_id),
               });
-              console.log(res);
+
               setView(elem);
             }}
           />

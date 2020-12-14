@@ -114,7 +114,6 @@ const Condos = (props) => {
               ? Number.parseInt(user.current.asso_id)
               : visibility.toLowerCase(),
         });
-        console.log(res);
 
         setVisibleCondos(
           res.ads ? res.ads.filter((ad) => ad.ad_type === "condo") : []
@@ -161,8 +160,6 @@ const Condos = (props) => {
   React.useEffect(() => {
     handlers.actions.updateCondos(visibilityFilter);
   }, [view]);
-
-  console.log(visibleCondos);
 
   return (
     <div className={`condos ${type}`}>

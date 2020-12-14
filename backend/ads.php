@@ -29,9 +29,9 @@ class ads extends request
                 // Save picture to local storage
                 file_put_contents($file, $image_base64);
                 if (($key + 1) == count($obj['pictures'])) {
-                    $pictures_column .= 'https://hac353.encs.concordia.ca/comp353project/backend/' . $file;
+                    $pictures_column .= 'http://localhost:3001/backend/' . $file;
                 } else {
-                    $pictures_column .= 'https://hac353.encs.concordia.ca/comp353project/backend/' . $file . ', ';
+                    $pictures_column .= 'http://localhost:3001/backend/' . $file . ', ';
                 }
             }
             // Insert ad data to database

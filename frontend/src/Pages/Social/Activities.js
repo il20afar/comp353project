@@ -85,6 +85,10 @@ const ActSpecific = (props) => {
 
   const [inputModalView, setInputModalView] = React.useState(type);
   const [isDeleting, setIsDeleting] = React.useState(false);
+
+  const [hasResponded, setHasResponded] = React.useState(
+    activity.has_responded
+  );
   const [inputValues, setInputValues] = React.useState({
     title: activity.title || "",
     activity_desc: activity.activity_desc || "",
@@ -108,19 +112,15 @@ const ActSpecific = (props) => {
     setInputValues(Object.assign({}, inputValues));
   };
 
-  console.log("activity: ", activity);
-
   const attendEvent = async () => {
     const params = {
       user_id: Number.parseInt(user.current.user_id),
       activity_id: Number.parseInt(activity.activity_id),
     };
     const res = await data.send("activities", "attend", params);
-    updateActivities();
-    console.log(res, params);
-  };
 
-  console.log(activity);
+    if (res === 1) setHasResponded(true);
+  };
 
   return (
     <InputModal
@@ -206,7 +206,7 @@ const ActSpecific = (props) => {
         {type === "display" && (
           <Button
             className={`send-review-button ${
-              !activity.has_responded ? "active" : "inactive"
+              !hasResponded ? "active" : "inactive"
             }`}
             content={{
               show: (
@@ -277,7 +277,7 @@ const Activities = (props) => {
 
   React.useEffect(() => {
     updateActivities();
-  }, []);
+  }, [view]);
 
   const updateActivities = async () => {
     const params = {
@@ -304,7 +304,12 @@ const Activities = (props) => {
           updateActivities={updateActivities}
         />
       ) : (
-        <ActSpecific user={user} activity={view} setView={setView} />
+        <ActSpecific
+          user={user}
+          activity={view}
+          setView={setView}
+          updateActivities={updateActivities}
+        />
       )}
     </D>
   );

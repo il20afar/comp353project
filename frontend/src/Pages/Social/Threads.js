@@ -168,10 +168,7 @@ const ThreadCreate = (props) => {
         };
         const res = await data.send("threads", "create", params);
 
-        console.log("THREADS CREATE: ", res, params);
-
         const threads = await data.send("threads", "get");
-        console.log("THREADS GET: ", threads);
 
         const newThread = threads.threads.find(
           (elem) =>
@@ -179,7 +176,6 @@ const ThreadCreate = (props) => {
             elem.creator_id === user.current.user_id
         );
 
-        console.log("NEWTHREAD: ", newThread);
         setView(newThread);
       }}
     >

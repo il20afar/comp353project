@@ -24,7 +24,9 @@ import AdDetail from "./Helpers/AdDetail";
 import "./Postings.scss";
 
 const PostingDetailedContainer = (props) => {
-  const { type, ad = {}, view, setView, editable, user_id } = props;
+  const { type, ad = {}, view, setView, editable } = props;
+
+  const { user } = React.useContext(MainContext);
 
   const handlers = {
     edit: () => {
@@ -48,7 +50,9 @@ const PostingDetailedContainer = (props) => {
           visibility: "",
           pictures: "",
         }
-      : view;
+      : ad;
+
+  console.log("userid: ", user.current.user_id, "  Creatorid: ", inputAd);
 
   return (
     <div className="ad-detail-container">
@@ -56,11 +60,11 @@ const PostingDetailedContainer = (props) => {
         {...{
           type,
           view,
-          editable: editable && user_id === view.creator_id,
+          editable: editable && user.current.user_id === inputAd.creator_id,
           ad: inputAd,
           onEdit: handlers.edit,
           onClose: handlers.close,
-          user_id,
+          user_id: user.current.user_id,
         }}
       />
     </div>
@@ -128,10 +132,8 @@ const Postings = () => {
     },
 
     adGrid: {
-      open: (adNumber) => {
-        setSelectedPosting(
-          visiblePostings.find((ad) => ad.ad_id === adNumber) || {}
-        );
+      open: (ad) => {
+        setSelectedPosting(ad);
         setView("specific");
       },
     },
@@ -177,7 +179,9 @@ const Postings = () => {
 
   React.useEffect(() => {
     handlers.actions.updatePostings();
-  }, []);
+  }, [view]);
+
+  console.log(visiblePostings);
 
   return (
     <div className="postings">
@@ -200,7 +204,7 @@ const Postings = () => {
                   (elem) => elem.ad_type === "item_sale"
                 )}
                 type="closed"
-                setView={setView}
+                setView={handlers.adGrid.open}
               />
               <PostingsContainer
                 user={user}
@@ -208,7 +212,7 @@ const Postings = () => {
                   (elem) => elem.ad_type === "service"
                 )}
                 type="open"
-                setView={setView}
+                setView={handlers.adGrid.open}
               />
             </>
           )}

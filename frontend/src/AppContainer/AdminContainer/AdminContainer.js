@@ -153,7 +153,6 @@ const AdminContainer = (props) => {
               asso_id: Number.parseInt(selectedAssociation.asso_id),
             };
             const tempres = await data.send("associations", "add", param);
-            console.log(tempres, param);
           });
 
           updateAssociations();
@@ -205,14 +204,6 @@ const AdminContainer = (props) => {
       updateAssociations();
     }
   }, [view]);
-
-  associationUsers &&
-    selectedAssociation &&
-    console.log(
-      associationUsers.filter(
-        (user) => user.asso_id === selectedAssociation.asso_id
-      )
-    );
 
   return (
     <D cn={`admin-container`}>
@@ -390,8 +381,7 @@ const AdminContainer = (props) => {
                   >
                     {Object.entries(createAssociationInputValues).map(
                       ([key, val]) => {
-                        //
-                        return (
+                        return key === "asso_users" && isCreating ? null : (
                           <D
                             key={`edit-info-field-${key}`}
                             cn={`edit-info-field ${key}`}

@@ -109,12 +109,19 @@ const AdDetail = (props) => {
     const adsParam = {
       ...(view === "edit" && { ad_id: Number.parseInt(ad.ad_id) }),
       title: inputValues.title,
-      ad_type: type === "condo" ? "condo" : inputValues.visibilityType,
+      ad_type:
+        type === "condo"
+          ? "condo"
+          : inputValues.visibilityType === "item"
+          ? "item_sale"
+          : "service",
       ad_desc: inputValues.ad_desc,
       ad_price: Number.parseInt(inputValues.ad_price),
       ad_city: "Montreal",
       visibility:
-        inputValues.visibilityType === "public"
+        type === "posting"
+          ? "public"
+          : inputValues.visibilityType === "public"
           ? "public"
           : Number.parseInt(asso_id),
       pictures: convertedPictures.length === 0 ? [""] : convertedPictures,
@@ -122,6 +129,8 @@ const AdDetail = (props) => {
     };
 
     const res = await data.send("ads", view, adsParam);
+
+    console.log(res, adsParam);
 
     window.setTimeout(() => {
       if (res !== 0) {
@@ -143,9 +152,12 @@ const AdDetail = (props) => {
 
   const getUsers = async () => {
     const res = await data.send("users", "get");
+
     setUsername(
       userFirstLastName(
-        res.users.find((elem) => elem.user_id === ad.creator_id)
+        ad.creator_id
+          ? res.users.find((elem) => elem.user_id === ad.creator_id)
+          : user.current
       )
     );
   };
@@ -154,7 +166,7 @@ const AdDetail = (props) => {
     getUsers();
   }, []);
 
-  console.log(ad, username);
+  console.log("Edit: ", edit, "  Editable: ", editable);
 
   return (
     <D cn="edit-view">
