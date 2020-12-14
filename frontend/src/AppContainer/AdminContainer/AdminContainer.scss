@@ -283,11 +283,11 @@
 }
 
 .edit-info-field.admin_id {
-  &:focus-within {
-    + .edit-info-field.asso_users {
-      display: none;
-    }
-  }
+  // &:focus-within {
+  //   + .edit-info-field.asso_users {
+  //     display: none;
+  //   }
+  // }
 }
 
 .createUserBubble {

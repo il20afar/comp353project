@@ -80,8 +80,10 @@ const UserModModal = (props) => {
         country: inputValues.country,
         email: inputValues.email,
         phone_number: Number.parseInt(inputValues.phone_number),
-        profile_picture: "/",
+        profile_picture:
+          convertedPictures.length === 0 ? [] : convertedPictures,
       };
+
       const res = await data.send("users", "create", params);
       console.log(res, params);
       if (res === 1) {
@@ -213,7 +215,7 @@ const UserModModal = (props) => {
                       key={`textinput${keyword}`}
                       type={"input"}
                       initialValue={inputValues[keyword]}
-                      matchValue={keyword === "phone_number" ? "number" : null}
+                      match={keyword === "phone_number" ? "number" : null}
                       onChange={(e) => onInputValueChange(keyword, e)}
                       onCancel={() => onInputValueChange(keyword, "")}
                       outlineOnChange

@@ -159,20 +159,33 @@ const AdminContainer = (props) => {
         const res = await data.send("associations", "create", params);
 
         if (res === 1) {
+          setIsCreating(false);
+
+          setCreateAssociationInputValues(
+            Object.assign(
+              {},
+              {
+                asso_name: "",
+                asso_desc: "",
+                admin_id: "",
+                asso_users: "",
+              }
+            )
+          );
           updateAssociations();
           setSelectedAssociation(associations[associations.length - 1]);
 
+          console.log(createMembers);
           createMembers.forEach(async (elem) => {
             const param = {
-              user_id: Number.parseInt(elem.user_id),
+              user_id: elem.value,
               asso_id: Number.parseInt(selectedAssociation.asso_id),
             };
             const tempres = await data.send("associations", "add", param);
+            console.log("Tempres: ", tempres, param);
           });
 
           updateAssociations();
-
-          setIsCreating(false);
         }
       },
     },
@@ -184,10 +197,12 @@ const AdminContainer = (props) => {
         const res = await data.send("users", "get");
         setAssociationUsers(res.users);
         setUserOptions(
-          res.users.map((elem) => ({
-            value: Number.parseInt(elem.user_id),
-            label: userFirstLastName(elem),
-          }))
+          res.users
+            .filter((user) => user.asso_id === null)
+            .map((elem) => ({
+              value: Number.parseInt(elem.user_id),
+              label: userFirstLastName(elem),
+            }))
         );
       },
     },
@@ -224,7 +239,9 @@ const AdminContainer = (props) => {
       handlers.users.getAllUsers();
       updateAssociations();
     }
-  }, [view]);
+  }, [view, isCreating]);
+
+  console.log("users", inputValues);
 
   return (
     <D cn={`admin-container`}>
@@ -436,7 +453,7 @@ const AdminContainer = (props) => {
                             </D>
                             <div className="field-display">
                               {isCreating ? (
-                                key === "admin-id" ? (
+                                key === "asso_name" || key === "asso_desc" ? (
                                   <TextBox
                                     key={`email-input${key}`}
                                     type={
@@ -469,7 +486,9 @@ const AdminContainer = (props) => {
                                     <Select
                                       defaultValue={[]}
                                       isMulti
+                                      noOptionsMessage="Create a user to add to an association..."
                                       name="colors"
+                                      onChange={(e) => setCreateMembers(e)}
                                       options={userOptions}
                                       className="basic-multi-select"
                                       classNamePrefix="select"
