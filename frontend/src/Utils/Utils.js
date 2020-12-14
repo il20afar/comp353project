@@ -39,7 +39,7 @@ const data = {
     // );
 
     try {
-      const req = await fetch("http://localhost:3001/backend/main.php", {
+      const req = await fetch("http://localhost:8080/backend/main.php", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
