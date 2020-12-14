@@ -58,6 +58,7 @@ const data = {
 
       return res;
     } catch (error) {
+      console.log(error.toString());
       return error.toString();
     }
   },
