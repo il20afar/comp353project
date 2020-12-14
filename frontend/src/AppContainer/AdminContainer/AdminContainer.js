@@ -167,7 +167,6 @@ const AdminContainer = (props) => {
             };
             const tempres = await data.send("associations", "add", param);
             if (tempres === 1) num += 1;
-            console.log("Tempres: ", tempres, param);
           });
 
           if (num === createMembers.length) {
@@ -188,7 +187,7 @@ const AdminContainer = (props) => {
           const asso = updatedAssociations.associations.find(
             (asso) => Number.parseInt(asso.asso_id) === res
           );
-          console.log(updatedAssociations.associations, asso);
+
           setAssociations(updatedAssociations.associations);
           setSelectedAssociation(asso);
         }
@@ -245,8 +244,6 @@ const AdminContainer = (props) => {
       updateAssociations();
     }
   }, [view, isCreating]);
-
-  console.log("users", inputValues);
 
   return (
     <D cn={`admin-container`}>

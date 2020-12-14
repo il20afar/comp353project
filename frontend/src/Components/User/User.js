@@ -30,8 +30,6 @@ const UserModModal = (props) => {
 
   const uploadPictures = React.useRef([]);
 
-  console.log(user.current);
-
   const [inputValues, setInputValues] = React.useState({
     username: user.current.username,
     pw: user.current.password,
@@ -79,7 +77,7 @@ const UserModModal = (props) => {
       };
 
       const res = await data.send("users", "create", params);
-      console.log(res, params);
+
       if (res === 1) {
         closeOrConfirm.current.className = "action-icon close";
         onClose(false);

@@ -52,8 +52,6 @@ const PostingDetailedContainer = (props) => {
         }
       : ad;
 
-  console.log("userid: ", user.current.user_id, "  Creatorid: ", inputAd);
-
   return (
     <div className="ad-detail-container">
       <AdDetail
@@ -180,8 +178,6 @@ const Postings = () => {
   React.useEffect(() => {
     handlers.actions.updatePostings();
   }, [view]);
-
-  console.log(visiblePostings);
 
   return (
     <div className="postings">

@@ -130,8 +130,6 @@ const AdDetail = (props) => {
 
     const res = await data.send("ads", view, adsParam);
 
-    console.log(res, adsParam);
-
     window.setTimeout(() => {
       if (res !== 0) {
         setEdit(false);
@@ -165,8 +163,6 @@ const AdDetail = (props) => {
   React.useEffect(() => {
     getUsers();
   }, []);
-
-  console.log("Edit: ", edit, "  Editable: ", editable);
 
   return (
     <D cn="edit-view">
