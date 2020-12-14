@@ -10,8 +10,8 @@ class ads extends request
     public function create($obj)
     {
         if (empty($obj['pictures'])) {
-            unset($obj['pictures']);
-            $columns = "title, ad_type, ad_desc, ad_price, ad_city, visibility, creator_id";
+            $obj['pictures'] = 'http://localhost:3001/backend/pictures/ads/default-ad-picture.png';
+            $columns = "title, ad_type, ad_desc, ad_price, ad_city, visibility, pictures, creator_id";
             $query = $this->insert($columns, $obj);
             $res = $this->query($query, false);
             return json_encode($res);
