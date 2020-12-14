@@ -1,1 +1,0 @@
-mysql < 'create_db.sql'
