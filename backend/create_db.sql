@@ -286,7 +286,7 @@ VALUES
 		'Canada',
 		'asmi@conman.com',
 		6046743459,
-		'http://localhost:80/comp353project/comp353project/backend/pictures/users/default-user-picture.jpeg'
+		'http://localhost:80/comp353project/backend/pictures/users/default-user-picture.jpeg'
 	),
 	(
 		'rcol',
@@ -299,7 +299,7 @@ VALUES
 		'Canada',
 		'rcol@conman.com',
 		6046742388,
-		'http://localhost:80/comp353project/comp353project/backend/pictures/users/default-user-picture.jpeg'
+		'http://localhost:80/comp353project/backend/pictures/users/default-user-picture.jpeg'
 	);
 
 INSERT INTO
