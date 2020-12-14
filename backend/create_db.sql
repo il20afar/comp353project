@@ -189,7 +189,7 @@ VALUES
 		'Canada',
 		'afar@conman.com',
 		5149635321,
-		'http://localhost:3001/backend/pictures/ads/user.jpeg'
+		'http://localhost:3001/backend/pictures/users/default-user-picture.jpeg'
 	),
 	(
 		'rohh',
@@ -202,7 +202,7 @@ VALUES
 		'Canada',
 		'rohh@conman.com',
 		5149548888,
-		'http://localhost:3001/backend/pictures/ads/user.jpeg'
+		'http://localhost:3001/backend/pictures/users/default-user-picture.jpeg'
 	),
 	(
 		'poon',
@@ -215,7 +215,7 @@ VALUES
 		'Canada',
 		'poon@conman.com',
 		5149766539,
-		'http://localhost:3001/backend/pictures/ads/user.jpeg'
+		'http://localhost:3001/backend/pictures/users/default-user-picture.jpeg'
 	),
 	(
 		'mpob',
@@ -228,7 +228,7 @@ VALUES
 		'Canada',
 		'mpob@conman.com',
 		6135576532,
-		'http://localhost:3001/backend/pictures/ads/user.jpeg'
+		'http://localhost:3001/backend/pictures/users/default-user-picture.jpeg'
 	),
 	(
 		'admin',
@@ -241,7 +241,7 @@ VALUES
 		'Canada',
 		'admin@conman.com',
 		4379765687,
-		'http://localhost:3001/backend/pictures/ads/user.jpeg'
+		'http://localhost:3001/backend/pictures/users/default-user-picture.jpeg'
 	);
 
 INSERT INTO
