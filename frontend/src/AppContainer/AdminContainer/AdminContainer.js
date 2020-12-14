@@ -158,9 +158,21 @@ const AdminContainer = (props) => {
         };
         const res = await data.send("associations", "create", params);
 
-        if (res === 1) {
-          setIsCreating(false);
+        if (res !== -1) {
+          let num = 0;
+          createMembers.forEach(async (elem) => {
+            const param = {
+              user_id: elem.value,
+              asso_id: res,
+            };
+            const tempres = await data.send("associations", "add", param);
+            if (tempres === 1) num += 1;
+            console.log("Tempres: ", tempres, param);
+          });
 
+          if (num === createMembers.length) {
+          }
+          setIsCreating(false);
           setCreateAssociationInputValues(
             Object.assign(
               {},
@@ -172,20 +184,13 @@ const AdminContainer = (props) => {
               }
             )
           );
-          updateAssociations();
-          setSelectedAssociation(associations[associations.length - 1]);
-
-          console.log(createMembers);
-          createMembers.forEach(async (elem) => {
-            const param = {
-              user_id: elem.value,
-              asso_id: Number.parseInt(selectedAssociation.asso_id),
-            };
-            const tempres = await data.send("associations", "add", param);
-            console.log("Tempres: ", tempres, param);
-          });
-
-          updateAssociations();
+          const updatedAssociations = await data.send("associations", "get");
+          const asso = updatedAssociations.associations.find(
+            (asso) => Number.parseInt(asso.asso_id) === res
+          );
+          console.log(updatedAssociations.associations, asso);
+          setAssociations(updatedAssociations.associations);
+          setSelectedAssociation(asso);
         }
       },
     },

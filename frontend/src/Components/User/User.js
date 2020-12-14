@@ -6,17 +6,11 @@ import { faCheckCircle } from "@fortawesome/free-regular-svg-icons";
 import { faTimesCircle } from "@fortawesome/free-solid-svg-icons";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 
-import { v4 as uuid } from "uuid";
-
 import "./User.scss";
 import "../../Styles/Utils.scss";
-import aisle20copy from "./aisle20copy.jpg";
 
 const UserIcon = (props) => {
-  const {
-    profilepic = <img src={aisle20copy} alt="user-picture-profile" />,
-    ...rest
-  } = props;
+  const { profilepic = null, ...rest } = props;
   return (
     <D cn="comp-user-icon" {...rest}>
       <D cn="user-icon-container">
