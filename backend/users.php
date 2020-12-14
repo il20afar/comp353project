@@ -66,5 +66,40 @@ class users extends request
         }
         return json_encode($res);
     }
+
+    public function create($obj)
+    {
+        $columns = "username, pw, first_name, last_name, street, city, province, country, email, phone_number, profile_picture";
+        if (empty($obj['profile_picture'])) {
+            $obj['profile_picture'] = 'http://localhost:80/comp353project/backend/pictures/users/default-user-picture.jpeg';
+            $query = $this->insert($columns, $obj);
+            echo $query;
+            $res = $this->query($query, false);
+            return json_encode($res);
+        } else {
+            // Iterate over each picture
+            $pictures_column = "";
+            foreach ($obj['profile_picture'] as $key => $picture) {
+                $base64_string = $picture;
+                $image_parts = explode(";base64,", $base64_string);
+                $image_type_aux = explode("image/", $image_parts[0]);
+                $image_type = $image_type_aux[1];
+                $image_base64 = base64_decode($image_parts[1]);
+                $file = 'pictures/users/' . uniqid() . "." . $image_type;
+                // Save picture to local storage
+                file_put_contents($file, $image_base64);
+                if (($key + 1) == count($obj['profile_picture'])) {
+                    $pictures_column .= 'http://localhost:80/comp353project/backend/' . $file;
+                } else {
+                    $pictures_column .= 'http://localhost:80/comp353project/backend/' . $file . ', ';
+                }
+            }
+            // Insert ad data to database
+            $obj['profile_picture'] = $pictures_column;
+            $query = $this->insert($columns, $obj);
+            $res = $this->query($query, false);
+            return json_encode($res);
+        }
+    }
 }
 ?>

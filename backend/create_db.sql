@@ -1,4 +1,8 @@
-USE hac353_2;
+DROP DATABASE IF EXISTS comp353;
+
+CREATE DATABASE comp353;
+
+USE comp353;
 
 /* Creating tables */
 CREATE TABLE users (
@@ -185,7 +189,7 @@ VALUES
 		'Canada',
 		'afar@conman.com',
 		5149635321,
-		'https://hac353.encs.concordia.ca/comp353project/backend/pictures/ads/user.jpeg'
+		'http://localhost:80/comp353project/backend/pictures/users/default-user-picture.jpeg'
 	),
 	(
 		'rohh',
@@ -198,7 +202,7 @@ VALUES
 		'Canada',
 		'rohh@conman.com',
 		5149548888,
-		'https://hac353.encs.concordia.ca/comp353project/backend/pictures/ads/user.jpeg'
+		'http://localhost:80/comp353project/backend/pictures/users/default-user-picture.jpeg'
 	),
 	(
 		'poon',
@@ -211,7 +215,7 @@ VALUES
 		'Canada',
 		'poon@conman.com',
 		5149766539,
-		'https://hac353.encs.concordia.ca/comp353project/backend/pictures/ads/user.jpeg'
+		'http://localhost:80/comp353project/backend/pictures/users/default-user-picture.jpeg'
 	),
 	(
 		'mpob',
@@ -224,7 +228,7 @@ VALUES
 		'Canada',
 		'mpob@conman.com',
 		6135576532,
-		'https://hac353.encs.concordia.ca/comp353project/backend/pictures/ads/user.jpeg'
+		'http://localhost:80/comp353project/backend/pictures/users/default-user-picture.jpeg'
 	),
 	(
 		'admin',
@@ -237,7 +241,7 @@ VALUES
 		'Canada',
 		'admin@conman.com',
 		4379765687,
-		'https://hac353.encs.concordia.ca/comp353project/backend/pictures/ads/user.jpeg'
+		'http://localhost:80/comp353project/backend/pictures/users/default-user-picture.jpeg'
 	);
 
 INSERT INTO
@@ -316,7 +320,7 @@ VALUES
 		500000,
 		'Montreal',
 		'public',
-		'https://hac353.encs.concordia.ca/comp353project/backend/pictures/ads/a.jpeg, https://hac353.encs.concordia.ca/comp353project/backend/pictures/ads/building.jpeg',
+		'http://localhost:80/comp353project/backend/pictures/ads/a.jpeg, http://localhost:80/comp353project/backend/pictures/ads/building.jpeg',
 		1
 	),
 	(
@@ -326,7 +330,7 @@ VALUES
 		320000,
 		'Montreal',
 		'public',
-		'https://hac353.encs.concordia.ca/comp353project/backend/pictures/ads/b.jpeg, https://hac353.encs.concordia.ca/comp353project/backend/pictures/ads/building.jpeg',
+		'http://localhost:80/comp353project/backend/pictures/ads/b.jpeg, http://localhost:80/comp353project/backend/pictures/ads/building.jpeg',
 		2
 	),
 	(
@@ -336,7 +340,7 @@ VALUES
 		450000,
 		'Montreal',
 		'public',
-		'https://hac353.encs.concordia.ca/comp353project/backend/pictures/ads/c.jpeg, https://hac353.encs.concordia.ca/comp353project/backend/pictures/ads/building.jpeg',
+		'http://localhost:80/comp353project/backend/pictures/ads/c.jpeg, http://localhost:80/comp353project/backend/pictures/ads/building.jpeg',
 		3
 	),
 	(
@@ -346,7 +350,7 @@ VALUES
 		390000,
 		'Montreal',
 		'public',
-		'https://hac353.encs.concordia.ca/comp353project/backend/pictures/ads/d.jpeg, https://hac353.encs.concordia.ca/comp353project/backend/pictures/ads/building.jpeg',
+		'http://localhost:80/comp353project/backend/pictures/ads/d.jpeg, http://localhost:80/comp353project/backend/pictures/ads/building.jpeg',
 		4
 	),
 	(
@@ -356,7 +360,7 @@ VALUES
 		550000,
 		'Montreal',
 		'public',
-		'https://hac353.encs.concordia.ca/comp353project/backend/pictures/ads/e.jpeg, https://hac353.encs.concordia.ca/comp353project/backend/pictures/ads/building.jpeg',
+		'http://localhost:80/comp353project/backend/pictures/ads/e.jpeg, http://localhost:80/comp353project/backend/pictures/ads/building.jpeg',
 		1
 	),
 	(
@@ -366,7 +370,7 @@ VALUES
 		700000,
 		'Montreal',
 		'public',
-		'https://hac353.encs.concordia.ca/comp353project/backend/pictures/ads/f.jpeg, https://hac353.encs.concordia.ca/comp353project/backend/pictures/ads/building.jpeg',
+		'http://localhost:80/comp353project/backend/pictures/ads/f.jpeg, http://localhost:80/comp353project/backend/pictures/ads/building.jpeg',
 		2
 	),
 	(
@@ -376,7 +380,7 @@ VALUES
 		450000,
 		'Montreal',
 		'1',
-		'https://hac353.encs.concordia.ca/comp353project/backend/pictures/ads/e.jpeg, https://hac353.encs.concordia.ca/comp353project/backend/pictures/ads/building.jpeg',
+		'http://localhost:80/comp353project/backend/pictures/ads/e.jpeg, http://localhost:80/comp353project/backend/pictures/ads/building.jpeg',
 		3
 	),
 	(
@@ -386,7 +390,7 @@ VALUES
 		4500,
 		'Montreal',
 		'1',
-		'https://hac353.encs.concordia.ca/comp353project/backend/pictures/ads/f.jpeg, https://hac353.encs.concordia.ca/comp353project/backend/pictures/ads/building.jpeg',
+		'http://localhost:80/comp353project/backend/pictures/ads/f.jpeg, http://localhost:80/comp353project/backend/pictures/ads/building.jpeg',
 		4
 	),
 	(
@@ -396,7 +400,7 @@ VALUES
 		4500,
 		'Montreal',
 		'public',
-		'https://hac353.encs.concordia.ca/comp353project/backend/pictures/ads/tv.jpeg',
+		'http://localhost:80/comp353project/backend/pictures/ads/tv.jpeg',
 		1
 	),
 	(
@@ -406,7 +410,7 @@ VALUES
 		2000,
 		'Montreal',
 		'public',
-		'https://hac353.encs.concordia.ca/comp353project/backend/pictures/ads/oven.jpeg',
+		'http://localhost:80/comp353project/backend/pictures/ads/oven.jpeg',
 		2
 	),
 	(
@@ -416,7 +420,7 @@ VALUES
 		6000,
 		'Montreal',
 		'public',
-		'https://hac353.encs.concordia.ca/comp353project/backend/pictures/ads/couch.jpeg',
+		'http://localhost:80/comp353project/backend/pictures/ads/couch.jpeg',
 		1
 	),
 	(
@@ -426,7 +430,7 @@ VALUES
 		1000,
 		'Montreal',
 		'public',
-		'https://hac353.encs.concordia.ca/comp353project/backend/pictures/ads/ps5.jpeg',
+		'http://localhost:80/comp353project/backend/pictures/ads/ps5.jpeg',
 		2
 	),
 	(
@@ -436,7 +440,7 @@ VALUES
 		400,
 		'Montreal',
 		'public',
-		'https://hac353.encs.concordia.ca/comp353project/backend/pictures/ads/dyson.jpeg',
+		'http://localhost:80/comp353project/backend/pictures/ads/dyson.jpeg',
 		2
 	),
 	(
@@ -446,7 +450,7 @@ VALUES
 		200,
 		'Montreal',
 		'public',
-		'https://hac353.encs.concordia.ca/comp353project/backend/pictures/ads/desk.jpeg',
+		'http://localhost:80/comp353project/backend/pictures/ads/desk.jpeg',
 		3
 	),
 	(
@@ -456,7 +460,7 @@ VALUES
 		390,
 		'Montreal',
 		'public',
-		'https://hac353.encs.concordia.ca/comp353project/backend/pictures/ads/monitor.jpeg',
+		'http://localhost:80/comp353project/backend/pictures/ads/monitor.jpeg',
 		4
 	),
 	(
@@ -466,7 +470,7 @@ VALUES
 		100,
 		'Montreal',
 		'public',
-		'https://hac353.encs.concordia.ca/comp353project/backend/pictures/ads/plumber.jpeg',
+		'http://localhost:80/comp353project/backend/pictures/ads/plumber.jpeg',
 		1
 	),
 	(
@@ -476,7 +480,7 @@ VALUES
 		60,
 		'Montreal',
 		'public',
-		'https://hac353.encs.concordia.ca/comp353project/backend/pictures/ads/technician.jpeg',
+		'http://localhost:80/comp353project/backend/pictures/ads/technician.jpeg',
 		2
 	),
 	(
@@ -486,7 +490,7 @@ VALUES
 		150,
 		'Montreal',
 		'public',
-		'https://hac353.encs.concordia.ca/comp353project/backend/pictures/ads/food.jpeg',
+		'http://localhost:80/comp353project/backend/pictures/ads/food.jpeg',
 		3
 	),
 	(
@@ -496,7 +500,7 @@ VALUES
 		100,
 		'Montreal',
 		'public',
-		'https://hac353.encs.concordia.ca/comp353project/backend/pictures/ads/trainer.jpeg',
+		'http://localhost:80/comp353project/backend/pictures/ads/trainer.jpeg',
 		4
 	);
 
