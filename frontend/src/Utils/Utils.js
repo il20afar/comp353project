@@ -30,13 +30,13 @@ const filesToBase64 = async (files) =>
 
 const data = {
   send: async (table, action, fields) => {
-    //
-    //   JSON.stringify({
-    //     table,
-    //     action,
-    //     ...fields,
-    //   })
-    // );
+    console.log(
+      JSON.stringify({
+        table,
+        action,
+        ...fields,
+      })
+    );
 
     try {
       const req = await fetch(
@@ -54,6 +54,7 @@ const data = {
         }
       );
       const res = await req.json();
+      console.log(req, res);
 
       return res;
     } catch (error) {
