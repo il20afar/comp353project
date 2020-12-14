@@ -261,6 +261,48 @@ WHERE
 	NOT user_id = 5;
 
 INSERT INTO
+	users (
+		username,
+		pw,
+		first_name,
+		last_name,
+		street,
+		city,
+		province,
+		country,
+		email,
+		phone_number,
+		profile_picture
+	)
+VALUES
+	(
+		'asmi',
+		'asmi',
+		'Adam',
+		'Smith',
+		'56 Franklin Boulevard',
+		'Vancouver',
+		'British Columbia',
+		'Canada',
+		'asmi@conman.com',
+		6046743459,
+		'http://localhost:80/comp353project/backend/pictures/users/default-user-picture.jpeg'
+	),
+	(
+		'rcol',
+		'rcol',
+		'Richard',
+		'Collins',
+		'33 Crescent Street',
+		'Burnaby',
+		'British Columbia',
+		'Canada',
+		'rcol@conman.com',
+		6046742388,
+		'http://localhost:80/comp353project/backend/pictures/users/default-user-picture.jpeg'
+	);
+
+INSERT INTO
 	condos (
 		price,
 		area,
