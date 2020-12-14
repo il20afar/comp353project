@@ -77,6 +77,14 @@
   position: relative;
   background-color: $bg;
 
+  > .input-modal.absolute {
+    .edit-view-window {
+      min-width: 300px;
+
+      max-width: 600px;
+    }
+  }
+
   .admin-login-container {
     width: 100%;
     height: 100%;
@@ -237,6 +245,12 @@
                         &::placeholder {
                           text-transform: capitalize;
                         }
+                      }
+                    }
+
+                    .basic-multi-select {
+                      .select__menu {
+                        color: black;
                       }
                     }
                   }

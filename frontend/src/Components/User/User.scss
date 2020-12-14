@@ -77,10 +77,9 @@
 
       .content-container {
         width: 100%;
-        height: 100%;
-        overflow: scroll;
+        overflow: hidden;
         width: fit-content;
-        height: calc(100vh - 100px);
+        height: calc(100vh - 160px);
         box-sizing: border-box;
         margin: 0 auto;
         background-color: $main;
@@ -88,60 +87,7 @@
         box-shadow: $boxshadow;
         position: relative;
         border-radius: 10px;
-        display: grid;
-        grid-auto-rows: 300px 100px 100px 100px 100px;
-        grid-template-columns: calc(50% - 10px) calc(50% - 10px);
-        column-gap: 20px;
-        row-gap: 10px;
         pointer-events: all;
-        overflow: scroll;
-
-        .username-container {
-          @include flex(column, center);
-          @include assVal(width height, 100%);
-
-          text-align: center;
-          color: white;
-          font-size: 50px;
-          font-style: italic;
-        }
-
-        .profilepicture-container {
-          width: 100%;
-          height: 100%;
-          pointer-events: all;
-
-          .profilepicture {
-            @include assVal(width height, 100%);
-
-            @include flex(column, center);
-            img {
-              width: 200px;
-              max-width: 100%;
-
-              height: auto;
-              margin: 0 auto;
-              border: 2px white solid;
-            }
-          }
-        }
-        .user-info-container {
-          width: 100%;
-          display: flex;
-          height: 100%;
-          @include flex(column, space-between);
-          .textbox {
-            margin-bottom: 10px;
-          }
-          .title {
-            height: 20px;
-            font-size: 16px;
-            line-height: 20px;
-            font-style: italic;
-            color: $bg;
-            margin-bottom: 10px;
-          }
-        }
 
         .action-icon-container {
           $size: 70px;
@@ -243,6 +189,114 @@
               &:hover {
                 opacity: 0.5;
               }
+            }
+          }
+        }
+
+        .edit-info-container {
+          width: 100%;
+          height: 100%;
+          overflow: scroll;
+          display: grid;
+          grid-auto-rows: 220px 100px 100px 100px 100px;
+          grid-template-columns: calc(50% - 10px) calc(50% - 10px);
+          column-gap: 20px;
+          row-gap: 30px;
+
+          .username-container {
+            @include flex(column, center);
+            width: 100%;
+            height: 100%;
+
+            text-align: left;
+            color: white;
+            font-size: 50px;
+            font-style: italic;
+
+            .username-wrapper {
+              width: 100%;
+              height: 100%;
+
+              .user-info-container.username {
+                justify-content: flex-start;
+              }
+
+              .username-password-wrapper {
+                width: 100%;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                .user-info-container {
+                  height: fit-content;
+                  &.password {
+                    .textbox {
+                      margin-bottom: 0px !important;
+                    }
+                  }
+                }
+              }
+            }
+          }
+
+          .profilepicture-container {
+            width: 382px;
+            max-width: 100%;
+            height: 100%;
+            pointer-events: all;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            overflow: hidden;
+            border-radius: 8px;
+
+            .content {
+              width: 100%;
+              height: calc(100% - 20px);
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              overflow: scroll;
+              > * {
+                width: 100% !important;
+                height: 100% !important;
+                .fileContainer {
+                  margin: 0;
+                  height: fit-content;
+                }
+              }
+            }
+
+            .profilepicture {
+              @include assVal(width height, 100%);
+
+              @include flex(column, center);
+              img {
+                width: 200px;
+                max-width: 100%;
+
+                height: auto;
+                margin: 0 auto;
+                border: 2px white solid;
+              }
+            }
+          }
+
+          .user-info-container {
+            width: 100%;
+            display: flex;
+            height: 100%;
+            @include flex(column, space-between);
+            .textbox {
+              margin-bottom: 10px;
+            }
+            .title {
+              height: 20px;
+              font-size: 16px;
+              line-height: 20px;
+              font-style: italic;
+              color: rgb(173, 173, 173);
+              margin-bottom: 10px;
             }
           }
         }

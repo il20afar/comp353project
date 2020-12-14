@@ -34,7 +34,7 @@ const fields = {
   visibilityType: "Visibility",
 };
 
-const ImageUpload = (props) => {
+export const ImageUpload = (props) => {
   const { defaultImages, uploadPictures } = props;
   const [pictures, setPictures] = React.useState([]);
 
@@ -124,7 +124,7 @@ const AdDetail = (props) => {
           : inputValues.visibilityType === "public"
           ? "public"
           : Number.parseInt(asso_id),
-      pictures: convertedPictures.length === 0 ? [""] : convertedPictures,
+      pictures: convertedPictures.length === 0 ? [] : convertedPictures,
       ...(view === "create" && { creator_id: Number.parseInt(user_id) }),
     };
 

@@ -11,6 +11,8 @@ export { default as Financial } from "./Pages/Management/Financial";
 export { default as Meetings } from "./Pages/Management/Meetings";
 export { default as AdThumbnail } from "./Pages/Ads/Helpers/AdThumbnail";
 
+export { ImageUpload } from "./Pages/Ads/Helpers/AdDetail";
+
 export { default as Condos } from "./Pages/Ads/Condos";
 export { default as Postings } from "./Pages/Ads/Postings";
 export { default as Activities } from "./Pages/Social/Activities";

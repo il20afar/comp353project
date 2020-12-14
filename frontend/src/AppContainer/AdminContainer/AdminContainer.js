@@ -7,12 +7,11 @@ import {
   InputModal,
   Header,
   UserList,
+  UserModModal,
 } from "../../imports";
 import { useHistory } from "react-router-dom";
 import { v4 as uuid } from "uuid";
-
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import Select from "react-select";
 
 import "../../Styles/Utils.scss";
 import "./AdminContainer.scss";
@@ -70,7 +69,23 @@ const AdminContainer = (props) => {
   const [associations, setAssociations] = React.useState([]);
   const [selectedAssociation, setSelectedAssociation] = React.useState(null);
 
+  const [showUserMod, setShowUserMod] = React.useState(null);
+  const createUserRef = React.useRef({
+    username: "",
+    pw: "",
+    first_name: "",
+    last_name: "",
+    email: "",
+    phone_number: "",
+    street: "",
+    city: "",
+    province: "",
+    country: "",
+    profile_picture: "",
+  });
+
   const [associationUsers, setAssociationUsers] = React.useState([null]);
+  const [userOptions, setUserOptions] = React.useState(null);
 
   const [isCreating, setIsCreating] = React.useState(false);
   const [createMembers, setCreateMembers] = React.useState([]);
@@ -162,15 +177,21 @@ const AdminContainer = (props) => {
       },
     },
     users: {
+      create: () => {
+        setShowUserMod(true);
+      },
       getAllUsers: async () => {
         const res = await data.send("users", "get");
-        //
         setAssociationUsers(res.users);
+        setUserOptions(
+          res.users.map((elem) => ({
+            value: Number.parseInt(elem.user_id),
+            label: userFirstLastName(elem),
+          }))
+        );
       },
     },
   };
-
-  const addUsers = async () => {};
 
   const updateAssociations = async () => {
     const res = await data.send("associations", "get");
@@ -207,6 +228,13 @@ const AdminContainer = (props) => {
 
   return (
     <D cn={`admin-container`}>
+      {showUserMod && (
+        <UserModModal
+          type="create"
+          user={createUserRef}
+          onClose={() => setShowUserMod(false)}
+        />
+      )}
       {view === "login" ? (
         <InputModal
           key="view-input-modal"
@@ -263,6 +291,17 @@ const AdminContainer = (props) => {
             title="CON MANANGER SYSTEM ADMIN"
             height="80px"
             actions={[
+              <Button
+                content={{ show: "CREATE USER" }}
+                style={{
+                  show: {
+                    fontSize: "20px",
+                    height: "40px",
+                    lineHeight: "40px",
+                  },
+                }}
+                onClick={handlers.users.create}
+              />,
               <Button
                 content={{ show: "LOG OUT" }}
                 style={{
@@ -381,7 +420,7 @@ const AdminContainer = (props) => {
                   >
                     {Object.entries(createAssociationInputValues).map(
                       ([key, val]) => {
-                        return key === "asso_users" && isCreating ? null : (
+                        return (
                           <D
                             key={`edit-info-field-${key}`}
                             cn={`edit-info-field ${key}`}
@@ -397,7 +436,7 @@ const AdminContainer = (props) => {
                             </D>
                             <div className="field-display">
                               {isCreating ? (
-                                !["admin_id", "asso_users"].includes(key) ? (
+                                key === "admin-id" ? (
                                   <TextBox
                                     key={`email-input${key}`}
                                     type={
@@ -425,6 +464,17 @@ const AdminContainer = (props) => {
                                     readOnly={false}
                                     height={"asso_desc" ? "auto" : "40px"}
                                   />
+                                ) : key === "asso_users" ? (
+                                  <div>
+                                    <Select
+                                      defaultValue={[]}
+                                      isMulti
+                                      name="colors"
+                                      options={userOptions}
+                                      className="basic-multi-select"
+                                      classNamePrefix="select"
+                                    />
+                                  </div>
                                 ) : (
                                   <div className={`userlist-${key}`}>
                                     <UserList
@@ -515,16 +565,6 @@ const AdminContainer = (props) => {
                         );
                       }
                     )}
-                    {/* <div
-                      className="delete-asso-container"
-                      onClick={() => setIsDeleting(true)}
-                    >
-                      <FontAwesomeIcon
-                        icon={faTrash}
-                        style={{ width: "50px", height: "50px" }}
-                        color="white"
-                      />
-                    </div> */}
                   </div>
                 </InputModal>
               ) : (
