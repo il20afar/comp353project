@@ -9,9 +9,23 @@ class associations extends request
 
     public function create($obj)
     {
+        $asso_name = $obj['asso_name'];
         $query = $this->insert("asso_name, asso_desc, admin_id", $obj);
         $res = $this->query($query, false);
-        return json_encode($res);
+        if ($res != 1) {
+            return json_encode($res);
+        }
+        $query = sprintf(
+            "SELECT asso_id FROM associations WHERE asso_name='%s';",
+            $asso_name
+        );
+        $res = $this->gquery($query, true);
+        $asso_id = $res[0]['asso_id'];
+        if (is_string($res) and $res == "Empty set.") {
+            return json_encode($res);
+        } else {
+            return json_encode($asso_id, JSON_NUMERIC_CHECK);
+        }
     }
 
     public function admin($obj)
