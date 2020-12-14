@@ -30,14 +30,6 @@ const filesToBase64 = async (files) =>
 
 const data = {
   send: async (table, action, fields) => {
-    console.log(
-      JSON.stringify({
-        table,
-        action,
-        ...fields,
-      })
-    );
-
     try {
       const req = await fetch(
         "http://localhost:80/comp353project/backend/main.php",
@@ -54,11 +46,9 @@ const data = {
         }
       );
       const res = await req.json();
-      console.log(req, res);
 
       return res;
     } catch (error) {
-      console.log(error.toString());
       return error.toString();
     }
   },
