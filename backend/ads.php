@@ -10,7 +10,7 @@ class ads extends request
     public function create($obj)
     {
         if (empty($obj['pictures'])) {
-            $obj['pictures'] = 'http://localhost:8080/backend/pictures/ads/default-ad-picture.png';
+            $obj['pictures'] = 'http://localhost:80/comp353project/backend/pictures/ads/default-ad-picture.png';
             $columns = "title, ad_type, ad_desc, ad_price, ad_city, visibility, pictures, creator_id";
             $query = $this->insert($columns, $obj);
             $res = $this->query($query, false);
@@ -29,9 +29,9 @@ class ads extends request
                 // Save picture to local storage
                 file_put_contents($file, $image_base64);
                 if (($key + 1) == count($obj['pictures'])) {
-                    $pictures_column .= 'http://localhost:8080/backend/' . $file;
+                    $pictures_column .= 'http://localhost:80/comp353project/backend/' . $file;
                 } else {
-                    $pictures_column .= 'http://localhost:8080/backend/' . $file . ', ';
+                    $pictures_column .= 'http://localhost:80/comp353project/backend/' . $file . ', ';
                 }
             }
             // Insert ad data to database

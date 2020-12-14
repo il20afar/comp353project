@@ -71,7 +71,7 @@ class users extends request
     {
         $columns = "username, pw, first_name, last_name, street, city, province, country, email, phone_number, profile_picture";
         if (empty($obj['profile_picture'])) {
-            $obj['profile_picture'] = 'http://localhost:8080/backend/pictures/users/default-user-picture.jpeg';
+            $obj['profile_picture'] = 'http://localhost:80/comp353project/backend/pictures/users/default-user-picture.jpeg';
             $query = $this->insert($columns, $obj);
             // echo $query;
             $res = $this->query($query, false);
@@ -89,9 +89,9 @@ class users extends request
                 // Save picture to local storage
                 file_put_contents($file, $image_base64);
                 if (($key + 1) == count($obj['profile_picture'])) {
-                    $pictures_column .= 'http://localhost:8080/backend/' . $file;
+                    $pictures_column .= 'http://localhost:80/comp353project/backend/' . $file;
                 } else {
-                    $pictures_column .= 'http://localhost:8080/backend/' . $file . ', ';
+                    $pictures_column .= 'http://localhost:80/comp353project/backend/' . $file . ', ';
                 }
             }
             // Insert ad data to database

@@ -39,17 +39,20 @@ const data = {
     // );
 
     try {
-      const req = await fetch("http://localhost:8080/backend/main.php", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          table,
-          action,
-          ...fields,
-        }),
-      });
+      const req = await fetch(
+        "http://localhost:80/comp353project/backend/main.php",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            table,
+            action,
+            ...fields,
+          }),
+        }
+      );
       const res = await req.json();
 
       return res;
