@@ -16,7 +16,9 @@
 `emacs /var/www/html/comp353project/backend/db_config.php`
 3. Run the SQL script after connecting to your database  
 `source /var/www/html/comp353project/backend/create_db.sql`
-4. Access the website at http://localhost:80/comp353project/backend/index.php
+4. Give permissions to pictures folder (required for image upload feature)  
+`chmod -R 777 /var/www/html/comp353project/backend/pictures/`
+5. Access the website at http://localhost:80/comp353project/backend/index.php
 
 # Account for testing
 | Username | Password |
