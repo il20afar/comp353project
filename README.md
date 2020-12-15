@@ -8,10 +8,21 @@
 | Rohhaan Thambithurai | 40062752 | r\_tha       |
 | Tik Man Poon         | 40042494 | t\_poo       |
 
-## Installation
+# Instructions
+**Replace the working directory in the following instructions with your own.**
+1. Unzip the source code into your working directory   
+`unzip comp353project.zip -d /var/www/html/`  
+2. Modify the database configuration file with your favorite text editor  
+`emacs /var/www/html/comp353project/backend/db_config.php`
+3. Run the SQL script after connecting to your database  
+`source /var/www/html/comp353project/backend/create_db.sql`
+4. Access the website at http://localhost:80/comp353project/backend/index.php
 
-TODO
-
-```bash
-pip install foobar
-```
+# Account for testing
+| Username | Password |
+|----------|----------|
+| admin    | admin    |
+| mpob     | mpob     |
+| afar     | afar     |
+| rohh     | rohh     |
+| poon     | poon     |
